@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetDevSys.MODEL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,10 +16,15 @@ namespace ProjetDevSys.Model
         public string State { get; set; }
         public Backup Backup { get; set; }
         private IBackupStrategy _strategy;
+        public LogRealTime LogRealTime;
 
         public BackupJob(Backup BackupObj)
         {
             Backup = BackupObj;
+            LogRealTime = new LogRealTime(AppConstants.LogFilePathRealTime)
+            {
+                BackupName = Backup.Name
+            };
             string type = Backup.Type;
             // Déterminer la stratégie en fonction du type
             switch (type)
@@ -36,8 +42,12 @@ namespace ProjetDevSys.Model
 
         public void Save()
         {
-            _strategy.Save(Backup);
-            Logger Log = new Logger(AppConstants.LogFilePath, Backup.Name, Backup.Source, Backup.Destination, 10, TimeSpan.FromSeconds(40));
+            LogRealTime.CalculateFolderSizeAndFileCount(Backup.Source);
+            DateTime TimeDebut = DateTime.Now;
+            _strategy.Save(Backup,LogRealTime);
+            DateTime TimeFin = DateTime.Now;
+            TimeSpan duration = TimeFin - TimeDebut;
+            Logger Log = new Logger(AppConstants.LogFilePath, Backup.Name, Backup.Source, Backup.Destination, 10, duration);
             Log.CreateLog();
             Console.WriteLine("Sauvegarde terminée avec la stratégie: " + Backup.Type);
         }

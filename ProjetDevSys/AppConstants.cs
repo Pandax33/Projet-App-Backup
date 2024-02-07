@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -6,23 +6,36 @@ namespace ProjetDevSys
 {
     public static class AppConstants
     {
-        // Remplacez par une propriété statique en lecture seule plutôt qu'une constante
         public static readonly string LogFilePath;
         public static readonly string Langage;
+        public static readonly string LogFilePathRealTime;
 
-        // Bloc statique pour initialiser les propriétés statiques
         static AppConstants()
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            // Chemin vers votre fichier appsettings.json
+            //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string filePath = Path.Combine(projectDirectory, "appsettings.json");
 
-            IConfigurationRoot configuration = builder.Build();
+            try
+            {
+                // Lecture du fichier JSON en tant que string
+                var json = File.ReadAllText(filePath);
 
-            // Assignez la valeur depuis appsettings.json à la propriété statique
-            LogFilePath = configuration["Logging:JsonPath"];
-            Langage = configuration["Langage:Langage"];
-            
+                // Désérialisation du JSON en un objet dynamique ou dans une structure fortement typée
+                dynamic config = JsonConvert.DeserializeObject(json);
+
+                // Assignation des valeurs. Ajustez les chemins d'accès selon votre structure JSON.
+                LogFilePath = config.Logging.JsonPath;
+                Langage = config.Langage.Langage;
+                LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
+            }
+            catch (Exception ex)
+            {
+                // Gestion des erreurs de lecture de fichier ou de désérialisation
+                Console.WriteLine($"Erreur lors de la lecture de la configuration: {ex.Message}");
+                // Initialisation avec des valeurs par défaut ou gestion d'erreur
+            }
         }
     }
 }

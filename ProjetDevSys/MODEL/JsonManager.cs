@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text.Json;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace ProjetDevSys.MODEL
 {
@@ -15,8 +15,9 @@ namespace ProjetDevSys.MODEL
 
         public void Serialize<T>(T obj)
         {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string json = JsonSerializer.Serialize(obj, options);
+            // Configure Newtonsoft.Json pour formater le JSON de manière lisible
+            var settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
+            string json = JsonConvert.SerializeObject(obj, settings);
             File.WriteAllText(JsonPath, json);
         }
 
@@ -28,7 +29,7 @@ namespace ProjetDevSys.MODEL
             }
 
             string json = File.ReadAllText(JsonPath);
-            return JsonSerializer.Deserialize<T>(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
     }
 }
