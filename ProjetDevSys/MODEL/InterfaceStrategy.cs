@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetDevSys.MODEL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,13 @@ namespace ProjetDevSys.Model
 {
     interface IBackupStrategy
     {
-        void Save(Backup backupContexte);
+        void Save(Backup backupContexte, LogRealTime LogRealTime);
     }
 
     class SaveCompleteStrategy : IBackupStrategy
     {
 
-        public void Save(Backup backup)
+        public void Save(Backup backup, LogRealTime LogRealTime)
         {
             // Vérifiez si le dossier source existe
             if (Directory.Exists(backup.Source))
@@ -28,7 +29,7 @@ namespace ProjetDevSys.Model
                 }
                 // Copiez tous les fichiers et sous-dossiers récursivement
                 Console.WriteLine("Début de la copie");
-                CopierDossier(backup.Source, backup.Destination);
+                CopierDossier(backup.Source, backup.Destination, LogRealTime);
                 Console.WriteLine("Fin de la copie");
             }
             else
@@ -37,15 +38,23 @@ namespace ProjetDevSys.Model
             }
         }
 
-        private void CopierDossier(string sourceDir, string destinationDir)
+        private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime)
         {
             // Copiez tous les fichiers du dossier
             foreach (string fichierPath in Directory.GetFiles(sourceDir))
             {
                 string fileName = Path.GetFileName(fichierPath);
                 string destinationFilePath = Path.Combine(destinationDir, fileName);
+                FileInfo fileInfo = new FileInfo(fichierPath);
+                long fileSize = fileInfo.Length;
+
                 File.Copy(fichierPath, destinationFilePath, true);
                 Console.WriteLine($"Copié: {fichierPath} -> {destinationFilePath}");
+                LogRealTime.Timestamp = DateTime.Now;
+                LogRealTime.CurrentSourcePath = fichierPath;
+                LogRealTime.CurrentTargetPath = destinationFilePath;
+                LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                LogRealTime.CreateLog();
             }
 
             // Copiez récursivement tous les sous-dossiers
@@ -58,7 +67,7 @@ namespace ProjetDevSys.Model
                     Directory.CreateDirectory(destinationFolderPath);
                 }
 
-                CopierDossier(dossierPath, destinationFolderPath);
+                CopierDossier(dossierPath, destinationFolderPath, LogRealTime);
             }
         }
     }
@@ -66,7 +75,7 @@ namespace ProjetDevSys.Model
     class SaveDiffStrategy : IBackupStrategy
     {
        
-        public void Save(Backup backup)
+        public void Save(Backup backup, LogRealTime LogRealTime)
         {
             if (Directory.Exists(backup.Source))
             {
@@ -77,7 +86,7 @@ namespace ProjetDevSys.Model
 
                 // Appelle CopierDossier pour une copie différentielle
                 Console.WriteLine("Début de la copie");
-                CopierDossierDifferenciel(backup.Source, backup.Destination);
+                CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime) ;
                 Console.WriteLine("Fin de la copie");
             }
             else
@@ -86,19 +95,26 @@ namespace ProjetDevSys.Model
             }
         }
 
-        private void CopierDossierDifferenciel(string sourceDir, string destinationDir)
+        private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime)
         {
             // Copier tous les fichiers du dossier source vers le dossier de destination s'ils sont nouveaux ou modifiés
             foreach (string fichierSource in Directory.GetFiles(sourceDir))
             {
                 string fileName = Path.GetFileName(fichierSource);
                 string fichierDestination = Path.Combine(destinationDir, fileName);
+                FileInfo fileInfo = new FileInfo(fichierSource);
+                long fileSize = fileInfo.Length;
 
                 // Effectuez la copie si le fichier de destination n'existe pas ou si le fichier source est plus récent
                 if (!File.Exists(fichierDestination) || File.GetLastWriteTime(fichierSource) > File.GetLastWriteTime(fichierDestination))
                 {
                     File.Copy(fichierSource, fichierDestination, true);
                     Console.WriteLine($"Copié: {fichierSource} -> {fichierDestination}");
+                    LogRealTime.Timestamp = DateTime.Now;
+                    LogRealTime.CurrentSourcePath = fichierSource;
+                    LogRealTime.CurrentTargetPath = fichierDestination;
+                    LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                    LogRealTime.CreateLog();
                 }
             }
 
@@ -113,7 +129,7 @@ namespace ProjetDevSys.Model
                     Directory.CreateDirectory(dossierDestination);
                 }
 
-                CopierDossierDifferenciel(dossierSource, dossierDestination);
+                CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime);
             }
         }
 

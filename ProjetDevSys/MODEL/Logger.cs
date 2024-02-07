@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.IO;
+using Newtonsoft.Json;
 using ProjetDevSys.MODEL;
 
 namespace ProjetDevSys
@@ -22,10 +24,11 @@ namespace ProjetDevSys
             Time = DateTime.Now;
         }
 
-        // La fonction CreateLog utilise Serialize pour écrire ses propres propriétés dans un fichier JSON.
         public void CreateLog()
         {
-            var logEntry = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+            // Configure Newtonsoft.Json pour formater le JSON de manière lisible
+            var settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
+            var logEntry = JsonConvert.SerializeObject(this, settings);
 
             // Ajoute le log sous forme de nouvelle ligne à la fin du fichier
             using (var streamWriter = File.AppendText(JsonPath))
