@@ -1,4 +1,5 @@
-﻿using ProjetDevSys.VueModel;
+﻿using ProjetDevSys.Model;
+using ProjetDevSys.VueModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,22 +17,50 @@ namespace ProjetDevSys.Vue
             string input = Console.ReadLine();
             if(input == "1")
             {
+                int index = 0;
+                IEnumerable<Backup> Backuplist = BackupFactory.GetAllBackups();
+                foreach (Backup backup in Backuplist)
+                {
+                    Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                    index = index + 1;
+                }
+                Console.WriteLine(index);
                 Console.WriteLine("Entrez l'ID de la tache que vous voulez effectuer");
                 string input2 = Console.ReadLine();
                 RunSaveTask runSaveTask = new RunSaveTask();
-                Console.WriteLine(Convert.ToInt32(input2));
-                //bool result = runSaveTask.RunTask(Convert.ToInt32(input2));
-                return input2;
+                bool result = runSaveTask.RunTask(Convert.ToInt32(input2));
+                if(result) 
+                {
+                    return "Sauvegarde fini";
+                }
+                else
+                {
+                    return "Un probleme est survenue";
+                }
             }
             else if(input == "2")
             {
+                int index = 0;
+                IEnumerable<Backup> Backuplist = BackupFactory.GetAllBackups();
+                foreach (Backup backup in Backuplist)
+                {
+                    Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                    index = index + 1;
+                }
                 Console.WriteLine("Entrez l'ID de la premiere tache que vous voulez effectuer");
                 string input2 = Console.ReadLine();
                 Console.WriteLine("Entrez l'ID de la derniere tache que vous voulez effectuer");
                 string input3 = Console.ReadLine();
                 RunSaveTask runSaveTask = new RunSaveTask();
                 bool result = runSaveTask.RunMultipleTask(Convert.ToInt32(input2), Convert.ToInt32(input3));
-                return input2 + " " + input3;
+                if (result)
+                {
+                    return "Sauvegarde fini";
+                }
+                else
+                {
+                    return "Un probleme est survenue";
+                }
             }
             else
             {

@@ -11,10 +11,10 @@ namespace ProjetDevSys.VueModel
     {
         public bool RunTask(int id)
         {
-            Backup backup = BackupFactory.GetBackupByIndex(id-1);
-            //BackupJob backupJob = new BackupJob(backup);
+            Backup backup = BackupFactory.GetBackupByIndex(id);
+            BackupJob backupJob = new BackupJob(backup);
             Console.WriteLine(backup.Name);
-            //backupJob.Save();
+            backupJob.Save();
             return true;
         }
 

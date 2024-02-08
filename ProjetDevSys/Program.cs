@@ -7,7 +7,8 @@ using System.Resources;
 using System.Numerics;
 using ProjetDevSys.VueModel;
 using ProjetDevSys.Vue;
+BackupFactory.LoadBackupsFromJson();
 
 RunTaskView runTaskView = new RunTaskView();
-runTaskView.SelectTaskView();
+Console.WriteLine(runTaskView.SelectTaskView());
 

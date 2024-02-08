@@ -79,6 +79,41 @@ namespace ProjetDevSys.Model
             return _backups.Values;
         }
 
+        public static bool DeleteBackup(string name)
+        {
+            if (_backups.ContainsKey(name))
+            {
+                _backups.Remove(name);
+                SaveBackupsToJson(); // Met à jour le fichier JSON après la suppression
+                return true;
+            }
+            else
+            {
+                return false; // Retourne false si aucun backup avec ce nom n'a été trouvé
+            }
+        }
+
+        public static bool EditBackup(string name, string newDestination, string newSource, string newType)
+        {
+            // Vérifier si le Backup à éditer existe
+            if (_backups.TryGetValue(name, out Backup backup))
+            {
+                // Mettre à jour les propriétés du Backup
+                backup.Destination = newDestination;
+                backup.Source = newSource;
+                backup.Type = newType;
+
+                // Pas besoin d'ajouter à nouveau le backup dans le dictionnaire puisque la référence est déjà mise à jour
+                SaveBackupsToJson(); // Sauvegarder les changements dans le fichier JSON
+
+                return true; // Retourner true pour indiquer que l'édition a réussi
+            }
+            else
+            {
+                return false; // Retourner false si aucun Backup avec ce nom n'a été trouvé
+            }
+        }
+
         public static IEnumerable<Backup> GetBackupsInRange(int startNumber, int endNumber)
         {
             // Calculer le nombre d'éléments à prendre après avoir sauté startNumber éléments
