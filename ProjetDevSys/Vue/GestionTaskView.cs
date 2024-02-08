@@ -3,6 +3,7 @@ using ProjetDevSys.VueModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,13 @@ namespace ProjetDevSys.Vue
                     }
                     break;
                 case "2":
+                    int index = 0;
+                    IEnumerable<Backup> Backuplist = BackupFactory.GetAllBackups();
+                    foreach (Backup backup in Backuplist)
+                    {
+                        Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        index = index + 1;
+                    }
                     Console.WriteLine("Entrez l'identifiant du backup à supprimer:");
                     string deleteIdInput = Console.ReadLine();
                     if (int.TryParse(deleteIdInput, out int deleteId))
@@ -45,7 +53,14 @@ namespace ProjetDevSys.Vue
                     }
                     break;
                 case "3":
-                    Console.WriteLine("Entrez le nom du backup à éditer, suivi par le nouveau chemin de destination, le nouveau chemin source, et le nouveau type de backup, séparés par des virgules:");
+                    int index2 = 0;
+                    IEnumerable<Backup> Backuplist2 = BackupFactory.GetAllBackups();
+                    foreach (Backup backup in Backuplist2)
+                    {
+                        Console.WriteLine($"ID : {index2} Save: {backup.Name}");
+                        index2 = index2 + 1;
+                    }
+                    Console.WriteLine("Entrez l'id du backup à éditer, suivi par le nouveau chemin de destination, le nouveau chemin source, et le nouveau type de backup, séparés par des virgules:");
                     string[] editParams = Console.ReadLine().Split(',');
                     if (editParams.Length == 4)
                     {

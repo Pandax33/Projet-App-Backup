@@ -10,5 +10,7 @@ using ProjetDevSys.Vue;
 BackupFactory.LoadBackupsFromJson();
 
 RunTaskView runTaskView = new RunTaskView();
-Console.WriteLine(runTaskView.SelectTaskView());
+GestionTaskView gestionTaskView = new GestionTaskView();
+//Console.WriteLine(runTaskView.SelectTaskView());
+gestionTaskView.SelectGestionTaskView();
 
