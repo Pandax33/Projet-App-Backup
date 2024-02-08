@@ -79,14 +79,33 @@ namespace ProjetDevSys.Model
             return _backups.Values;
         }
 
-        public static void DisplayFirstFiveBackupNames(int Number)
+        public static IEnumerable<Backup> GetBackupsInRange(int startNumber, int endNumber)
         {
-            // Prend les 5 premiers éléments du dictionnaire _backups
-            IEnumerable<Backup> firstFiveBackups = _backups.Values.Take(Number);
+            // Calculer le nombre d'éléments à prendre après avoir sauté startNumber éléments
+            int count = endNumber - startNumber + 1;
 
-            foreach (Backup backup in firstFiveBackups)
+            // Vérifier que le calcul de count est positif, sinon retourner un enumerable vide
+            if (count > 0)
             {
-                Console.WriteLine(backup.Name);
+                return _backups.Values.Skip(startNumber).Take(count);
+            }
+            else
+            {
+                return Enumerable.Empty<Backup>(); // Retourne une collection vide si la plage est invalide
+            }
+        }
+
+        public static Backup GetBackupByIndex(int index)
+        {
+            // Convertit les valeurs du dictionnaire en liste et tente de récupérer l'élément à l'index spécifié
+            var backupList = _backups.Values.ToList();
+            if (index >= 0 && index < backupList.Count)
+            {
+                return backupList[index];
+            }
+            else
+            {
+                return null; // ou gérer l'erreur comme désiré
             }
         }
     }
