@@ -2,6 +2,11 @@
 using Microsoft.Extensions.Configuration;
 
 using ProjetDevSys.Model;
+using System.Globalization;
+using System.Resources;
+
+CultureInfo ci = new CultureInfo(AppConstants.Langage);
+CultureInfo.CurrentUICulture = ci;
 
 Backup test = BackupFactory.CreateBackup(
     "Goatjo.jpg",
@@ -10,6 +15,9 @@ Backup test = BackupFactory.CreateBackup(
     "A"
 );
 
+
+// Utiliser une chaîne de ressource
+Console.WriteLine(ResourceHelper.GetString("HelloMessage"));
 var allBackups = BackupFactory.GetAllBackups();
 foreach (var backup in allBackups)
 {
