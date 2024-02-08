@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjetDevSys
 {
-    public static readonly class ResourceHelper
+    public static class ResourceHelper
     {
 
         private static readonly ResourceManager ResourceManager = new ResourceManager("ProjetDevSys.Messages", typeof(ResourceHelper).Assembly);
