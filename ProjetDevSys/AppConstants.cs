@@ -10,6 +10,7 @@ namespace ProjetDevSys
         public static readonly string LogFilePath;
         public static readonly string Langage;
         public static readonly string LogFilePathRealTime;
+        public static readonly string JsonSave;
 
         static AppConstants()
         {
@@ -21,7 +22,7 @@ namespace ProjetDevSys
             try
             {
                 // Lecture du fichier JSON en tant que string
-                var json = File.ReadAllText(filePath);
+                string json = File.ReadAllText(filePath);
 
                 // Désérialisation du JSON en un objet dynamique ou dans une structure fortement typée
                 dynamic config = JsonConvert.DeserializeObject(json);
@@ -30,6 +31,7 @@ namespace ProjetDevSys
                 LogFilePath = config.Logging.JsonPath;
                 Langage = config.Langage.Langage;
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
+                JsonSave = config.LoadSave.JsonPathSave;
             }
             catch (Exception ex)
             {
