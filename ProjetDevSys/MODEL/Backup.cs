@@ -9,7 +9,6 @@ namespace ProjetDevSys.Model
 {
     internal class Backup
     {
-        public int ID { get; set; }
         public string Name { get; set; }
         public string Destination { get; set; }
         public string Source { get; set; }
