@@ -16,7 +16,7 @@ namespace ProjetDevSys.MODEL
         public void Serialize<T>(T obj)
         {
             // Configure Newtonsoft.Json pour formater le JSON de manière lisible
-            var settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
+            JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
             string json = JsonConvert.SerializeObject(obj, settings);
             File.WriteAllText(JsonPath, json);
         }
