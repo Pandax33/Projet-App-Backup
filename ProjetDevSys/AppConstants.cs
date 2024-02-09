@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using ProjetDevSys.Model;
 
 namespace ProjetDevSys
 {
@@ -20,7 +21,7 @@ namespace ProjetDevSys
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySavePath = Path.Combine(appDataPath, "EasySave");
             string filePath = Path.Combine(easySavePath, "appsettings.json");
-
+            Config.CreateSetting();
             try
             {
                 // Lecture du fichier JSON en tant que string
