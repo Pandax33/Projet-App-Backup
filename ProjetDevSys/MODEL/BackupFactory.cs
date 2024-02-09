@@ -79,14 +79,68 @@ namespace ProjetDevSys.Model
             return _backups.Values;
         }
 
-        public static void DisplayFirstFiveBackupNames(int Number)
+        public static bool DeleteBackup(string name)
         {
-            // Prend les 5 premiers éléments du dictionnaire _backups
-            IEnumerable<Backup> firstFiveBackups = _backups.Values.Take(Number);
-
-            foreach (Backup backup in firstFiveBackups)
+            if (_backups.ContainsKey(name))
             {
-                Console.WriteLine(backup.Name);
+                _backups.Remove(name);
+                SaveBackupsToJson(); // Met à jour le fichier JSON après la suppression
+                return true;
+            }
+            else
+            {
+                return false; // Retourne false si aucun backup avec ce nom n'a été trouvé
+            }
+        }
+
+        public static bool EditBackup(string name, string newDestination, string newSource, string newType)
+        {
+            // Vérifier si le Backup à éditer existe
+            if (_backups.TryGetValue(name, out Backup backup))
+            {
+                // Mettre à jour les propriétés du Backup
+                backup.Destination = newDestination;
+                backup.Source = newSource;
+                backup.Type = newType;
+
+                // Pas besoin d'ajouter à nouveau le backup dans le dictionnaire puisque la référence est déjà mise à jour
+                SaveBackupsToJson(); // Sauvegarder les changements dans le fichier JSON
+
+                return true; // Retourner true pour indiquer que l'édition a réussi
+            }
+            else
+            {
+                return false; // Retourner false si aucun Backup avec ce nom n'a été trouvé
+            }
+        }
+
+        public static IEnumerable<Backup> GetBackupsInRange(int startNumber, int endNumber)
+        {
+            // Calculer le nombre d'éléments à prendre après avoir sauté startNumber éléments
+            int count = endNumber - startNumber + 1;
+
+            // Vérifier que le calcul de count est positif, sinon retourner un enumerable vide
+            if (count > 0)
+            {
+                return _backups.Values.Skip(startNumber).Take(count);
+            }
+            else
+            {
+                return Enumerable.Empty<Backup>(); // Retourne une collection vide si la plage est invalide
+            }
+        }
+
+        public static Backup GetBackupByIndex(int index)
+        {
+            // Convertit les valeurs du dictionnaire en liste et tente de récupérer l'élément à l'index spécifié
+            var backupList = _backups.Values.ToList();
+            if (index >= 0 && index < backupList.Count)
+            {
+                return backupList[index];
+            }
+            else
+            {
+                return null; // ou gérer l'erreur comme désiré
             }
         }
     }
