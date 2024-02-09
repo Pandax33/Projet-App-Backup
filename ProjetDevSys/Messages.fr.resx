@@ -117,7 +117,112 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppConstants1" xml:space="preserve">
+    <value>Erreur lors de la lecture de la configuration</value>
+  </data>
+  <data name="BackupFactory1" xml:space="preserve">
+    <value>Une backup avec le même nom existe déjà.</value>
+  </data>
+  <data name="BackupJob1" xml:space="preserve">
+    <value>Type de sauvegarde non supporté.</value>
+  </data>
+  <data name="ConfigViewModel1" xml:space="preserve">
+    <value>Changement fini</value>
+  </data>
   <data name="ConfigViewText1" xml:space="preserve">
     <value>Entrez le chemin du fichier Json, la langue, le chemin du fichier Json en temps réel, et le chemin du fichier Json sauvegardé séparés par des virgules:"</value>
+  </data>
+  <data name="ConfigViewText2" xml:space="preserve">
+    <value>Paramètres incorrects.</value>
+  </data>
+  <data name="GestionTask1" xml:space="preserve">
+    <value>Delete fini</value>
+  </data>
+  <data name="GestionTask2" xml:space="preserve">
+    <value>Le fichier n'existe pas</value>
+  </data>
+  <data name="GestionTask3" xml:space="preserve">
+    <value>Edit fini</value>
+  </data>
+  <data name="GestionTask4" xml:space="preserve">
+    <value>Le fichier n'existe pas</value>
+  </data>
+  <data name="GestionTaskView1" xml:space="preserve">
+    <value>Voulez vous effectuez une Ajouter(1) ou Supprimer(2) ou Editer une tache(3) ?</value>
+  </data>
+  <data name="GestionTaskView10" xml:space="preserve">
+    <value>Paramètres incorrects.</value>
+  </data>
+  <data name="GestionTaskView11" xml:space="preserve">
+    <value>Option invalide.</value>
+  </data>
+  <data name="GestionTaskView2" xml:space="preserve">
+    <value>Entrez le nom du fichier, le chemin source, le chemin de destination, et le type de backup séparés par des virgules:</value>
+  </data>
+  <data name="GestionTaskView3" xml:space="preserve">
+    <value>Backup créé avec succès.</value>
+  </data>
+  <data name="GestionTaskView4" xml:space="preserve">
+    <value>Échec de la création du backup.</value>
+  </data>
+  <data name="GestionTaskView5" xml:space="preserve">
+    <value>Paramètres incorrects.</value>
+  </data>
+  <data name="GestionTaskView6" xml:space="preserve">
+    <value>Entrez l'identifiant du backup à supprimer:</value>
+  </data>
+  <data name="GestionTaskView7" xml:space="preserve">
+    <value>Identifiant invalide.</value>
+  </data>
+  <data name="GestionTaskView8" xml:space="preserve">
+    <value>Entrez l'id du backup à éditer, suivi par le nouveau chemin de destination, le nouveau chemin source, et le nouveau type de backup, séparés par des virgules:</value>
+  </data>
+  <data name="GestionTaskView9" xml:space="preserve">
+    <value>Identifiant invalide.</value>
+  </data>
+  <data name="InterfaceStrategy1" xml:space="preserve">
+    <value>Le dossier source n'existe pas.</value>
+  </data>
+  <data name="JsonManager1" xml:space="preserve">
+    <value>Le fichier n'existe pas.</value>
+  </data>
+  <data name="RunTaskView1" xml:space="preserve">
+    <value>Voulez vous effectuez une seule tache(1), plusieurs taches ?(2) ou une liste de tache ? (3)</value>
+  </data>
+  <data name="RunTaskView10" xml:space="preserve">
+    <value>Entrée invalide</value>
+  </data>
+  <data name="RunTaskView11" xml:space="preserve">
+    <value>Sauvegarde de toutes les tâches sélectionnées terminée avec succès.</value>
+  </data>
+  <data name="RunTaskView12" xml:space="preserve">
+    <value>Un problème est survenu lors de la sauvegarde des tâches.</value>
+  </data>
+  <data name="RunTaskView13" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="RunTaskView2" xml:space="preserve">
+    <value>Entrez l'ID de la tache que vous voulez effectuer</value>
+  </data>
+  <data name="RunTaskView3" xml:space="preserve">
+    <value>Sauvegarde fini</value>
+  </data>
+  <data name="RunTaskView4" xml:space="preserve">
+    <value>Un probleme est survenue</value>
+  </data>
+  <data name="RunTaskView5" xml:space="preserve">
+    <value>Entrez l'ID de la première et de la dernière tâche que vous voulez effectuer, séparés par une virgule (exemple: 2,5):</value>
+  </data>
+  <data name="RunTaskView6" xml:space="preserve">
+    <value>Sauvegarde finie.</value>
+  </data>
+  <data name="RunTaskView7" xml:space="preserve">
+    <value>Un problème est survenu.</value>
+  </data>
+  <data name="RunTaskView8" xml:space="preserve">
+    <value>Entrée invalide. Assurez-vous de séparer les deux nombres par une virgule.</value>
+  </data>
+  <data name="RunTaskView9" xml:space="preserve">
+    <value>Entrez les ID des tâches que vous voulez effectuer, séparés par des virgules (exemple: 1,3,5):</value>
   </data>
 </root>

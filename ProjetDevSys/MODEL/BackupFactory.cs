@@ -18,7 +18,7 @@ namespace ProjetDevSys.Model
             if (_backups.ContainsKey(save))
             {
                 // Vous pouvez lever une exception ou simplement retourner null/le backup existant
-                throw new ArgumentException($"Un backup nommé '{save}' existe déjà.");
+                throw new ArgumentException(ResourceHelper.GetString("BackupFactory1"));
             }
 
             Backup backup = new Backup

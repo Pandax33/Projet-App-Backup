@@ -9,7 +9,6 @@ using ProjetDevSys.VueModel;
 using ProjetDevSys.Vue;
 using ProjetDevSys;
 
-Config.CreateSetting();
 
 BackupFactory.LoadBackupsFromJson();
 

@@ -11,19 +11,19 @@ namespace ProjetDevSys.Vue
     {
         public string EditerConfig()
         {
-            Console.WriteLine("Entrez le chemin du fichier Json, la langue, le chemin du fichier Json en temps réel, et le chemin du fichier Json sauvegardé séparés par des virgules:");
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText1"));
             string[] createParams = Console.ReadLine().Split(',');
             if (createParams.Length == 4)
             {
                 ConfigViewModel configViewModel = new ConfigViewModel();
                 string result = configViewModel.EditerConfig(createParams[0], createParams[1], createParams[2], createParams[3]);
-                Console.WriteLine(result);
+                return(result);
             }
             else
             {
-                Console.WriteLine("Paramètres incorrects.");
+                return(ResourceHelper.GetString("ConfigViewText2"));
             }
-            return "Changement fini";
+            
         }
 
         
