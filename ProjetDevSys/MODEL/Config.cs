@@ -59,19 +59,19 @@ namespace ProjetDevSys.Model
                 {
                     Logging = new
                     {
-                        JsonPath = "C:\\Users\\leanb\\Pictures\\Json\\test.json"
+                        JsonPath
                     },
                     Langage = new
                     {
-                        Langage = "en"
+                        Langage 
                     },
                     RealTimeLogging = new
                     {
-                        JsonPathRealTime = "C:\\Users\\leanb\\Pictures\\Json\\test2.json"
+                        JsonPathRealTime
                     },
                     LoadSave = new
                     {
-                        JsonPathSave = "C:\\Users\\leanb\\Pictures\\Json\\test3.json"
+                        JsonPathSave
                     }
                 };
                 string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
