@@ -6,10 +6,10 @@ namespace ProjetDevSys.Model
 {
     public static class Config
     {
-        public static string JsonPath { get; private set; }
+        public static string JsonPath { get; set; }
         public static string Langage { get; set; } = "en";
-        public static string JsonPathRealTime { get; private set; }
-        public static string JsonPathSave { get; private set; }
+        public static string JsonPathRealTime { get; set; }
+        public static string JsonPathSave { get; set; }
 
         static Config()
         {
