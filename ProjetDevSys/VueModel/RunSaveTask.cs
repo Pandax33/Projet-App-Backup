@@ -28,5 +28,15 @@ namespace ProjetDevSys.VueModel
             }
             return true;
         }
+        public bool RunTaskMultiple(int[] tab)
+        {
+            foreach(int id in tab)
+            {
+                Backup backup = BackupFactory.GetBackupByIndex(id);
+                BackupJob backupJob = new BackupJob(backup);
+                backupJob.Save();
+            }
+            return true;
+        }
     }
 }

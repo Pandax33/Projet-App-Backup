@@ -9,8 +9,5 @@ using ProjetDevSys.VueModel;
 using ProjetDevSys.Vue;
 BackupFactory.LoadBackupsFromJson();
 
-RunTaskView runTaskView = new RunTaskView();
-GestionTaskView gestionTaskView = new GestionTaskView();
-//Console.WriteLine(runTaskView.SelectTaskView());
-gestionTaskView.SelectGestionTaskView();
-
+MenuPrincipal menuPrincipal = new MenuPrincipal();
+menuPrincipal.PrincipalMenu();
