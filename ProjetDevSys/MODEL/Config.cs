@@ -27,6 +27,9 @@ namespace ProjetDevSys.Model
             JsonPathRealTime = Path.Combine(easySaveFolder, "LogRealTime.json");
             JsonPathSave = Path.Combine(easySaveFolder, "Backlist.json");
             Langage = AppConstants.Langage;
+            CreateFileIfNotExists(JsonPath);
+            CreateFileIfNotExists(JsonPathRealTime);
+            CreateFileIfNotExists(JsonPathSave);
         }
 
         // La méthode pour initialiser ou mettre à jour les propriétés si nécessaire
@@ -54,15 +57,28 @@ namespace ProjetDevSys.Model
             {
                 var defaultConfig = new
                 {
-                    JsonPath,
-                    Langage,
-                    JsonPathRealTime,
-                    JsonPathSave
+                    Logging = new
+                    {
+                        JsonPath = "C:\\Users\\leanb\\Pictures\\Json\\test.json"
+                    },
+                    Langage = new
+                    {
+                        Langage = "en"
+                    },
+                    RealTimeLogging = new
+                    {
+                        JsonPathRealTime = "C:\\Users\\leanb\\Pictures\\Json\\test2.json"
+                    },
+                    LoadSave = new
+                    {
+                        JsonPathSave = "C:\\Users\\leanb\\Pictures\\Json\\test3.json"
+                    }
                 };
                 string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(configFilePath, json);
             }
         }
+
 
         public static void EditConfig()
         {
@@ -83,6 +99,15 @@ namespace ProjetDevSys.Model
             // Sérialisation et écriture dans le fichier
             string jsonString = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(filePath, jsonString);
+        }
+
+        private static void CreateFileIfNotExists(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                // Créer un fichier vide
+                File.Create(filePath).Dispose();
+            }
         }
     }
 }
