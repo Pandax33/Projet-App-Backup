@@ -61,11 +61,20 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string Damian {
+            get {
+                return ResourceManager.GetString("Damian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à The Chicken is insane.
         /// </summary>
-        internal static string HelloMessage {
+        internal static string Damien {
             get {
-                return ResourceManager.GetString("HelloMessage", resourceCulture);
+                return ResourceManager.GetString("Damien", resourceCulture);
             }
         }
     }

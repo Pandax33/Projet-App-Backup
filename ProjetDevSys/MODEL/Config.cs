@@ -2,14 +2,31 @@
 using System.IO;
 using System.Text.Json;
 
-namespace ProjetDevSys.MODEL
+namespace ProjetDevSys.Model
 {
     public static class Config
     {
-        public static string JsonPath { get; set; } = @"C:\Users\leanb\Pictures\Json\test.json";
+        public static string JsonPath { get; private set; }
         public static string Langage { get; set; } = "en";
-        public static string JsonPathRealTime { get; set; } = @"C:\Users\leanb\Pictures\Json\test2.json";
-        public static string JsonPathSave { get; set; } = @"C:\Users\leanb\Pictures\Json\test3.json";
+        public static string JsonPathRealTime { get; private set; }
+        public static string JsonPathSave { get; private set; }
+
+        static Config()
+        {
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string easySaveFolder = Path.Combine(appDataPath, "EasySave");
+
+            // Assurez-vous que le dossier EasySave existe
+            if (!Directory.Exists(easySaveFolder))
+            {
+                Directory.CreateDirectory(easySaveFolder);
+            }
+
+            // Construire les chemins avec les noms spécifiques
+            JsonPath = Path.Combine(easySaveFolder, $"Log_{DateTime.Now:yyyyMMdd}.json");
+            JsonPathRealTime = Path.Combine(easySaveFolder, "LogRealTime.json");
+            JsonPathSave = Path.Combine(easySaveFolder, "Backlist.json");
+        }
 
         // La méthode pour initialiser ou mettre à jour les propriétés si nécessaire
         public static void Initialize(string jsonPath, string langage, string jsonPathRealTime, string jsonPathSave)

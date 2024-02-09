@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProjetDevSys.MODEL;
+using ProjetDevSys.Model;
 
 namespace ProjetDevSys.VueModel
 {
