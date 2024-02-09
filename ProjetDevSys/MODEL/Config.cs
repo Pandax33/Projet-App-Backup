@@ -7,7 +7,7 @@ namespace ProjetDevSys.Model
     public static class Config
     {
         public static string JsonPath { get; set; }
-        public static string Langage { get; set; } = "en";
+        public static string Langage { get; set; }
         public static string JsonPathRealTime { get; set; }
         public static string JsonPathSave { get; set; }
 
@@ -26,6 +26,7 @@ namespace ProjetDevSys.Model
             JsonPath = Path.Combine(easySaveFolder, $"Log_{DateTime.Now:yyyyMMdd}.json");
             JsonPathRealTime = Path.Combine(easySaveFolder, "LogRealTime.json");
             JsonPathSave = Path.Combine(easySaveFolder, "Backlist.json");
+            Langage = AppConstants.Langage;
         }
 
         // La méthode pour initialiser ou mettre à jour les propriétés si nécessaire

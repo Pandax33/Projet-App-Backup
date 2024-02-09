@@ -17,7 +17,9 @@ namespace ProjetDevSys
             // Chemin vers votre fichier appsettings.json
             //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
             string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string filePath = Path.Combine(projectDirectory, "appsettings.json");
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string easySavePath = Path.Combine(appDataPath, "EasySave");
+            string filePath = Path.Combine(easySavePath, "appsettings.json");
 
             try
             {
