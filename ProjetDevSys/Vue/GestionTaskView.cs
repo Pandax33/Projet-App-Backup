@@ -11,7 +11,7 @@ namespace ProjetDevSys.Vue
 {
     public class GestionTaskView
     {
-        public void SelectGestionTaskView()
+        public string SelectGestionTaskView()
         {
             Console.WriteLine("Voulez vous effectuez une Ajouter(1) ou Supprimer(2) ou Editer une tache(3) ?");
             string input = Console.ReadLine();
@@ -24,13 +24,12 @@ namespace ProjetDevSys.Vue
                     if (createParams.Length == 4)
                     {
                         bool created = gestionTask.CreateTask(createParams[0], createParams[1], createParams[2], createParams[3]);
-                        Console.WriteLine(created ? "Backup créé avec succès." : "Échec de la création du backup.");
+                        return(created ? "Backup créé avec succès." : "Échec de la création du backup.");
                     }
                     else
                     {
-                        Console.WriteLine("Paramètres incorrects.");
+                        return("Paramètres incorrects.");
                     }
-                    break;
                 case "2":
                     int index = 0;
                     IEnumerable<Backup> Backuplist = BackupFactory.GetAllBackups();
@@ -45,13 +44,12 @@ namespace ProjetDevSys.Vue
                     {
                         // Modifier pour appeler DeleteTask sur BackupFactory
                         string result = gestionTask.DeleteTask(deleteId);
-                        Console.WriteLine(result);
+                        return(result);
                     }
                     else
                     {
-                        Console.WriteLine("Identifiant invalide.");
+                        return("Identifiant invalide.");
                     }
-                    break;
                 case "3":
                     int index2 = 0;
                     IEnumerable<Backup> Backuplist2 = BackupFactory.GetAllBackups();
@@ -67,21 +65,19 @@ namespace ProjetDevSys.Vue
                         if (int.TryParse(editParams[0], out int id))
                         {
                             string result = gestionTask.EditTask(id, editParams[1], editParams[2], editParams[3]);
-                            Console.WriteLine(result);
+                            return(result);
                         }
                         else
                         {
-                            Console.WriteLine("Identifiant invalide.");
+                            return("Identifiant invalide.");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Paramètres incorrects.");
+                        return("Paramètres incorrects.");
                     }
-                    break;
                 default:
-                    Console.WriteLine("Option invalide.");
-                    break;
+                    return("Option invalide.");
             }
         }
     }
