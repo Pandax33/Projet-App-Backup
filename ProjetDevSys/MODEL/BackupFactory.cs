@@ -1,4 +1,4 @@
-﻿using ProjetDevSys.MODEL; // Assurez-vous que cet espace de noms est correct
+﻿using ProjetDevSys.MODEL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,13 +11,13 @@ namespace ProjetDevSys.Model
         private static readonly Dictionary<string, Backup> _backups = new Dictionary<string, Backup>();
         private static readonly JsonManager _jsonManager = new JsonManager(AppConstants.JsonSave);
 
-        // Méthode mise à jour pour créer une instance de Backup
+        // Update method to create a backup
         public static Backup CreateBackup(string save, string source,string destination, string type)
         {
-            // Vérifie si un backup avec le même nom existe déjà
+            // Check if the backup already exists
             if (_backups.ContainsKey(save))
             {
-                // Vous pouvez lever une exception ou simplement retourner null/le backup existant
+                // You can throw an exception or return null
                 throw new ArgumentException(ResourceHelper.GetString("BackupFactory1"));
             }
 
@@ -29,14 +29,14 @@ namespace ProjetDevSys.Model
                 Type = type
             };
 
-            // Utilise le nom comme clé pour le dictionnaire
+            // use the name as a key to store the backup in the dictionary
             _backups.Add(save, backup);
             SaveBackupsToJson();
 
             return backup;
         }
 
-        // Méthode mise à jour pour récupérer un Backup par son nom
+        // Update Method to get a backup by name
         public static Backup GetBackupByName(string name)
         {
             if (_backups.TryGetValue(name, out Backup backup))
@@ -46,8 +46,6 @@ namespace ProjetDevSys.Model
 
             return null;
         }
-
-        // Les autres méthodes restent plus ou moins inchangées...
 
         private static void SaveBackupsToJson()
         {
@@ -84,55 +82,56 @@ namespace ProjetDevSys.Model
             if (_backups.ContainsKey(name))
             {
                 _backups.Remove(name);
-                SaveBackupsToJson(); // Met à jour le fichier JSON après la suppression
+                // Update the JSON file
+                SaveBackupsToJson();
                 return true;
             }
             else
             {
-                return false; // Retourne false si aucun backup avec ce nom n'a été trouvé
+                return false; // Return false if the backup was not found
             }
         }
 
         public static bool EditBackup(string name, string newDestination, string newSource, string newType)
         {
-            // Vérifier si le Backup à éditer existe
+            // Check if the backup exists
             if (_backups.TryGetValue(name, out Backup backup))
             {
-                // Mettre à jour les propriétés du Backup
+                // Update the backup properties
                 backup.Destination = newDestination;
                 backup.Source = newSource;
                 backup.Type = newType;
 
-                // Pas besoin d'ajouter à nouveau le backup dans le dictionnaire puisque la référence est déjà mise à jour
-                SaveBackupsToJson(); // Sauvegarder les changements dans le fichier JSON
+                // Save the changes to the JSON file
+                SaveBackupsToJson();
 
-                return true; // Retourner true pour indiquer que l'édition a réussi
+                return true; // Return true if the backup was found and updated
             }
             else
             {
-                return false; // Retourner false si aucun Backup avec ce nom n'a été trouvé
+                return false; // Return false if the backup was not found
             }
         }
 
         public static IEnumerable<Backup> GetBackupsInRange(int startNumber, int endNumber)
         {
-            // Calculer le nombre d'éléments à prendre après avoir sauté startNumber éléments
+            // Calculate the number of elements to take from the dictionary
             int count = endNumber - startNumber + 1;
 
-            // Vérifier que le calcul de count est positif, sinon retourner un enumerable vide
+            // Check if the range is valid
             if (count > 0)
             {
                 return _backups.Values.Skip(startNumber).Take(count);
             }
             else
             {
-                return Enumerable.Empty<Backup>(); // Retourne une collection vide si la plage est invalide
+                return Enumerable.Empty<Backup>(); // Return an empty collection if the range is invalid
             }
         }
 
         public static Backup GetBackupByIndex(int index)
         {
-            // Convertit les valeurs du dictionnaire en liste et tente de récupérer l'élément à l'index spécifié
+            // Convert the dictionary values to a list
             var backupList = _backups.Values.ToList();
             if (index >= 0 && index < backupList.Count)
             {
@@ -140,7 +139,7 @@ namespace ProjetDevSys.Model
             }
             else
             {
-                return null; // ou gérer l'erreur comme désiré
+                return null;
             }
         }
     }

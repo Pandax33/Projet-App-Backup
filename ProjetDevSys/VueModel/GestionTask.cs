@@ -52,7 +52,7 @@ namespace ProjetDevSys.VueModel
         }
         public string EditNewDestination(int taskId, string newDestination)
         {
-            // Récupère le backup existant par son index
+            // Get the backup by index
             Backup backup = BackupFactory.GetBackupByIndex(taskId);
             if (backup == null)
             {

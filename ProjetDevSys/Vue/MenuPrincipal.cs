@@ -15,7 +15,7 @@ namespace ProjetDevSys.Vue
             GestionTaskView gestionTaskView = new GestionTaskView();
             ConfigView configView = new ConfigView();
 
-            while (true) // Boucle infinie pour revenir au menu principal après chaque action
+            while (true) // Infinity loop for the main menu
             {
                 Console.WriteLine(ResourceHelper.GetString("Form1"));
                 Console.WriteLine(ResourceHelper.GetString("MenuPrincipal1"));
@@ -41,7 +41,7 @@ namespace ProjetDevSys.Vue
                         break;
                     case "4":
                         Console.WriteLine(ResourceHelper.GetString("MenuPrincipal7"));
-                        return; // Sortie de la fonction pour quitter le programme
+                        return; // Exit the main menu
                     default:
                         Console.WriteLine(ResourceHelper.GetString("MenuPrincipal8"));
                         break;

@@ -15,22 +15,22 @@ namespace ProjetDevSys
 
         static AppConstants()
         {
-            // Chemin vers votre fichier appsettings.json
+            // Pass to your JSON path
             //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
             string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string easySavePath = Path.Combine(appDataPath, "EasySave");
+            string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
             string filePath = Path.Combine(easySavePath, "appsettings.json");
             Config.CreateSetting();
             try
             {
-                // Lecture du fichier JSON en tant que string
+                // Read the file and deserialize the JSON to a dynamic type
                 string json = File.ReadAllText(filePath);
 
-                // Désérialisation du JSON en un objet dynamique ou dans une structure fortement typée
+                // Deserialize the JSON to a dynamic type
                 dynamic config = JsonConvert.DeserializeObject(json);
 
-                // Assignation des valeurs. Ajustez les chemins d'accès selon votre structure JSON.
+                // Assign the values to the static fields
                 LogFilePath = config.Logging.JsonPath;
                 Langage = config.Langage.Langage;
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;

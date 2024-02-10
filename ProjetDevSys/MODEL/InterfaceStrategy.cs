@@ -17,15 +17,15 @@ namespace ProjetDevSys.Model
 
         public void Save(Backup backup, LogRealTime LogRealTime)
         {
-            // Vérifiez si le dossier source existe
+            // Check if the source directory exists
             if (Directory.Exists(backup.Source))
             {
-                // Assurez-vous que le dossier de destination existe, sinon créez-le
+                // Be sure that the destination directory exists
                 if (!Directory.Exists(backup.Destination))
                 {
                     Directory.CreateDirectory(backup.Destination);
                 }
-                // Copiez tous les fichiers et sous-dossiers récursivement
+                // Copy folder and under folders
                 CopierDossier(backup.Source, backup.Destination, LogRealTime);
             }
             else
@@ -37,7 +37,7 @@ namespace ProjetDevSys.Model
 
         private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime)
         {
-            // Copiez tous les fichiers du dossier
+            // Copy every file from the source directory to the destination directory
             foreach (string fichierPath in Directory.GetFiles(sourceDir))
             {
                 string fileName = Path.GetFileName(fichierPath);
@@ -53,7 +53,7 @@ namespace ProjetDevSys.Model
                 LogRealTime.CreateLog();
             }
 
-            // Copiez récursivement tous les sous-dossiers
+            // Copy all subdirectories recursively
             foreach (string dossierPath in Directory.GetDirectories(sourceDir))
             {
                 string folderName = Path.GetFileName(dossierPath);
@@ -80,7 +80,7 @@ namespace ProjetDevSys.Model
                     Directory.CreateDirectory(backup.Destination);
                 }
 
-                // Appelle CopierDossier pour une copie différentielle
+                // Call the recursive method to copy the files
                 CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime);
             }
             else
@@ -92,7 +92,7 @@ namespace ProjetDevSys.Model
 
         private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime)
         {
-            // Copier tous les fichiers du dossier source vers le dossier de destination s'ils sont nouveaux ou modifiés
+            // Copy every file from the source directory to the destination directory
             foreach (string fichierSource in Directory.GetFiles(sourceDir))
             {
                 string fileName = Path.GetFileName(fichierSource);
@@ -100,7 +100,7 @@ namespace ProjetDevSys.Model
                 FileInfo fileInfo = new FileInfo(fichierSource);
                 long fileSize = fileInfo.Length;
 
-                // Effectuez la copie si le fichier de destination n'existe pas ou si le fichier source est plus récent
+                // Do the copy only if the file does not exist or if the source file is more recent than the destination file
                 if (!File.Exists(fichierDestination) || File.GetLastWriteTime(fichierSource) > File.GetLastWriteTime(fichierDestination))
                 {
                     File.Copy(fichierSource, fichierDestination, true);
@@ -112,7 +112,7 @@ namespace ProjetDevSys.Model
                 }
             }
 
-            // Récursivement copier tous les sous-dossiers
+            // Recursively call the method for each subdirectory
             foreach (string dossierSource in Directory.GetDirectories(sourceDir))
             {
                 string nomDossier = Path.GetFileName(dossierSource);

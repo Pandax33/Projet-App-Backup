@@ -31,7 +31,7 @@ namespace ProjetDevSys.Vue
                     return ResourceHelper.GetString("RunTaskView18");
                 }
 
-                // Affichage des sauvegardes disponibles
+                // Print the list of backups
                 int index = 0;
                 foreach (Backup backup in BackupList)
                 {
@@ -82,15 +82,15 @@ namespace ProjetDevSys.Vue
                     return ResourceHelper.GetString("RunTaskView18");
                 }
 
-                // Demande à l'utilisateur d'entrer les IDs
+                // Ask for the start and end ID
                 Console.WriteLine(ResourceHelper.GetString("RunTaskView5"));
                 string input2 = Console.ReadLine();
                 string[] inputs = input2.Split(',');
 
-                // Vérifie qu'il y a exactement 2 entrées et que les deux sont des nombres entiers valides
+                // Check if the input is valid
                 if (inputs.Length == 2 && int.TryParse(inputs[0], out int startId) && int.TryParse(inputs[1], out int endId))
                 {
-                    // Vérification pour s'assurer que endId est supérieur à startId
+                    // Check if the start ID is smaller than the end ID
                     if (startId >= endId)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -99,14 +99,14 @@ namespace ProjetDevSys.Vue
                         return ResourceHelper.GetString("RunTaskView18");
                     }
 
-                    // Vérification pour s'assurer que les ID existent bien
+                    // Check if the start and end ID are valid
                     if (startId < 0 || endId >= BackupList.Count())
                     {
                         
                         return ResourceHelper.GetString("RunTaskView19");
                     }
 
-                    // Exécution de la tâche avec les IDs validés
+                    // Do the task for the range of IDs
                     RunSaveTask runSaveTask = new RunSaveTask();
                     bool result = runSaveTask.RunMultipleTask(startId, endId);
 
@@ -153,7 +153,7 @@ namespace ProjetDevSys.Vue
                 string input5 = Console.ReadLine();
                 string[] inputIds = input5.Split(',');
 
-                // Conversion des inputs en tableau d'entiers et vérification de l'existence des IDs
+                // Convert the input to an array of IDs
                 int[] ids = new int[inputIds.Length];
                 for (int i = 0; i < inputIds.Length; i++)
                 {
@@ -170,7 +170,7 @@ namespace ProjetDevSys.Vue
                     }
                 }
 
-                // Appel de RunTaskMultiple avec le tableau d'ID
+                // Call the task to run the multiple tasks
                 RunSaveTask runSaveTask = new RunSaveTask();
                 bool result = runSaveTask.RunTaskMultiple(ids);
 

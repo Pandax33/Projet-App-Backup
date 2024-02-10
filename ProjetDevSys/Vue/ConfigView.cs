@@ -38,14 +38,14 @@ namespace ProjetDevSys.Vue
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
                             Console.ResetColor();
-                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText5")); // Demandez à nouveau
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText5")); // Ask a new one
                         }
                     } while (!AppConstants.VerifJson(newPath));
                     return configViewModel.EditerJsonPath(newPath);
 
                 case "2":
                     Console.WriteLine(ResourceHelper.GetString("ConfigViewText6"));
-                    string newLangage = Console.ReadLine().Trim().ToLower(); // Normalise l'entrée pour la comparaison
+                    string newLangage = Console.ReadLine().Trim().ToLower(); // Normalise the entered language
 
                     while (newLangage != "fr" && newLangage != "en")
                     {
@@ -56,7 +56,7 @@ namespace ProjetDevSys.Vue
                         newLangage = Console.ReadLine().Trim().ToLower();
                     }
 
-                    // Une fois une entrée valide obtenue, appelle la méthode pour éditer la langue
+                    // Once the language is correct, we can edit it
                     return configViewModel.EditerLangage(newLangage);
 
                 case "3":
@@ -70,7 +70,7 @@ namespace ProjetDevSys.Vue
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
                             Console.ResetColor();
-                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText7")); // Demandez à nouveau
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText7")); // Ask again
                         }
                     } while (!AppConstants.VerifJson(newRealTimePath));
                     return configViewModel.EditerJsonPathRealTime(newRealTimePath);
@@ -86,7 +86,7 @@ namespace ProjetDevSys.Vue
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
                             Console.ResetColor();
-                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText8")); // Demandez à nouveau
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText8")); // Ask again
                         }
                     } while (!AppConstants.VerifJson(newSavePath));
                     return configViewModel.EditerJsonPathSave(newSavePath);
