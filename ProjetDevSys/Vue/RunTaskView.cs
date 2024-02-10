@@ -17,14 +17,24 @@ namespace ProjetDevSys.Vue
             string input = Console.ReadLine();
             if(input == "1")
             {
-                int index = 0;
-                IEnumerable<Backup> Backuplist = BackupFactory.GetAllBackups();
-                foreach (Backup backup in Backuplist)
+                IEnumerable<Backup> BackupList = BackupFactory.GetAllBackups();
+                if (BackupList != null && BackupList.Any())
                 {
-                    Console.WriteLine($"ID : {index} Save: {backup.Name}");
-                    index = index + 1;
+                    int index = 0;
+                    foreach (Backup backup in BackupList)
+                    {
+                        Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        index++;
+                    }
                 }
-                Console.WriteLine(index);
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Aucune sauvegarde enregistrée");
+                    Console.ResetColor();
+                    return (ResourceHelper.GetString("RunTaskView18"));
+                }
+
                 Console.WriteLine(ResourceHelper.GetString("RunTaskView2"));
                 string input2 = Console.ReadLine();
                 RunSaveTask runSaveTask = new RunSaveTask();
@@ -40,12 +50,22 @@ namespace ProjetDevSys.Vue
             }
             else if(input == "2")
             {
-                int index = 0;
-                IEnumerable<Backup> Backuplist = BackupFactory.GetAllBackups();
-                foreach (Backup backup in Backuplist)
+                IEnumerable<Backup> BackupList = BackupFactory.GetAllBackups();
+                if (BackupList != null && BackupList.Any())
                 {
-                    Console.WriteLine($"ID : {index} Save: {backup.Name}");
-                    index += 1;
+                    int index = 0;
+                    foreach (Backup backup in BackupList)
+                    {
+                        Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        index++;
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Aucune sauvegarde enregistrée");
+                    Console.ResetColor();
+                    return (ResourceHelper.GetString("RunTaskView18"));
                 }
 
                 Console.WriteLine(ResourceHelper.GetString("RunTaskView5"));
@@ -74,12 +94,22 @@ namespace ProjetDevSys.Vue
             }
             else if(input == "3")
             {
-                int index = 0;
-                IEnumerable<Backup> backupList = BackupFactory.GetAllBackups();
-                foreach (Backup backup in backupList)
+                IEnumerable<Backup> BackupList = BackupFactory.GetAllBackups();
+                if (BackupList != null && BackupList.Any())
                 {
-                    Console.WriteLine($"ID : {index} Save: {backup.Name}");
-                    index += 1;
+                    int index = 0;
+                    foreach (Backup backup in BackupList)
+                    {
+                        Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        index++;
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Aucune sauvegarde enregistrée");
+                    Console.ResetColor();
+                    return (ResourceHelper.GetString("RunTaskView18"));
                 }
 
                 Console.WriteLine(ResourceHelper.GetString("RunTaskView9"));

@@ -17,12 +17,14 @@ namespace ProjetDevSys.Vue
 
             while (true) // Boucle infinie pour revenir au menu principal après chaque action
             {
+                Console.WriteLine(ResourceHelper.GetString("Form1"));
                 Console.WriteLine(ResourceHelper.GetString("MenuPrincipal1"));
                 Console.WriteLine(ResourceHelper.GetString("MenuPrincipal2"));
                 Console.WriteLine(ResourceHelper.GetString("MenuPrincipal3"));
                 Console.WriteLine(ResourceHelper.GetString("MenuPrincipal4"));
                 Console.WriteLine(ResourceHelper.GetString("MenuPrincipal5"));
-                Console.Write(ResourceHelper.GetString("MenuPrincipal6"));
+                Console.WriteLine(ResourceHelper.GetString("MenuPrincipal6"));
+                Console.WriteLine(ResourceHelper.GetString("Form1"));
 
                 string choix = Console.ReadLine();
 
