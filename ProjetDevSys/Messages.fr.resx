@@ -186,6 +186,30 @@
   <data name="JsonManager1" xml:space="preserve">
     <value>Le fichier n'existe pas.</value>
   </data>
+  <data name="MenuPrincipal1" xml:space="preserve">
+    <value>Menu Principal:</value>
+  </data>
+  <data name="MenuPrincipal2" xml:space="preserve">
+    <value>1. Exécuter une tâche</value>
+  </data>
+  <data name="MenuPrincipal3" xml:space="preserve">
+    <value>2. Gestion des tâches</value>
+  </data>
+  <data name="MenuPrincipal4" xml:space="preserve">
+    <value>3. Éditer la configuration</value>
+  </data>
+  <data name="MenuPrincipal5" xml:space="preserve">
+    <value>4. Quitter</value>
+  </data>
+  <data name="MenuPrincipal6" xml:space="preserve">
+    <value>Veuillez entrer votre choix (1-4):</value>
+  </data>
+  <data name="MenuPrincipal7" xml:space="preserve">
+    <value>Quitter le programme...</value>
+  </data>
+  <data name="MenuPrincipal8" xml:space="preserve">
+    <value>Choix invalide. Veuillez essayer à nouveau.</value>
+  </data>
   <data name="RunTaskView1" xml:space="preserve">
     <value>Voulez vous effectuez une seule tache(1), plusieurs taches ?(2) ou une liste de tache ? (3)</value>
   </data>
