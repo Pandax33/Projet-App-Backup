@@ -9,8 +9,9 @@ using ProjetDevSys.VueModel;
 using ProjetDevSys.Vue;
 using ProjetDevSys;
 
-Config.CreateSetting();
 
+CultureInfo ci = new CultureInfo(AppConstants.Langage);
+CultureInfo.CurrentUICulture = ci;
 BackupFactory.LoadBackupsFromJson();
 
 

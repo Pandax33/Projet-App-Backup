@@ -36,7 +36,7 @@ namespace ProjetDevSys.Model
                     _strategy = new SaveDiffStrategy();
                     break;
                 default:
-                    throw new ArgumentException("Type de sauvegarde non supporté.");
+                    throw new ArgumentException(ResourceHelper.GetString("BackupJob1"));
             }
         }
 
@@ -49,7 +49,6 @@ namespace ProjetDevSys.Model
             TimeSpan duration = TimeFin - TimeDebut;
             Logger Log = new Logger(AppConstants.LogFilePath, Backup.Name, Backup.Source, Backup.Destination, 10, duration);
             Log.CreateLog();
-            Console.WriteLine("Sauvegarde terminée avec la stratégie: " + Backup.Type);
         }
     }
 }

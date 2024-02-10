@@ -13,7 +13,7 @@ namespace ProjetDevSys.Vue
     {
         public string SelectTaskView()
         {
-            Console.WriteLine("Voulez vous effectuez une tache(1) ou plusieurs taches ?(2)");
+            Console.WriteLine(ResourceHelper.GetString("RunTaskView1"));
             string input = Console.ReadLine();
             if(input == "1")
             {
@@ -25,17 +25,17 @@ namespace ProjetDevSys.Vue
                     index = index + 1;
                 }
                 Console.WriteLine(index);
-                Console.WriteLine("Entrez l'ID de la tache que vous voulez effectuer");
+                Console.WriteLine(ResourceHelper.GetString("RunTaskView2"));
                 string input2 = Console.ReadLine();
                 RunSaveTask runSaveTask = new RunSaveTask();
                 bool result = runSaveTask.RunTask(Convert.ToInt32(input2));
                 if(result) 
                 {
-                    return "Sauvegarde fini";
+                    return ResourceHelper.GetString("RunTaskView3");
                 }
                 else
                 {
-                    return "Un probleme est survenue";
+                    return ResourceHelper.GetString("RunTaskView4");
                 }
             }
             else if(input == "2")
@@ -48,7 +48,7 @@ namespace ProjetDevSys.Vue
                     index += 1;
                 }
 
-                Console.WriteLine("Entrez l'ID de la première et de la dernière tâche que vous voulez effectuer, séparés par une virgule (exemple: 2,5):");
+                Console.WriteLine(ResourceHelper.GetString("RunTaskView5"));
                 string input2 = Console.ReadLine();
                 string[] inputs = input2.Split(',');
 
@@ -59,19 +59,16 @@ namespace ProjetDevSys.Vue
 
                     if (result)
                     {
-                        Console.WriteLine("Sauvegarde finie.");
-                        return "Sauvegarde finie.";
+                        return ResourceHelper.GetString("RunTaskView6");
                     }
                     else
                     {
-                        Console.WriteLine("Un problème est survenu.");
-                        return "Un problème est survenu.";
+                        return ResourceHelper.GetString("RunTaskView7");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Entrée invalide. Assurez-vous de séparer les deux nombres par une virgule.");
-                    return "Entrée invalide.";
+                    return ResourceHelper.GetString("RunTaskView8");
                 }
 
             }
@@ -85,7 +82,7 @@ namespace ProjetDevSys.Vue
                     index += 1;
                 }
 
-                Console.WriteLine("Entrez les ID des tâches que vous voulez effectuer, séparés par des virgules (exemple: 1,3,5):");
+                Console.WriteLine(ResourceHelper.GetString("RunTaskView9"));
                 string input5 = Console.ReadLine();
                 string[] inputIds = input5.Split(',');
 
@@ -99,7 +96,7 @@ namespace ProjetDevSys.Vue
                     }
                     else
                     {
-                        return ($"Entrée invalide pour l'ID: {inputIds[i]}");
+                        return (ResourceHelper.GetString("RunTaskView10"));
                         
                     }
                 }
@@ -110,18 +107,17 @@ namespace ProjetDevSys.Vue
 
                 if (result)
                 {
-                    return("Sauvegarde de toutes les tâches sélectionnées terminée avec succès.");
+                    return(ResourceHelper.GetString("RunTaskView11"));
                 }
                 else
                 {
-                    return("Un problème est survenu lors de la sauvegarde des tâches.");
+                    return(ResourceHelper.GetString("RunTaskView12"));
                 }
 
             }
             else
             {
-                Console.WriteLine("Erreur");
-                return "Erreur";
+                return ResourceHelper.GetString("RunTaskView13");
             }
         }
 

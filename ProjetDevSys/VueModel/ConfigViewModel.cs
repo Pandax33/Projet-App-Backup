@@ -18,7 +18,7 @@ namespace ProjetDevSys.VueModel
             Config.EditConfig();
 
 
-            return "Changement fini";
+            return ResourceHelper.GetString("ConfigViewModel1");
         }
     }
 }

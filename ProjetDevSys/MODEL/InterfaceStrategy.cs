@@ -24,18 +24,15 @@ namespace ProjetDevSys.Model
                 if (!Directory.Exists(backup.Destination))
                 {
                     Directory.CreateDirectory(backup.Destination);
-                    Console.WriteLine("Fin de la copie");
-
                 }
                 // Copiez tous les fichiers et sous-dossiers récursivement
-                Console.WriteLine("Début de la copie");
                 CopierDossier(backup.Source, backup.Destination, LogRealTime);
-                Console.WriteLine("Fin de la copie");
             }
             else
             {
-                Console.WriteLine("Le dossier source n'existe pas.");
+                throw new DirectoryNotFoundException(ResourceHelper.GetString("InterfaceStrategy1"));
             }
+
         }
 
         private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime)
@@ -49,7 +46,6 @@ namespace ProjetDevSys.Model
                 long fileSize = fileInfo.Length;
 
                 File.Copy(fichierPath, destinationFilePath, true);
-                Console.WriteLine($"Copié: {fichierPath} -> {destinationFilePath}");
                 LogRealTime.Timestamp = DateTime.Now;
                 LogRealTime.CurrentSourcePath = fichierPath;
                 LogRealTime.CurrentTargetPath = destinationFilePath;
@@ -85,14 +81,13 @@ namespace ProjetDevSys.Model
                 }
 
                 // Appelle CopierDossier pour une copie différentielle
-                Console.WriteLine("Début de la copie");
-                CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime) ;
-                Console.WriteLine("Fin de la copie");
+                CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime);
             }
             else
             {
-                Console.WriteLine("Le dossier source n'existe pas.");
+                throw new DirectoryNotFoundException(ResourceHelper.GetString("InterfaceStrategy1"));
             }
+
         }
 
         private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime)
@@ -109,7 +104,6 @@ namespace ProjetDevSys.Model
                 if (!File.Exists(fichierDestination) || File.GetLastWriteTime(fichierSource) > File.GetLastWriteTime(fichierDestination))
                 {
                     File.Copy(fichierSource, fichierDestination, true);
-                    Console.WriteLine($"Copié: {fichierSource} -> {fichierDestination}");
                     LogRealTime.Timestamp = DateTime.Now;
                     LogRealTime.CurrentSourcePath = fichierSource;
                     LogRealTime.CurrentTargetPath = fichierDestination;

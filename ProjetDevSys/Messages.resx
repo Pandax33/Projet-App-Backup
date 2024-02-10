@@ -117,11 +117,137 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Damian" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Damien" xml:space="preserve">
-    <value>The Chicken is insane</value>
-    <comment>Je pense que ce poulet est pas mal</comment>
-  </data>
+ <data name="AppConstants1" xml:space="preserve">
+  <value>Error reading configuration</value>
+</data>
+<data name="BackupFactory1" xml:space="preserve">
+  <value>A backup with the same name already exists.</value>
+</data>
+<data name="BackupJob1" xml:space="preserve">
+  <value>Unsupported backup type.</value>
+</data>
+<data name="ConfigViewModel1" xml:space="preserve">
+  <value>Change finished</value>
+</data>
+<data name="ConfigViewText1" xml:space="preserve">
+  <value>Enter the path of the Json file, language, real-time Json file path, and saved Json file path separated by commas:</value>
+</data>
+<data name="ConfigViewText2" xml:space="preserve">
+  <value>Incorrect settings.</value>
+</data>
+<data name="GestionTask1" xml:space="preserve">
+  <value>Delete finished</value>
+</data>
+<data name="GestionTask2" xml:space="preserve">
+  <value>File does not exist</value>
+</data>
+<data name="GestionTask3" xml:space="preserve">
+  <value>Edit finished</value>
+</data>
+<data name="GestionTask4" xml:space="preserve">
+  <value>File does not exist</value>
+</data>
+<data name="GestionTaskView1" xml:space="preserve">
+  <value>Do you want to Add(1), Delete(2), or Edit a task(3)?</value>
+</data>
+<data name="GestionTaskView10" xml:space="preserve">
+  <value>Incorrect settings.</value>
+</data>
+<data name="GestionTaskView11" xml:space="preserve">
+  <value>Invalid option.</value>
+</data>
+<data name="GestionTaskView2" xml:space="preserve">
+  <value>Enter the file name, source path, destination path, and backup type separated by commas:</value>
+</data>
+<data name="GestionTaskView3" xml:space="preserve">
+  <value>Backup created successfully.</value>
+</data>
+<data name="GestionTaskView4" xml:space="preserve">
+  <value>Failed to create backup.</value>
+</data>
+<data name="GestionTaskView5" xml:space="preserve">
+  <value>Incorrect settings.</value>
+</data>
+<data name="GestionTaskView6" xml:space="preserve">
+  <value>Enter the ID of the backup to delete:</value>
+</data>
+<data name="GestionTaskView7" xml:space="preserve">
+  <value>Invalid ID.</value>
+</data>
+<data name="GestionTaskView8" xml:space="preserve">
+  <value>Enter the backup ID to edit, followed by the new destination path, new source path, and new backup type, separated by commas:</value>
+</data>
+<data name="GestionTaskView9" xml:space="preserve">
+  <value>Invalid ID.</value>
+</data>
+<data name="InterfaceStrategy1" xml:space="preserve">
+  <value>The source folder does not exist.</value>
+</data>
+<data name="JsonManager1" xml:space="preserve">
+  <value>File does not exist.</value>
+</data>
+<data name="RunTaskView1" xml:space="preserve">
+  <value>Do you want to perform a single task(1), multiple tasks(2), or a list of tasks(3)?</value>
+</data>
+<data name="RunTaskView10" xml:space="preserve">
+  <value>Invalid input</value>
+</data>
+<data name="RunTaskView11" xml:space="preserve">
+  <value>Backup of all selected tasks completed successfully.</value>
+</data>
+<data name="RunTaskView12" xml:space="preserve">
+  <value>A problem occurred during the backup of tasks.</value>
+</data>
+<data name="RunTaskView13" xml:space="preserve">
+  <value>Error</value>
+</data>
+<data name="RunTaskView2" xml:space="preserve">
+  <value>Enter the ID of the task you want to perform</value>
+</data>
+<data name="RunTaskView3" xml:space="preserve">
+  <value>Backup finished</value>
+</data>
+<data name="RunTaskView4" xml:space="preserve">
+  <value>A problem has occurred</value>
+</data>
+<data name="RunTaskView5" xml:space="preserve">
+  <value>Enter the ID of the first and last task you want to perform, separated by a comma (example: 2,5):</value>
+</data>
+<data name="RunTaskView6" xml:space="preserve">
+  <value>Backup finished.</value>
+</data>
+<data name="RunTaskView7" xml:space="preserve">
+  <value>A problem occurred.</value>
+</data>
+<data name="RunTaskView8" xml:space="preserve">
+  <value>Invalid entry. Make sure to separate the two numbers with a comma.</value>
+</data>
+<data name="RunTaskView9" xml:space="preserve">
+  <value>Enter the IDs of the tasks you want to perform, separated by commas (example: 1,3,5):</value>
+</data>
+<data name="MenuPrincipal1" xml:space="preserve">
+  <value>Main Menu:</value>
+</data>
+<data name="MenuPrincipal2" xml:space="preserve">
+  <value>1. Execute a task</value>
+</data>
+<data name="MenuPrincipal3" xml:space="preserve">
+  <value>2. Task Management</value>
+</data>
+<data name="MenuPrincipal4" xml:space="preserve">
+  <value>3. Edit Configuration</value>
+</data>
+<data name="MenuPrincipal5" xml:space="preserve">
+  <value>4. Quit</value>
+</data>
+<data name="MenuPrincipal6" xml:space="preserve">
+  <value>Please enter your choice (1-4):</value>
+</data>
+<data name="MenuPrincipal7" xml:space="preserve">
+  <value>Exiting the program...</value>
+</data>
+<data name="MenuPrincipal8" xml:space="preserve">
+  <value>Invalid choice. Please try again.</value>
+</data>
+
 </root>

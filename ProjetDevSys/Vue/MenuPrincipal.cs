@@ -17,12 +17,12 @@ namespace ProjetDevSys.Vue
 
             while (true) // Boucle infinie pour revenir au menu principal après chaque action
             {
-                Console.WriteLine("Menu Principal:");
-                Console.WriteLine("1. Exécuter une tâche");
-                Console.WriteLine("2. Gestion des tâches");
-                Console.WriteLine("3. Éditer la configuration");
-                Console.WriteLine("4. Quitter");
-                Console.Write("Veuillez entrer votre choix (1-4): ");
+                Console.WriteLine(ResourceHelper.GetString("MenuPrincipal1"));
+                Console.WriteLine(ResourceHelper.GetString("MenuPrincipal2"));
+                Console.WriteLine(ResourceHelper.GetString("MenuPrincipal3"));
+                Console.WriteLine(ResourceHelper.GetString("MenuPrincipal4"));
+                Console.WriteLine(ResourceHelper.GetString("MenuPrincipal5"));
+                Console.Write(ResourceHelper.GetString("MenuPrincipal6"));
 
                 string choix = Console.ReadLine();
 
@@ -38,10 +38,10 @@ namespace ProjetDevSys.Vue
                         Console.WriteLine(configView.EditerConfig());
                         break;
                     case "4":
-                        Console.WriteLine("Quitter le programme...");
+                        Console.WriteLine(ResourceHelper.GetString("MenuPrincipal7"));
                         return; // Sortie de la fonction pour quitter le programme
                     default:
-                        Console.WriteLine("Choix invalide. Veuillez essayer à nouveau.");
+                        Console.WriteLine(ResourceHelper.GetString("MenuPrincipal8"));
                         break;
                 }
             }

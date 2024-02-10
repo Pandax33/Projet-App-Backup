@@ -13,22 +13,22 @@ namespace ProjetDevSys.Vue
     {
         public string SelectGestionTaskView()
         {
-            Console.WriteLine("Voulez vous effectuez une Ajouter(1) ou Supprimer(2) ou Editer une tache(3) ?");
+            Console.WriteLine(ResourceHelper.GetString("GestionTaskView1"));
             string input = Console.ReadLine();
             GestionTask gestionTask = new GestionTask();
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("Entrez le nom du fichier, le chemin source, le chemin de destination, et le type de backup séparés par des virgules:");
+                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView2"));
                     string[] createParams = Console.ReadLine().Split(',');
                     if (createParams.Length == 4)
                     {
                         bool created = gestionTask.CreateTask(createParams[0], createParams[1], createParams[2], createParams[3]);
-                        return(created ? "Backup créé avec succès." : "Échec de la création du backup.");
+                        return(created ? ResourceHelper.GetString("GestionTaskView3") : ResourceHelper.GetString("GestionTaskView4"));
                     }
                     else
                     {
-                        return("Paramètres incorrects.");
+                        return(ResourceHelper.GetString("GestionTaskView5"));
                     }
                 case "2":
                     int index = 0;
@@ -38,7 +38,7 @@ namespace ProjetDevSys.Vue
                         Console.WriteLine($"ID : {index} Save: {backup.Name}");
                         index = index + 1;
                     }
-                    Console.WriteLine("Entrez l'identifiant du backup à supprimer:");
+                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView6"));
                     string deleteIdInput = Console.ReadLine();
                     if (int.TryParse(deleteIdInput, out int deleteId))
                     {
@@ -48,7 +48,7 @@ namespace ProjetDevSys.Vue
                     }
                     else
                     {
-                        return("Identifiant invalide.");
+                        return(ResourceHelper.GetString("GestionTaskView7"));
                     }
                 case "3":
                     int index2 = 0;
@@ -58,7 +58,7 @@ namespace ProjetDevSys.Vue
                         Console.WriteLine($"ID : {index2} Save: {backup.Name}");
                         index2 = index2 + 1;
                     }
-                    Console.WriteLine("Entrez l'id du backup à éditer, suivi par le nouveau chemin de destination, le nouveau chemin source, et le nouveau type de backup, séparés par des virgules:");
+                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView8"));
                     string[] editParams = Console.ReadLine().Split(',');
                     if (editParams.Length == 4)
                     {
@@ -69,15 +69,15 @@ namespace ProjetDevSys.Vue
                         }
                         else
                         {
-                            return("Identifiant invalide.");
+                            return(ResourceHelper.GetString("GestionTaskView9"));
                         }
                     }
                     else
                     {
-                        return("Paramètres incorrects.");
+                        return(ResourceHelper.GetString("GestionTaskView10"));
                     }
                 default:
-                    return("Option invalide.");
+                    return(ResourceHelper.GetString("GestionTaskView11"));
             }
         }
     }

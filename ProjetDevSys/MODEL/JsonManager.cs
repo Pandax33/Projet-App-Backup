@@ -25,7 +25,7 @@ namespace ProjetDevSys.MODEL
         {
             if (!File.Exists(JsonPath))
             {
-                throw new FileNotFoundException($"Le fichier {JsonPath} n'existe pas.");
+                throw new FileNotFoundException(ResourceHelper.GetString("JsonManager1"));
             }
 
             string json = File.ReadAllText(JsonPath);
