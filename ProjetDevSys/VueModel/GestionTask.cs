@@ -11,7 +11,6 @@ namespace ProjetDevSys.VueModel
     {
         public bool CreateTask(string fileName, string sourcePath, string destinationPath, string backupType)
         {
-            // Utiliser la factory pour créer le backup avec les paramètres fournis
             Backup backup = BackupFactory.CreateBackup(fileName, sourcePath, destinationPath, backupType);
 
             if (backup != null)
@@ -50,6 +49,72 @@ namespace ProjetDevSys.VueModel
             {
                 return ResourceHelper.GetString("GestionTask4");
             }
+        }
+        public string EditNewDestination(int taskId, string newDestination)
+        {
+            // Récupère le backup existant par son index
+            Backup backup = BackupFactory.GetBackupByIndex(taskId);
+            if (backup == null)
+            {
+                return ResourceHelper.GetString("GestionTask4");
+            }
+
+            bool result = BackupFactory.EditBackup(backup.Name, newDestination, backup.Source, backup.Type);
+            if (result)
+            {
+                return ResourceHelper.GetString("GestionTask5"); 
+            }
+            else
+            {
+                return ResourceHelper.GetString("GestionTask4");
+            }
+        }
+
+
+        public string EditNewSource(int taskId, string newSource)
+        {
+            Backup backup = BackupFactory.GetBackupByIndex(taskId);
+            if (backup == null)
+            {
+                return ResourceHelper.GetString("GestionTask4");
+            }
+
+            bool result = BackupFactory.EditBackup(backup.Name, backup.Destination, newSource, backup.Type);
+            if (result)
+            {
+                return ResourceHelper.GetString("GestionTask6");
+            }
+            else
+            {
+                return ResourceHelper.GetString("GestionTask4");
+            }
+        }
+
+        public string EditNewType(int taskId, string newType)
+        {
+        
+            Backup backup = BackupFactory.GetBackupByIndex(taskId);
+            if (backup == null)
+            {
+                return ResourceHelper.GetString("GestionTask4");
+            }
+        
+            bool result = BackupFactory.EditBackup(backup.Name, backup.Destination, backup.Source, newType);
+            if (result)
+            {
+                return ResourceHelper.GetString("GestionTask7");
+            }
+            else
+            {
+                return ResourceHelper.GetString("GestionTask4");
+            }
+        }
+
+
+
+        public bool VerifSource(string path)
+        {
+            return Directory.Exists(path);
         }
     }
 }

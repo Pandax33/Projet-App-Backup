@@ -12,7 +12,7 @@ namespace ProjetDevSys.Model
         private static readonly JsonManager _jsonManager = new JsonManager(AppConstants.JsonSave);
 
         // Méthode mise à jour pour créer une instance de Backup
-        public static Backup CreateBackup(string save, string destination, string source, string type)
+        public static Backup CreateBackup(string save, string source,string destination, string type)
         {
             // Vérifie si un backup avec le même nom existe déjà
             if (_backups.ContainsKey(save))

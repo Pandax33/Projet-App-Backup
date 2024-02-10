@@ -127,13 +127,55 @@
     <value>Type de sauvegarde non supporté.</value>
   </data>
   <data name="ConfigViewModel1" xml:space="preserve">
-    <value>Changement fini</value>
+    <value>Changement réalisé</value>
   </data>
   <data name="ConfigViewText1" xml:space="preserve">
     <value>Entrez le chemin du fichier Json, la langue, le chemin du fichier Json en temps réel, et le chemin du fichier Json sauvegardé séparés par des virgules:"</value>
   </data>
+  <data name="ConfigViewText10" xml:space="preserve">
+    <value>1. Fichier de log journaliere</value>
+  </data>
+  <data name="ConfigViewText11" xml:space="preserve">
+    <value>2. Langue</value>
+  </data>
+  <data name="ConfigViewText12" xml:space="preserve">
+    <value>3. Fichier de log en temps reel</value>
+  </data>
+  <data name="ConfigViewText13" xml:space="preserve">
+    <value>4. Fichier de sauvegarde des backups</value>
+  </data>
+  <data name="ConfigViewText14" xml:space="preserve">
+    <value>5. Quitter</value>
+  </data>
+  <data name="ConfigViewText15" xml:space="preserve">
+    <value>Langue non valide. Veuillez entrer 'fr' pour Français ou 'en' pour Anglais.</value>
+  </data>
   <data name="ConfigViewText2" xml:space="preserve">
-    <value>Paramètres incorrects.</value>
+    <value>Retour au menu principal</value>
+  </data>
+  <data name="ConfigViewText3" xml:space="preserve">
+    <value>Fichier JSON non valide ou inexistant.</value>
+  </data>
+  <data name="ConfigViewText4" xml:space="preserve">
+    <value>Choix non valide</value>
+  </data>
+  <data name="ConfigViewText5" xml:space="preserve">
+    <value>Entrez le nouveau chemin pour le fichier de log :</value>
+  </data>
+  <data name="ConfigViewText6" xml:space="preserve">
+    <value>Entrez la nouvelle langue (fr/en) :</value>
+  </data>
+  <data name="ConfigViewText7" xml:space="preserve">
+    <value>Entrez le nouveau chemin pour le fichier de log en temps reel :</value>
+  </data>
+  <data name="ConfigViewText8" xml:space="preserve">
+    <value>Entrez le nouveau chemin pour le fichier de sauvegarde des backup :</value>
+  </data>
+  <data name="ConfigViewText9" xml:space="preserve">
+    <value>Quel champ souhaitez-vous éditer ?</value>
+  </data>
+  <data name="Form1" xml:space="preserve">
+    <value>----------------------------------------------------------------------------</value>
   </data>
   <data name="GestionTask1" xml:space="preserve">
     <value>Delete fini</value>
@@ -147,8 +189,17 @@
   <data name="GestionTask4" xml:space="preserve">
     <value>Le fichier n'existe pas</value>
   </data>
+  <data name="GestionTask5" xml:space="preserve">
+    <value>Nouvelle destination enregistré</value>
+  </data>
+  <data name="GestionTask6" xml:space="preserve">
+    <value>Nouvelle source enregistré</value>
+  </data>
+  <data name="GestionTask7" xml:space="preserve">
+    <value>Nouveau type enregistré</value>
+  </data>
   <data name="GestionTaskView1" xml:space="preserve">
-    <value>Voulez vous effectuez une Ajouter(1) ou Supprimer(2) ou Editer une tache(3) ?</value>
+    <value>1. Ajouter une tache</value>
   </data>
   <data name="GestionTaskView10" xml:space="preserve">
     <value>Paramètres incorrects.</value>
@@ -156,11 +207,77 @@
   <data name="GestionTaskView11" xml:space="preserve">
     <value>Option invalide.</value>
   </data>
+  <data name="GestionTaskView13" xml:space="preserve">
+    <value>Entrez le nom de sauvegarde :</value>
+  </data>
+  <data name="GestionTaskView14" xml:space="preserve">
+    <value>Entrez le chemin source :</value>
+  </data>
+  <data name="GestionTaskView15" xml:space="preserve">
+    <value>Chemin non valide, veuillez entrer un chemin valide.</value>
+  </data>
+  <data name="GestionTaskView16" xml:space="preserve">
+    <value>Entrez le chemin de destination :</value>
+  </data>
+  <data name="GestionTaskView17" xml:space="preserve">
+    <value>Entrez le type de backup (A pour complète, B pour differentielle) :</value>
+  </data>
+  <data name="GestionTaskView18" xml:space="preserve">
+    <value>2. Supprimer une tache</value>
+  </data>
+  <data name="GestionTaskView19" xml:space="preserve">
+    <value>3. Editer une tache</value>
+  </data>
   <data name="GestionTaskView2" xml:space="preserve">
     <value>Entrez le nom du fichier, le chemin source, le chemin de destination, et le type de backup séparés par des virgules:</value>
   </data>
+  <data name="GestionTaskView20" xml:space="preserve">
+    <value>4. Quitter</value>
+  </data>
+  <data name="GestionTaskView21" xml:space="preserve">
+    <value>Retour au menu principal.</value>
+  </data>
+  <data name="GestionTaskView22" xml:space="preserve">
+    <value>Chemin non valide, veuillez entrer un chemin valide.</value>
+  </data>
+  <data name="GestionTaskView23" xml:space="preserve">
+    <value>Entrée non valide. Veuillez entrer 'A' ou 'B'.</value>
+  </data>
+  <data name="GestionTaskView24" xml:space="preserve">
+    <value>Aucune sauvegarde enregistrée</value>
+  </data>
+  <data name="GestionTaskView25" xml:space="preserve">
+    <value>Voulez-vous modifier la source de la sauvegarde ? (y/n)</value>
+  </data>
+  <data name="GestionTaskView26" xml:space="preserve">
+    <value>Entrez le nouveau chemin pour la source :</value>
+  </data>
+  <data name="GestionTaskView27" xml:space="preserve">
+    <value>Chemin non valide, veuillez entrer un chemin valide.</value>
+  </data>
+  <data name="GestionTaskView28" xml:space="preserve">
+    <value>Voulez-vous modifier la destination de la sauvegarde ? (y/n)</value>
+  </data>
+  <data name="GestionTaskView29" xml:space="preserve">
+    <value>Entrez le nouveau chemin pour la destination :</value>
+  </data>
   <data name="GestionTaskView3" xml:space="preserve">
     <value>Backup créé avec succès.</value>
+  </data>
+  <data name="GestionTaskView30" xml:space="preserve">
+    <value>Chemin non valide, veuillez entrer un chemin valide.</value>
+  </data>
+  <data name="GestionTaskView31" xml:space="preserve">
+    <value>Voulez-vous modifier le type de la sauvegarde ? (y/n)</value>
+  </data>
+  <data name="GestionTaskView32" xml:space="preserve">
+    <value>Entrez le nouveau type de la sauvegarde (A Complete/B Differentielle) :</value>
+  </data>
+  <data name="GestionTaskView33" xml:space="preserve">
+    <value>Type non valide, veuillez entrer A ou B.</value>
+  </data>
+  <data name="GestionTaskView34" xml:space="preserve">
+    <value>Réponse non valide, veuillez entrer 'y' pour oui ou 'n' pour non.</value>
   </data>
   <data name="GestionTaskView4" xml:space="preserve">
     <value>Échec de la création du backup.</value>
@@ -175,7 +292,7 @@
     <value>Identifiant invalide.</value>
   </data>
   <data name="GestionTaskView8" xml:space="preserve">
-    <value>Entrez l'id du backup à éditer, suivi par le nouveau chemin de destination, le nouveau chemin source, et le nouveau type de backup, séparés par des virgules:</value>
+    <value>Entrez l'id du backup à éditer :</value>
   </data>
   <data name="GestionTaskView9" xml:space="preserve">
     <value>Identifiant invalide.</value>
@@ -211,7 +328,7 @@
     <value>Choix invalide. Veuillez essayer à nouveau.</value>
   </data>
   <data name="RunTaskView1" xml:space="preserve">
-    <value>Voulez vous effectuez une seule tache(1), plusieurs taches ?(2) ou une liste de tache ? (3)</value>
+    <value>1. Lancer une tâche</value>
   </data>
   <data name="RunTaskView10" xml:space="preserve">
     <value>Entrée invalide</value>
@@ -225,8 +342,29 @@
   <data name="RunTaskView13" xml:space="preserve">
     <value>Erreur</value>
   </data>
+  <data name="RunTaskView14" xml:space="preserve">
+    <value>2. Lancer plusieurs tâches successives</value>
+  </data>
+  <data name="RunTaskView15" xml:space="preserve">
+    <value>3. Lancer une liste de tâches</value>
+  </data>
+  <data name="RunTaskView16" xml:space="preserve">
+    <value>4. Quitter</value>
+  </data>
+  <data name="RunTaskView17" xml:space="preserve">
+    <value>L'ID de fin doit être supérieur à l'ID de départ.</value>
+  </data>
+  <data name="RunTaskView18" xml:space="preserve">
+    <value>Retour au menu principal</value>
+  </data>
+  <data name="RunTaskView19" xml:space="preserve">
+    <value>Les IDs spécifiés ne sont pas valides.</value>
+  </data>
   <data name="RunTaskView2" xml:space="preserve">
     <value>Entrez l'ID de la tache que vous voulez effectuer</value>
+  </data>
+  <data name="RunTaskView20" xml:space="preserve">
+    <value>L'ID spécifié n'est pas valide. Veuillez entrer un ID numérique correspondant à une sauvegarde existante.</value>
   </data>
   <data name="RunTaskView3" xml:space="preserve">
     <value>Sauvegarde fini</value>
@@ -244,7 +382,7 @@
     <value>Un problème est survenu.</value>
   </data>
   <data name="RunTaskView8" xml:space="preserve">
-    <value>Entrée invalide. Assurez-vous de séparer les deux nombres par une virgule.</value>
+    <value>Entrée invalide. Veuillez entrer exactement deux IDs valides, séparés par une virgule.</value>
   </data>
   <data name="RunTaskView9" xml:space="preserve">
     <value>Entrez les ID des tâches que vous voulez effectuer, séparés par des virgules (exemple: 1,3,5):</value>

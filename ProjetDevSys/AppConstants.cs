@@ -38,9 +38,30 @@ namespace ProjetDevSys
             }
             catch (Exception ex)
             {
-                // Gestion des erreurs de lecture de fichier ou de désérialisation
                 Console.WriteLine(ResourceHelper.GetString("AppConstants1"));
-                // Initialisation avec des valeurs par défaut ou gestion d'erreur
+            }
+        }
+
+        public static bool VerifJson(string path)
+        {
+            return File.Exists(path);
+        }
+
+        public static bool VerifExist(string path)
+        {
+            return Directory.Exists(path) || File.Exists(path);
+        }
+
+        public static bool VerifPath(string path)
+        {
+            try
+            {
+                var absolutePath = Path.GetFullPath(path);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjetDevSys.VueModel;
+using ProjetDevSys;
 
 namespace ProjetDevSys.Vue
 {
@@ -11,21 +12,96 @@ namespace ProjetDevSys.Vue
     {
         public string EditerConfig()
         {
-            Console.WriteLine(ResourceHelper.GetString("ConfigViewText1"));
-            string[] createParams = Console.ReadLine().Split(',');
-            if (createParams.Length == 4)
+            Console.WriteLine(ResourceHelper.GetString("Form1"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText9"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText10"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText11"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText12"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText13"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText14"));
+            Console.WriteLine(ResourceHelper.GetString("Form1"));
+            string choice = Console.ReadLine();
+
+            ConfigViewModel configViewModel = new ConfigViewModel();
+            string result;
+
+            switch (choice)
             {
-                ConfigViewModel configViewModel = new ConfigViewModel();
-                string result = configViewModel.EditerConfig(createParams[0], createParams[1], createParams[2], createParams[3]);
-                return(result);
+                case "1":
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText5"));
+                    string newPath;
+                    do
+                    {
+                        newPath = Console.ReadLine();
+                        if (!AppConstants.VerifJson(newPath))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
+                            Console.ResetColor();
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText5")); // Demandez à nouveau
+                        }
+                    } while (!AppConstants.VerifJson(newPath));
+                    return configViewModel.EditerJsonPath(newPath);
+
+                case "2":
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText6"));
+                    string newLangage = Console.ReadLine().Trim().ToLower(); // Normalise l'entrée pour la comparaison
+
+                    while (newLangage != "fr" && newLangage != "en")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText15"));
+                        Console.ResetColor();
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText6"));
+                        newLangage = Console.ReadLine().Trim().ToLower();
+                    }
+
+                    // Une fois une entrée valide obtenue, appelle la méthode pour éditer la langue
+                    return configViewModel.EditerLangage(newLangage);
+
+                case "3":
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText7"));
+                    string newRealTimePath;
+                    do
+                    {
+                        newRealTimePath = Console.ReadLine();
+                        if (!AppConstants.VerifJson(newRealTimePath))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
+                            Console.ResetColor();
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText7")); // Demandez à nouveau
+                        }
+                    } while (!AppConstants.VerifJson(newRealTimePath));
+                    return configViewModel.EditerJsonPathRealTime(newRealTimePath);
+
+                case "4":
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText8"));
+                    string newSavePath;
+                    do
+                    {
+                        newSavePath = Console.ReadLine();
+                        if (!AppConstants.VerifJson(newSavePath))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
+                            Console.ResetColor();
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText8")); // Demandez à nouveau
+                        }
+                    } while (!AppConstants.VerifJson(newSavePath));
+                    return configViewModel.EditerJsonPathSave(newSavePath);
+
+                case "5":
+                    return ResourceHelper.GetString("ConfigViewText2");
+
+                default:
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText4"));
+                    return ResourceHelper.GetString("ConfigViewText2");
             }
-            else
-            {
-                return(ResourceHelper.GetString("ConfigViewText2"));
-            }
-            
+
+
         }
 
-        
+
     }
 }
