@@ -20,5 +20,33 @@ namespace ProjetDevSys.VueModel
 
             return ResourceHelper.GetString("ConfigViewModel1");
         }
+
+        public string EditerJsonPath(string JsonPath)
+        {
+            Config.JsonPath = JsonPath;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public string EditerLangage(string Langage)
+        {
+            Config.Langage = Langage;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public string EditerJsonPathRealTime(string JsonPathRealTime)
+        {
+            Config.JsonPathRealTime = JsonPathRealTime;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public string EditerJsonPathSave(string JsonPathSave)
+        {
+            Config.JsonPathSave = JsonPathSave;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
     }
 }

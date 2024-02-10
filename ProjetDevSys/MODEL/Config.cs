@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text.Json;
 
@@ -63,7 +64,7 @@ namespace ProjetDevSys.Model
                     },
                     Langage = new
                     {
-                        Langage 
+                        Langage = CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US"
                     },
                     RealTimeLogging = new
                     {
