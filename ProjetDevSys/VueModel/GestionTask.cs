@@ -31,11 +31,11 @@ namespace ProjetDevSys.VueModel
             bool result = BackupFactory.DeleteBackup(BackupFactory.GetBackupByIndex(taskId).Name);
             if(result)
             {
-                return "Delete fini";
+                return ResourceHelper.GetString("GestionTask1");
             }
             else
             {
-                return "Le fichier n'existe pas";
+                return ResourceHelper.GetString("GestionTask2");
             }
         }
 
@@ -44,11 +44,11 @@ namespace ProjetDevSys.VueModel
             bool result = BackupFactory.EditBackup(BackupFactory.GetBackupByIndex(taskId).Name, newDestination, newSource, newType);
             if (result)
             {
-                return "Edit fini";
+                return ResourceHelper.GetString("GestionTask3");
             }
             else
             {
-                return "Le fichier n'existe pas";
+                return ResourceHelper.GetString("GestionTask4");
             }
         }
     }

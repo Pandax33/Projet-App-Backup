@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using ProjetDevSys.Model;
 
 namespace ProjetDevSys
 {
@@ -17,8 +18,10 @@ namespace ProjetDevSys
             // Chemin vers votre fichier appsettings.json
             //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
             string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-            string filePath = Path.Combine(projectDirectory, "appsettings.json");
-
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string easySavePath = Path.Combine(appDataPath, "EasySave");
+            string filePath = Path.Combine(easySavePath, "appsettings.json");
+            Config.CreateSetting();
             try
             {
                 // Lecture du fichier JSON en tant que string
@@ -36,7 +39,7 @@ namespace ProjetDevSys
             catch (Exception ex)
             {
                 // Gestion des erreurs de lecture de fichier ou de désérialisation
-                Console.WriteLine($"Erreur lors de la lecture de la configuration: {ex.Message}");
+                Console.WriteLine(ResourceHelper.GetString("AppConstants1"));
                 // Initialisation avec des valeurs par défaut ou gestion d'erreur
             }
         }
