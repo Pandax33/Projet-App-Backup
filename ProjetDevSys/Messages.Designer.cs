@@ -61,7 +61,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Error reading configuration.
+        ///   Recherche une chaîne localisée semblable à Error while reading the configuration.
         /// </summary>
         internal static string AppConstants1 {
             get {
@@ -88,7 +88,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Change finished.
+        ///   Recherche une chaîne localisée semblable à Change made.
         /// </summary>
         internal static string ConfigViewModel1 {
             get {
@@ -97,7 +97,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Enter the path of the Json file, language, real-time Json file path, and saved Json file path separated by commas:.
+        ///   Recherche une chaîne localisée semblable à Enter the Json file path, language, real-time Json file path, and saved Json file path separated by commas:.
         /// </summary>
         internal static string ConfigViewText1 {
             get {
@@ -106,11 +106,137 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Incorrect settings..
+        ///   Recherche une chaîne localisée semblable à 1. Daily log file.
+        /// </summary>
+        internal static string ConfigViewText10 {
+            get {
+                return ResourceManager.GetString("ConfigViewText10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 2. Language.
+        /// </summary>
+        internal static string ConfigViewText11 {
+            get {
+                return ResourceManager.GetString("ConfigViewText11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 3. Real-time log file.
+        /// </summary>
+        internal static string ConfigViewText12 {
+            get {
+                return ResourceManager.GetString("ConfigViewText12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 4. Backup save file.
+        /// </summary>
+        internal static string ConfigViewText13 {
+            get {
+                return ResourceManager.GetString("ConfigViewText13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 5. Exit.
+        /// </summary>
+        internal static string ConfigViewText14 {
+            get {
+                return ResourceManager.GetString("ConfigViewText14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid language. Please enter &apos;fr&apos; for French or &apos;en&apos; for English..
+        /// </summary>
+        internal static string ConfigViewText15 {
+            get {
+                return ResourceManager.GetString("ConfigViewText15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Return to the main menu.
         /// </summary>
         internal static string ConfigViewText2 {
             get {
                 return ResourceManager.GetString("ConfigViewText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid or non-existent JSON file..
+        /// </summary>
+        internal static string ConfigViewText3 {
+            get {
+                return ResourceManager.GetString("ConfigViewText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid choice.
+        /// </summary>
+        internal static string ConfigViewText4 {
+            get {
+                return ResourceManager.GetString("ConfigViewText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the new path for the log file:.
+        /// </summary>
+        internal static string ConfigViewText5 {
+            get {
+                return ResourceManager.GetString("ConfigViewText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the new language (fr/en):.
+        /// </summary>
+        internal static string ConfigViewText6 {
+            get {
+                return ResourceManager.GetString("ConfigViewText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the new path for the real-time log file:.
+        /// </summary>
+        internal static string ConfigViewText7 {
+            get {
+                return ResourceManager.GetString("ConfigViewText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the new path for the backup save file:.
+        /// </summary>
+        internal static string ConfigViewText8 {
+            get {
+                return ResourceManager.GetString("ConfigViewText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Which field would you like to edit?.
+        /// </summary>
+        internal static string ConfigViewText9 {
+            get {
+                return ResourceManager.GetString("ConfigViewText9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à ----------------------------------------------------------------------------.
+        /// </summary>
+        internal static string Form1 {
+            get {
+                return ResourceManager.GetString("Form1", resourceCulture);
             }
         }
         
@@ -124,7 +250,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à File does not exist.
+        ///   Recherche une chaîne localisée semblable à The file does not exist.
         /// </summary>
         internal static string GestionTask2 {
             get {
@@ -142,7 +268,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à File does not exist.
+        ///   Recherche une chaîne localisée semblable à The file does not exist.
         /// </summary>
         internal static string GestionTask4 {
             get {
@@ -151,7 +277,34 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you want to Add(1), Delete(2), or Edit a task(3)?.
+        ///   Recherche une chaîne localisée semblable à New destination recorded.
+        /// </summary>
+        internal static string GestionTask5 {
+            get {
+                return ResourceManager.GetString("GestionTask5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New source recorded.
+        /// </summary>
+        internal static string GestionTask6 {
+            get {
+                return ResourceManager.GetString("GestionTask6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New type recorded.
+        /// </summary>
+        internal static string GestionTask7 {
+            get {
+                return ResourceManager.GetString("GestionTask7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 1. Add a task.
         /// </summary>
         internal static string GestionTaskView1 {
             get {
@@ -160,7 +313,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Incorrect settings..
+        ///   Recherche une chaîne localisée semblable à Incorrect parameters..
         /// </summary>
         internal static string GestionTaskView10 {
             get {
@@ -178,6 +331,69 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the backup name:.
+        /// </summary>
+        internal static string GestionTaskView13 {
+            get {
+                return ResourceManager.GetString("GestionTaskView13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the source path:.
+        /// </summary>
+        internal static string GestionTaskView14 {
+            get {
+                return ResourceManager.GetString("GestionTaskView14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid path, please enter a valid path..
+        /// </summary>
+        internal static string GestionTaskView15 {
+            get {
+                return ResourceManager.GetString("GestionTaskView15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the destination path:.
+        /// </summary>
+        internal static string GestionTaskView16 {
+            get {
+                return ResourceManager.GetString("GestionTaskView16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the backup type (A for full, B for differential):.
+        /// </summary>
+        internal static string GestionTaskView17 {
+            get {
+                return ResourceManager.GetString("GestionTaskView17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 2. Delete a task.
+        /// </summary>
+        internal static string GestionTaskView18 {
+            get {
+                return ResourceManager.GetString("GestionTaskView18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 3. Edit a task.
+        /// </summary>
+        internal static string GestionTaskView19 {
+            get {
+                return ResourceManager.GetString("GestionTaskView19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Enter the file name, source path, destination path, and backup type separated by commas:.
         /// </summary>
         internal static string GestionTaskView2 {
@@ -187,11 +403,146 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Backup created successfully..
+        ///   Recherche une chaîne localisée semblable à 4. Exit.
+        /// </summary>
+        internal static string GestionTaskView20 {
+            get {
+                return ResourceManager.GetString("GestionTaskView20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Return to the main menu..
+        /// </summary>
+        internal static string GestionTaskView21 {
+            get {
+                return ResourceManager.GetString("GestionTaskView21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid path, please enter a valid path..
+        /// </summary>
+        internal static string GestionTaskView22 {
+            get {
+                return ResourceManager.GetString("GestionTaskView22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid entry. Please enter &apos;A&apos; or &apos;B&apos;..
+        /// </summary>
+        internal static string GestionTaskView23 {
+            get {
+                return ResourceManager.GetString("GestionTaskView23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No backups recorded.
+        /// </summary>
+        internal static string GestionTaskView24 {
+            get {
+                return ResourceManager.GetString("GestionTaskView24", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to change the backup source? (y/n).
+        /// </summary>
+        internal static string GestionTaskView25 {
+            get {
+                return ResourceManager.GetString("GestionTaskView25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the new path for the source:.
+        /// </summary>
+        internal static string GestionTaskView26 {
+            get {
+                return ResourceManager.GetString("GestionTaskView26", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid path, please enter a valid path..
+        /// </summary>
+        internal static string GestionTaskView27 {
+            get {
+                return ResourceManager.GetString("GestionTaskView27", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to change the backup destination? (y/n).
+        /// </summary>
+        internal static string GestionTaskView28 {
+            get {
+                return ResourceManager.GetString("GestionTaskView28", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the new path for the destination:.
+        /// </summary>
+        internal static string GestionTaskView29 {
+            get {
+                return ResourceManager.GetString("GestionTaskView29", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Backup successfully created..
         /// </summary>
         internal static string GestionTaskView3 {
             get {
                 return ResourceManager.GetString("GestionTaskView3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid path, please enter a valid path..
+        /// </summary>
+        internal static string GestionTaskView30 {
+            get {
+                return ResourceManager.GetString("GestionTaskView30", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Do you want to change the backup type? (y/n).
+        /// </summary>
+        internal static string GestionTaskView31 {
+            get {
+                return ResourceManager.GetString("GestionTaskView31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the new backup type (A Complete /B Differential):.
+        /// </summary>
+        internal static string GestionTaskView32 {
+            get {
+                return ResourceManager.GetString("GestionTaskView32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid type, please enter A or B..
+        /// </summary>
+        internal static string GestionTaskView33 {
+            get {
+                return ResourceManager.GetString("GestionTaskView33", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid response, please enter &apos;y&apos; for yes or &apos;n&apos; for no..
+        /// </summary>
+        internal static string GestionTaskView34 {
+            get {
+                return ResourceManager.GetString("GestionTaskView34", resourceCulture);
             }
         }
         
@@ -205,7 +556,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Incorrect settings..
+        ///   Recherche une chaîne localisée semblable à Incorrect parameters..
         /// </summary>
         internal static string GestionTaskView5 {
             get {
@@ -214,7 +565,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Enter the ID of the backup to delete:.
+        ///   Recherche une chaîne localisée semblable à Enter the backup ID to delete:.
         /// </summary>
         internal static string GestionTaskView6 {
             get {
@@ -232,7 +583,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Enter the backup ID to edit, followed by the new destination path, new source path, and new backup type, separated by commas:.
+        ///   Recherche une chaîne localisée semblable à Enter the backup ID to edit :.
         /// </summary>
         internal static string GestionTaskView8 {
             get {
@@ -259,7 +610,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à File does not exist..
+        ///   Recherche une chaîne localisée semblable à The file does not exist..
         /// </summary>
         internal static string JsonManager1 {
             get {
@@ -268,7 +619,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Menu Principal:.
+        ///   Recherche une chaîne localisée semblable à Main Menu:.
         /// </summary>
         internal static string MenuPrincipal1 {
             get {
@@ -277,7 +628,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 1. Exécuter une tâche.
+        ///   Recherche une chaîne localisée semblable à 1. Execute a task.
         /// </summary>
         internal static string MenuPrincipal2 {
             get {
@@ -286,7 +637,61 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Do you want to perform a single task(1), multiple tasks(2), or a list of tasks(3)?.
+        ///   Recherche une chaîne localisée semblable à 2. Task management.
+        /// </summary>
+        internal static string MenuPrincipal3 {
+            get {
+                return ResourceManager.GetString("MenuPrincipal3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 3. Edit configuration.
+        /// </summary>
+        internal static string MenuPrincipal4 {
+            get {
+                return ResourceManager.GetString("MenuPrincipal4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 4. Exit.
+        /// </summary>
+        internal static string MenuPrincipal5 {
+            get {
+                return ResourceManager.GetString("MenuPrincipal5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter your choice (1-4):.
+        /// </summary>
+        internal static string MenuPrincipal6 {
+            get {
+                return ResourceManager.GetString("MenuPrincipal6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Exiting the program....
+        /// </summary>
+        internal static string MenuPrincipal7 {
+            get {
+                return ResourceManager.GetString("MenuPrincipal7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid choice. Please try again..
+        /// </summary>
+        internal static string MenuPrincipal8 {
+            get {
+                return ResourceManager.GetString("MenuPrincipal8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 1. Launch a task.
         /// </summary>
         internal static string RunTaskView1 {
             get {
@@ -304,7 +709,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Backup of all selected tasks completed successfully..
+        ///   Recherche une chaîne localisée semblable à Backup of all selected tasks finished successfully..
         /// </summary>
         internal static string RunTaskView11 {
             get {
@@ -331,11 +736,74 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Enter the ID of the task you want to perform.
+        ///   Recherche une chaîne localisée semblable à 2. Launch multiple successive tasks.
+        /// </summary>
+        internal static string RunTaskView14 {
+            get {
+                return ResourceManager.GetString("RunTaskView14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 3. Launch a list of tasks.
+        /// </summary>
+        internal static string RunTaskView15 {
+            get {
+                return ResourceManager.GetString("RunTaskView15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 4. Exit.
+        /// </summary>
+        internal static string RunTaskView16 {
+            get {
+                return ResourceManager.GetString("RunTaskView16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The end ID must be higher than the start ID..
+        /// </summary>
+        internal static string RunTaskView17 {
+            get {
+                return ResourceManager.GetString("RunTaskView17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Return to the main menu.
+        /// </summary>
+        internal static string RunTaskView18 {
+            get {
+                return ResourceManager.GetString("RunTaskView18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The specified IDs are not valid..
+        /// </summary>
+        internal static string RunTaskView19 {
+            get {
+                return ResourceManager.GetString("RunTaskView19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter the task ID you want to perform.
         /// </summary>
         internal static string RunTaskView2 {
             get {
                 return ResourceManager.GetString("RunTaskView2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The specified ID is not valid. Please enter a numeric ID corresponding to an existing backup..
+        /// </summary>
+        internal static string RunTaskView20 {
+            get {
+                return ResourceManager.GetString("RunTaskView20", resourceCulture);
             }
         }
         
@@ -349,7 +817,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à A problem has occurred.
+        ///   Recherche une chaîne localisée semblable à A problem occurred.
         /// </summary>
         internal static string RunTaskView4 {
             get {
@@ -385,7 +853,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Invalid entry. Make sure to separate the two numbers with a comma..
+        ///   Recherche une chaîne localisée semblable à Invalid input. Please enter exactly two valid IDs, separated by a comma..
         /// </summary>
         internal static string RunTaskView8 {
             get {

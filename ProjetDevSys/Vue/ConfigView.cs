@@ -45,7 +45,18 @@ namespace ProjetDevSys.Vue
 
                 case "2":
                     Console.WriteLine(ResourceHelper.GetString("ConfigViewText6"));
-                    string newLangage = Console.ReadLine();
+                    string newLangage = Console.ReadLine().Trim().ToLower(); // Normalise l'entrée pour la comparaison
+
+                    while (newLangage != "fr" && newLangage != "en")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText15"));
+                        Console.ResetColor();
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText6"));
+                        newLangage = Console.ReadLine().Trim().ToLower();
+                    }
+
+                    // Une fois une entrée valide obtenue, appelle la méthode pour éditer la langue
                     return configViewModel.EditerLangage(newLangage);
 
                 case "3":

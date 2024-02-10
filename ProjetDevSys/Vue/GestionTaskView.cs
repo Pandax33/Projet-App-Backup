@@ -51,12 +51,11 @@ namespace ProjetDevSys.Vue
                         if (!AppConstants.VerifPath(destinationPath))
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Chemin non valide, veuillez entrer un chemin valide.");
+                            Console.WriteLine(ResourceHelper.GetString("GestionTaskView22"));
                             Console.ResetColor(); 
                             Console.WriteLine(ResourceHelper.GetString("GestionTaskView16"));
                         }
                     } while (!AppConstants.VerifPath(destinationPath));
-                    Console.WriteLine(AppConstants.VerifPath(destinationPath));
 
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView17"));
                     string backupType = Console.ReadLine().Trim().ToUpper(); 
@@ -64,7 +63,7 @@ namespace ProjetDevSys.Vue
                     while (backupType != "A" && backupType != "B")
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Entrée non valide. Veuillez entrer 'A' ou 'B'.");
+                        Console.WriteLine(ResourceHelper.GetString("GestionTaskView23"));
                         Console.ResetColor();
                         Console.WriteLine(ResourceHelper.GetString("GestionTaskView17")); 
                         backupType = Console.ReadLine().Trim().ToUpper(); 
@@ -75,41 +74,45 @@ namespace ProjetDevSys.Vue
                     
                 case "2":
                     IEnumerable<Backup> BackupList = BackupFactory.GetAllBackups();
-                    if (BackupList != null && BackupList.Any())
+                    if (BackupList == null || !BackupList.Any())
                     {
-                        int index2 = 0;
-                        foreach (Backup backup in BackupList)
-                        {
-                            Console.WriteLine($"ID : {index2} Save: {backup.Name}");
-                            index2++;
-                        }
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(ResourceHelper.GetString("GestionTaskView24"));
+                        Console.ResetColor();
+                        return ResourceHelper.GetString("RunTaskView18");
+                    }
+
+                    // Affichage des sauvegardes disponibles
+                    int index2 = 0;
+                    foreach (Backup backup in BackupList)
+                    {
+                        Console.WriteLine($"ID : {index2} Save: {backup.Name}");
+                        index2++;
+                    }
+
+                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView6"));
+                    string deleteIdInput = Console.ReadLine();
+                    if (int.TryParse(deleteIdInput, out int deleteId) && deleteId >= 0 && deleteId < BackupList.Count())
+                    {
+                        // Appel de DeleteTask sur gestionTask avec vérification de l'existence de l'ID
+                        string result = gestionTask.DeleteTask(deleteId);
+                        return (result);
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Aucune sauvegarde enregistrée");
+                        Console.WriteLine(ResourceHelper.GetString("GestionTaskView7"));
                         Console.ResetColor();
-                        return (ResourceHelper.GetString("RunTaskView18"));
+                        return ResourceHelper.GetString("GestionTaskView21");
                     }
-                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView6"));
-                    string deleteIdInput = Console.ReadLine();
-                    if (int.TryParse(deleteIdInput, out int deleteId))
-                    {
-                        // Modifier pour appeler DeleteTask sur BackupFactory
-                        string result = gestionTask.DeleteTask(deleteId);
-                        return(result);
-                    }
-                    else
-                    {
-                        return(ResourceHelper.GetString("GestionTaskView7"));
-                    }
+
                 case "3":
                     // Affichage des sauvegardes disponibles
                     IEnumerable<Backup> BackupList2 = BackupFactory.GetAllBackups();
                     if (BackupList2 == null || !BackupList2.Any())
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Aucune sauvegarde enregistrée");
+                        Console.WriteLine(ResourceHelper.GetString("GestionTaskView24"));
                         Console.ResetColor();
                         return ResourceHelper.GetString("RunTaskView18");
                     }
@@ -128,18 +131,18 @@ namespace ProjetDevSys.Vue
                         Backup selectedBackup = BackupList2.ElementAt(id);
 
                         // Demande si l'utilisateur veut modifier la source
-                        Console.WriteLine("Voulez-vous modifier la source de la sauvegarde ? (y/n)");
+                        Console.WriteLine(ResourceHelper.GetString("GestionTaskView25"));
                         if (Console.ReadLine().Trim().ToLower() == "y")
                         {
                             string newPath;
                             do
                             {
-                                Console.WriteLine("Entrez le nouveau chemin pour la source :");
+                                Console.WriteLine(ResourceHelper.GetString("GestionTaskView26"));
                                 newPath = Console.ReadLine();
                                 if (!AppConstants.VerifExist(newPath))
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Chemin non valide, veuillez entrer un chemin valide.");
+                                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView27"));
                                     Console.ResetColor();
                                 }
                             } while (!AppConstants.VerifExist(newPath));
@@ -150,18 +153,18 @@ namespace ProjetDevSys.Vue
                         }
 
                         // Demande si l'utilisateur veut modifier la destination
-                        Console.WriteLine("Voulez-vous modifier la destination de la sauvegarde ? (y/n)");
+                        Console.WriteLine(ResourceHelper.GetString("GestionTaskView28"));
                         if (Console.ReadLine().Trim().ToLower() == "y")
                         {
                             string newDestination;
                             do
                             {
-                                Console.WriteLine("Entrez le nouveau chemin pour la destination :");
+                                Console.WriteLine(ResourceHelper.GetString("GestionTaskView29"));
                                 newDestination = Console.ReadLine();
                                 if (!AppConstants.VerifPath(newDestination))
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Chemin non valide, veuillez entrer un chemin valide.");
+                                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView30"));
                                     Console.ResetColor();
                                 }
                             } while (!AppConstants.VerifPath(newDestination));
@@ -172,7 +175,7 @@ namespace ProjetDevSys.Vue
                         }
 
                         //Ask to user if he want to change Type
-                        Console.WriteLine("Voulez-vous modifier le type de la sauvegarde ? (y/n)");
+                        Console.WriteLine(ResourceHelper.GetString("GestionTaskView31"));
                         string modifyTypeResponse = Console.ReadLine().Trim().ToLower();
 
                         if (modifyTypeResponse == "y")
@@ -180,12 +183,12 @@ namespace ProjetDevSys.Vue
                             string newType;
                             do
                             {
-                                Console.WriteLine("Entrez le nouveau type de la sauvegarde (A/B) :");
+                                Console.WriteLine(ResourceHelper.GetString("GestionTaskView32"));
                                 newType = Console.ReadLine().Trim().ToUpper();
                                 if (newType != "A" && newType != "B")
                                 {
                                     Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine("Type non valide, veuillez entrer A ou B.");
+                                    Console.WriteLine(ResourceHelper.GetString("GestionTaskView33"));
                                     Console.ResetColor();
                                 }
                             } while (newType != "A" && newType != "B");
@@ -196,7 +199,7 @@ namespace ProjetDevSys.Vue
                         else if (modifyTypeResponse != "n")
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Réponse non valide, veuillez entrer 'y' pour oui ou 'n' pour non.");
+                            Console.WriteLine(ResourceHelper.GetString("GestionTaskView34"));
                             Console.ResetColor();
                         }
                     }
