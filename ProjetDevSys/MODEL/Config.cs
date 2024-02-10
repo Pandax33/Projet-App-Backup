@@ -64,7 +64,7 @@ namespace ProjetDevSys.Model
                     },
                     Langage = new
                     {
-                        Langage = CultureInfo.CurrentUICulture
+                        Langage = CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US"
                     },
                     RealTimeLogging = new
                     {
