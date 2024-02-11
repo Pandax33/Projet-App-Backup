@@ -150,6 +150,9 @@
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Langue non valide. Veuillez entrer 'fr' pour Français ou 'en' pour Anglais.</value>
   </data>
+  <data name="ConfigViewText16" xml:space="preserve">
+    <value>Changement réalisé. Merci de redémarrer l'application </value>
+  </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Retour au menu principal</value>
   </data>
