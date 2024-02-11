@@ -129,6 +129,9 @@
   <data name="ConfigViewModel1" xml:space="preserve">
     <value>Change made.</value>
   </data>
+  <data name="ConfigViewModel16" xml:space="preserve">
+    <value>Change made. Please restart the application</value>
+  </data>
   <data name="ConfigViewText1" xml:space="preserve">
     <value>Enter the Json file path, language, real-time Json file path, and saved Json file path separated by commas:</value>
   </data>
@@ -149,9 +152,6 @@
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Invalid language. Please enter 'fr' for French or 'en' for English.</value>
-  </data>
-  <data name="ConfigViewText16" xml:space="preserve">
-    <value>Change made. Please restart the application</value>
   </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Return to the main menu</value>

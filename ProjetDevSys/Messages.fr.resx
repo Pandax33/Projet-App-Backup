@@ -129,6 +129,9 @@
   <data name="ConfigViewModel1" xml:space="preserve">
     <value>Changement réalisé.</value>
   </data>
+  <data name="ConfigViewModel16" xml:space="preserve">
+    <value>Changement réalisé. Merci de redémarrer l'application </value>
+  </data>
   <data name="ConfigViewText1" xml:space="preserve">
     <value>Entrez le chemin du fichier Json, la langue, le chemin du fichier Json en temps réel, et le chemin du fichier Json sauvegardé séparés par des virgules:"</value>
   </data>
@@ -149,9 +152,6 @@
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Langue non valide. Veuillez entrer 'fr' pour Français ou 'en' pour Anglais.</value>
-  </data>
-  <data name="ConfigViewText16" xml:space="preserve">
-    <value>Changement réalisé. Merci de redémarrer l'application </value>
   </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Retour au menu principal</value>

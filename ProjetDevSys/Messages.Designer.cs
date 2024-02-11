@@ -97,6 +97,15 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change made. Please restart the application.
+        /// </summary>
+        internal static string ConfigViewModel16 {
+            get {
+                return ResourceManager.GetString("ConfigViewModel16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter the Json file path, language, real-time Json file path, and saved Json file path separated by commas:.
         /// </summary>
         internal static string ConfigViewText1 {
@@ -156,15 +165,6 @@ namespace ProjetDevSys {
         internal static string ConfigViewText15 {
             get {
                 return ResourceManager.GetString("ConfigViewText15", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Change made. Please restart the application.
-        /// </summary>
-        internal static string ConfigViewText16 {
-            get {
-                return ResourceManager.GetString("ConfigViewText16", resourceCulture);
             }
         }
         
