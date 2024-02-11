@@ -45,7 +45,14 @@ namespace ProjetDevSys.MODEL
             CurrentFile = CurrentFile +1;
             CurrentFileSize = fileSize;
             SizeRemaining = SizeRemaining - CurrentFileSize;
-            Progress = Progress + (CurrentFileSize * 100) / TotalSize;
+            if (TotalSize != 0)
+            {
+                Progress = Progress + (CurrentFileSize * 100) / TotalSize;
+            }
+            else
+            {
+                Progress = 100;
+            }
             FilesRemaining = TotalFiles - CurrentFile;
         }
         public void CreateLog()
