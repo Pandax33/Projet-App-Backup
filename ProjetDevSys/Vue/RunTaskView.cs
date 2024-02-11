@@ -35,7 +35,7 @@ namespace ProjetDevSys.Vue
                 int index = 0;
                 foreach (Backup backup in BackupList)
                 {
-                    Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        Console.WriteLine($"{index}. [{backup.Name}]");
                     index++;
                 }
 
@@ -70,7 +70,7 @@ namespace ProjetDevSys.Vue
                     int index = 0;
                     foreach (Backup backup in BackupList)
                     {
-                        Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        Console.WriteLine($"{index}. [{backup.Name}]");
                         index++;
                     }
                 }
@@ -137,7 +137,7 @@ namespace ProjetDevSys.Vue
                     int index = 0;
                     foreach (Backup backup in BackupList)
                     {
-                        Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        Console.WriteLine($"{index}. [{backup.Name}]");
                         index++;
                     }
                 }
