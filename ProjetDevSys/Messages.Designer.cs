@@ -88,7 +88,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Change made.
+        ///   Recherche une chaîne localisée semblable à Change made..
         /// </summary>
         internal static string ConfigViewModel1 {
             get {
@@ -241,7 +241,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Delete finished.
+        ///   Recherche une chaîne localisée semblable à Delete done..
         /// </summary>
         internal static string GestionTask1 {
             get {
@@ -259,7 +259,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Edit finished.
+        ///   Recherche une chaîne localisée semblable à Edit done..
         /// </summary>
         internal static string GestionTask3 {
             get {
@@ -790,7 +790,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Enter the task ID you want to perform.
+        ///   Recherche une chaîne localisée semblable à Enter the task ID you want to run.
         /// </summary>
         internal static string RunTaskView2 {
             get {
@@ -808,7 +808,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Backup finished.
+        ///   Recherche une chaîne localisée semblable à Backup done..
         /// </summary>
         internal static string RunTaskView3 {
             get {
@@ -835,7 +835,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Backup finished..
+        ///   Recherche une chaîne localisée semblable à Backup done..
         /// </summary>
         internal static string RunTaskView6 {
             get {
