@@ -26,11 +26,11 @@ namespace ProjetDevSys
 
         public void CreateLog()
         {
-            // Configure Newtonsoft.Json pour formater le JSON de manière lisible
+            // Configure Newtonsoft.Json to format the JSON file
             JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
             string logEntry = JsonConvert.SerializeObject(this, settings);
 
-            // Ajoute le log sous forme de nouvelle ligne à la fin du fichier
+            // Add the log entry to the JSON file
             using (StreamWriter streamWriter = File.AppendText(JsonPath))
             {
                 streamWriter.WriteLine(logEntry);

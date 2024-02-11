@@ -25,7 +25,7 @@ namespace ProjetDevSys.MODEL
 
         public LogRealTime(string jsonPath) : base(jsonPath)
         {
-            // Initialisation avec des valeurs par défaut ou chargement à partir du JSON
+            // Initialize the log with default values
             BackupName = "";
             Timestamp = DateTime.Now;
             State = "In Progress";
@@ -50,11 +50,11 @@ namespace ProjetDevSys.MODEL
         }
         public void CreateLog()
         {
-            // Configure Newtonsoft.Json pour formater le JSON de manière lisible
+            // Configure Newtonsoft.Json to format the JSON file with indentation
             JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
             string logEntry = JsonConvert.SerializeObject(this, settings);
 
-            // Ajoute le log sous forme de nouvelle ligne à la fin du fichier
+            // Add the log entry to the JSON file
             using (StreamWriter streamWriter = File.AppendText(JsonPath))
             {
                 streamWriter.WriteLine(logEntry);
@@ -63,29 +63,27 @@ namespace ProjetDevSys.MODEL
 
         public void CalculateFolderSizeAndFileCount(string folderPath)
         {
-            // Réinitialiser les compteurs
+            // Reset the log values
             TotalFiles = 0;
             TotalSize = 0;
 
-            // Créer une instance de DirectoryInfo
+            // Create a DirectoryInfo object
             DirectoryInfo dirInfo = new DirectoryInfo(folderPath);
 
-            // Appeler la fonction récursive
             CalculateFolder(dirInfo);
 
-            // Fonction récursive pour calculer la taille et le nombre de fichiers
+            // Recursive method to calculate the size of all files in the folder
             void CalculateFolder(DirectoryInfo directory)
             {
                 try
                 {
-                    // Compter tous les fichiers du dossier et additionner leur taille
+                    // Count the number of files and calculate the total size
                     foreach (FileInfo file in directory.GetFiles())
                     {
                         TotalFiles++;
                         TotalSize += file.Length;
                     }
 
-                    // Appel récursif pour tous les sous-dossiers
                     foreach (DirectoryInfo dir in directory.GetDirectories())
                     {
                         CalculateFolder(dir);
@@ -93,7 +91,7 @@ namespace ProjetDevSys.MODEL
                 }
                 catch (System.Exception ex)
                 {
-                    // Gérer les exceptions, par exemple, accès refusé
+                    // Manage the exception if the directory cannot be accessed
                     System.Console.WriteLine($"Cannot access {directory.FullName}: {ex.Message}");
                 }
             }

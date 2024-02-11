@@ -15,7 +15,7 @@ namespace ProjetDevSys.Model
         static Config()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string easySaveFolder = Path.Combine(appDataPath, "EasySave");
+            string easySaveFolder = Path.Combine(appDataPath, "EasySaveGP5");
 
             // Assurez-vous que le dossier EasySave existe
             if (!Directory.Exists(easySaveFolder))
@@ -46,7 +46,7 @@ namespace ProjetDevSys.Model
         public static void CreateSetting()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string easySavePath = Path.Combine(appDataPath, "EasySave");
+            string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
             string configFilePath = Path.Combine(easySavePath, "appsettings.json");
 
             if (!Directory.Exists(easySavePath))
@@ -83,7 +83,7 @@ namespace ProjetDevSys.Model
 
         public static void EditConfig()
         {
-            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EasySave");
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EasySaveGP5");
             Directory.CreateDirectory(folderPath);
 
             string filePath = Path.Combine(folderPath, "appsettings.json");

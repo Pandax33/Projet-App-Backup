@@ -82,7 +82,7 @@ namespace ProjetDevSys.Vue
                         return ResourceHelper.GetString("RunTaskView18");
                     }
 
-                    // Affichage des sauvegardes disponibles
+                    // Print all backups
                     int index2 = 0;
                     foreach (Backup backup in BackupList)
                     {
@@ -94,7 +94,7 @@ namespace ProjetDevSys.Vue
                     string deleteIdInput = Console.ReadLine();
                     if (int.TryParse(deleteIdInput, out int deleteId) && deleteId >= 0 && deleteId < BackupList.Count())
                     {
-                        // Appel de DeleteTask sur gestionTask avec vérification de l'existence de l'ID
+                        // Call the function to delete the task
                         string result = gestionTask.DeleteTask(deleteId);
                         return (result);
                     }
@@ -107,7 +107,7 @@ namespace ProjetDevSys.Vue
                     }
 
                 case "3":
-                    // Affichage des sauvegardes disponibles
+                    // Print all backups
                     IEnumerable<Backup> BackupList2 = BackupFactory.GetAllBackups();
                     if (BackupList2 == null || !BackupList2.Any())
                     {
@@ -124,13 +124,13 @@ namespace ProjetDevSys.Vue
                         index++;
                     }
 
-                    // Demande de l'ID à modifier
+                    // Ask the user to select the backup to edit
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView8"));
                     if (int.TryParse(Console.ReadLine(), out int id) && id >= 0 && id < BackupList2.Count())
                     {
                         Backup selectedBackup = BackupList2.ElementAt(id);
 
-                        // Demande si l'utilisateur veut modifier la source
+                        // Ask the user if he wants to modify the source
                         Console.WriteLine(ResourceHelper.GetString("GestionTaskView25"));
                         if (Console.ReadLine().Trim().ToLower() == "y")
                         {
@@ -147,12 +147,12 @@ namespace ProjetDevSys.Vue
                                 }
                             } while (!AppConstants.VerifExist(newPath));
 
-                            // Appel de la fonction pour modifier la source
+                            // Call the function to modify the source
                             string resultSource = gestionTask.EditNewSource(id, newPath);
                             Console.WriteLine(resultSource);
                         }
 
-                        // Demande si l'utilisateur veut modifier la destination
+                        // Ask the user if he wants to modify the destination
                         Console.WriteLine(ResourceHelper.GetString("GestionTaskView28"));
                         if (Console.ReadLine().Trim().ToLower() == "y")
                         {
@@ -169,12 +169,12 @@ namespace ProjetDevSys.Vue
                                 }
                             } while (!AppConstants.VerifPath(newDestination));
 
-                            // Appel de la fonction pour modifier la destination
+                            // Call the function to modify the destination
                             string resultDestination = gestionTask.EditNewDestination(id, newDestination);
                             Console.WriteLine(resultDestination);
                         }
 
-                        //Ask to user if he want to change Type
+                        // Ask to user if he want to change Type
                         Console.WriteLine(ResourceHelper.GetString("GestionTaskView31"));
                         string modifyTypeResponse = Console.ReadLine().Trim().ToLower();
 

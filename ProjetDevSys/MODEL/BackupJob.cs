@@ -26,7 +26,7 @@ namespace ProjetDevSys.Model
                 BackupName = Backup.Name
             };
             string type = Backup.Type;
-            // Déterminer la stratégie en fonction du type
+            // Determine the strategy to use
             switch (type)
             {
                 case "A":
