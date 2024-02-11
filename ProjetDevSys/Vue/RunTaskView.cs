@@ -102,7 +102,6 @@ namespace ProjetDevSys.Vue
                     // Check if the start and end ID are valid
                     if (startId < 0 || endId >= BackupList.Count())
                     {
-                        
                         return ResourceHelper.GetString("RunTaskView19");
                     }
 
