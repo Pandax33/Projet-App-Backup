@@ -32,7 +32,7 @@ namespace ProjetDevSys.VueModel
         {
             Config.Langage = Langage;
             Config.EditConfig();
-            return ResourceHelper.GetString("ConfigViewModel1");
+            return ResourceHelper.GetString("ConfigViewModel16");
         }
 
         public string EditerJsonPathRealTime(string JsonPathRealTime)
