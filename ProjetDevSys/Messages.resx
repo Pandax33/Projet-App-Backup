@@ -127,7 +127,7 @@
     <value>Unsupported backup type.</value>
   </data>
   <data name="ConfigViewModel1" xml:space="preserve">
-    <value>Change made</value>
+    <value>Change made.</value>
   </data>
   <data name="ConfigViewText1" xml:space="preserve">
     <value>Enter the Json file path, language, real-time Json file path, and saved Json file path separated by commas:</value>
@@ -178,13 +178,13 @@
     <value>----------------------------------------------------------------------------</value>
   </data>
   <data name="GestionTask1" xml:space="preserve">
-    <value>Delete finished</value>
+    <value>Delete done.</value>
   </data>
   <data name="GestionTask2" xml:space="preserve">
     <value>The file does not exist</value>
   </data>
   <data name="GestionTask3" xml:space="preserve">
-    <value>Edit finished</value>
+    <value>Edit done.</value>
   </data>
   <data name="GestionTask4" xml:space="preserve">
     <value>The file does not exist</value>
@@ -361,13 +361,13 @@
     <value>The specified IDs are not valid.</value>
   </data>
   <data name="RunTaskView2" xml:space="preserve">
-    <value>Enter the task ID you want to perform</value>
+    <value>Enter the task ID you want to run</value>
   </data>
   <data name="RunTaskView20" xml:space="preserve">
     <value>The specified ID is not valid. Please enter a numeric ID corresponding to an existing backup.</value>
   </data>
   <data name="RunTaskView3" xml:space="preserve">
-    <value>Backup finished</value>
+    <value>Backup done.</value>
   </data>
   <data name="RunTaskView4" xml:space="preserve">
     <value>A problem occurred</value>
@@ -376,7 +376,7 @@
     <value>Enter the ID of the first and last task you want to perform, separated by a comma (example: 2,5):</value>
   </data>
   <data name="RunTaskView6" xml:space="preserve">
-    <value>Backup finished.</value>
+    <value>Backup done.</value>
   </data>
   <data name="RunTaskView7" xml:space="preserve">
     <value>A problem occurred.</value>
