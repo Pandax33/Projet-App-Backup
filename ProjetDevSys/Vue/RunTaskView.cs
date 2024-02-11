@@ -46,14 +46,11 @@ namespace ProjetDevSys.Vue
                     bool result = runSaveTask.RunTask(inputId);
                     if (result)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
                         return ResourceHelper.GetString("RunTaskView3");
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
                         return ResourceHelper.GetString("RunTaskView4");
-
                     }
                 }
                 else
@@ -105,7 +102,6 @@ namespace ProjetDevSys.Vue
                     // Check if the start and end ID are valid
                     if (startId < 0 || endId >= BackupList.Count())
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
                         return ResourceHelper.GetString("RunTaskView19");
                     }
 
@@ -115,12 +111,10 @@ namespace ProjetDevSys.Vue
 
                     if (result)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
                         return ResourceHelper.GetString("RunTaskView6");
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
                         return ResourceHelper.GetString("RunTaskView7");
                     }
                 }
