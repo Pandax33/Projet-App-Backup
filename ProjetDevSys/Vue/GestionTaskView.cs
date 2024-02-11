@@ -86,7 +86,7 @@ namespace ProjetDevSys.Vue
                     int index2 = 0;
                     foreach (Backup backup in BackupList)
                     {
-                        Console.WriteLine($"ID : {index2} Save: {backup.Name}");
+                        Console.WriteLine($"{index2}. [{backup.Name}]");
                         index2++;
                     }
 
@@ -120,7 +120,7 @@ namespace ProjetDevSys.Vue
                     int index = 0;
                     foreach (Backup backup in BackupList2)
                     {
-                        Console.WriteLine($"ID : {index} Save: {backup.Name}");
+                        Console.WriteLine($"{index}. [{backup.Name}]");
                         index++;
                     }
 
