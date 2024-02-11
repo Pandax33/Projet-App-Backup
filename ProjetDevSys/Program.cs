@@ -13,7 +13,7 @@ using ProjetDevSys;
 CultureInfo ci = new CultureInfo(AppConstants.Langage);
 CultureInfo.CurrentUICulture = ci;
 BackupFactory.LoadBackupsFromJson();
-Config.EditConfig();
+
 
 MenuPrincipal menuPrincipal = new MenuPrincipal();
 menuPrincipal.PrincipalMenu();
