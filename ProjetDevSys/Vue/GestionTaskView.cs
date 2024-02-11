@@ -41,7 +41,7 @@ namespace ProjetDevSys.Vue
                             Console.ResetColor();
                         }
                     } while (!isValidSource);
-
+                    
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView16"));
                     string destinationPath;
 
