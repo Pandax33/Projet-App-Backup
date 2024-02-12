@@ -19,6 +19,7 @@ namespace ProjetDevSysGraphical
     {
         private GestionTask gestionTask = new GestionTask();
 
+
         public MainWindow()
         {
             InitializeComponent();
