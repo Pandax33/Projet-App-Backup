@@ -129,6 +129,9 @@
   <data name="ConfigViewModel1" xml:space="preserve">
     <value>Changement réalisé.</value>
   </data>
+  <data name="ConfigViewModel16" xml:space="preserve">
+    <value>Changement réalisé. Merci de redémarrer l'application </value>
+  </data>
   <data name="ConfigViewText1" xml:space="preserve">
     <value>Entrez le chemin du fichier Json, la langue, le chemin du fichier Json en temps réel, et le chemin du fichier Json sauvegardé séparés par des virgules:"</value>
   </data>
