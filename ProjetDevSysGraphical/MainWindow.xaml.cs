@@ -22,6 +22,7 @@ namespace ProjetDevSysGraphical
         public MainWindow()
         {
             InitializeComponent();
+            GenerateGrid();
         }
 
         public void ButtonInstance()
@@ -67,5 +68,23 @@ namespace ProjetDevSysGraphical
         {
             gestionTask.DeleteTask(dataGrid.SelectedIndex);
         }
+
+        public void GenerateGrid()
+        {
+            BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
+            var backups = backupGridViewModel.GetAllBackupsModel();
+            dataGrid.Items.Clear();
+            foreach (var backup in backups)
+            {
+                dataGrid.Items.Add(new
+                {
+                    Propriete1 = backup.Name,
+                    Propriete2 = backup.Source,
+                    Propriete3 = backup.Destination,
+                    Propriete4 = backup.Type
+                });
+            }
+        }
+
     }
 }
