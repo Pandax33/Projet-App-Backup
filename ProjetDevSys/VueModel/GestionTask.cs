@@ -9,18 +9,18 @@ namespace ProjetDevSys.VueModel
 {
     public class GestionTask
     {
-        public bool CreateTask(string fileName, string sourcePath, string destinationPath, string backupType)
+        public string CreateTask(string fileName, string sourcePath, string destinationPath, string backupType)
         {
             Backup backup = BackupFactory.CreateBackup(fileName, sourcePath, destinationPath, backupType);
 
             if (backup != null)
             {
 
-                return true; 
+                return ResourceHelper.GetString("GestionTaskView3");
             }
             else
             {
-                return false; 
+                return ResourceHelper.GetString("GestionTaskView4");
             }
         }
 
@@ -110,8 +110,27 @@ namespace ProjetDevSys.VueModel
             }
         }
 
+        public bool VerifyId(int id)
+        {
 
+            if (BackupFactory.GetBackupByIndex(id) != null)
+            {
+                return true;
+            }
+            return false;
+        }
 
+        public bool verifInputLanguage(string input)
+        {
+            if(input == "fr" || input == "en")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public bool VerifSource(string path)
         {
             return Directory.Exists(path);

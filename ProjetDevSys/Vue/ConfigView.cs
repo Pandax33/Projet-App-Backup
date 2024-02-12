@@ -38,7 +38,7 @@ namespace ProjetDevSys.Vue
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
                             Console.ResetColor();
-                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText5")); // Ask a new one
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText5"));
                         }
                     } while (!AppConstants.VerifJson(newPath));
                     return configViewModel.EditerJsonPath(newPath);

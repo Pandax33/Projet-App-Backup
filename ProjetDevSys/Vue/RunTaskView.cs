@@ -40,18 +40,14 @@ namespace ProjetDevSys.Vue
                 }
 
                 Console.WriteLine(ResourceHelper.GetString("RunTaskView2"));
-                if (int.TryParse(Console.ReadLine(), out int inputId) && inputId >= 0 && inputId < BackupList.Count())
+                string inputId = Console.ReadLine();
+                RunSaveTask runSaveTask = new RunSaveTask();
+                int inputIdint = AppConstants.StringToInt(inputId);
+                if (runSaveTask.VerifyId(inputIdint))
                 {
-                    RunSaveTask runSaveTask = new RunSaveTask();
-                    bool result = runSaveTask.RunTask(inputId);
-                    if (result)
-                    {
-                        return ResourceHelper.GetString("RunTaskView3");
-                    }
-                    else
-                    {
-                        return ResourceHelper.GetString("RunTaskView4");
-                    }
+            
+                    return runSaveTask.RunTask(inputIdint);
+                    
                 }
                 else
                 {
@@ -85,39 +81,18 @@ namespace ProjetDevSys.Vue
                 // Ask for the start and end ID
                 Console.WriteLine(ResourceHelper.GetString("RunTaskView5"));
                 string input2 = Console.ReadLine();
-                string[] inputs = input2.Split(',');
-
+                RunSaveTask runSaveTask = new RunSaveTask();
                 // Check if the input is valid
-                if (inputs.Length == 2 && int.TryParse(inputs[0], out int startId) && int.TryParse(inputs[1], out int endId))
+                if (runSaveTask.VerifyContinueId(input2))
                 {
+                    string[] inputs = input2.Split(',');
+                    int startId = AppConstants.StringToInt(inputs[0]);
+                    int endId = AppConstants.StringToInt(inputs[1]);
                     // Check if the start ID is smaller than the end ID
-                    if (startId >= endId)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(ResourceHelper.GetString("RunTaskView17"));
-                        Console.ResetColor();
-                        return ResourceHelper.GetString("RunTaskView18");
-                    }
-
-                    // Check if the start and end ID are valid
-                    if (startId < 0 || endId >= BackupList.Count())
-                    {
-                        return ResourceHelper.GetString("RunTaskView19");
-                    }
-
-                    // Do the task for the range of IDs
-                    RunSaveTask runSaveTask = new RunSaveTask();
-                    bool result = runSaveTask.RunMultipleTask(startId, endId);
-
-                    if (result)
-                    {
-                        return ResourceHelper.GetString("RunTaskView6");
-                    }
-                    else
-                    {
-                        return ResourceHelper.GetString("RunTaskView7");
-                    }
+   
+                    return runSaveTask.RunMultipleTask(startId, endId);
                 }
+
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -130,11 +105,11 @@ namespace ProjetDevSys.Vue
             }
             else if(input == "3")
             {
-                IEnumerable<Backup> BackupList = BackupFactory.GetAllBackups();
-                if (BackupList != null && BackupList.Any())
+                IEnumerable<Backup> BackupList2 = BackupFactory.GetAllBackups();
+                if (BackupList2 != null && BackupList2.Any())
                 {
                     int index = 0;
-                    foreach (Backup backup in BackupList)
+                    foreach (Backup backup in BackupList2)
                     {
                         Console.WriteLine($"{index}. [{backup.Name}]");
                         index++;
@@ -151,12 +126,13 @@ namespace ProjetDevSys.Vue
                 Console.WriteLine(ResourceHelper.GetString("RunTaskView9"));
                 string input5 = Console.ReadLine();
                 string[] inputIds = input5.Split(',');
-
+                RunSaveTask runSaveTask2 = new RunSaveTask();
                 // Convert the input to an array of IDs
                 int[] ids = new int[inputIds.Length];
                 for (int i = 0; i < inputIds.Length; i++)
                 {
-                    if (int.TryParse(inputIds[i], out int id) && id >= 0 && id < BackupList.Count())
+                    int id = AppConstants.StringToInt(inputIds[i]);
+                    if (runSaveTask2.VerifyId(id))
                     {
                         ids[i] = id;
                     }
@@ -170,17 +146,9 @@ namespace ProjetDevSys.Vue
                 }
 
                 // Call the task to run the multiple tasks
-                RunSaveTask runSaveTask = new RunSaveTask();
-                bool result = runSaveTask.RunTaskMultiple(ids);
+                
+                return runSaveTask2.RunTaskMultiple(ids);
 
-                if (result)
-                {
-                    return ResourceHelper.GetString("RunTaskView11");
-                }
-                else
-                {
-                    return ResourceHelper.GetString("RunTaskView12");
-                }
 
 
             }
