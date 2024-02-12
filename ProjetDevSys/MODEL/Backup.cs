@@ -7,7 +7,7 @@ using System.IO;
 
 namespace ProjetDevSys.Model
 {
-    internal class Backup
+    public class Backup
     {
         public string Name { get; set; }
         public string Destination { get; set; }
