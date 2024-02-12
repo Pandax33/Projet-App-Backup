@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjetDevSys.VueModel;
 
 namespace ProjetDevSysGraphical
 {
@@ -19,6 +20,37 @@ namespace ProjetDevSysGraphical
         public MainWindow()
         {
             InitializeComponent();
+        }
+        
+        public void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        
+        public void ButtonlaunchAllTasks_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        
+        public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        public void ButtonInstance()
+        {
+            foreach (var item in dataGrid.Items)
+            {
+                // Create a button for each row in the DataGrid
+                Button button = new Button();
+                button.Content = "Delete";
+
+                // Create a click event for each row in the DataGrid
+                CheckBox checkBox = new CheckBox();
+                checkBox.HorizontalAlignment = HorizontalAlignment.Left;
+                checkBox.VerticalAlignment = VerticalAlignment.Bottom;
+                // checkBox.Margin = Datagrid.row.position;
+            }
         }
     }
 }
