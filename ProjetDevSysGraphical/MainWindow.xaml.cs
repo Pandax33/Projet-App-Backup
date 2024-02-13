@@ -73,11 +73,10 @@ namespace ProjetDevSysGraphical
         public void GenerateGrid()
         {
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
-            // Obtenez la liste des sauvegardes depuis le ViewModel
+            // Get all backups
             var backups = backupGridViewModel.GetAllBackupsModel();
-            // Assurez-vous que la DataGrid est vide
             dataGrid.Items.Clear();
-            // Ajoutez les sauvegardes à la DataGrid
+            // Add each backup to the DataGrid
             foreach (var backup in backups)
             {
                 dataGrid.Items.Add(new 
