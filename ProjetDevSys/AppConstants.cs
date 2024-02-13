@@ -21,7 +21,12 @@ namespace ProjetDevSys
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
             string filePath = Path.Combine(easySavePath, "appsettings.json");
-            Config.CreateSetting();
+            if (!AppConstants.VerifJson(filePath))
+            {
+                Config.CreateSetting();
+            }
+            
+            
             try
             {
                 // Read the file and deserialize the JSON to a dynamic type
@@ -64,5 +69,15 @@ namespace ProjetDevSys
                 return false;
             }
         }
+        public static int StringToInt(string id)
+        {
+            bool isSuccess = int.TryParse(id, out int numericId);
+            if (isSuccess)
+            {
+                return numericId;
+            }
+            return -1;
+        }
+
     }
 }

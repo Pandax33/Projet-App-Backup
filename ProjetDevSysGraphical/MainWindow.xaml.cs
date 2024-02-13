@@ -19,6 +19,7 @@ namespace ProjetDevSysGraphical
     {
         private GestionTask gestionTask = new GestionTask();
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,8 +44,9 @@ namespace ProjetDevSysGraphical
 
         public void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            // Add a new task
-            // gestionTask.CreateTask("fileName", "sourcePath", "destinationPath", "backupType");
+            AddTask addTask = new AddTask();
+            addTask.Show();
+            Hide();
         }
 
         public void ButtonlaunchAllTasks_Click(object sender, RoutedEventArgs e)
