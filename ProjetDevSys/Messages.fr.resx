@@ -300,6 +300,9 @@
   <data name="GestionTaskView9" xml:space="preserve">
     <value>Identifiant invalide.</value>
   </data>
+  <data name="GestionTaskViewText35" xml:space="preserve">
+    <value>Nom déjà existant. Veuillez entrer un autre nom.</value>
+  </data>
   <data name="InterfaceStrategy1" xml:space="preserve">
     <value>Le dossier source n'existe pas.</value>
   </data>

@@ -610,6 +610,15 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Name is already taken. Please enter another..
+        /// </summary>
+        internal static string GestionTaskViewText35 {
+            get {
+                return ResourceManager.GetString("GestionTaskViewText35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à The source folder does not exist..
         /// </summary>
         internal static string InterfaceStrategy1 {
