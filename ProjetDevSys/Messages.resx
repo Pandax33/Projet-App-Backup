@@ -303,6 +303,9 @@
   <data name="InterfaceStrategy1" xml:space="preserve">
     <value>The source folder does not exist.</value>
   </data>
+  <data name="InterfaceStrategy2" xml:space="preserve">
+    <value>Task interrupted : blocking process detected</value>
+  </data>
   <data name="JsonManager1" xml:space="preserve">
     <value>The file does not exist.</value>
   </data>
@@ -371,6 +374,9 @@
   </data>
   <data name="RunTaskView21" xml:space="preserve">
     <value>You have no saved task</value>
+  </data>
+  <data name="RunTaskView22" xml:space="preserve">
+    <value>Task blocked : blocking process interrupted</value>
   </data>
   <data name="RunTaskView3" xml:space="preserve">
     <value>Backup done.</value>

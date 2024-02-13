@@ -11,30 +11,55 @@ namespace ProjetDevSys.VueModel
     {
         public string RunTask(int id)
         {
+            if (AppConstants.RunningBlockerProcess()) return ResourceHelper.GetString("RunTaskView22");
             Backup backup = BackupFactory.GetBackupByIndex(id);
             BackupJob backupJob = new BackupJob(backup);
             Console.WriteLine(backup.Name);
-            backupJob.Save();
+            try
+            {
+                backupJob.Save();
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
             return ResourceHelper.GetString("RunTaskView3");
         }
 
         public string RunMultipleTask(int idDebut, int idFin)
         {
+            if (AppConstants.RunningBlockerProcess()) return ResourceHelper.GetString("RunTaskView22");
+
             IEnumerable<Backup> allBackups = BackupFactory.GetBackupsInRange(idDebut,idFin);
             foreach (Backup backup in allBackups)
             {
                 BackupJob backupJob = new BackupJob(backup);
-                backupJob.Save();
+                try
+                {
+                    backupJob.Save();
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+                }
             }
             return ResourceHelper.GetString("RunTaskView6");
         }
         public string RunTaskMultiple(int[] tab)
         {
-            foreach(int id in tab)
+            if (AppConstants.RunningBlockerProcess()) return ResourceHelper.GetString("RunTaskView22");
+            foreach (int id in tab)
             {
                 Backup backup = BackupFactory.GetBackupByIndex(id);
                 BackupJob backupJob = new BackupJob(backup);
-                backupJob.Save();
+                try
+                {
+                    backupJob.Save();
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+                }
             }
             return ResourceHelper.GetString("RunTaskView11");
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,8 @@ namespace ProjetDevSys.Model
 
         private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime)
         {
+            if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
+
             //file case
             if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
             {
@@ -57,7 +60,6 @@ namespace ProjetDevSys.Model
             else
             {
                 // Copy every file from the source directory to the destination directory
-
                 foreach (string fichierPath in Directory.GetFiles(sourceDir))
                 {
                     string fileName = Path.GetFileName(fichierPath);
@@ -82,10 +84,9 @@ namespace ProjetDevSys.Model
                     {
                         Directory.CreateDirectory(destinationFolderPath);
                     }
-
-                    CopierDossier(dossierPath, destinationFolderPath, LogRealTime);
                 }
             }
+            return;
         }
     }
 
@@ -113,6 +114,8 @@ namespace ProjetDevSys.Model
 
         private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime)
         {
+            if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
+
             //file case
             if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
             {
@@ -165,6 +168,7 @@ namespace ProjetDevSys.Model
                     CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime);
                 }
             }
+            return;
         }
 
     }

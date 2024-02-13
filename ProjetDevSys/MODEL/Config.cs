@@ -11,7 +11,7 @@ namespace ProjetDevSys.Model
         public static string Langage { get; set; }
         public static string JsonPathRealTime { get; set; }
         public static string JsonPathSave { get; set; }
-
+        public static string BlockerProcess { get; set; }
         static Config()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -28,6 +28,7 @@ namespace ProjetDevSys.Model
             JsonPathRealTime = Path.Combine(easySaveFolder, "LogRealTime.json");
             JsonPathSave = Path.Combine(easySaveFolder, "Backlist.json");
             Langage = AppConstants.Langage;
+            BlockerProcess = AppConstants.BlockerProcess;
             CreateFileIfNotExists(JsonPath);
             CreateFileIfNotExists(JsonPathRealTime);
             CreateFileIfNotExists(JsonPathSave);
@@ -73,6 +74,10 @@ namespace ProjetDevSys.Model
                     LoadSave = new
                     {
                         JsonPathSave
+                    },
+                    BlockerProcess = new
+                    {
+                        BlockerProcess
                     }
                 };
                 string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
@@ -94,7 +99,8 @@ namespace ProjetDevSys.Model
                 Logging = new { JsonPath },
                 Langage = new { Langage },
                 RealTimeLogging = new { JsonPathRealTime },
-                LoadSave = new { JsonPathSave }
+                LoadSave = new { JsonPathSave },
+                BlockerProcess = new { BlockerProcess }
             };
 
             // Sérialisation et écriture dans le fichier

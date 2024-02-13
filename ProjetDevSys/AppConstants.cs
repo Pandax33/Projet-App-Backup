@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using ProjetDevSys.Model;
+using System.Diagnostics;
 
 namespace ProjetDevSys
 {
@@ -12,6 +13,7 @@ namespace ProjetDevSys
         public static readonly string Langage;
         public static readonly string LogFilePathRealTime;
         public static readonly string JsonSave;
+        public static readonly string BlockerProcess;
 
         static AppConstants()
         {
@@ -40,6 +42,7 @@ namespace ProjetDevSys
                 Langage = config.Langage.Langage;
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
                 JsonSave = config.LoadSave.JsonPathSave;
+                BlockerProcess = config.BlockerProcess.BlockerProcess;
             }
             catch (Exception ex)
             {
@@ -77,6 +80,12 @@ namespace ProjetDevSys
                 return numericId;
             }
             return -1;
+        }
+
+        public static bool RunningBlockerProcess()
+        {
+            if (BlockerProcess == null) return false;
+            return Process.GetProcessesByName(BlockerProcess).Any();
         }
 
     }
