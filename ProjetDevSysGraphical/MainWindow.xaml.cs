@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjetDevSys.Model;
 using ProjetDevSys.VueModel;
 
 namespace ProjetDevSysGraphical
@@ -23,6 +24,7 @@ namespace ProjetDevSysGraphical
         public MainWindow()
         {
             InitializeComponent();
+            GenerateGrid();
         }
 
         public void ButtonInstance()
@@ -66,6 +68,26 @@ namespace ProjetDevSysGraphical
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
             gestionTask.DeleteTask(dataGrid.SelectedIndex);
+        }
+
+        public void GenerateGrid()
+        {
+            BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
+            // Obtenez la liste des sauvegardes depuis le ViewModel
+            var backups = backupGridViewModel.GetAllBackupsModel();
+            // Assurez-vous que la DataGrid est vide
+            dataGrid.Items.Clear();
+            // Ajoutez les sauvegardes à la DataGrid
+            foreach (var backup in backups)
+            {
+                dataGrid.Items.Add(new 
+                {
+                    Propriete1 = backup.Name,
+                    Propriete2 = backup.Source,
+                    Propriete3 = backup.Destination,
+                    Propriete4 = backup.Type
+                });
+            }
         }
     }
 }
