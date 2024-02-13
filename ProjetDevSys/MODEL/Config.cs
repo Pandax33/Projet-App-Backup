@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace ProjetDevSys.Model
 {
@@ -11,6 +13,7 @@ namespace ProjetDevSys.Model
         public static string Langage { get; set; }
         public static string JsonPathRealTime { get; set; }
         public static string JsonPathSave { get; set; }
+        public static string ExtensionType { get; set; }
 
         static Config()
         {
@@ -23,23 +26,21 @@ namespace ProjetDevSys.Model
                 Directory.CreateDirectory(easySaveFolder);
             }
 
-            // Construire les chemins avec les noms spécifiques
-            JsonPath = Path.Combine(easySaveFolder, $"Log_{DateTime.Now:yyyyMMdd}.json");
-            JsonPathRealTime = Path.Combine(easySaveFolder, "LogRealTime.json");
-            JsonPathSave = Path.Combine(easySaveFolder, "Backlist.json");
-            Langage = AppConstants.Langage;
+            JsonPath = AppConstants.LogFilePath ?? Path.Combine(easySaveFolder, $"Log_{DateTime.Now:yyyyMMdd}");
+            JsonPathRealTime = AppConstants.LogFilePathRealTime ?? Path.Combine(easySaveFolder, "LogRealTime");
+            JsonPathSave = AppConstants.JsonSave ?? Path.Combine(easySaveFolder, "Backlist.json");
+            Langage = AppConstants.Langage ?? GetLanguage();
+            ExtensionType = AppConstants.ExtensionType ?? ".json";
+
             CreateFileIfNotExists(JsonPath);
             CreateFileIfNotExists(JsonPathRealTime);
             CreateFileIfNotExists(JsonPathSave);
         }
+        
 
-        // La méthode pour initialiser ou mettre à jour les propriétés si nécessaire
-        public static void Initialize(string jsonPath, string langage, string jsonPathRealTime, string jsonPathSave)
+        private static string GetLanguage()
         {
-            JsonPath = jsonPath;
-            Langage = langage;
-            JsonPathRealTime = jsonPathRealTime;
-            JsonPathSave = jsonPathSave;
+            return CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US";
         }
 
         // Crée le dossier et le fichier de configuration avec les valeurs par défaut si nécessaire
@@ -73,6 +74,10 @@ namespace ProjetDevSys.Model
                     LoadSave = new
                     {
                         JsonPathSave
+                    },
+                    LogType = new
+                    {
+                        ExtensionType = ".json"
                     }
                 };
                 string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
@@ -106,9 +111,61 @@ namespace ProjetDevSys.Model
         {
             if (!File.Exists(filePath))
             {
-                // Créer un fichier vide
                 File.Create(filePath).Dispose();
             }
         }
+
+        public static void UpdateLogFilePathIfNeeded()
+        {
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string easySaveFolder = Path.Combine(appDataPath, "EasySaveGP5");
+            string configFilePath = Path.Combine(easySaveFolder, "appsettings.json");
+
+            try
+            {
+                string jsonContent = File.ReadAllText(configFilePath);
+                var config = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonContent);
+
+                if (config != null && config.ContainsKey("Logging") && config["Logging"].TryGetProperty("JsonPath", out JsonElement jsonPathElement))
+                {
+                    string currentLogFilePath = jsonPathElement.GetString();
+                    string currentLogFileName = Path.GetFileNameWithoutExtension(currentLogFilePath);
+
+                    Regex regex = new Regex(@"^Log_\d{8}$");
+                    if (regex.IsMatch(currentLogFileName))
+                    {
+                        string dateString = currentLogFileName.Replace("Log_", "");
+
+                        if (DateTime.TryParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fileDate))
+                        {
+                            if (fileDate.Date < DateTime.Today)
+                            {
+                                string newFileName = $"Log_{DateTime.Today:yyyyMMdd}.json";
+                                string newFilePath = Path.Combine(Path.GetDirectoryName(currentLogFilePath), newFileName).Replace("\\", "\\\\");
+
+                                var loggingConfig = new
+                                {
+                                    JsonPath = newFilePath
+                                };
+
+                                // Mettre à jour la configuration avec la nouvelle structure de Logging
+                                config["Logging"] = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize(loggingConfig));
+
+                                // Sérialiser l'objet modifié en JSON
+                                string updatedJsonContent = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
+
+                                // Écrire le JSON mis à jour dans le fichier de configuration
+                                File.WriteAllText(configFilePath, updatedJsonContent);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
     }
 }

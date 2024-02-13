@@ -12,6 +12,7 @@ namespace ProjetDevSys
         public static readonly string Langage;
         public static readonly string LogFilePathRealTime;
         public static readonly string JsonSave;
+        public static readonly string ExtensionType;
 
         static AppConstants()
         {
@@ -21,12 +22,12 @@ namespace ProjetDevSys
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
             string filePath = Path.Combine(easySavePath, "appsettings.json");
-            if (!AppConstants.VerifJson(filePath))
+            if (!VerifJson(filePath))
             {
                 Config.CreateSetting();
             }
-            
-            
+            Config.UpdateLogFilePathIfNeeded();
+
             try
             {
                 // Read the file and deserialize the JSON to a dynamic type
