@@ -131,6 +131,18 @@ namespace ProjetDevSys.VueModel
                 return false;
             }
         }
+        public bool verifInputBackupType(string input)
+        {
+            if (input == "A" || input == "B")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool VerifSource(string path)
         {
             return Directory.Exists(path);

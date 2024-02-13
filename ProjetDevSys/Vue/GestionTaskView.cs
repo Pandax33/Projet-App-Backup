@@ -60,7 +60,7 @@ namespace ProjetDevSys.Vue
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView17"));
                     string backupType = Console.ReadLine().Trim().ToUpper(); 
 
-                    while (!gestionTask.verifInputLanguage(backupType))
+                    while (!gestionTask.verifInputBackupType(backupType))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(ResourceHelper.GetString("GestionTaskView23"));

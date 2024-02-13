@@ -73,7 +73,7 @@ namespace ProjetDevSys.Vue
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Aucune sauvegarde enregistrée");
+                    Console.WriteLine(ResourceHelper.GetString("RunTaskView21"));
                     Console.ResetColor();
                     return ResourceHelper.GetString("RunTaskView18");
                 }
