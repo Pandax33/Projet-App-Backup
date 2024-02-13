@@ -369,6 +369,9 @@
   <data name="RunTaskView20" xml:space="preserve">
     <value>The specified ID is not valid. Please enter a numeric ID corresponding to an existing backup.</value>
   </data>
+  <data name="RunTaskView21" xml:space="preserve">
+    <value>You have no saved task</value>
+  </data>
   <data name="RunTaskView3" xml:space="preserve">
     <value>Backup done.</value>
   </data>

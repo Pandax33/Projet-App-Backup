@@ -69,5 +69,15 @@ namespace ProjetDevSys
                 return false;
             }
         }
+        public static int StringToInt(string id)
+        {
+            bool isSuccess = int.TryParse(id, out int numericId);
+            if (isSuccess)
+            {
+                return numericId;
+            }
+            return -1;
+        }
+
     }
 }

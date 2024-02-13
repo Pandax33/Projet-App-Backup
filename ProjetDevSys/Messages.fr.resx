@@ -369,6 +369,9 @@
   <data name="RunTaskView20" xml:space="preserve">
     <value>L'ID spécifié n'est pas valide. Veuillez entrer un ID numérique correspondant à une sauvegarde existante.</value>
   </data>
+  <data name="RunTaskView21" xml:space="preserve">
+    <value>Aucune sauvegarde enregistrée</value>
+  </data>
   <data name="RunTaskView3" xml:space="preserve">
     <value>Sauvegarde terminée.</value>
   </data>

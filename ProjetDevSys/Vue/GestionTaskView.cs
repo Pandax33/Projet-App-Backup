@@ -60,7 +60,7 @@ namespace ProjetDevSys.Vue
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView17"));
                     string backupType = Console.ReadLine().Trim().ToUpper(); 
 
-                    while (backupType != "A" && backupType != "B")
+                    while (!gestionTask.verifInputBackupType(backupType))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(ResourceHelper.GetString("GestionTaskView23"));
@@ -69,8 +69,7 @@ namespace ProjetDevSys.Vue
                         backupType = Console.ReadLine().Trim().ToUpper(); 
                     }
 
-                    bool created = gestionTask.CreateTask(fileName, sourcePath, destinationPath, backupType);
-                    return created ? ResourceHelper.GetString("GestionTaskView3") : ResourceHelper.GetString("GestionTaskView4");
+                    return gestionTask.CreateTask(fileName, sourcePath, destinationPath, backupType);
                     
                 case "2":
                     IEnumerable<Backup> BackupList = BackupFactory.GetAllBackups();
@@ -92,11 +91,10 @@ namespace ProjetDevSys.Vue
 
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView6"));
                     string deleteIdInput = Console.ReadLine();
-                    if (int.TryParse(deleteIdInput, out int deleteId) && deleteId >= 0 && deleteId < BackupList.Count())
+                    if (gestionTask.VerifyId(AppConstants.StringToInt(deleteIdInput)))
                     {
                         // Call the function to delete the task
-                        string result = gestionTask.DeleteTask(deleteId);
-                        return (result);
+                        return gestionTask.DeleteTask(AppConstants.StringToInt(deleteIdInput));
                     }
                     else
                     {
@@ -126,8 +124,10 @@ namespace ProjetDevSys.Vue
 
                     // Ask the user to select the backup to edit
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView8"));
-                    if (int.TryParse(Console.ReadLine(), out int id) && id >= 0 && id < BackupList2.Count())
+                    string editIdInput = Console.ReadLine();
+                    if (gestionTask.VerifyId(AppConstants.StringToInt(editIdInput)))
                     {
+                        int id = AppConstants.StringToInt(editIdInput);
                         Backup selectedBackup = BackupList2.ElementAt(id);
 
                         // Ask the user if he wants to modify the source

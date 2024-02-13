@@ -18,7 +18,7 @@ namespace ProjetDevSys.Model
         public void Save(Backup backup, LogRealTime LogRealTime)
         {
             // Check if the source directory exists
-            if (Directory.Exists(backup.Source))
+            if (File.Exists(backup.Source) || Directory.Exists(backup.Source))
             {
                 // Be sure that the destination directory exists
                 if (!Directory.Exists(backup.Destination))
@@ -37,33 +37,54 @@ namespace ProjetDevSys.Model
 
         private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime)
         {
-            // Copy every file from the source directory to the destination directory
-            foreach (string fichierPath in Directory.GetFiles(sourceDir))
+            //file case
+            if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
             {
-                string fileName = Path.GetFileName(fichierPath);
+
+                string fileName = Path.GetFileName(sourceDir);
                 string destinationFilePath = Path.Combine(destinationDir, fileName);
-                FileInfo fileInfo = new FileInfo(fichierPath);
+                FileInfo fileInfo = new FileInfo(sourceDir);
                 long fileSize = fileInfo.Length;
 
-                File.Copy(fichierPath, destinationFilePath, true);
+                File.Copy(sourceDir, destinationFilePath, true);
                 LogRealTime.Timestamp = DateTime.Now;
-                LogRealTime.CurrentSourcePath = fichierPath;
+                LogRealTime.CurrentSourcePath = sourceDir;
                 LogRealTime.CurrentTargetPath = destinationFilePath;
                 LogRealTime.UpdateCurrentFileAndSize(fileSize);
                 LogRealTime.CreateLog();
             }
 
-            // Copy all subdirectories recursively
-            foreach (string dossierPath in Directory.GetDirectories(sourceDir))
+            else
             {
-                string folderName = Path.GetFileName(dossierPath);
-                string destinationFolderPath = Path.Combine(destinationDir, folderName);
-                if (!Directory.Exists(destinationFolderPath))
+                // Copy every file from the source directory to the destination directory
+
+                foreach (string fichierPath in Directory.GetFiles(sourceDir))
                 {
-                    Directory.CreateDirectory(destinationFolderPath);
+                    string fileName = Path.GetFileName(fichierPath);
+                    string destinationFilePath = Path.Combine(destinationDir, fileName);
+                    FileInfo fileInfo = new FileInfo(fichierPath);
+                    long fileSize = fileInfo.Length;
+
+                    File.Copy(fichierPath, destinationFilePath, true);
+                    LogRealTime.Timestamp = DateTime.Now;
+                    LogRealTime.CurrentSourcePath = fichierPath;
+                    LogRealTime.CurrentTargetPath = destinationFilePath;
+                    LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                    LogRealTime.CreateLog();
                 }
 
-                CopierDossier(dossierPath, destinationFolderPath, LogRealTime);
+                // Copy all subdirectories recursively
+                foreach (string dossierPath in Directory.GetDirectories(sourceDir))
+                {
+                    string folderName = Path.GetFileName(dossierPath);
+                    string destinationFolderPath = Path.Combine(destinationDir, folderName);
+                    if (!Directory.Exists(destinationFolderPath))
+                    {
+                        Directory.CreateDirectory(destinationFolderPath);
+                    }
+
+                    CopierDossier(dossierPath, destinationFolderPath, LogRealTime);
+                }
             }
         }
     }
@@ -73,7 +94,7 @@ namespace ProjetDevSys.Model
        
         public void Save(Backup backup, LogRealTime LogRealTime)
         {
-            if (Directory.Exists(backup.Source))
+            if (File.Exists(backup.Source) || Directory.Exists(backup.Source))
             {
                 if (!Directory.Exists(backup.Destination))
                 {
@@ -92,38 +113,57 @@ namespace ProjetDevSys.Model
 
         private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime)
         {
-            // Copy every file from the source directory to the destination directory
-            foreach (string fichierSource in Directory.GetFiles(sourceDir))
+            //file case
+            if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
             {
-                string fileName = Path.GetFileName(fichierSource);
-                string fichierDestination = Path.Combine(destinationDir, fileName);
-                FileInfo fileInfo = new FileInfo(fichierSource);
+
+                string fileName = Path.GetFileName(sourceDir);
+                string destinationFilePath = Path.Combine(destinationDir, fileName);
+                FileInfo fileInfo = new FileInfo(sourceDir);
                 long fileSize = fileInfo.Length;
 
-                // Do the copy only if the file does not exist or if the source file is more recent than the destination file
-                if (!File.Exists(fichierDestination) || File.GetLastWriteTime(fichierSource) > File.GetLastWriteTime(fichierDestination))
-                {
-                    File.Copy(fichierSource, fichierDestination, true);
-                    LogRealTime.Timestamp = DateTime.Now;
-                    LogRealTime.CurrentSourcePath = fichierSource;
-                    LogRealTime.CurrentTargetPath = fichierDestination;
-                    LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                    LogRealTime.CreateLog();
-                }
+                File.Copy(sourceDir, destinationFilePath, true);
+                LogRealTime.Timestamp = DateTime.Now;
+                LogRealTime.CurrentSourcePath = sourceDir;
+                LogRealTime.CurrentTargetPath = destinationFilePath;
+                LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                LogRealTime.CreateLog();
             }
-
-            // Recursively call the method for each subdirectory
-            foreach (string dossierSource in Directory.GetDirectories(sourceDir))
+            else
             {
-                string nomDossier = Path.GetFileName(dossierSource);
-                string dossierDestination = Path.Combine(destinationDir, nomDossier);
-
-                if (!Directory.Exists(dossierDestination))
+                // Copy every file from the source directory to the destination directory
+                foreach (string fichierSource in Directory.GetFiles(sourceDir))
                 {
-                    Directory.CreateDirectory(dossierDestination);
+                    string fileName = Path.GetFileName(fichierSource);
+                    string fichierDestination = Path.Combine(destinationDir, fileName);
+                    FileInfo fileInfo = new FileInfo(fichierSource);
+                    long fileSize = fileInfo.Length;
+
+                    // Do the copy only if the file does not exist or if the source file is more recent than the destination file
+                    if (!File.Exists(fichierDestination) || File.GetLastWriteTime(fichierSource) > File.GetLastWriteTime(fichierDestination))
+                    {
+                        File.Copy(fichierSource, fichierDestination, true);
+                        LogRealTime.Timestamp = DateTime.Now;
+                        LogRealTime.CurrentSourcePath = fichierSource;
+                        LogRealTime.CurrentTargetPath = fichierDestination;
+                        LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                        LogRealTime.CreateLog();
+                    }
                 }
 
-                CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime);
+                // Recursively call the method for each subdirectory
+                foreach (string dossierSource in Directory.GetDirectories(sourceDir))
+                {
+                    string nomDossier = Path.GetFileName(dossierSource);
+                    string dossierDestination = Path.Combine(destinationDir, nomDossier);
+
+                    if (!Directory.Exists(dossierDestination))
+                    {
+                        Directory.CreateDirectory(dossierDestination);
+                    }
+
+                    CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime);
+                }
             }
         }
 

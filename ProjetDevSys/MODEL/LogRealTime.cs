@@ -45,13 +45,15 @@ namespace ProjetDevSys.MODEL
             CurrentFile = CurrentFile +1;
             CurrentFileSize = fileSize;
             SizeRemaining = SizeRemaining - CurrentFileSize;
-            if (TotalSize != 0)
+
+            if (SizeRemaining != 0)
             {
                 Progress = Progress + (CurrentFileSize * 100) / TotalSize;
             }
             else
             {
                 Progress = 100;
+                State = "Completed";
             }
             FilesRemaining = TotalFiles - CurrentFile;
         }
@@ -74,36 +76,47 @@ namespace ProjetDevSys.MODEL
             TotalFiles = 0;
             TotalSize = 0;
 
-            // Create a DirectoryInfo object
-            DirectoryInfo dirInfo = new DirectoryInfo(folderPath);
-
-            CalculateFolder(dirInfo);
-
-            // Recursive method to calculate the size of all files in the folder
-            void CalculateFolder(DirectoryInfo directory)
+            //file case
+            if (!(Directory.Exists(folderPath)) && File.Exists(folderPath))
             {
-                try
-                {
-                    // Count the number of files and calculate the total size
-                    foreach (FileInfo file in directory.GetFiles())
-                    {
-                        TotalFiles++;
-                        TotalSize += file.Length;
-                    }
-
-                    foreach (DirectoryInfo dir in directory.GetDirectories())
-                    {
-                        CalculateFolder(dir);
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    // Manage the exception if the directory cannot be accessed
-                    System.Console.WriteLine($"Cannot access {directory.FullName}: {ex.Message}");
-                }
+                FileInfo fileInfo = new FileInfo(folderPath);
+                TotalFiles = 1;
+                SizeRemaining = fileInfo.Length;
+                TotalSize = fileInfo.Length;
             }
+            else
+            {
+                // Create a DirectoryInfo object
+                DirectoryInfo dirInfo = new DirectoryInfo(folderPath);
 
-            SizeRemaining = TotalSize;
+                CalculateFolder(dirInfo);
+
+                // Recursive method to calculate the size of all files in the folder
+                void CalculateFolder(DirectoryInfo directory)
+                {
+                    try
+                    {
+                        // Count the number of files and calculate the total size
+                        foreach (FileInfo file in directory.GetFiles())
+                        {
+                            TotalFiles++;
+                            TotalSize += file.Length;
+                        }
+
+                        foreach (DirectoryInfo dir in directory.GetDirectories())
+                        {
+                            CalculateFolder(dir);
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        // Manage the exception if the directory cannot be accessed
+                        System.Console.WriteLine($"Cannot access {directory.FullName}: {ex.Message}");
+                    }
+                }
+
+                SizeRemaining = TotalSize;
+            }
         }
     } 
 
