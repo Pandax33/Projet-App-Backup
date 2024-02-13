@@ -300,6 +300,9 @@
   <data name="GestionTaskView9" xml:space="preserve">
     <value>Invalid ID.</value>
   </data>
+  <data name="GestionTaskViewText35" xml:space="preserve">
+    <value>Name is already taken. Please enter another.</value>
+  </data>
   <data name="InterfaceStrategy1" xml:space="preserve">
     <value>The source folder does not exist.</value>
   </data>
