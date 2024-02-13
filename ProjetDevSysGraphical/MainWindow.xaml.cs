@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjetDevSys.Model;
 using ProjetDevSys.VueModel;
 
 namespace ProjetDevSysGraphical
@@ -18,6 +19,7 @@ namespace ProjetDevSysGraphical
     public partial class MainWindow : Window
     {
         private GestionTask gestionTask = new GestionTask();
+
 
         public MainWindow()
         {

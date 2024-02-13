@@ -12,8 +12,7 @@
         <Button x:Name="launchSelectedTasks" Content="Lancer les tâches selectionnées" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200" Click="ButtonlaunchSelectedTasks_Click" Height="50" Margin="20,0,0,20" Grid.Row="1"/>
         <Button x:Name="launchAllTasks" Content="Lancer les tâches sur cette page" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="200" Click="ButtonlaunchAllTasks_Click" Height="50" Margin="0,0,30,20"/>
 
-        <!-- Ajout du DataGrid -->
-        <DataGrid x:Name="dataGrid" Margin="10,80,130,80" AutoGenerateColumns="False">
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,80,10,80" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{Binding Propriete1}" Width="*" />
                 <DataGridTextColumn Header="Source" Binding="{Binding Propriete2}" Width="*" />
