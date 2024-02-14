@@ -120,17 +120,6 @@ namespace ProjetDevSys.VueModel
             return false;
         }
 
-        public bool verifInputLanguage(string input)
-        {
-            if(input == "fr" || input == "en")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
         public bool verifInputBackupType(string input)
         {
             if (input == "A" || input == "B")

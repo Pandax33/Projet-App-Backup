@@ -8,11 +8,11 @@ namespace ProjetDevSys
 {
     public static class AppConstants
     {
-        public static readonly string LogFilePath;
-        public static readonly string Langage;
-        public static readonly string LogFilePathRealTime;
-        public static readonly string JsonSave;
-        public static readonly string ExtensionType;
+        public static string LogFilePath;
+        public static string Langage;
+        public static string LogFilePathRealTime;
+        public static string JsonSave;
+        public static string ExtensionType;
 
         static AppConstants()
         {
@@ -41,6 +41,7 @@ namespace ProjetDevSys
                 Langage = config.Langage.Langage;
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
                 JsonSave = config.LoadSave.JsonPathSave;
+                ExtensionType = config.LogType.ExtensionType;
             }
             catch (Exception ex)
             {
@@ -78,6 +79,25 @@ namespace ProjetDevSys
                 return numericId;
             }
             return -1;
+        }
+
+        public static void reloadConfig()
+        {
+            string appsettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EasySaveGP5", "appsettings.json");
+            string json = File.ReadAllText(appsettings);
+
+            // Deserialize the JSON to a dynamic type
+            dynamic config = JsonConvert.DeserializeObject(json);
+
+            // Assign the values to the static fields
+            LogFilePath = config.Logging.JsonPath;
+            Langage = config.Langage.Langage;
+            LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
+            JsonSave = config.LoadSave.JsonPathSave;
+            ExtensionType = config.LogType.ExtensionType;
+            CultureInfo ci = new CultureInfo(Langage);
+            CultureInfo.CurrentUICulture = ci;
+
         }
 
     }
