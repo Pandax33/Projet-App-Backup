@@ -61,14 +61,14 @@ namespace ProjetDevSys.Vue
                     do
                     {
                         destinationPath = Console.ReadLine();
-                        if (!AppConstants.VerifPath(destinationPath))
+                        if (!AppConstants.VerifPath(destinationPath) || destinationPath.Contains(sourcePath))
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("GestionTaskView22"));
                             Console.ResetColor(); 
                             Console.WriteLine(ResourceHelper.GetString("GestionTaskView16"));
                         }
-                    } while (!AppConstants.VerifPath(destinationPath));
+                    } while (!AppConstants.VerifPath(destinationPath) || destinationPath.Contains(sourcePath));
 
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView17"));
                     string backupType = Console.ReadLine().Trim().ToUpper(); 
