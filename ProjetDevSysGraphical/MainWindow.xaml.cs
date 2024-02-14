@@ -108,17 +108,25 @@ namespace ProjetDevSysGraphical
         #region ButtonClicks
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
-            RunSaveTask runSaveTask = new RunSaveTask();
-
             CheckBox clicked = sender as CheckBox;
             if (clicked != null)
             {
                 // Extract the index from the button's name
                 int index = int.Parse(clicked.Name.Split('_')[1]);
 
-                idToLaunch.Add(index);
+                if (clicked.IsChecked == true)
+                {
+                    // Add the index to the list if it is checked
+                    idToLaunch.Add(index);
+                }
+                else
+                {
+                    // Delete the index from the list if it is unchecked
+                    idToLaunch.Remove(index);
+                }
             }
         }
+
 
         public void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
