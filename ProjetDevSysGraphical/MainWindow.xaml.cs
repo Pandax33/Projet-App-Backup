@@ -21,6 +21,7 @@ namespace ProjetDevSysGraphical
         private List<Button> deleteButtonList = new List<Button>();
         private List<Button> editButtonList = new List<Button>();
         private List<string> buttonNameList = new List<string>();
+        private List<int> idToLaunch = new List<int>();
 
         public MainWindow()
         {
@@ -91,6 +92,7 @@ namespace ProjetDevSysGraphical
 
                 buttonDelete.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "Delete";
                 buttonEdit.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "Edit";
+                checkBox.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "CheckBox";
                 // Add the buttons to the list
                 deleteButtonList.Add(buttonDelete);
                 editButtonList.Add(buttonEdit);
@@ -106,7 +108,16 @@ namespace ProjetDevSysGraphical
         #region ButtonClicks
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
+            RunSaveTask runSaveTask = new RunSaveTask();
 
+            CheckBox clicked = sender as CheckBox;
+            if (clicked != null)
+            {
+                // Extract the index from the button's name
+                int index = int.Parse(clicked.Name.Split('_')[1]);
+
+                idToLaunch.Add(index);
+            }
         }
 
         public void ButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -121,18 +132,13 @@ namespace ProjetDevSysGraphical
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             // Launch all tasks
-            foreach (ItemCollection item in dataGrid.Items)
-            {
-                for (int i = 0; i < item.Count; i++)
-                {
-                    runSaveTask.RunTask(i);
-                }
-            }
+            runSaveTask.RunMultipleTask(0, dataGrid.Items.Count);
         }
 
         public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
         {
-            // Launch selected tasks
+            RunSaveTask runSaveTask = new RunSaveTask();
+            runSaveTask.RunTaskMultiple(idToLaunch.ToArray());
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
