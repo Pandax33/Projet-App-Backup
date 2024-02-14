@@ -32,8 +32,8 @@ namespace ProjetDevSys.Model
             Langage = AppConstants.Langage ?? GetLanguage();
             ExtensionType = AppConstants.ExtensionType ?? ".json";
 
-            CreateFileIfNotExists(JsonPath);
-            CreateFileIfNotExists(JsonPathRealTime);
+            CreateFileWithExtensionIfNotExists(JsonPath);
+            CreateFileWithExtensionIfNotExists(JsonPathRealTime);
             CreateFileIfNotExists(JsonPathSave);
         }
         
@@ -99,12 +99,16 @@ namespace ProjetDevSys.Model
                 Logging = new { JsonPath },
                 Langage = new { Langage },
                 RealTimeLogging = new { JsonPathRealTime },
-                LoadSave = new { JsonPathSave }
+                LoadSave = new { JsonPathSave },
+                LogType = new { ExtensionType }
             };
 
             // Sérialisation et écriture dans le fichier
             string jsonString = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(filePath, jsonString);
+            AppConstants.reloadConfig();
+            CreateFileWithExtensionIfNotExists(JsonPath);
+            CreateFileWithExtensionIfNotExists(JsonPathRealTime);
         }
 
         private static void CreateFileIfNotExists(string filePath)
@@ -112,6 +116,16 @@ namespace ProjetDevSys.Model
             if (!File.Exists(filePath))
             {
                 File.Create(filePath).Dispose();
+            }
+        }
+
+        private static void CreateFileWithExtensionIfNotExists(string filePath)
+        {
+            string fullFilePath = filePath + ExtensionType;
+
+            if (!File.Exists(fullFilePath))
+            {
+                File.Create(fullFilePath).Dispose();
             }
         }
 
