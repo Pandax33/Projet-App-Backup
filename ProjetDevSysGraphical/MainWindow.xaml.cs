@@ -32,9 +32,9 @@ namespace ProjetDevSysGraphical
 
         public void GenerateGrid()
         {
+            dataGrid.Items.Clear();
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
-            dataGrid.Items.Clear();
             foreach(var backup in backups) // backup type = Backup
             {
                 dataGrid.Items.Add(new
