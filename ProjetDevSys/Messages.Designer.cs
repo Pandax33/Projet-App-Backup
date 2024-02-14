@@ -151,7 +151,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 5. Exit.
+        ///   Recherche une chaîne localisée semblable à 6. Exit.
         /// </summary>
         internal static string ConfigViewText14 {
             get {
@@ -165,6 +165,33 @@ namespace ProjetDevSys {
         internal static string ConfigViewText15 {
             get {
                 return ResourceManager.GetString("ConfigViewText15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Enter extension type for logs (.json/.xml) :.
+        /// </summary>
+        internal static string ConfigViewText16 {
+            get {
+                return ResourceManager.GetString("ConfigViewText16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid extension. Please enter &apos;.json&apos; or &apos;.xml&apos;..
+        /// </summary>
+        internal static string ConfigViewText17 {
+            get {
+                return ResourceManager.GetString("ConfigViewText17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 5. Log extension type.
+        /// </summary>
+        internal static string ConfigViewText18 {
+            get {
+                return ResourceManager.GetString("ConfigViewText18", resourceCulture);
             }
         }
         
