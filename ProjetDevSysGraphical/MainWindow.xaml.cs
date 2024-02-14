@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using ProjetDevSys.VueModel;
 
 namespace ProjetDevSysGraphical
@@ -176,6 +177,11 @@ namespace ProjetDevSysGraphical
         private void MainWindow_Closed(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            new Config().ShowDialog();
         }
     }
 }
