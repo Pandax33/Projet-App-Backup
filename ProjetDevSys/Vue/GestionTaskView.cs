@@ -25,7 +25,20 @@ namespace ProjetDevSys.Vue
             {
                 case "1":
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView13"));
-                    string fileName = Console.ReadLine();
+                    string fileName;
+                    bool isValidName = false;
+                    do
+                    {
+                        fileName = Console.ReadLine().Trim();
+                        isValidName = ((BackupFactory.GetBackupByName(fileName) == null) && !String.IsNullOrWhiteSpace(fileName)) ? true : false;
+                        if (!isValidName)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(ResourceHelper.GetString("GestionTaskViewText35"));
+                            Console.ResetColor();
+                        }
+
+                    } while (!isValidName);
 
                     string sourcePath;
                     bool isValidSource = false;
@@ -48,19 +61,19 @@ namespace ProjetDevSys.Vue
                     do
                     {
                         destinationPath = Console.ReadLine();
-                        if (!AppConstants.VerifPath(destinationPath))
+                        if (!AppConstants.VerifPath(destinationPath) || destinationPath.Contains(sourcePath))
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("GestionTaskView22"));
                             Console.ResetColor(); 
                             Console.WriteLine(ResourceHelper.GetString("GestionTaskView16"));
                         }
-                    } while (!AppConstants.VerifPath(destinationPath));
+                    } while (!AppConstants.VerifPath(destinationPath) || destinationPath.Contains(sourcePath));
 
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView17"));
                     string backupType = Console.ReadLine().Trim().ToUpper(); 
 
-                    while (backupType != "A" && backupType != "B")
+                    while (!gestionTask.verifInputBackupType(backupType))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(ResourceHelper.GetString("GestionTaskView23"));
@@ -69,8 +82,7 @@ namespace ProjetDevSys.Vue
                         backupType = Console.ReadLine().Trim().ToUpper(); 
                     }
 
-                    bool created = gestionTask.CreateTask(fileName, sourcePath, destinationPath, backupType);
-                    return created ? ResourceHelper.GetString("GestionTaskView3") : ResourceHelper.GetString("GestionTaskView4");
+                    return gestionTask.CreateTask(fileName, sourcePath, destinationPath, backupType);
                     
                 case "2":
                     IEnumerable<Backup> BackupList = BackupFactory.GetAllBackups();
@@ -92,11 +104,10 @@ namespace ProjetDevSys.Vue
 
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView6"));
                     string deleteIdInput = Console.ReadLine();
-                    if (int.TryParse(deleteIdInput, out int deleteId) && deleteId >= 0 && deleteId < BackupList.Count())
+                    if (gestionTask.VerifyId(AppConstants.StringToInt(deleteIdInput)))
                     {
                         // Call the function to delete the task
-                        string result = gestionTask.DeleteTask(deleteId);
-                        return (result);
+                        return gestionTask.DeleteTask(AppConstants.StringToInt(deleteIdInput));
                     }
                     else
                     {
@@ -126,8 +137,10 @@ namespace ProjetDevSys.Vue
 
                     // Ask the user to select the backup to edit
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView8"));
-                    if (int.TryParse(Console.ReadLine(), out int id) && id >= 0 && id < BackupList2.Count())
+                    string editIdInput = Console.ReadLine();
+                    if (gestionTask.VerifyId(AppConstants.StringToInt(editIdInput)))
                     {
+                        int id = AppConstants.StringToInt(editIdInput);
                         Backup selectedBackup = BackupList2.ElementAt(id);
 
                         // Ask the user if he wants to modify the source

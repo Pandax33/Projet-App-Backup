@@ -148,10 +148,19 @@
     <value>4. Fichier de sauvegarde des backups</value>
   </data>
   <data name="ConfigViewText14" xml:space="preserve">
-    <value>5. Quitter</value>
+    <value>6. Quitter</value>
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Langue non valide. Veuillez entrer 'fr' pour Français ou 'en' pour Anglais.</value>
+  </data>
+  <data name="ConfigViewText16" xml:space="preserve">
+    <value>Entrez le type d'extension pour les logs (.json/.xml) :</value>
+  </data>
+  <data name="ConfigViewText17" xml:space="preserve">
+    <value>Extension non valide. Veuillez entrer '.json' ou '.xml'</value>
+  </data>
+  <data name="ConfigViewText18" xml:space="preserve">
+    <value>5. Extension des fichiers logs</value>
   </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Retour au menu principal</value>
@@ -300,6 +309,9 @@
   <data name="GestionTaskView9" xml:space="preserve">
     <value>Identifiant invalide.</value>
   </data>
+  <data name="GestionTaskViewText35" xml:space="preserve">
+    <value>Nom déjà existant. Veuillez entrer un autre nom.</value>
+  </data>
   <data name="InterfaceStrategy1" xml:space="preserve">
     <value>Le dossier source n'existe pas.</value>
   </data>
@@ -368,6 +380,9 @@
   </data>
   <data name="RunTaskView20" xml:space="preserve">
     <value>L'ID spécifié n'est pas valide. Veuillez entrer un ID numérique correspondant à une sauvegarde existante.</value>
+  </data>
+  <data name="RunTaskView21" xml:space="preserve">
+    <value>Aucune sauvegarde enregistrée</value>
   </data>
   <data name="RunTaskView3" xml:space="preserve">
     <value>Sauvegarde terminée.</value>

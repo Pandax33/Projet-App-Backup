@@ -47,7 +47,39 @@ namespace ProjetDevSys.Model
             _strategy.Save(Backup,LogRealTime);
             DateTime TimeFin = DateTime.Now;
             TimeSpan duration = TimeFin - TimeDebut;
-            Logger Log = new Logger(AppConstants.LogFilePath, Backup.Name, Backup.Source, Backup.Destination, 10, duration);
+            long size;
+            if (!(Directory.Exists(Backup.Source)) && File.Exists(Backup.Source)) size = new FileInfo(Backup.Source).Length;
+            else
+            {
+                DirectoryInfo sourceInfoBackup = new DirectoryInfo(Backup.Source);
+                size = CalculateFolder(sourceInfoBackup);
+            }
+
+            long CalculateFolder(DirectoryInfo directory)
+            {
+                long TotalSize = 0;
+                try
+                {
+                    // Count the number of files and calculate the total size
+                    foreach (FileInfo file in directory.GetFiles())
+                    {
+                        TotalSize += file.Length;
+                    }
+
+                    foreach (DirectoryInfo dir in directory.GetDirectories())
+                    {
+                        CalculateFolder(dir);
+                    }
+                    return TotalSize;
+                }
+                catch (System.Exception ex)
+                {
+                    // Manage the exception if the directory cannot be accessed
+                    return 0;
+                }
+            }
+
+            Logger Log = new Logger(AppConstants.LogFilePath, Backup.Name, Backup.Source, Backup.Destination, size, duration);
             Log.CreateLog();
         }
     }

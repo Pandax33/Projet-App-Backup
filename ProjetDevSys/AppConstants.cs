@@ -8,10 +8,11 @@ namespace ProjetDevSys
 {
     public static class AppConstants
     {
-        public static readonly string LogFilePath;
-        public static readonly string Langage;
-        public static readonly string LogFilePathRealTime;
-        public static readonly string JsonSave;
+        public static string LogFilePath;
+        public static string Langage;
+        public static string LogFilePathRealTime;
+        public static string JsonSave;
+        public static string ExtensionType;
 
         static AppConstants()
         {
@@ -21,12 +22,12 @@ namespace ProjetDevSys
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
             string filePath = Path.Combine(easySavePath, "appsettings.json");
-            if (!AppConstants.VerifJson(filePath))
+            if (!VerifJson(filePath))
             {
                 Config.CreateSetting();
             }
-            
-            
+            Config.UpdateLogFilePathIfNeeded();
+
             try
             {
                 // Read the file and deserialize the JSON to a dynamic type
@@ -40,6 +41,7 @@ namespace ProjetDevSys
                 Langage = config.Langage.Langage;
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
                 JsonSave = config.LoadSave.JsonPathSave;
+                ExtensionType = config.LogType.ExtensionType;
             }
             catch (Exception ex)
             {
@@ -69,5 +71,34 @@ namespace ProjetDevSys
                 return false;
             }
         }
+        public static int StringToInt(string id)
+        {
+            bool isSuccess = int.TryParse(id, out int numericId);
+            if (isSuccess)
+            {
+                return numericId;
+            }
+            return -1;
+        }
+
+        public static void reloadConfig()
+        {
+            string appsettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EasySaveGP5", "appsettings.json");
+            string json = File.ReadAllText(appsettings);
+
+            // Deserialize the JSON to a dynamic type
+            dynamic config = JsonConvert.DeserializeObject(json);
+
+            // Assign the values to the static fields
+            LogFilePath = config.Logging.JsonPath;
+            Langage = config.Langage.Langage;
+            LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
+            JsonSave = config.LoadSave.JsonPathSave;
+            ExtensionType = config.LogType.ExtensionType;
+            CultureInfo ci = new CultureInfo(Langage);
+            CultureInfo.CurrentUICulture = ci;
+
+        }
+
     }
 }
