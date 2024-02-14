@@ -30,6 +30,7 @@ namespace ProjetDevSysGraphical
             InitializeComponent();
         }
 
+        #region Enter
         private void textBoxName_TextChanged(object sender, TextChangedEventArgs e)
         {
             string name = textBoxName.Text;
@@ -57,18 +58,46 @@ namespace ProjetDevSysGraphical
         {
             SaveType = "B";
         }
+        #endregion
 
         private void ButtonValider_Click(object sender, RoutedEventArgs e)
         {
+            GestionTask gestionTask = new GestionTask();
+
             if (Name != null && FileSource != null && FileTarget != null && SaveType != null)
             {
-                GestionTask gestionTask = new GestionTask();
-                gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType);
+                gestionTask.VerifSource(FileSource);
+                gestionTask.VerifSource(FileTarget);
             }
+            if (gestionTask.VerifSource(FileSource) == true && gestionTask.VerifSource(FileTarget) == true)
+            {
+                gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType);
 
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+            }
+            if (gestionTask.VerifSource(FileSource) == false && gestionTask.VerifSource(FileTarget) == true)
+            {
+                PopUpWPF popUpWPF = new PopUpWPF("Le chemin source n'existe pas");
+                popUpWPF.Show();
+            }
+            if (gestionTask.VerifSource(FileTarget) == false && gestionTask.VerifSource(FileSource) == true)
+            {
+                PopUpWPF popUpWPF = new PopUpWPF("Le chemin cible n'existe pas");
+                popUpWPF.Show();
+            }
+            if (gestionTask.VerifSource(FileSource) == false && gestionTask.VerifSource(FileTarget) == false)
+            {
+                PopUpWPF popUpWPF = new PopUpWPF("Les chemins source et cible n'existent pas");
+                popUpWPF.Show();
+            }
+            Hide();
+        }
+
+        private void Window_Closing_Add(object sender, System.ComponentModel.CancelEventArgs e)
+        {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
-            Hide();
         }
     }
 }
