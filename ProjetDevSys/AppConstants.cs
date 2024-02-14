@@ -13,6 +13,7 @@ namespace ProjetDevSys
         public static string LogFilePathRealTime;
         public static string JsonSave;
         public static string ExtensionType;
+        public static List<string> ExtensionListCrypt;
 
         static AppConstants()
         {
@@ -42,6 +43,7 @@ namespace ProjetDevSys
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
                 JsonSave = config.LoadSave.JsonPathSave;
                 ExtensionType = config.LogType.ExtensionType;
+                ExtensionListCrypt = config.ExtensionListCrypt.ExtensionListCrypt;
             }
             catch (Exception ex)
             {

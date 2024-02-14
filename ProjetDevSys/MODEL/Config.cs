@@ -14,6 +14,7 @@ namespace ProjetDevSys.Model
         public static string JsonPathRealTime { get; set; }
         public static string JsonPathSave { get; set; }
         public static string ExtensionType { get; set; }
+        public static List<string> ExtensionListCrypt { get; set; }
 
         static Config()
         {
@@ -31,6 +32,7 @@ namespace ProjetDevSys.Model
             JsonPathSave = AppConstants.JsonSave ?? Path.Combine(easySaveFolder, "Backlist.json");
             Langage = AppConstants.Langage ?? GetLanguage();
             ExtensionType = AppConstants.ExtensionType ?? ".json";
+            ExtensionListCrypt = new List<string> {  };
 
             CreateFileWithExtensionIfNotExists(JsonPath);
             CreateFileWithExtensionIfNotExists(JsonPathRealTime);
@@ -78,6 +80,10 @@ namespace ProjetDevSys.Model
                     LogType = new
                     {
                         ExtensionType = ".json"
+                    },
+                    ExtensionListCrypt = new
+                    {
+                        ExtensionListCrypt
                     }
                 };
                 string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
@@ -100,7 +106,8 @@ namespace ProjetDevSys.Model
                 Langage = new { Langage },
                 RealTimeLogging = new { JsonPathRealTime },
                 LoadSave = new { JsonPathSave },
-                LogType = new { ExtensionType }
+                LogType = new { ExtensionType },
+                ExtensionListCrypt = new { ExtensionListCrypt }
             };
 
             // Sérialisation et écriture dans le fichier
