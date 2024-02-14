@@ -18,6 +18,7 @@ namespace ProjetDevSys.Vue
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText11"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText12"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText13"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText18"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText14"));
             Console.WriteLine(ResourceHelper.GetString("Form1"));
             string choice = Console.ReadLine();
@@ -38,7 +39,7 @@ namespace ProjetDevSys.Vue
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("ConfigViewText3"));
                             Console.ResetColor();
-                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText5")); // Ask a new one
+                            Console.WriteLine(ResourceHelper.GetString("ConfigViewText5"));
                         }
                     } while (!AppConstants.VerifJson(newPath));
                     return configViewModel.EditerJsonPath(newPath);
@@ -47,7 +48,7 @@ namespace ProjetDevSys.Vue
                     Console.WriteLine(ResourceHelper.GetString("ConfigViewText6"));
                     string newLangage = Console.ReadLine().Trim().ToLower(); // Normalise the entered language
 
-                    while (newLangage != "fr" && newLangage != "en")
+                    while (!configViewModel.verifInputLanguage(newLangage))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(ResourceHelper.GetString("ConfigViewText15"));
@@ -92,6 +93,22 @@ namespace ProjetDevSys.Vue
                     return configViewModel.EditerJsonPathSave(newSavePath);
 
                 case "5":
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText16"));
+                    string newExtension = Console.ReadLine().Trim().ToLower();
+
+                    while (!configViewModel.verifInputExtension(newExtension))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText17"));
+                        Console.ResetColor();
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText16"));
+                        newExtension = Console.ReadLine().Trim().ToLower();
+                    }
+
+                    // Once the language is correct, we can edit it
+                    return configViewModel.EditExtensionType(newExtension);
+
+                case "6":
                     return ResourceHelper.GetString("ConfigViewText2");
 
                 default:

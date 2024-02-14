@@ -148,10 +148,19 @@
     <value>4. Backup save file</value>
   </data>
   <data name="ConfigViewText14" xml:space="preserve">
-    <value>5. Exit</value>
+    <value>6. Exit</value>
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Invalid language. Please enter 'fr' for French or 'en' for English.</value>
+  </data>
+  <data name="ConfigViewText16" xml:space="preserve">
+    <value>Enter extension type for logs (.json/.xml) :</value>
+  </data>
+  <data name="ConfigViewText17" xml:space="preserve">
+    <value>Invalid extension. Please enter '.json' or '.xml'.</value>
+  </data>
+  <data name="ConfigViewText18" xml:space="preserve">
+    <value>5. Log extension type</value>
   </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Return to the main menu</value>
@@ -300,6 +309,9 @@
   <data name="GestionTaskView9" xml:space="preserve">
     <value>Invalid ID.</value>
   </data>
+  <data name="GestionTaskViewText35" xml:space="preserve">
+    <value>Name is already taken. Please enter another.</value>
+  </data>
   <data name="InterfaceStrategy1" xml:space="preserve">
     <value>The source folder does not exist.</value>
   </data>
@@ -368,6 +380,9 @@
   </data>
   <data name="RunTaskView20" xml:space="preserve">
     <value>The specified ID is not valid. Please enter a numeric ID corresponding to an existing backup.</value>
+  </data>
+  <data name="RunTaskView21" xml:space="preserve">
+    <value>You have no saved task</value>
   </data>
   <data name="RunTaskView3" xml:space="preserve">
     <value>Backup done.</value>

@@ -15,6 +15,7 @@ namespace ProjetDevSys.VueModel
             Config.Langage = Langage;
             Config.JsonPathRealTime = JsonPathRealTime;
             Config.JsonPathSave = JsonPathSave;
+
             Config.EditConfig();
 
 
@@ -32,7 +33,7 @@ namespace ProjetDevSys.VueModel
         {
             Config.Langage = Langage;
             Config.EditConfig();
-            return ResourceHelper.GetString("ConfigViewModel16");
+            return ResourceHelper.GetString("ConfigViewModel1");
         }
 
         public string EditerJsonPathRealTime(string JsonPathRealTime)
@@ -47,6 +48,37 @@ namespace ProjetDevSys.VueModel
             Config.JsonPathSave = JsonPathSave;
             Config.EditConfig();
             return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public string EditExtensionType(string ExtensionType)
+        {
+            Config.ExtensionType = ExtensionType;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public bool verifInputLanguage(string input)
+        {
+            if (input == "fr" || input == "en")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool verifInputExtension(string input)
+        {
+            if (input == ".json" || input == ".xml")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

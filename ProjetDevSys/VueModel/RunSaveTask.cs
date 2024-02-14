@@ -9,16 +9,16 @@ namespace ProjetDevSys.VueModel
 {
     public class RunSaveTask
     {
-        public bool RunTask(int id)
+        public string RunTask(int id)
         {
             Backup backup = BackupFactory.GetBackupByIndex(id);
             BackupJob backupJob = new BackupJob(backup);
             Console.WriteLine(backup.Name);
             backupJob.Save();
-            return true;
+            return ResourceHelper.GetString("RunTaskView3");
         }
 
-        public bool RunMultipleTask(int idDebut, int idFin)
+        public string RunMultipleTask(int idDebut, int idFin)
         {
             IEnumerable<Backup> allBackups = BackupFactory.GetBackupsInRange(idDebut,idFin);
             foreach (Backup backup in allBackups)
@@ -26,9 +26,9 @@ namespace ProjetDevSys.VueModel
                 BackupJob backupJob = new BackupJob(backup);
                 backupJob.Save();
             }
-            return true;
+            return ResourceHelper.GetString("RunTaskView6");
         }
-        public bool RunTaskMultiple(int[] tab)
+        public string RunTaskMultiple(int[] tab)
         {
             foreach(int id in tab)
             {
@@ -36,7 +36,54 @@ namespace ProjetDevSys.VueModel
                 BackupJob backupJob = new BackupJob(backup);
                 backupJob.Save();
             }
-            return true;
+            return ResourceHelper.GetString("RunTaskView11");
         }
+
+        public bool VerifyId(int id)
+        {
+
+            if (BackupFactory.GetBackupByIndex(id) != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool VerifyContinueId(string input)
+        {
+            string[] inputs = input.Split(',');
+            if(inputs.Length == 2)
+            {
+                int idDebut = AppConstants.StringToInt(inputs[0]);
+                int idFin = AppConstants.StringToInt(inputs[1]);
+                if (idDebut != -1 && idFin != -1)
+                {
+                    if (idDebut < idFin)
+                    {
+                        if(VerifyId(idDebut) && VerifyId(idFin))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
