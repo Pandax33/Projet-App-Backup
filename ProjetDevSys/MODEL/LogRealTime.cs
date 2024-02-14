@@ -59,15 +59,44 @@ namespace ProjetDevSys.MODEL
         }
         public void CreateLog()
         {
-            // Configure Newtonsoft.Json to format the JSON file with indentation
-            JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
-            string logEntry = JsonConvert.SerializeObject(this, settings);
-
-            // Add the log entry to the JSON file
-            using (StreamWriter streamWriter = File.AppendText(JsonPath))
+            if(AppConstants.ExtensionType == ".json")
             {
-                streamWriter.WriteLine(logEntry);
+                // Configure Newtonsoft.Json to format the JSON file with indentation
+                JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
+                string logEntry = JsonConvert.SerializeObject(this, settings);
+
+                // Add the log entry to the JSON file
+                string completeFilePath = JsonPath + AppConstants.ExtensionType;
+
+                using (StreamWriter streamWriter = File.AppendText(completeFilePath))
+                {
+                    streamWriter.WriteLine(logEntry);
+                }
             }
+            else if(AppConstants.ExtensionType == ".xml")
+            {
+                // Add the log entry to the XML file
+                string completeFilePath = JsonPath + AppConstants.ExtensionType;
+
+                using (StreamWriter streamWriter = File.AppendText(completeFilePath))
+                {
+                    streamWriter.WriteLine("<LogEntry>");
+                    streamWriter.WriteLine("  <BackupName>" + BackupName + "</BackupName>");
+                    streamWriter.WriteLine("  <Timestamp>" + Timestamp + "</Timestamp>");
+                    streamWriter.WriteLine("  <State>" + State + "</State>");
+                    streamWriter.WriteLine("  <TotalFiles>" + TotalFiles + "</TotalFiles>");
+                    streamWriter.WriteLine("  <TotalSize>" + TotalSize + "</TotalSize>");
+                    streamWriter.WriteLine("  <Progress>" + Progress + "</Progress>");
+                    streamWriter.WriteLine("  <FilesRemaining>" + FilesRemaining + "</FilesRemaining>");
+                    streamWriter.WriteLine("  <SizeRemaining>" + SizeRemaining + "</SizeRemaining>");
+                    streamWriter.WriteLine("  <CurrentSourcePath>" + CurrentSourcePath + "</CurrentSourcePath>");
+                    streamWriter.WriteLine("  <CurrentTargetPath>" + CurrentTargetPath + "</CurrentTargetPath>");
+                    streamWriter.WriteLine("  <CurrentFile>" + CurrentFile + "</CurrentFile>");
+                    streamWriter.WriteLine("  <CurrentFileSize>" + CurrentFileSize + "</CurrentFileSize>");
+                    streamWriter.WriteLine("</LogEntry>");
+                }
+            }   
+            
         }
 
         public void CalculateFolderSizeAndFileCount(string folderPath)
