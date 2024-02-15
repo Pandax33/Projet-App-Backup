@@ -2,8 +2,12 @@
 using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO.Compression;
 
 namespace ProjetDevSys.Model
 {
@@ -14,23 +18,38 @@ namespace ProjetDevSys.Model
         public static string JsonPathRealTime { get; set; }
         public static string JsonPathSave { get; set; }
         public static string ExtensionType { get; set; }
+        public static List<string> ExtensionListCrypt { get; set; }
+        public static string KeyCrypt { get; set; }
+        public static string CryptPath { get; set; }
 
         static Config()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySaveFolder = Path.Combine(appDataPath, "EasySaveGP5");
+            string cryptoSoftZIP = Path.Combine(easySaveFolder, "CryptoSoftGP5");
+            string cryptoSoftPath = Path.Combine(cryptoSoftZIP, "CryptoSoftGP5-main");
+            string url = "https://github.com/alexandrethurel/CryptoSoftGP5/archive/refs/heads/main.zip";
+            string downloadPath = Path.Combine(easySaveFolder, "CryptoSoftGP5.zip");
 
             // Assurez-vous que le dossier EasySave existe
             if (!Directory.Exists(easySaveFolder))
             {
                 Directory.CreateDirectory(easySaveFolder);
             }
+            if (!Directory.Exists(cryptoSoftZIP))
+            {
+                DownloadCryptoSoftIfNeeded(easySaveFolder, cryptoSoftZIP).Wait();
+            }
+
 
             JsonPath = AppConstants.LogFilePath ?? Path.Combine(easySaveFolder, $"Log_{DateTime.Now:yyyyMMdd}");
             JsonPathRealTime = AppConstants.LogFilePathRealTime ?? Path.Combine(easySaveFolder, "LogRealTime");
             JsonPathSave = AppConstants.JsonSave ?? Path.Combine(easySaveFolder, "Backlist.json");
             Langage = AppConstants.Langage ?? GetLanguage();
             ExtensionType = AppConstants.ExtensionType ?? ".json";
+            ExtensionListCrypt = new List<string> {  };
+            CryptPath = AppConstants.CryptPath ?? Path.Combine(cryptoSoftPath, "CryptoSoft.exe");
+            KeyCrypt = AppConstants.KeyCrypt ?? generateKey();
 
             CreateFileWithExtensionIfNotExists(JsonPath);
             CreateFileWithExtensionIfNotExists(JsonPathRealTime);
@@ -78,6 +97,18 @@ namespace ProjetDevSys.Model
                     LogType = new
                     {
                         ExtensionType = ".json"
+                    },
+                    ExtensionListCrypt = new
+                    {
+                        ExtensionListCrypt
+                    },
+                    CryptPath = new
+                    {
+                        CryptPath
+                    },
+                    KeyCrypt = new
+                    {
+                        KeyCrypt
                     }
                 };
                 string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
@@ -100,7 +131,10 @@ namespace ProjetDevSys.Model
                 Langage = new { Langage },
                 RealTimeLogging = new { JsonPathRealTime },
                 LoadSave = new { JsonPathSave },
-                LogType = new { ExtensionType }
+                LogType = new { ExtensionType },
+                ExtensionListCrypt = new { ExtensionListCrypt },
+                CryptPath = new { CryptPath },
+                KeyCrypt = new { KeyCrypt }
             };
 
             // Sérialisation et écriture dans le fichier
@@ -178,6 +212,67 @@ namespace ProjetDevSys.Model
             catch (Exception ex)
             {
                 
+            }
+        }
+
+        public static string generateKey()
+        { // Génère un nombre aléatoire de 64 bits
+            byte[] randomNumber = new byte[8]; // 64 bits = 8 octets
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+            }
+
+            long key = BitConverter.ToInt64(randomNumber, 0);
+
+            string keyString = BitConverter.ToString(randomNumber).Replace("-", string.Empty);
+
+            if (keyString.Length > 16)
+            {
+                keyString = keyString.Substring(0, 16);
+            }
+            else if (keyString.Length < 16)
+            {
+                keyString = keyString.PadRight(16, '0');
+            }
+            return keyString;
+        }
+
+        public static async Task DownloadCryptoSoftIfNeeded(string easySaveFolder, string cryptoSoftPath)
+        {
+            string url = "https://github.com/alexandrethurel/CryptoSoftGP5/archive/refs/heads/main.zip";
+            string downloadPath = Path.Combine(easySaveFolder, "CryptoSoftGP5.zip");
+
+            // Vérifie si le dossier CryptoSoft n'existe pas
+            if (!Directory.Exists(cryptoSoftPath))
+            {
+                Console.WriteLine($"Le dossier {cryptoSoftPath} n'existe pas. Téléchargement en cours...");
+
+                try
+                {
+                    // Télécharge le fichier
+                    using (HttpClient client = new HttpClient())
+                    {
+                        byte[] fileBytes = await client.GetByteArrayAsync(url);
+                        await File.WriteAllBytesAsync(downloadPath, fileBytes);
+                    }
+
+                    Console.WriteLine("Téléchargement terminé. Extraction en cours...");
+
+                    // Extrait le fichier téléchargé
+                    string extractPath = Path.Combine(easySaveFolder, "CryptoSoftGP5");
+                    ZipFile.ExtractToDirectory(downloadPath, extractPath);
+
+                    Console.WriteLine($"Extraction terminée. Fichiers disponibles dans {extractPath}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Une erreur est survenue : {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Le dossier {cryptoSoftPath} existe déjà.");
             }
         }
 

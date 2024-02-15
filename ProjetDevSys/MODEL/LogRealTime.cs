@@ -23,6 +23,8 @@ namespace ProjetDevSys.MODEL
         public int CurrentFile {  get; set; }
         public long CurrentFileSize { get; set; }
 
+        public string TimeCrypt { get; set; }
+
         public LogRealTime(string jsonPath) : base(jsonPath)
         {
             // Initialize the log with default values
@@ -38,6 +40,7 @@ namespace ProjetDevSys.MODEL
             CurrentTargetPath = "";
             CurrentFile = 0;
             CurrentFileSize = 0;
+            TimeCrypt = "";
         }
 
         public void UpdateCurrentFileAndSize(long fileSize)
@@ -93,6 +96,7 @@ namespace ProjetDevSys.MODEL
                     streamWriter.WriteLine("  <CurrentTargetPath>" + CurrentTargetPath + "</CurrentTargetPath>");
                     streamWriter.WriteLine("  <CurrentFile>" + CurrentFile + "</CurrentFile>");
                     streamWriter.WriteLine("  <CurrentFileSize>" + CurrentFileSize + "</CurrentFileSize>");
+                    streamWriter.WriteLine("  <TimeCrypt>" + TimeCrypt + "</TimeCrypt>");
                     streamWriter.WriteLine("</LogEntry>");
                 }
             }   

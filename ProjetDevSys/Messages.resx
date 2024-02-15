@@ -148,7 +148,7 @@
     <value>4. Backup save file</value>
   </data>
   <data name="ConfigViewText14" xml:space="preserve">
-    <value>6. Exit</value>
+    <value>8. Exit</value>
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Invalid language. Please enter 'fr' for French or 'en' for English.</value>
@@ -162,8 +162,26 @@
   <data name="ConfigViewText18" xml:space="preserve">
     <value>5. Log extension type</value>
   </data>
+  <data name="ConfigViewText19" xml:space="preserve">
+    <value>Please enter an extension type</value>
+  </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Return to the main menu</value>
+  </data>
+  <data name="ConfigViewText20" xml:space="preserve">
+    <value>Invalid extension</value>
+  </data>
+  <data name="ConfigViewText21" xml:space="preserve">
+    <value>Please enter the path to cryptosoft</value>
+  </data>
+  <data name="ConfigViewText22" xml:space="preserve">
+    <value>Invalid path</value>
+  </data>
+  <data name="ConfigViewText23" xml:space="preserve">
+    <value>6. Add an extension to encrypt</value>
+  </data>
+  <data name="ConfigViewText24" xml:space="preserve">
+    <value>7. Edit cryptosoft path</value>
   </data>
   <data name="ConfigViewText3" xml:space="preserve">
     <value>Invalid or non-existent JSON file.</value>

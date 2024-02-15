@@ -22,6 +22,7 @@ namespace ProjetDevSysGraphical
         private List<Button> deleteButtonList = new List<Button>();
         private List<Button> editButtonList = new List<Button>();
         private List<string> buttonNameList = new List<string>();
+        private List<int> idToLaunch = new List<int>();
 
         public MainWindow()
         {
@@ -32,12 +33,12 @@ namespace ProjetDevSysGraphical
 
         public void GenerateGrid()
         {
+            listView.Items.Clear();
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
-            dataGrid.Items.Clear();
             foreach(var backup in backups) // backup type = Backup
             {
-                dataGrid.Items.Add(new
+                listView.Items.Add(new
                 {
                     Propriete1 = backup.Name,
                     Propriete2 = backup.Source,
@@ -46,12 +47,14 @@ namespace ProjetDevSysGraphical
                 });
                 SetButtonName(backup.Name);
             }
+            ButtonInstance(stackPanel);
         }
 
         public void ButtonInstance(StackPanel container)
         {
-            int[] index = new int[dataGrid.Items.Count];
-            for (int i = 0; i < dataGrid.Items.Count; i++)
+            container.Children.Clear();
+            int[] index = new int[listView.Items.Count];
+            for (int i = 0; i < listView.Items.Count; i++)
             {
                 index[i] = i;
 
@@ -92,10 +95,10 @@ namespace ProjetDevSysGraphical
 
                 buttonDelete.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "Delete";
                 buttonEdit.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "Edit";
+                checkBox.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "CheckBox";
                 // Add the buttons to the list
                 deleteButtonList.Add(buttonDelete);
                 editButtonList.Add(buttonEdit);
-
             }
         }
 
@@ -107,33 +110,44 @@ namespace ProjetDevSysGraphical
         #region ButtonClicks
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
+            CheckBox clicked = sender as CheckBox;
+            if (clicked != null)
+            {
+                // Extract the index from the button's name
+                int index = int.Parse(clicked.Name.Split('_')[1]);
 
+                if (clicked.IsChecked == true)
+                {
+                    // Add the index to the list if it is checked
+                    idToLaunch.Add(index);
+                }
+                else
+                {
+                    // Delete the index from the list if it is unchecked
+                    idToLaunch.Remove(index);
+                }
+            }
         }
+
 
         public void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             // Add a new task
             AddTask addTask = new AddTask();
-            addTask.Show();
-            Hide();
+            addTask.ShowDialog();
         }
 
         public void ButtonlaunchAllTasks_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             // Launch all tasks
-            foreach (ItemCollection item in dataGrid.Items)
-            {
-                for (int i = 0; i < item.Count; i++)
-                {
-                    runSaveTask.RunTask(i);
-                }
-            }
+            runSaveTask.RunMultipleTask(0, listView.Items.Count);
         }
 
         public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
         {
-            // Launch selected tasks
+            RunSaveTask runSaveTask = new RunSaveTask();
+            runSaveTask.RunTaskMultiple(idToLaunch.ToArray());
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
@@ -150,8 +164,7 @@ namespace ProjetDevSysGraphical
                 // Call DeleteTask with the extracted index
                 gestionTask.DeleteTask(index);
                 PopUpWPF popUpWPF = new PopUpWPF(buttonName + " " + "Task deleted successfully");
-                popUpWPF.Show();
-                Hide();
+                popUpWPF.ShowDialog();
             }
         }
 
@@ -168,8 +181,7 @@ namespace ProjetDevSysGraphical
 
                 // Call EditTask view
                 EditTask editTask = new EditTask(index, buttonName, null, null, null);
-                editTask.Show();
-                Hide();
+                editTask.ShowDialog();
             }
         }
         #endregion

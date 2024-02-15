@@ -11,6 +11,7 @@ namespace ProjetDevSys.VueModel
     {
         public IEnumerable<Backup> GetAllBackupsModel()
         {
+            BackupFactory.LoadBackupsFromJson();
             return BackupFactory.GetAllBackups();
         }
     }

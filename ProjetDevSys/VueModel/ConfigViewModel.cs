@@ -57,6 +57,20 @@ namespace ProjetDevSys.VueModel
             return ResourceHelper.GetString("ConfigViewModel1");
         }
 
+        public string EditExtensionListCrypt(string ExtensionListCrypt)
+        {
+            Config.ExtensionListCrypt.Add(ExtensionListCrypt);
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public string EditCryptPath(string CryptPath)
+        {
+            Config.CryptPath = CryptPath;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
         public bool verifInputLanguage(string input)
         {
             if (input == "fr" || input == "en")
@@ -80,5 +94,33 @@ namespace ProjetDevSys.VueModel
                 return false;
             }
         }
+
+        public bool verifCryptPath(string input)
+        {
+            bool fileExists = File.Exists(input);
+
+            bool isExe = Path.GetExtension(input).Equals(".exe", StringComparison.OrdinalIgnoreCase);
+
+            return fileExists && isExe;
+        }
+
+        public bool IsExtensionValid(string extension)
+        {
+            if (!extension.StartsWith(".") || extension.Length < 2)
+            {
+                return false;
+            }
+
+            for (int i = 1; i < extension.Length; i++)
+            {
+                if (!char.IsLetter(extension[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
 }
