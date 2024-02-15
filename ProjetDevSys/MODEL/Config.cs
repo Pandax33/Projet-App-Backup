@@ -36,10 +36,7 @@ namespace ProjetDevSys.Model
             {
                 Directory.CreateDirectory(easySaveFolder);
             }
-            if (!Directory.Exists(cryptoSoftZIP))
-            {
-                DownloadCryptoSoftIfNeeded(easySaveFolder, cryptoSoftZIP).Wait();
-            }
+            
 
 
             JsonPath = AppConstants.LogFilePath ?? Path.Combine(easySaveFolder, $"Log_{DateTime.Now:yyyyMMdd}");
@@ -68,10 +65,15 @@ namespace ProjetDevSys.Model
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
             string configFilePath = Path.Combine(easySavePath, "appsettings.json");
+            string cryptoSoftZIP = Path.Combine(easySavePath, "CryptoSoftGP5");
 
             if (!Directory.Exists(easySavePath))
             {
                 Directory.CreateDirectory(easySavePath);
+            }
+            if (!Directory.Exists(cryptoSoftZIP))
+            {
+                Task.Run(async () => await DownloadCryptoSoftIfNeeded(easySavePath, cryptoSoftZIP)).Wait();
             }
 
             if (!File.Exists(configFilePath))
@@ -274,6 +276,59 @@ namespace ProjetDevSys.Model
             {
                 Console.WriteLine($"Le dossier {cryptoSoftPath} existe déjà.");
             }
+        }
+
+        public static void ResetSetting()
+        {
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
+            string configFilePath = Path.Combine(easySavePath, "appsettings.json");
+            string cryptoSoftZIP = Path.Combine(easySavePath, "CryptoSoftGP5");
+
+            if (!Directory.Exists(easySavePath))
+            {
+                Directory.CreateDirectory(easySavePath);
+            }
+            
+            var defaultConfig = new
+            {
+                Logging = new
+                {
+                    JsonPath
+                },
+                Langage = new
+                {
+                    Langage = CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US"
+                },
+                RealTimeLogging = new
+                {
+                    JsonPathRealTime
+                },
+                LoadSave = new
+                {
+                    JsonPathSave
+                },
+                LogType = new
+                {
+                    ExtensionType = ".json"
+                },
+                ExtensionListCrypt = new
+                {
+                    ExtensionListCrypt
+                },
+                CryptPath = new
+                {
+                    CryptPath
+                },
+                KeyCrypt = new
+                {
+                    KeyCrypt
+                }
+            };
+            string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(configFilePath, json);
+            AppConstants.reloadConfig();
+            
         }
 
     }

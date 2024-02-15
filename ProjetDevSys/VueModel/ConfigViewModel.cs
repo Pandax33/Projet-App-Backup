@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using ProjetDevSys.Model;
@@ -120,6 +121,12 @@ namespace ProjetDevSys.VueModel
             }
 
             return true;
+        }
+
+        public string resetConfig()
+        {
+            Config.ResetSetting();
+            return ResourceHelper.GetString("ConfigViewModel25");
         }
 
     }

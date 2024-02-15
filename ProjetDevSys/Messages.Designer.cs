@@ -259,6 +259,15 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The configuration has been reset..
+        /// </summary>
+        internal static string ConfigViewText25 {
+            get {
+                return ResourceManager.GetString("ConfigViewText25", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Invalid or non-existent JSON file..
         /// </summary>
         internal static string ConfigViewText3 {

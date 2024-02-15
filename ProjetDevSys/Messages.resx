@@ -183,6 +183,9 @@
   <data name="ConfigViewText24" xml:space="preserve">
     <value>7. Edit cryptosoft path</value>
   </data>
+  <data name="ConfigViewText25" xml:space="preserve">
+    <value>The configuration has been reset.</value>
+  </data>
   <data name="ConfigViewText3" xml:space="preserve">
     <value>Invalid or non-existent JSON file.</value>
   </data>
