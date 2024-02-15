@@ -14,6 +14,8 @@ namespace ProjetDevSys
         public static string JsonSave;
         public static string ExtensionType;
         public static List<string> ExtensionListCrypt;
+        public static string CryptPath;
+        public static string KeyCrypt;
 
         static AppConstants()
         {
@@ -43,7 +45,9 @@ namespace ProjetDevSys
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
                 JsonSave = config.LoadSave.JsonPathSave;
                 ExtensionType = config.LogType.ExtensionType;
-                ExtensionListCrypt = config.ExtensionListCrypt.ExtensionListCrypt;
+                ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
+                CryptPath = config.CryptPath.CryptPath;
+                KeyCrypt = config.KeyCrypt.KeyCrypt;
             }
             catch (Exception ex)
             {

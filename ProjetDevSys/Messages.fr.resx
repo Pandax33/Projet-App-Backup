@@ -148,7 +148,7 @@
     <value>4. Fichier de sauvegarde des backups</value>
   </data>
   <data name="ConfigViewText14" xml:space="preserve">
-    <value>6. Quitter</value>
+    <value>8. Quitter</value>
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Langue non valide. Veuillez entrer 'fr' pour Français ou 'en' pour Anglais.</value>
@@ -162,8 +162,26 @@
   <data name="ConfigViewText18" xml:space="preserve">
     <value>5. Extension des fichiers logs</value>
   </data>
+  <data name="ConfigViewText19" xml:space="preserve">
+    <value>Veuillez entrer un type d'extension</value>
+  </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Retour au menu principal</value>
+  </data>
+  <data name="ConfigViewText20" xml:space="preserve">
+    <value>Extension invalide</value>
+  </data>
+  <data name="ConfigViewText21" xml:space="preserve">
+    <value>Veuillez entrer le chemin de cryptosoft</value>
+  </data>
+  <data name="ConfigViewText22" xml:space="preserve">
+    <value>Chemin invalide</value>
+  </data>
+  <data name="ConfigViewText23" xml:space="preserve">
+    <value>6. Ajouter une extension a crypter</value>
+  </data>
+  <data name="ConfigViewText24" xml:space="preserve">
+    <value>7. Editer le chemin de cryptosoft</value>
   </data>
   <data name="ConfigViewText3" xml:space="preserve">
     <value>Fichier JSON non valide ou inexistant.</value>
