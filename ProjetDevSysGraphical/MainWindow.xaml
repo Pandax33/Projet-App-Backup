@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="EasySave" MinHeight="400" Height="450" MaxHeight="800" MinWidth="750" Width="800" MaxWidth="1200">
     <Grid>
+        
         <TextBlock x:Name="textBlockTitle" HorizontalAlignment="Center" TextWrapping="Wrap" Text="EasySave" VerticalAlignment="Top" Height="50" Width="427" FontSize="30" Margin="0,10,0,0"/>
         <Button x:Name="button" Content="Ajouter une tâche" HorizontalAlignment="Right" VerticalAlignment="Top" Width="135" Click="ButtonAdd_Click" Height="50" Margin="0,20,30,0"/>
         <Button x:Name="launchSelectedTasks" Content="Lancer les tâches selectionnées" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200" Click="ButtonlaunchSelectedTasks_Click" Height="50" Margin="20,0,0,20" Grid.Row="1"/>
@@ -28,6 +29,16 @@
         <StackPanel x:Name="stackPanel" HorizontalAlignment="Right" VerticalAlignment="Top" Width="186" Margin="0,80,10,0">
             
         </StackPanel>
+        <Button Name="Settings" Content="&#x2699;" Margin="20,15,724,369" Click="Settings_Click">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
     </Grid>
 </Window>
