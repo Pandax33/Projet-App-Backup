@@ -1,7 +1,11 @@
 ﻿using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Newtonsoft.Json;
+using ProjetDevSys;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +34,19 @@ namespace ProjetDevSysGraphical
                 return openFileDialog.FileName;
             }
             return "";
+        }
+        public static string GetLanguage()
+        {
+            string langage = ProjetDevSys.AppConstants.Langage.Substring(0,2); //take only the primary part
+            switch (langage)
+            {
+                case "en":
+                    return "English";
+                case "fr":
+                    return "Francais";
+                default:
+                    return null;
+            }
         }
     }
 }

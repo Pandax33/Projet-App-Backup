@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
-using ProjetDevSys;
+using ProjetDevSys.Model;
 
 namespace ProjetDevSysGraphical
 {
@@ -25,8 +25,20 @@ namespace ProjetDevSysGraphical
     {
         public Config()
         {
-            //pathSaveBackupEntry.Text = ProjetDevSys.AppConstants.JsonSave;
             InitializeComponent();
+            //paths
+            pathSaveBackupEntry.Text = ProjetDevSys.AppConstants.JsonSave;
+            logDailyEntry.Text = ProjetDevSys.AppConstants.LogFilePath;
+            logRTEntry.Text = ProjetDevSys.AppConstants.LogFilePathRealTime;
+            //extensions
+            string extension = ProjetDevSys.AppConstants.ExtensionType;
+            logExtensionSelector.SelectedItem = extension;
+            logExtensionSelector.Text = extension;
+            //language
+            string language = AppConstants.GetLanguage();
+            languageSelector.SelectedItem = Language;
+            languageSelector.Text = language;
+
         }
 
         private void pathLogDailyExplorer_Click(object sender, RoutedEventArgs e)
@@ -36,7 +48,7 @@ namespace ProjetDevSysGraphical
 
         private void pathLogRTExplorer_Click(object sender, RoutedEventArgs e)
         {
-            logRTEntry.Text = AppConstants.OpenFolderDialog();
+            logRTEntry.Text =   AppConstants.OpenFolderDialog();
         }
 
         private void pathSaveBackupExplorer_Click(object sender, RoutedEventArgs e)

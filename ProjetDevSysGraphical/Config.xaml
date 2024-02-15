@@ -51,8 +51,8 @@
 
                 <Label Name="logExtensionlabel" Content="Select: " Grid.Row="3" Grid.Column="1"/>
                 <ComboBox Name="logExtensionSelector"  IsEditable="True" Grid.Row="3" Grid.Column="2" PreviewMouseDown="logExtensionSelector_GotFocus" GotFocus="logExtensionSelector_GotFocus">
-                    <ComboBoxItem>json</ComboBoxItem>
-                    <ComboBoxItem>xml</ComboBoxItem>
+                    <ComboBoxItem>.json</ComboBoxItem>
+                    <ComboBoxItem>.xml</ComboBoxItem>
                 </ComboBox>
 
             </Grid>
