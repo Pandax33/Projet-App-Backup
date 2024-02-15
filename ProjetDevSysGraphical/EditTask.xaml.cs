@@ -78,34 +78,28 @@ namespace ProjetDevSysGraphical
 
                 if (gestionTask.VerifSource(FileSource) == true && gestionTask.VerifSource(FileTarget) == true)
                 {
-                    gestionTask.EditTask(Id, FileSource, FileTarget, SaveType);
+                    gestionTask.EditTask(Id, FileTarget, FileSource, SaveType);
 
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
+                    MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+                    mainWindow.GenerateGrid();
                 }
                 if (gestionTask.VerifSource(FileSource) == false && gestionTask.VerifSource(FileTarget) == true)
                 {
                     PopUpWPF popUpWPF = new PopUpWPF("Le chemin source n'existe pas");
-                    popUpWPF.Show();
+                    popUpWPF.ShowDialog();
                 }
                 if (gestionTask.VerifSource(FileTarget) == false && gestionTask.VerifSource(FileSource) == true)
                 {
                     PopUpWPF popUpWPF = new PopUpWPF("Le chemin cible n'existe pas");
-                    popUpWPF.Show();
+                    popUpWPF.ShowDialog();
                 }
                 if (gestionTask.VerifSource(FileSource) == false && gestionTask.VerifSource(FileTarget) == false)
                 {
                     PopUpWPF popUpWPF = new PopUpWPF("Les chemins source et cible n'existent pas");
-                    popUpWPF.Show();
+                    popUpWPF.ShowDialog();
                 }
             }
             Hide();
-        }
-
-        private void Window_Closing_Edit(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
         }
     }
 }

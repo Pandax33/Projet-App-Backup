@@ -46,10 +46,12 @@ namespace ProjetDevSysGraphical
                 });
                 SetButtonName(backup.Name);
             }
+            ButtonInstance(stackPanel);
         }
 
         public void ButtonInstance(StackPanel container)
         {
+            container.Children.Clear();
             int[] index = new int[dataGrid.Items.Count];
             for (int i = 0; i < dataGrid.Items.Count; i++)
             {
@@ -96,7 +98,6 @@ namespace ProjetDevSysGraphical
                 // Add the buttons to the list
                 deleteButtonList.Add(buttonDelete);
                 editButtonList.Add(buttonEdit);
-
             }
         }
 
@@ -132,8 +133,7 @@ namespace ProjetDevSysGraphical
         {
             // Add a new task
             AddTask addTask = new AddTask();
-            addTask.Show();
-            Hide();
+            addTask.ShowDialog();
         }
 
         public void ButtonlaunchAllTasks_Click(object sender, RoutedEventArgs e)
@@ -163,8 +163,7 @@ namespace ProjetDevSysGraphical
                 // Call DeleteTask with the extracted index
                 gestionTask.DeleteTask(index);
                 PopUpWPF popUpWPF = new PopUpWPF(buttonName + " " + "Task deleted successfully");
-                popUpWPF.Show();
-                Hide();
+                popUpWPF.ShowDialog();
             }
         }
 
@@ -181,8 +180,7 @@ namespace ProjetDevSysGraphical
 
                 // Call EditTask view
                 EditTask editTask = new EditTask(index, buttonName, null, null, null);
-                editTask.Show();
-                Hide();
+                editTask.ShowDialog();
             }
         }
         #endregion
