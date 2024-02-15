@@ -113,14 +113,6 @@ namespace ProjetDevSys.Vue
                 case "6":
                     Console.WriteLine(ResourceHelper.GetString("ConfigViewText19"));
                     string newExtensionCrypt = Console.ReadLine().Trim().ToLower();
-                    while (!configViewModel.IsExtensionValid(newExtensionCrypt))
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText20"));
-                        Console.ResetColor();
-                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText19"));
-                        newExtension = Console.ReadLine().Trim().ToLower();
-                    }
 
                     // Once the language is correct, we can edit it
                     return configViewModel.EditExtensionListCrypt(newExtensionCrypt);
@@ -129,7 +121,7 @@ namespace ProjetDevSys.Vue
                     Console.WriteLine(ResourceHelper.GetString("ConfigViewText21"));
                     string newCryptPath = Console.ReadLine().Trim().ToLower();
 
-                    while (!configViewModel.verifInputExtension(newCryptPath))
+                    while (!configViewModel.verifCryptPath(newCryptPath))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(ResourceHelper.GetString("ConfigViewText22"));

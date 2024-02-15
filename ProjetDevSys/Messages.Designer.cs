@@ -151,7 +151,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 6. Exit.
+        ///   Recherche une chaîne localisée semblable à 8. Exit.
         /// </summary>
         internal static string ConfigViewText14 {
             get {
