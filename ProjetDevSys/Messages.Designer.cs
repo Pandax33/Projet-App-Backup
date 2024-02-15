@@ -718,6 +718,15 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Task interrupted : blocking process detected.
+        /// </summary>
+        internal static string InterfaceStrategy2 {
+            get {
+                return ResourceManager.GetString("InterfaceStrategy2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à The file does not exist..
         /// </summary>
         internal static string JsonManager1 {
@@ -921,6 +930,15 @@ namespace ProjetDevSys {
         internal static string RunTaskView21 {
             get {
                 return ResourceManager.GetString("RunTaskView21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Task blocked : blocking process interrupted.
+        /// </summary>
+        internal static string RunTaskView22 {
+            get {
+                return ResourceManager.GetString("RunTaskView22", resourceCulture);
             }
         }
         

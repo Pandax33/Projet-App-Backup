@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using ProjetDevSys.Model;
+using System.Diagnostics;
 
 namespace ProjetDevSys
 {
@@ -16,6 +17,8 @@ namespace ProjetDevSys
         public static List<string> ExtensionListCrypt;
         public static string CryptPath;
         public static string KeyCrypt;
+        
+        public static readonly string BlockerProcess;
 
         static AppConstants()
         {
@@ -48,6 +51,7 @@ namespace ProjetDevSys
                 ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
                 CryptPath = config.CryptPath.CryptPath;
                 KeyCrypt = config.KeyCrypt.KeyCrypt;
+                BlockerProcess = config.BlockerProcess.BlockerProcess;
             }
             catch (Exception ex)
             {
@@ -104,6 +108,12 @@ namespace ProjetDevSys
             CultureInfo ci = new CultureInfo(Langage);
             CultureInfo.CurrentUICulture = ci;
 
+        }
+
+        public static bool RunningBlockerProcess()
+        {
+            if (BlockerProcess == null) return false;
+            return Process.GetProcessesByName(BlockerProcess).Any();
         }
 
     }

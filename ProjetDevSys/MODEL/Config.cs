@@ -17,11 +17,13 @@ namespace ProjetDevSys.Model
         public static string Langage { get; set; }
         public static string JsonPathRealTime { get; set; }
         public static string JsonPathSave { get; set; }
+
         public static string ExtensionType { get; set; }
         public static List<string> ExtensionListCrypt { get; set; }
         public static string KeyCrypt { get; set; }
         public static string CryptPath { get; set; }
 
+        public static string BlockerProcess { get; set; }
         static Config()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -111,6 +113,10 @@ namespace ProjetDevSys.Model
                     KeyCrypt = new
                     {
                         KeyCrypt
+                    },
+                    BlockerProcess = new
+                    {
+                        BlockerProcess
                     }
                 };
                 string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
@@ -136,7 +142,8 @@ namespace ProjetDevSys.Model
                 LogType = new { ExtensionType },
                 ExtensionListCrypt = new { ExtensionListCrypt },
                 CryptPath = new { CryptPath },
-                KeyCrypt = new { KeyCrypt }
+                KeyCrypt = new { KeyCrypt },
+                BlockerProcess = new { BlockerProcess }
             };
 
             // Sérialisation et écriture dans le fichier
