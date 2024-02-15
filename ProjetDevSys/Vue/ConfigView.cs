@@ -19,6 +19,8 @@ namespace ProjetDevSys.Vue
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText12"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText13"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText18"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText23"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText24"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText14"));
             Console.WriteLine(ResourceHelper.GetString("Form1"));
             string choice = Console.ReadLine();
@@ -109,6 +111,29 @@ namespace ProjetDevSys.Vue
                     return configViewModel.EditExtensionType(newExtension);
 
                 case "6":
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText19"));
+                    string newExtensionCrypt = Console.ReadLine().Trim().ToLower();
+
+                    // Once the language is correct, we can edit it
+                    return configViewModel.EditExtensionListCrypt(newExtensionCrypt);
+
+                case "7":
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText21"));
+                    string newCryptPath = Console.ReadLine().Trim().ToLower();
+
+                    while (!configViewModel.verifCryptPath(newCryptPath))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText22"));
+                        Console.ResetColor();
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText21"));
+                        newExtension = Console.ReadLine().Trim().ToLower();
+                    }
+
+                    // Once the language is correct, we can edit it
+                    return configViewModel.EditCryptPath(newCryptPath);
+
+                case "8":
                     return ResourceHelper.GetString("ConfigViewText2");
 
                 default:

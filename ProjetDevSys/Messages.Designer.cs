@@ -151,7 +151,7 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à 6. Exit.
+        ///   Recherche une chaîne localisée semblable à 8. Exit.
         /// </summary>
         internal static string ConfigViewText14 {
             get {
@@ -196,11 +196,65 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter an extension type.
+        /// </summary>
+        internal static string ConfigViewText19 {
+            get {
+                return ResourceManager.GetString("ConfigViewText19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Return to the main menu.
         /// </summary>
         internal static string ConfigViewText2 {
             get {
                 return ResourceManager.GetString("ConfigViewText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid extension.
+        /// </summary>
+        internal static string ConfigViewText20 {
+            get {
+                return ResourceManager.GetString("ConfigViewText20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter the path to cryptosoft.
+        /// </summary>
+        internal static string ConfigViewText21 {
+            get {
+                return ResourceManager.GetString("ConfigViewText21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Invalid path.
+        /// </summary>
+        internal static string ConfigViewText22 {
+            get {
+                return ResourceManager.GetString("ConfigViewText22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 6. Add an extension to encrypt.
+        /// </summary>
+        internal static string ConfigViewText23 {
+            get {
+                return ResourceManager.GetString("ConfigViewText23", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à 7. Edit cryptosoft path.
+        /// </summary>
+        internal static string ConfigViewText24 {
+            get {
+                return ResourceManager.GetString("ConfigViewText24", resourceCulture);
             }
         }
         
