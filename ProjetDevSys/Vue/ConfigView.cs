@@ -136,7 +136,6 @@ namespace ProjetDevSys.Vue
                     return configViewModel.EditCryptPath(newCryptPath);
 
                 case "8":
-                    Console.WriteLine(Config.Langage);
                     for (int i = 0; i < Config.ExtensionListCrypt.Count; i++)
                     {
                         Console.WriteLine($"Id: {i}, Element: {Config.ExtensionListCrypt[i]}");

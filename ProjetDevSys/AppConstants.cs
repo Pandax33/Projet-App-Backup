@@ -33,6 +33,7 @@ namespace ProjetDevSys
                 Config.CreateSetting();
             }
             Config.UpdateLogFilePathIfNeeded();
+            Config.VerifyAndAddMissingConfigElements(filePath,Config.GetDefaultConfig());
             
             try
             {
@@ -52,6 +53,7 @@ namespace ProjetDevSys
                 CryptPath = config.CryptPath.CryptPath;
                 KeyCrypt = config.KeyCrypt.KeyCrypt;
                 BlockerProcess = config.BlockerProcess.BlockerProcess;
+                Config.Initialize();
             }
             catch (Exception ex)
             {
