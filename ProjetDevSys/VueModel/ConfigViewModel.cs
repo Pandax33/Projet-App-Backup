@@ -63,6 +63,12 @@ namespace ProjetDevSys.VueModel
             Config.EditConfig();
             return ResourceHelper.GetString("ConfigViewModel1");
         }
+        public string ChangeExtensionListCrypt(List<string> ExtensionListCrypt)
+        {
+            Config.ExtensionListCrypt = ExtensionListCrypt;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
 
         public string EditCryptPath(string CryptPath)
         {

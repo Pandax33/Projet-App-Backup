@@ -40,12 +40,10 @@ namespace ProjetDevSysGraphical
             string langage = ProjetDevSys.AppConstants.Langage.Substring(0,2); //take only the primary part
             switch (langage)
             {
-                case "en":
-                    return "English";
                 case "fr":
                     return "Francais";
                 default:
-                    return null;
+                    return "English";
             }
         }
     }
