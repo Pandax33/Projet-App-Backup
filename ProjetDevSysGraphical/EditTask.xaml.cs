@@ -78,7 +78,7 @@ namespace ProjetDevSysGraphical
 
                 if (gestionTask.VerifSource(FileSource) == true && gestionTask.VerifSource(FileTarget) == true)
                 {
-                    gestionTask.EditTask(Id, FileSource, FileTarget, SaveType);
+                    gestionTask.EditTask(Id, FileTarget, FileSource, SaveType);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                     mainWindow.GenerateGrid();

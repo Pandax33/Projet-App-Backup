@@ -38,7 +38,7 @@ namespace ProjetDevSys.VueModel
             }
         }
 
-        public string EditTask(int taskId, string newSource, string newDestination, string newType)
+        public string EditTask(int taskId, string newDestination, string newSource, string newType)
         {
             bool result = BackupFactory.EditBackup(BackupFactory.GetBackupByIndex(taskId).Name, newDestination, newSource, newType);
             if (result)
