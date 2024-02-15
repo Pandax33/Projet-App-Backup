@@ -148,7 +148,7 @@
     <value>4. Fichier de sauvegarde des backups</value>
   </data>
   <data name="ConfigViewText14" xml:space="preserve">
-    <value>8. Quitter</value>
+    <value>9. Quitter</value>
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Langue non valide. Veuillez entrer 'fr' pour Français ou 'en' pour Anglais.</value>
@@ -185,6 +185,15 @@
   </data>
   <data name="ConfigViewText25" xml:space="preserve">
     <value>La configuration a bien été réinitialisé.</value>
+  </data>
+  <data name="ConfigViewText26" xml:space="preserve">
+    <value>Veuillez saisir l'identifiant a supprimer</value>
+  </data>
+  <data name="ConfigViewText27" xml:space="preserve">
+    <value>Identifiant invalide</value>
+  </data>
+  <data name="ConfigViewText28" xml:space="preserve">
+    <value>8. Supprimer une extension à crypter</value>
   </data>
   <data name="ConfigViewText3" xml:space="preserve">
     <value>Fichier JSON non valide ou inexistant.</value>

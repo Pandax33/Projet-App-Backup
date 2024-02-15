@@ -8,6 +8,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
+using NewtonSoft = Newtonsoft.Json.JsonConvert;
+
+
 
 namespace ProjetDevSys.Model
 {
@@ -38,18 +41,18 @@ namespace ProjetDevSys.Model
             {
                 Directory.CreateDirectory(easySaveFolder);
             }
+
+
             
-
-
+            // Deserialize the JSON to a dynamic type
             JsonPath = AppConstants.LogFilePath ?? Path.Combine(easySaveFolder, $"Log_{DateTime.Now:yyyyMMdd}");
             JsonPathRealTime = AppConstants.LogFilePathRealTime ?? Path.Combine(easySaveFolder, "LogRealTime");
             JsonPathSave = AppConstants.JsonSave ?? Path.Combine(easySaveFolder, "Backlist.json");
             Langage = AppConstants.Langage ?? GetLanguage();
             ExtensionType = AppConstants.ExtensionType ?? ".json";
-            ExtensionListCrypt = new List<string> {  };
+            ExtensionListCrypt = new List<string> { };
             CryptPath = AppConstants.CryptPath ?? Path.Combine(cryptoSoftPath, "CryptoSoft.exe");
             KeyCrypt = AppConstants.KeyCrypt ?? generateKey();
-
             CreateFileWithExtensionIfNotExists(JsonPath);
             CreateFileWithExtensionIfNotExists(JsonPathRealTime);
             CreateFileIfNotExists(JsonPathSave);
@@ -338,5 +341,6 @@ namespace ProjetDevSys.Model
             
         }
 
+        
     }
 }
