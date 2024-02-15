@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjetDevSys.VueModel;
 using ProjetDevSys;
+using ProjetDevSys.Model;
 
 namespace ProjetDevSys.Vue
 {
@@ -21,6 +22,7 @@ namespace ProjetDevSys.Vue
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText18"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText23"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText24"));
+            Console.WriteLine(ResourceHelper.GetString("ConfigViewText28"));
             Console.WriteLine(ResourceHelper.GetString("ConfigViewText14"));
             Console.WriteLine(ResourceHelper.GetString("Form1"));
             string choice = Console.ReadLine();
@@ -127,13 +129,31 @@ namespace ProjetDevSys.Vue
                         Console.WriteLine(ResourceHelper.GetString("ConfigViewText22"));
                         Console.ResetColor();
                         Console.WriteLine(ResourceHelper.GetString("ConfigViewText21"));
-                        newExtension = Console.ReadLine().Trim().ToLower();
+                        newCryptPath = Console.ReadLine().Trim().ToLower();
                     }
 
                     // Once the language is correct, we can edit it
                     return configViewModel.EditCryptPath(newCryptPath);
 
                 case "8":
+                    for (int i = 0; i < Config.ExtensionListCrypt.Count; i++)
+                    {
+                        Console.WriteLine($"Id: {i}, Element: {Config.ExtensionListCrypt[i]}");
+                    }
+                    Console.WriteLine(ResourceHelper.GetString("ConfigViewText26"));
+                    string newDeleteExtensionCrypt = Console.ReadLine().Trim().ToLower();
+
+                    while (!configViewModel.verifDeleteExtensionList(AppConstants.StringToInt(newDeleteExtensionCrypt)))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText27"));
+                        Console.ResetColor();
+                        Console.WriteLine(ResourceHelper.GetString("ConfigViewText26"));
+                        newDeleteExtensionCrypt = Console.ReadLine().Trim().ToLower();
+                    }
+                    return configViewModel.removeExtensionListCrypt(AppConstants.StringToInt(newDeleteExtensionCrypt));
+
+                case "9":
                     return ResourceHelper.GetString("ConfigViewText2");
 
                 default:
