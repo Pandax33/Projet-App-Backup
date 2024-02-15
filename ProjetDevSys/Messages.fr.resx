@@ -183,6 +183,9 @@
   <data name="ConfigViewText24" xml:space="preserve">
     <value>7. Editer le chemin de cryptosoft</value>
   </data>
+  <data name="ConfigViewText25" xml:space="preserve">
+    <value>La configuration a bien été réinitialisé.</value>
+  </data>
   <data name="ConfigViewText3" xml:space="preserve">
     <value>Fichier JSON non valide ou inexistant.</value>
   </data>
