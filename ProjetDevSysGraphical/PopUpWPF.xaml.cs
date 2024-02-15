@@ -25,10 +25,10 @@ namespace ProjetDevSysGraphical
             TextPop.Text = content;
         }
 
-        public void PopUpClose(object sender, System.ComponentModel.CancelEventArgs e)
+        private void PopUp_Closed(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+            mainWindow.GenerateGrid();
         }
     }
 }
