@@ -32,12 +32,12 @@ namespace ProjetDevSysGraphical
 
         public void GenerateGrid()
         {
-            dataGrid.Items.Clear();
+            listView.Items.Clear();
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
             foreach(var backup in backups) // backup type = Backup
             {
-                dataGrid.Items.Add(new
+                listView.Items.Add(new
                 {
                     Propriete1 = backup.Name,
                     Propriete2 = backup.Source,
@@ -52,8 +52,8 @@ namespace ProjetDevSysGraphical
         public void ButtonInstance(StackPanel container)
         {
             container.Children.Clear();
-            int[] index = new int[dataGrid.Items.Count];
-            for (int i = 0; i < dataGrid.Items.Count; i++)
+            int[] index = new int[listView.Items.Count];
+            for (int i = 0; i < listView.Items.Count; i++)
             {
                 index[i] = i;
 
@@ -140,7 +140,7 @@ namespace ProjetDevSysGraphical
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             // Launch all tasks
-            runSaveTask.RunMultipleTask(0, dataGrid.Items.Count);
+            runSaveTask.RunMultipleTask(0, listView.Items.Count);
         }
 
         public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)

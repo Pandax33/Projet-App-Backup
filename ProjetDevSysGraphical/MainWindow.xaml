@@ -13,14 +13,17 @@
         <Button x:Name="launchSelectedTasks" Content="Lancer les tâches selectionnées" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200" Click="ButtonlaunchSelectedTasks_Click" Height="50" Margin="20,0,0,20" Grid.Row="1"/>
         <Button x:Name="launchAllTasks" Content="Lancer les tâches sur cette page" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="200" Click="ButtonlaunchAllTasks_Click" Height="50" Margin="0,0,30,20"/>
 
-        <DataGrid x:Name="dataGrid" Margin="10,80,186,80" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Propriete1}" Width="*" />
-                <DataGridTextColumn Header="Source" Binding="{Binding Propriete2}" Width="*" />
-                <DataGridTextColumn Header="Cible" Binding="{Binding Propriete3}" Width="*" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Propriete4}" Width="*" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView x:Name="listView" Margin="10,80,186,80">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Propriete1}" />
+                    <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Propriete2}" />
+                    <GridViewColumn Header="Cible" DisplayMemberBinding="{Binding Propriete3}" />
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Propriete4}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
 
         <StackPanel x:Name="stackPanel" HorizontalAlignment="Right" VerticalAlignment="Top" Width="186" Margin="0,80,10,0">
             
