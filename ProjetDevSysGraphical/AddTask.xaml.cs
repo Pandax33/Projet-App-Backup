@@ -93,11 +93,5 @@ namespace ProjetDevSysGraphical
             }
             Hide();
         }
-
-        private void Window_Closing_Add(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // MainWindow mainWindow = new MainWindow();
-            // mainWindow.Show();
-        }
     }
 }
