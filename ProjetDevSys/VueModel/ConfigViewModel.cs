@@ -88,6 +88,13 @@ namespace ProjetDevSys.VueModel
             return ResourceHelper.GetString("ConfigViewModel1");
         }
 
+        public string EditBlockerProcess(string process)
+        {
+            Config.BlockerProcess = process;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
         public bool verifInputLanguage(string input)
         {
             if (input == "fr" || input == "en")

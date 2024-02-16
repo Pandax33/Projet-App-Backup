@@ -29,28 +29,7 @@ namespace ProjetDevSysGraphical
         public Config()
         {
             InitializeComponent();
-            //paths
-            pathSaveBackupEntry.Text = ProjetDevSys.AppConstants.JsonSave;
-            logDailyEntry.Text = ProjetDevSys.AppConstants.LogFilePath;
-            logRTEntry.Text = ProjetDevSys.AppConstants.LogFilePathRealTime;
-            //extensions
-            string extension = ProjetDevSys.AppConstants.ExtensionType;
-            logExtensionSelector.SelectedItem = extension;
-            logExtensionSelector.Text = extension;
-            //language
-            string language = AppConstants.GetLanguage();
-            languageSelector.SelectedItem = Language;
-            languageSelector.Text = language;
-            //crypto
-            cryptoPathEntry.Text = ProjetDevSys.AppConstants.CryptPath;
-            CryptoExtensions = new ObservableCollection<string>();
-            if (ProjetDevSys.AppConstants.ExtensionListCrypt != null)
-            {
-                foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListCrypt) CryptoExtensions.Add(extensions);
-            }
-            cryptoExtensionsUpdate();
-
-            //add logic for blocker
+            Refresh();
         }
 
         private void pathLogDailyExplorer_Click(object sender, RoutedEventArgs e)
@@ -87,7 +66,9 @@ namespace ProjetDevSysGraphical
             MessageBoxResult result = MessageBox.Show("Are you sure you want to reset all settings ?", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
-                //insert Reset method
+                ProjetDevSys.VueModel.ConfigViewModel config = new ConfigViewModel();
+                config.resetConfig();
+                Refresh();
             }
         }
 
@@ -131,8 +112,6 @@ namespace ProjetDevSysGraphical
             if (!String.IsNullOrWhiteSpace(logRTEntry.Text)) configViewModel.EditerJsonPathRealTime(logRTEntry.Text);
 
             //extensions
-
-            //it's not editable. Works ?
             if (logExtensionSelector.Text != null) configViewModel.EditExtensionType(logExtensionSelector.Text);
 
             //language
@@ -142,7 +121,38 @@ namespace ProjetDevSysGraphical
             if (CryptoExtensions != null) configViewModel.ChangeExtensionListCrypt(new List<string>(CryptoExtensions));
             if (!String.IsNullOrWhiteSpace(cryptoPathEntry.Text)) configViewModel.EditCryptPath(cryptoPathEntry.Text);
 
-            //add logic for blocker
+            //blocker Process
+            if (!String.IsNullOrWhiteSpace(blockerEntry.Text)) configViewModel.EditBlockerProcess(blockerEntry.Text);
+
+            //refresh content
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            //paths
+            pathSaveBackupEntry.Text = ProjetDevSys.AppConstants.JsonSave;
+            logDailyEntry.Text = ProjetDevSys.AppConstants.LogFilePath;
+            logRTEntry.Text = ProjetDevSys.AppConstants.LogFilePathRealTime;
+            //extensions
+            string extension = ProjetDevSys.AppConstants.ExtensionType;
+            logExtensionSelector.SelectedItem = extension;
+            logExtensionSelector.Text = extension;
+            //language
+            string language = GetLanguage();
+            languageSelector.SelectedItem = Language;
+            languageSelector.Text = language;
+            //crypto
+            cryptoPathEntry.Text = ProjetDevSys.AppConstants.CryptPath;
+            CryptoExtensions = new ObservableCollection<string>();
+            if (ProjetDevSys.AppConstants.ExtensionListCrypt != null)
+            {
+                foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListCrypt) CryptoExtensions.Add(extensions);
+            }
+            cryptoExtensionsUpdate();
+
+            //blocker
+            blockerEntry.Text = ProjetDevSys.AppConstants.BlockerProcess;
         }
         public static string GetLangageCulture(string langage)
         {
@@ -152,6 +162,17 @@ namespace ProjetDevSysGraphical
                     return "fr";
                 default:
                     return "en";
+            }
+        }
+        public static string GetLanguage()
+        {
+            string langage = ProjetDevSys.AppConstants.Langage.Substring(0, 2); //take only the primary part
+            switch (langage)
+            {
+                case "fr":
+                    return "Francais";
+                default:
+                    return "English";
             }
         }
     }
