@@ -11,6 +11,9 @@ namespace ProjetDevSys.VueModel
     {
         public string CreateTask(string fileName, string sourcePath, string destinationPath, string backupType)
         {
+
+            if ((BackupFactory.GetBackupByName(fileName) != null) || String.IsNullOrWhiteSpace(fileName)) return ResourceHelper.GetString("GestionTaskView35");
+
             Backup backup = BackupFactory.CreateBackup(fileName, sourcePath, destinationPath, backupType);
 
             if (backup != null)
