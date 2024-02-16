@@ -250,6 +250,15 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Welcome !.
+        /// </summary>
+        internal static string Home1 {
+            get {
+                return ResourceManager.GetString("Home1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Home.
         /// </summary>
         internal static string Selector1 {
@@ -273,6 +282,222 @@ namespace ProjetDevSysGraphical {
         internal static string Selector3 {
             get {
                 return ResourceManager.GetString("Selector3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add a task.
+        /// </summary>
+        internal static string Task_Add_Title {
+            get {
+                return ResourceManager.GetString("Task.Add.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add a task.
+        /// </summary>
+        internal static string Task_AddButton {
+            get {
+                return ResourceManager.GetString("Task.AddButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Apply.
+        /// </summary>
+        internal static string Task_Apply {
+            get {
+                return ResourceManager.GetString("Task.Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Cancel.
+        /// </summary>
+        internal static string Task_Cancel {
+            get {
+                return ResourceManager.GetString("Task.Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Result.
+        /// </summary>
+        internal static string Task_Delete {
+            get {
+                return ResourceManager.GetString("Task.Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Task deleted successfully.
+        /// </summary>
+        internal static string Task_DeleteInfo {
+            get {
+                return ResourceManager.GetString("Task.DeleteInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit a task.
+        /// </summary>
+        internal static string Task_Edit_Title {
+            get {
+                return ResourceManager.GetString("Task.Edit.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Name.
+        /// </summary>
+        internal static string Task_Grid_Name {
+            get {
+                return ResourceManager.GetString("Task.Grid.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Source.
+        /// </summary>
+        internal static string Task_Grid_Source {
+            get {
+                return ResourceManager.GetString("Task.Grid.Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target.
+        /// </summary>
+        internal static string Task_Grid_Target {
+            get {
+                return ResourceManager.GetString("Task.Grid.Target", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Type.
+        /// </summary>
+        internal static string Task_Grid_Type {
+            get {
+                return ResourceManager.GetString("Task.Grid.Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Launch every tasks.
+        /// </summary>
+        internal static string Task_LaunchAll {
+            get {
+                return ResourceManager.GetString("Task.LaunchAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Launch all selected tasks.
+        /// </summary>
+        internal static string Task_LaunchSelect {
+            get {
+                return ResourceManager.GetString("Task.LaunchSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Problem: source doesn&apos;t exist.
+        /// </summary>
+        internal static string Task_Popup_Add1 {
+            get {
+                return ResourceManager.GetString("Task.Popup.Add1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Problem: target doesn&apos;t exist.
+        /// </summary>
+        internal static string Task_Popup_Add2 {
+            get {
+                return ResourceManager.GetString("Task.Popup.Add2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Problem: source and target doesn&apos;t exist.
+        /// </summary>
+        internal static string Task_Popup_Add3 {
+            get {
+                return ResourceManager.GetString("Task.Popup.Add3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please fill out all the entries.
+        /// </summary>
+        internal static string Task_Popup_Add4 {
+            get {
+                return ResourceManager.GetString("Task.Popup.Add4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Result.
+        /// </summary>
+        internal static string Task_Popup_Out {
+            get {
+                return ResourceManager.GetString("Task.Popup.Out", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Problem.
+        /// </summary>
+        internal static string Task_Popup_Warning {
+            get {
+                return ResourceManager.GetString("Task.Popup.Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Name :.
+        /// </summary>
+        internal static string Task_Prompt1 {
+            get {
+                return ResourceManager.GetString("Task.Prompt1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Source Path :.
+        /// </summary>
+        internal static string Task_Prompt2 {
+            get {
+                return ResourceManager.GetString("Task.Prompt2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target Path :.
+        /// </summary>
+        internal static string Task_Prompt3 {
+            get {
+                return ResourceManager.GetString("Task.Prompt3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Complete.
+        /// </summary>
+        internal static string Task_Type1 {
+            get {
+                return ResourceManager.GetString("Task.Type1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Differential.
+        /// </summary>
+        internal static string Task_Type2 {
+            get {
+                return ResourceManager.GetString("Task.Type2", resourceCulture);
             }
         }
     }

@@ -145,13 +145,13 @@ namespace ProjetDevSysGraphical
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             // Launch all tasks
-            runSaveTask.RunMultipleTask(0, listView.Items.Count);
+            MessageBox.Show(runSaveTask.RunMultipleTask(0, listView.Items.Count), "Run", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
-            runSaveTask.RunTaskMultiple(idToLaunch.ToArray());
+            MessageBox.Show(runSaveTask.RunTaskMultiple(idToLaunch.ToArray()), "Run", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
@@ -167,8 +167,9 @@ namespace ProjetDevSysGraphical
 
                 // Call DeleteTask with the extracted index
                 gestionTask.DeleteTask(index);
-                PopUpWPF popUpWPF = new PopUpWPF(buttonName + " " + "Task deleted successfully");
-                popUpWPF.ShowDialog();
+
+                MessageBox.Show(ResourceHelper.GetString("Task.DeleteInfo"), ResourceHelper.GetString("Task.Delete"), MessageBoxButton.OK, MessageBoxImage.Information);
+                GenerateGrid();
             }
         }
 

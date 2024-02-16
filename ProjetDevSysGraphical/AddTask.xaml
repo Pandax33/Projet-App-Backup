@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetDevSysGraphical"
         mc:Ignorable="d"
-        Title="AddTask" MinHeight="175" MaxHeight="200" MinWidth="250" MaxWidth="300" Width="305">
+        Title="{local:LangageExtension Key='Task.Add.Title'}" MinHeight="175" MaxHeight="200" MinWidth="250" MaxWidth="300" Width="305">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,22 +20,23 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Nom de la tâche:" Grid.Row="0" Grid.Column="0" />
+        <TextBlock Text="{local:LangageExtension Key='Task.Prompt1'}" Grid.Row="0" Grid.Column="0" />
         <TextBox x:Name="textBoxName" Grid.Row="0" Grid.Column="1" TextChanged="textBoxName_TextChanged"/>
 
-        <TextBlock Text="Chemin d'entrée:" Grid.Row="1" Grid.Column="0"/>
+        <TextBlock Text="{local:LangageExtension Key='Task.Prompt2'}" Grid.Row="1" Grid.Column="0"/>
         <TextBox x:Name="textBoxEnterPath" Grid.Row="1" Grid.Column="1" TextChanged="textBoxEnterPath_TextChanged"/>
         <Button x:Name="EnterButton" Content="&#x1F4C1;" Grid.Row="1" Grid.Column="2" Click="ButtonEnterPath_Click" Height="20" Grid.RowSpan="2" VerticalAlignment="Top"/>
 
-        <TextBlock Text="Chemin de sortie:" Grid.Column="0" Grid.Row="2" />
+        <TextBlock Text="{local:LangageExtension Key='Task.Prompt3'}" Grid.Column="0" Grid.Row="2" />
         <TextBox x:Name="textBoxOutPath" Grid.Row="2" Grid.Column="1" TextChanged="textBoxOutPath_TextChanged"/>
         <Button x:Name="DestinationButton" Content="&#x1F4C1;" Grid.Row="2" Grid.Column="2"  Click="ButtonOutPath_Click"/>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
-            <RadioButton Content="Complète" x:Name="radioButtonComplete" GroupName="BackupType" VerticalAlignment="Center" Margin="0,0,5,0" Checked="radioButtonComplete_Checked"/>
-            <RadioButton Content="Différentielle" x:Name="radioButtonDifferentielle" GroupName="BackupType" Checked="radioButtonDifferentielle_Checked"/>
+            <RadioButton Content="{local:LangageExtension Key='Task.Type1'}" x:Name="radioButtonComplete" GroupName="BackupType" VerticalAlignment="Center" Margin="0,0,5,0" Checked="radioButtonComplete_Checked"/>
+            <RadioButton Content="{local:LangageExtension Key='Task.Type2'}" x:Name="radioButtonDifferentielle" GroupName="BackupType" Checked="radioButtonDifferentielle_Checked"/>
         </StackPanel>
 
-        <Button Content="Valider" Grid.Row="4" Margin="5" Click="ButtonValider_Click"/>
+        <Button Name="cancelButton"  Content="{local:LangageExtension Key='Task.Cancel'}" Grid.Row="4" Grid.Column="0" Margin="5" Width="80" Click="cancelButton_Click"/>
+        <Button Name="applyButton" Content="{local:LangageExtension Key='Task.Apply'}" Grid.Row="4" Grid.Column="1" Margin="5" Width="80"  Click="applyButton_Click"/>
     </Grid>
 </Window>

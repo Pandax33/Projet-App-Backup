@@ -33,21 +33,25 @@ namespace ProjetDevSysGraphical
         private void pathLogDailyExplorer_Click(object sender, RoutedEventArgs e)
         {
             logDailyEntry.Text = AppConstants.OpenFolderDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void pathLogRTExplorer_Click(object sender, RoutedEventArgs e)
         {
             logRTEntry.Text = AppConstants.OpenFolderDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void pathSaveBackupExplorer_Click(object sender, RoutedEventArgs e)
         {
             pathSaveBackupEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void cryptoPathExplorer_Click(object sender, RoutedEventArgs e)
         {
             cryptoPathEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void languageSelector_GotFocus(object sender, RoutedEventArgs e)
