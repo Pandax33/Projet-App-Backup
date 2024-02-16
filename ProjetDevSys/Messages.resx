@@ -126,6 +126,21 @@
   <data name="BackupJob1" xml:space="preserve">
     <value>Unsupported backup type.</value>
   </data>
+  <data name="ConfigText1" xml:space="preserve">
+    <value>CryptoSoft Folder dooesn't exist. Downloading...</value>
+  </data>
+  <data name="ConfigText2" xml:space="preserve">
+    <value>Download complete. Extracting...</value>
+  </data>
+  <data name="ConfigText3" xml:space="preserve">
+    <value>Extract complete. Folders availables in</value>
+  </data>
+  <data name="ConfigText4" xml:space="preserve">
+    <value>An error occured :</value>
+  </data>
+  <data name="ConfigText5" xml:space="preserve">
+    <value>CryptoSoft folder already exists.</value>
+  </data>
   <data name="ConfigViewModel1" xml:space="preserve">
     <value>Change made.</value>
   </data>
