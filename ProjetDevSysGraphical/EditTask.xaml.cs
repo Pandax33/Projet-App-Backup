@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,29 +13,39 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace ProjetDevSysGraphical
 {
     /// <summary>
-    /// Logique d'interaction pour AddTask.xaml
+    /// Logique d'interaction pour EditTask.xaml
     /// </summary>
-    public partial class AddTask : Window
+    public partial class EditTask : Window
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
         public string FileSource { get; set; }
         public string FileTarget { get; set; }
         public string SaveType { get; set; }
 
-        public AddTask()
+        public EditTask(int id, string name, string fileSource, string fileTarget, string saveType)
         {
             InitializeComponent();
-        }
+            Id = id;
+            FileSource = fileSource;
+            FileTarget = fileTarget;
+            SaveType = saveType;
 
-        #region Enter
-        private void textBoxName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string name = textBoxName.Text;
-            Name = name;
+            task_name.Text = name;
+            textBoxEnterPath.Text = FileSource;
+            textBoxOutPath.Text = FileTarget;
+            if (SaveType == "A")
+            {
+                radioButtonComplete.IsChecked = true;
+            }
+            if (SaveType == "B")
+            {
+                radioButtonDifferentielle.IsChecked = true;
+            }
         }
 
         private void textBoxEnterPath_TextChanged(object sender, TextChangedEventArgs e)
@@ -58,17 +69,16 @@ namespace ProjetDevSysGraphical
         {
             SaveType = "B";
         }
-        #endregion
 
         private void ButtonValider_Click(object sender, RoutedEventArgs e)
         {
-            GestionTask gestionTask = new GestionTask();
-
-            if (Name != null && FileSource != null && FileTarget != null && SaveType != null)
+            if (FileSource != null && FileTarget != null && SaveType != null)
             {
+                GestionTask gestionTask = new GestionTask();
+
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == true && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
-                    gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType);
+                    gestionTask.EditTask(Id, FileTarget, FileSource, SaveType);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                     if (mainWindow != null && mainWindow.contentControl.Content is Backup backup)
@@ -94,16 +104,6 @@ namespace ProjetDevSysGraphical
                 }
             }
             Hide();
-        }
-
-        private void ButtonEnterPath_Click(object sender, RoutedEventArgs e)
-        {
-            textBoxEnterPath.Text = AppConstants.OpenFolderDialog();
-        }
-
-        private void ButtonOutPath_Click(object sender, RoutedEventArgs e)
-        {
-            textBoxOutPath.Text = AppConstants.OpenFolderDialog();
         }
     }
 }

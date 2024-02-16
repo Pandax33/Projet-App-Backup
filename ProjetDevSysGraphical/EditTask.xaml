@@ -1,0 +1,34 @@
+﻿<Window x:Class="ProjetDevSysGraphical.EditTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjetDevSysGraphical"
+        mc:Ignorable="d"
+        Title="EditTask" MinHeight="175" MaxHeight="300" MinWidth="250" MaxWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Nom de la tâche:" Grid.Row="0" Margin="5"/>
+        <TextBlock Name="task_name" Text="task_name" Grid.Row="0" Margin="100,5,5,5"/>
+        
+        <TextBlock Text="Chemin d'entrée:" Grid.Row="1" Margin="5"/>
+        <TextBox x:Name="textBoxEnterPath" Grid.Row="1" Margin="100,5,5,5" Text="{Binding EnterPath, Mode=TwoWay}" TextChanged="textBoxEnterPath_TextChanged"/>
+
+        <TextBlock Text="Chemin de sortie:" Grid.Row="2" Margin="5"/>
+        <TextBox x:Name="textBoxOutPath" Grid.Row="2" Margin="100,5,5,5" Text="{Binding OutPath, Mode=TwoWay}" TextChanged="textBoxOutPath_TextChanged"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+            <RadioButton Content="Complète" x:Name="radioButtonComplete" GroupName="BackupType" VerticalAlignment="Center" Margin="0,0,5,0" IsChecked="{Binding IsCompleteBackup, Mode=TwoWay}" Checked="radioButtonComplete_Checked"/>
+            <RadioButton Content="Différentielle" x:Name="radioButtonDifferentielle" GroupName="BackupType" IsChecked="{Binding IsDifferentialBackup, Mode=TwoWay}" Checked="radioButtonDifferentielle_Checked"/>
+        </StackPanel>
+
+        <Button Content="Valider" Grid.Row="4" Margin="5" Click="ButtonValider_Click"/>
+    </Grid>
+</Window>
