@@ -35,13 +35,12 @@ namespace ProjetDevSysGraphical
 
         public void GenerateGrid()
         {
-            // Nettoyer la Grid avant de remplir avec de nouvelles données
             grid.Children.Clear();
 
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
 
-            int i = 0; // Variable pour garder la trace de la ligne actuelle dans la Grid
+            int i = 0; // keep track of the row index
 
             foreach (var backup in backups)
             {
