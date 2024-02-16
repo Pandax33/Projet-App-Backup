@@ -116,6 +116,11 @@ namespace ProjetDevSys.Vue
                     Console.WriteLine(ResourceHelper.GetString("ConfigViewText19"));
                     string newExtensionCrypt = Console.ReadLine().Trim().ToLower();
 
+                    if (!newExtensionCrypt.StartsWith("."))
+                    {
+                        newExtensionCrypt = "." + newExtensionCrypt;
+                    }
+
                     // Once the language is correct, we can edit it
                     return configViewModel.EditExtensionListCrypt(newExtensionCrypt);
 
