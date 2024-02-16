@@ -56,5 +56,43 @@ namespace ProjetDevSysGraphical
         {
             contentControl.Content = new ConfigControl();
         }
+        private void buttonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void buttonMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+                maximizeImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/maximize.png"));
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+                maximizeImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/restore.png"));
+            }
+        }
+
+        private void buttonClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void CloseButton_Enter(object sender, MouseEventArgs e)
+        {
+            mainBorder.BorderBrush = Brushes.Red;
+        }
+
+        private void CloseButton_Leave(object sender, MouseEventArgs e)
+        {
+            mainBorder.BorderBrush = Brushes.Transparent;
+        }
     }
 }
