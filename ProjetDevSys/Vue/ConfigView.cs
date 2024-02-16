@@ -138,7 +138,7 @@ namespace ProjetDevSys.Vue
                 case "8":
                     for (int i = 0; i < Config.ExtensionListCrypt.Count; i++)
                     {
-                        Console.WriteLine($"Id: {i}, Element: {Config.ExtensionListCrypt[i]}");
+                        Console.WriteLine($"{i}. [{Config.ExtensionListCrypt[i]}]");
                     }
                     Console.WriteLine(ResourceHelper.GetString("ConfigViewText26"));
                     string newDeleteExtensionCrypt = Console.ReadLine().Trim().ToLower();

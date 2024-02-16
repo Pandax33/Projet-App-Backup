@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppConstants1" xml:space="preserve">
+    <value>Error while reading the configuration</value>
+  </data>
+  <data name="BackupFactory1" xml:space="preserve">
+    <value>A backup with the same name already exists.</value>
+  </data>
+  <data name="BackupJob1" xml:space="preserve">
+    <value>Unsupported backup type.</value>
+  </data>
+  <data name="ConfigViewModel1" xml:space="preserve">
+    <value>Change made.</value>
+  </data>
+  <data name="ConfigViewModel16" xml:space="preserve">
+    <value>Change made. Please restart the application</value>
+  </data>
+  <data name="ConfigViewText1" xml:space="preserve">
+    <value>Enter the Json file path, language, real-time Json file path, and saved Json file path separated by commas:</value>
+  </data>
+  <data name="ConfigViewText10" xml:space="preserve">
+    <value>1. Daily log file</value>
+  </data>
+  <data name="ConfigViewText11" xml:space="preserve">
+    <value>2. Language</value>
+  </data>
+  <data name="ConfigViewText12" xml:space="preserve">
+    <value>3. Real-time log file</value>
+  </data>
+  <data name="ConfigViewText13" xml:space="preserve">
+    <value>4. Backup save file</value>
+  </data>
+  <data name="ConfigViewText14" xml:space="preserve">
+    <value>9. Exit</value>
+  </data>
+  <data name="ConfigViewText15" xml:space="preserve">
+    <value>Invalid language. Please enter 'fr' for French or 'en' for English.</value>
+  </data>
+  <data name="ConfigViewText16" xml:space="preserve">
+    <value>Enter extension type for logs (.json/.xml) :</value>
+  </data>
+  <data name="ConfigViewText17" xml:space="preserve">
+    <value>Invalid extension. Please enter '.json' or '.xml'.</value>
+  </data>
+  <data name="ConfigViewText18" xml:space="preserve">
+    <value>5. Log extension type</value>
+  </data>
+  <data name="ConfigViewText19" xml:space="preserve">
+    <value>Please enter an extension type</value>
+  </data>
+  <data name="ConfigViewText2" xml:space="preserve">
+    <value>Return to the main menu</value>
+  </data>
+  <data name="ConfigViewText20" xml:space="preserve">
+    <value>Invalid extension</value>
+  </data>
+  <data name="ConfigViewText21" xml:space="preserve">
+    <value>Please enter the path to cryptosoft</value>
+  </data>
+  <data name="ConfigViewText22" xml:space="preserve">
+    <value>Invalid path</value>
+  </data>
+  <data name="ConfigViewText23" xml:space="preserve">
+    <value>6. Add an extension to encrypt</value>
+  </data>
+  <data name="ConfigViewText24" xml:space="preserve">
+    <value>7. Edit cryptosoft path</value>
+  </data>
+  <data name="ConfigViewText25" xml:space="preserve">
+    <value>The configuration has been reset.</value>
+  </data>
+  <data name="ConfigViewText26" xml:space="preserve">
+    <value>Please enter the id to be deleted</value>
+  </data>
+  <data name="ConfigViewText27" xml:space="preserve">
+    <value>Invalid identifier</value>
+  </data>
+  <data name="ConfigViewText28" xml:space="preserve">
+    <value>8. Delete an extension to be encrypted</value>
+  </data>
+  <data name="ConfigViewText3" xml:space="preserve">
+    <value>Invalid or non-existent JSON file.</value>
+  </data>
+  <data name="ConfigViewText4" xml:space="preserve">
+    <value>Invalid choice</value>
+  </data>
+  <data name="ConfigViewText5" xml:space="preserve">
+    <value>Enter the new path for the log file:</value>
+  </data>
+  <data name="ConfigViewText6" xml:space="preserve">
+    <value>Enter the new language (fr/en):</value>
+  </data>
+  <data name="ConfigViewText7" xml:space="preserve">
+    <value>Enter the new path for the real-time log file:</value>
+  </data>
+  <data name="ConfigViewText8" xml:space="preserve">
+    <value>Enter the new path for the backup save file:</value>
+  </data>
+  <data name="ConfigViewText9" xml:space="preserve">
+    <value>Which field would you like to edit?</value>
+  </data>
+  <data name="Form1" xml:space="preserve">
+    <value>----------------------------------------------------------------------------</value>
+  </data>
+  <data name="GestionTask1" xml:space="preserve">
+    <value>Delete done.</value>
+  </data>
+  <data name="GestionTask2" xml:space="preserve">
+    <value>The file does not exist</value>
+  </data>
+  <data name="GestionTask3" xml:space="preserve">
+    <value>Edit done.</value>
+  </data>
+  <data name="GestionTask4" xml:space="preserve">
+    <value>The file does not exist</value>
+  </data>
+  <data name="GestionTask5" xml:space="preserve">
+    <value>New destination recorded</value>
+  </data>
+  <data name="GestionTask6" xml:space="preserve">
+    <value>New source recorded</value>
+  </data>
+  <data name="GestionTask7" xml:space="preserve">
+    <value>New type recorded</value>
+  </data>
+  <data name="GestionTaskView1" xml:space="preserve">
+    <value>1. Add a task</value>
+  </data>
+  <data name="GestionTaskView10" xml:space="preserve">
+    <value>Incorrect parameters.</value>
+  </data>
+  <data name="GestionTaskView11" xml:space="preserve">
+    <value>Invalid option.</value>
+  </data>
+  <data name="GestionTaskView13" xml:space="preserve">
+    <value>Enter the backup name:</value>
+  </data>
+  <data name="GestionTaskView14" xml:space="preserve">
+    <value>Enter the source path:</value>
+  </data>
+  <data name="GestionTaskView15" xml:space="preserve">
+    <value>Invalid path, please enter a valid path.</value>
+  </data>
+  <data name="GestionTaskView16" xml:space="preserve">
+    <value>Enter the destination path:</value>
+  </data>
+  <data name="GestionTaskView17" xml:space="preserve">
+    <value>Enter the backup type (A for full, B for differential):</value>
+  </data>
+  <data name="GestionTaskView18" xml:space="preserve">
+    <value>2. Delete a task</value>
+  </data>
+  <data name="GestionTaskView19" xml:space="preserve">
+    <value>3. Edit a task</value>
+  </data>
+  <data name="GestionTaskView2" xml:space="preserve">
+    <value>Enter the file name, source path, destination path, and backup type separated by commas:</value>
+  </data>
+  <data name="GestionTaskView20" xml:space="preserve">
+    <value>4. Exit</value>
+  </data>
+  <data name="GestionTaskView21" xml:space="preserve">
+    <value>Return to the main menu.</value>
+  </data>
+  <data name="GestionTaskView22" xml:space="preserve">
+    <value>Invalid path, please enter a valid path.</value>
+  </data>
+  <data name="GestionTaskView23" xml:space="preserve">
+    <value>Invalid entry. Please enter 'A' or 'B'.</value>
+  </data>
+  <data name="GestionTaskView24" xml:space="preserve">
+    <value>No backups recorded</value>
+  </data>
+  <data name="GestionTaskView25" xml:space="preserve">
+    <value>Do you want to change the backup source? (y/n)</value>
+  </data>
+  <data name="GestionTaskView26" xml:space="preserve">
+    <value>Enter the new path for the source:</value>
+  </data>
+  <data name="GestionTaskView27" xml:space="preserve">
+    <value>Invalid path, please enter a valid path.</value>
+  </data>
+  <data name="GestionTaskView28" xml:space="preserve">
+    <value>Do you want to change the backup destination? (y/n)</value>
+  </data>
+  <data name="GestionTaskView29" xml:space="preserve">
+    <value>Enter the new path for the destination:</value>
+  </data>
+  <data name="GestionTaskView3" xml:space="preserve">
+    <value>Backup successfully created.</value>
+  </data>
+  <data name="GestionTaskView30" xml:space="preserve">
+    <value>Invalid path, please enter a valid path.</value>
+  </data>
+  <data name="GestionTaskView31" xml:space="preserve">
+    <value>Do you want to change the backup type? (y/n)</value>
+  </data>
+  <data name="GestionTaskView32" xml:space="preserve">
+    <value>Enter the new backup type (A Complete /B Differential):</value>
+  </data>
+  <data name="GestionTaskView33" xml:space="preserve">
+    <value>Invalid type, please enter A or B.</value>
+  </data>
+  <data name="GestionTaskView34" xml:space="preserve">
+    <value>Invalid response, please enter 'y' for yes or 'n' for no.</value>
+  </data>
+  <data name="GestionTaskView4" xml:space="preserve">
+    <value>Failed to create backup.</value>
+  </data>
+  <data name="GestionTaskView5" xml:space="preserve">
+    <value>Incorrect parameters.</value>
+  </data>
+  <data name="GestionTaskView6" xml:space="preserve">
+    <value>Enter the backup ID to delete:</value>
+  </data>
+  <data name="GestionTaskView7" xml:space="preserve">
+    <value>Invalid ID.</value>
+  </data>
+  <data name="GestionTaskView8" xml:space="preserve">
+    <value>Enter the backup ID to edit :</value>
+  </data>
+  <data name="GestionTaskView9" xml:space="preserve">
+    <value>Invalid ID.</value>
+  </data>
+  <data name="GestionTaskViewText35" xml:space="preserve">
+    <value>Name is already taken. Please enter another.</value>
+  </data>
+  <data name="InterfaceStrategy1" xml:space="preserve">
+    <value>The source folder does not exist.</value>
+  </data>
+  <data name="InterfaceStrategy2" xml:space="preserve">
+    <value>Task interrupted : blocking process detected</value>
+  </data>
+  <data name="JsonManager1" xml:space="preserve">
+    <value>The file does not exist.</value>
+  </data>
+  <data name="MenuPrincipal1" xml:space="preserve">
+    <value>Main Menu:</value>
+  </data>
+  <data name="MenuPrincipal2" xml:space="preserve">
+    <value>1. Execute a task</value>
+  </data>
+  <data name="MenuPrincipal3" xml:space="preserve">
+    <value>2. Task management</value>
+  </data>
+  <data name="MenuPrincipal4" xml:space="preserve">
+    <value>3. Edit configuration</value>
+  </data>
+  <data name="MenuPrincipal5" xml:space="preserve">
+    <value>4. Exit</value>
+  </data>
+  <data name="MenuPrincipal6" xml:space="preserve">
+    <value>Please enter your choice (1-4):</value>
+  </data>
+  <data name="MenuPrincipal7" xml:space="preserve">
+    <value>Exiting the program...</value>
+  </data>
+  <data name="MenuPrincipal8" xml:space="preserve">
+    <value>Invalid choice. Please try again.</value>
+  </data>
+  <data name="RunTaskView1" xml:space="preserve">
+    <value>1. Launch a task</value>
+  </data>
+  <data name="RunTaskView10" xml:space="preserve">
+    <value>Invalid input</value>
+  </data>
+  <data name="RunTaskView11" xml:space="preserve">
+    <value>Backup of all selected tasks finished successfully.</value>
+  </data>
+  <data name="RunTaskView12" xml:space="preserve">
+    <value>A problem occurred during the backup of tasks.</value>
+  </data>
+  <data name="RunTaskView13" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="RunTaskView14" xml:space="preserve">
+    <value>2. Launch multiple successive tasks</value>
+  </data>
+  <data name="RunTaskView15" xml:space="preserve">
+    <value>3. Launch a list of tasks</value>
+  </data>
+  <data name="RunTaskView16" xml:space="preserve">
+    <value>4. Exit</value>
+  </data>
+  <data name="RunTaskView17" xml:space="preserve">
+    <value>The end ID must be higher than the start ID.</value>
+  </data>
+  <data name="RunTaskView18" xml:space="preserve">
+    <value>Return to the main menu</value>
+  </data>
+  <data name="RunTaskView19" xml:space="preserve">
+    <value>The specified IDs are not valid.</value>
+  </data>
+  <data name="RunTaskView2" xml:space="preserve">
+    <value>Enter the task ID you want to run</value>
+  </data>
+  <data name="RunTaskView20" xml:space="preserve">
+    <value>The specified ID is not valid. Please enter a numeric ID corresponding to an existing backup.</value>
+  </data>
+  <data name="RunTaskView21" xml:space="preserve">
+    <value>You have no saved task</value>
+  </data>
+  <data name="RunTaskView22" xml:space="preserve">
+    <value>Task blocked : blocking process interrupted</value>
+  </data>
+  <data name="RunTaskView3" xml:space="preserve">
+    <value>Backup done.</value>
+  </data>
+  <data name="RunTaskView4" xml:space="preserve">
+    <value>A problem occurred</value>
+  </data>
+  <data name="RunTaskView5" xml:space="preserve">
+    <value>Enter the ID of the first and last task you want to perform, separated by a comma (example: 2,5):</value>
+  </data>
+  <data name="RunTaskView6" xml:space="preserve">
+    <value>Backup done.</value>
+  </data>
+  <data name="RunTaskView7" xml:space="preserve">
+    <value>A problem occurred.</value>
+  </data>
+  <data name="RunTaskView8" xml:space="preserve">
+    <value>Invalid input. Please enter exactly two valid IDs, separated by a comma.</value>
+  </data>
+  <data name="RunTaskView9" xml:space="preserve">
+    <value>Enter the IDs of the tasks you want to perform, separated by commas (example: 1,3,5):</value>
+  </data>
+</root>
