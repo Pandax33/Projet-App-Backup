@@ -23,6 +23,7 @@ namespace ProjetDevSysGraphical
     public partial class ConfigControl : UserControl
     {
         public ObservableCollection<string> CryptoExtensions { get; set; }
+        public ObservableCollection<string> blockerProcesses { get; set; }
         public ConfigControl()
         {
             InitializeComponent();
@@ -96,6 +97,33 @@ namespace ProjetDevSysGraphical
                 cryptoExtensionsListView.Items.Add(new { extension = extensions });
             }
         }
+        private void blockerAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(blockerEntry.Text))
+            {
+                blockerProcesses.Add(blockerEntry.Text);
+                blockerEntry.Clear();
+                blockerUpdate();
+            }
+        }
+
+        private void blockerRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (blockerListView.SelectedItem != null)
+            {
+                blockerProcesses.Remove((blockerListView.SelectedItem as dynamic).process);
+                blockerUpdate();
+            }
+        }
+
+        private void blockerUpdate()
+        {
+            blockerListView.Items.Clear();
+            foreach (string processes in blockerProcesses)
+            {
+                blockerListView.Items.Add(new { process = processes });
+            }
+        }
 
         private void ApplyButton_Click(object sender, RoutedEventArgs e)
         {
@@ -119,7 +147,7 @@ namespace ProjetDevSysGraphical
             if (!String.IsNullOrWhiteSpace(cryptoPathEntry.Text)) configViewModel.EditCryptPath(cryptoPathEntry.Text);
 
             //blocker Process
-            if (!String.IsNullOrWhiteSpace(blockerEntry.Text)) configViewModel.EditBlockerProcess(blockerEntry.Text);
+            if (blockerProcesses != null) configViewModel.ChangeBlockerProcessList(new List<string>(blockerProcesses));
 
             //refresh content
             Refresh();
@@ -149,7 +177,12 @@ namespace ProjetDevSysGraphical
             cryptoExtensionsUpdate();
 
             //blocker
-            blockerEntry.Text = ProjetDevSys.AppConstants.BlockerProcess;
+            blockerProcesses = new ObservableCollection<string>();
+            if (ProjetDevSys.AppConstants.BlockerProcess != null)
+            {
+                foreach (string processes in ProjetDevSys.AppConstants.BlockerProcess) blockerProcesses.Add(processes);
+            }
+            blockerUpdate();
         }
         public static string GetLangageCulture(string langage)
         {
