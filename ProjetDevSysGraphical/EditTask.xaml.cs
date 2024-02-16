@@ -81,7 +81,11 @@ namespace ProjetDevSysGraphical
                     gestionTask.EditTask(Id, FileTarget, FileSource, SaveType);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-                    mainWindow.GenerateGrid();
+                    if (mainWindow != null && mainWindow.contentControl.Content is Backup backup)
+                    {
+                        // Appeler GenerateGrid sur cette instance
+                        backup.GenerateGrid();
+                    }
                 }
                 if (gestionTask.VerifSource(FileSource) == false && gestionTask.VerifSource(FileTarget) == true)
                 {
