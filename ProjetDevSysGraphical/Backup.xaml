@@ -13,6 +13,7 @@
         <Grid x:Name="grid" Margin="10,80,10,80" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -23,6 +24,14 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0">Name</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1">Source</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="2">Destionation</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="3">Type</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="4">Supprimer</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="5">Editer</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="6">Selectionner</TextBlock>
+
             <!-- Adding TextBlock -->
         </Grid>
     </Grid>

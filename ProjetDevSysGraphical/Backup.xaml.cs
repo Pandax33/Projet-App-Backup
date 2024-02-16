@@ -40,7 +40,8 @@ namespace ProjetDevSysGraphical
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
 
-            int i = 0; // keep track of the row index
+            int i = 1; // keep track of the row index
+            buttonNameList.Add("Config");
 
             foreach (var backup in backups)
             {
@@ -48,7 +49,7 @@ namespace ProjetDevSysGraphical
                 TextBlock textBlock2 = new TextBlock { Text = backup.Source };
                 TextBlock textBlock3 = new TextBlock { Text = backup.Destination };
                 TextBlock textBlock4 = new TextBlock { Text = backup.Type };
-
+                grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 grid.Children.Add(textBlock1);
                 Grid.SetColumn(textBlock1, 0);
                 Grid.SetRow(textBlock1, i);
@@ -99,7 +100,7 @@ namespace ProjetDevSysGraphical
 
                 // Add the buttons to the StackPanel
 
-
+                int index = i-1;
                 buttonDelete.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "Delete";
                 buttonEdit.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "Edit";
                 checkBox.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "CheckBox";
