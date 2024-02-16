@@ -77,6 +77,7 @@ namespace ProjetDevSysGraphical
                         // Appeler GenerateGrid sur cette instance
                         backup.GenerateGrid();
                     }
+                    Close();
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
@@ -91,7 +92,7 @@ namespace ProjetDevSysGraphical
                     MessageBox.Show("Les chemins source et cible n'existent pas", "problème", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            MessageBox.Show("Veuillez valider tous les champs", "probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else MessageBox.Show("Veuillez valider tous les champs", "probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)

@@ -36,6 +36,7 @@
             <RadioButton Content="Différentielle" x:Name="radioButtonDifferentielle" GroupName="BackupType" IsChecked="{Binding IsDifferentialBackup, Mode=TwoWay}" Checked="radioButtonDifferentielle_Checked"/>
         </StackPanel>
 
-        <Button Content="Valider" Grid.Row="4" Margin="5" Click="ButtonValider_Click"/>
+        <Button Name="cancelButton"  Content="Annuler" Grid.Row="4" Grid.Column="0" Margin="5" Width="100" Click="cancelButton_Click"/>
+        <Button Name="applyButton" Content="Valider" Grid.Row="4" Grid.Column="1" Margin="5" Width="100"  Click="applyButton_Click"/>
     </Grid>
 </Window>
