@@ -99,11 +99,13 @@ namespace ProjetDevSysGraphical
         private void ButtonEnterPath_Click(object sender, RoutedEventArgs e)
         {
             textBoxEnterPath.Text = AppConstants.OpenFolderDialog();
+            Activate();
         }
 
         private void ButtonOutPath_Click(object sender, RoutedEventArgs e)
         {
             textBoxOutPath.Text = AppConstants.OpenFolderDialog();
+            Activate();
         }
     }
 }
