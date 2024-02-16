@@ -97,5 +97,15 @@ namespace ProjetDevSysGraphical
             }
             Hide();
         }
+
+        private void ButtonEnterPath_Click(object sender, RoutedEventArgs e)
+        {
+            textBoxEnterPath.Text = AppConstants.OpenFolderDialog();
+        }
+
+        private void ButtonOutPath_Click(object sender, RoutedEventArgs e)
+        {
+            textBoxOutPath.Text = AppConstants.OpenFolderDialog();
+        }
     }
 }
