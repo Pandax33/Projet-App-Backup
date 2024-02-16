@@ -11,6 +11,9 @@
         <Button x:Name="launchSelectedTasks" Content="Lancer les tâches selectionnées" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200" Click="ButtonlaunchSelectedTasks_Click" Height="50" Margin="10,0,0,20"/>
         <Button x:Name="launchAllTasks" Content="Lancer les tâches sur cette page" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="200" Click="ButtonlaunchAllTasks_Click" Height="50" Margin="234,0,0,20"/>
         <Grid x:Name="grid" Margin="10,80,10,80" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -22,6 +25,5 @@
             </Grid.ColumnDefinitions>
             <!-- Adding TextBlock -->
         </Grid>
-        <StackPanel x:Name="stackPanel" HorizontalAlignment="Right" VerticalAlignment="Top" Width="186" Margin="0,80,10,0"/>
     </Grid>
 </UserControl>

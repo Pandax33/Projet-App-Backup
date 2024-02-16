@@ -75,15 +75,18 @@ namespace ProjetDevSysGraphical
                 buttonDelete.Click += new RoutedEventHandler(ButtonDelete_Click);
                 Grid.SetColumn(buttonDelete, 4);
                 Grid.SetRow(buttonDelete, i);
+                grid.Children.Add(buttonDelete);
 
                 // Create a button for Edit
                 Button buttonEdit = new Button();
-                buttonEdit.Width = 30;
-                buttonEdit.Height = 30;
+
                 buttonEdit.Background = Brushes.Blue;
                 buttonEdit.Click += new RoutedEventHandler(ButtonEdit_Click);
+                buttonEdit.Width = 30;
+                buttonEdit.Height = 30;
                 Grid.SetColumn(buttonEdit, 5);
                 Grid.SetRow(buttonEdit, i);
+                grid.Children.Add(buttonEdit);
 
                 // Create a checkbox
                 CheckBox checkBox = new CheckBox();
@@ -92,11 +95,10 @@ namespace ProjetDevSysGraphical
                 checkBox.Click += new RoutedEventHandler(CheckBox_Click);
                 Grid.SetColumn(checkBox, 6);
                 Grid.SetRow(checkBox, i);
+                grid.Children.Add(checkBox);
 
                 // Add the buttons to the StackPanel
-                grid.Children.Add(buttonDelete);
-                grid.Children.Add(buttonEdit);
-                grid.Children.Add(checkBox);
+
 
                 buttonDelete.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "Delete";
                 buttonEdit.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "Edit";
