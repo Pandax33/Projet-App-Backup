@@ -35,16 +35,5 @@ namespace ProjetDevSysGraphical
             }
             return "";
         }
-        public static string GetLanguage()
-        {
-            string langage = ProjetDevSys.AppConstants.Langage.Substring(0,2); //take only the primary part
-            switch (langage)
-            {
-                case "fr":
-                    return "Francais";
-                default:
-                    return "English";
-            }
-        }
     }
 }
