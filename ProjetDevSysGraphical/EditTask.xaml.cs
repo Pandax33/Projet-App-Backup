@@ -76,7 +76,7 @@ namespace ProjetDevSysGraphical
             {
                 GestionTask gestionTask = new GestionTask();
 
-                if (gestionTask.VerifSource(FileSource) == true && gestionTask.VerifSource(FileTarget) == true)
+                if (ProjetDevSys.AppConstants.VerifExist(FileSource) == true && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
                     gestionTask.EditTask(Id, FileTarget, FileSource, SaveType);
 
@@ -87,17 +87,17 @@ namespace ProjetDevSysGraphical
                         backup.GenerateGrid();
                     }
                 }
-                if (gestionTask.VerifSource(FileSource) == false && gestionTask.VerifSource(FileTarget) == true)
+                if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
                     PopUpWPF popUpWPF = new PopUpWPF("Le chemin source n'existe pas");
                     popUpWPF.ShowDialog();
                 }
-                if (gestionTask.VerifSource(FileTarget) == false && gestionTask.VerifSource(FileSource) == true)
+                if (ProjetDevSys.AppConstants.VerifExist(FileTarget) == false && ProjetDevSys.AppConstants.VerifExist(FileSource) == true)
                 {
                     PopUpWPF popUpWPF = new PopUpWPF("Le chemin cible n'existe pas");
                     popUpWPF.ShowDialog();
                 }
-                if (gestionTask.VerifSource(FileSource) == false && gestionTask.VerifSource(FileTarget) == false)
+                if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == false)
                 {
                     PopUpWPF popUpWPF = new PopUpWPF("Les chemins source et cible n'existent pas");
                     popUpWPF.ShowDialog();

@@ -90,7 +90,19 @@ namespace ProjetDevSys.VueModel
 
         public string EditBlockerProcess(string process)
         {
-            Config.BlockerProcess = process;
+            Config.BlockerProcess.Add(process);
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+        public string RemoveBlockerProcess(int process)
+        {
+            Config.BlockerProcess.RemoveAt(process);
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+        public string ChangeBlockerProcessList(List<string> blockerProcess)
+        {
+            Config.BlockerProcess = blockerProcess;
             Config.EditConfig();
             return ResourceHelper.GetString("ConfigViewModel1");
         }

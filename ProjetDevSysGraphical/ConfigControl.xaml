@@ -155,8 +155,17 @@
 
                         <Label Name="blockerTitle" Content="Blocker" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-                        <Label Name="blockerlabel" Content="Select: " Grid.Row="2" Grid.Column="1"/>
-                        <TextBox x:Name="blockerEntry" Grid.Row="2" Grid.Column="2" />
+                        <Label Name="blockerLabel" Content="extensionsCrypto" Grid.Row="2" Grid.Column="1"/>
+                        <TextBox x:Name="blockerEntry" Grid.Row="2" Grid.Column="2"/>
+                        <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2">
+                            <ListView.View>
+                                <GridView x:Name="blockerGridView">
+                                    <GridViewColumn Header="processes"  DisplayMemberBinding="{Binding process}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button Name="blockerAdd" Grid.Row="2"  Grid.Column="3" Margin="5" Background="LightGreen" Foreground="Green" Click="blockerAdd_Click" Width="20" Height="20">+</Button>
+                        <Button Name="blockerRemove" Grid.Row="3"  Grid.Column="3" Margin="5" Background="Red" Foreground="DarkRed" VerticalAlignment="Top" Click="blockerRemove_Click" Width="20" Height="20">-</Button>
                     </Grid>
                 </Border>
 
