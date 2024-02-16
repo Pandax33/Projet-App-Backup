@@ -31,7 +31,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TabControl>
-            <TabItem Header="Log">
+            <TabItem Name="tabLog" Header="{local:LangageExtension Key='Config.Tab1'}" >
                 <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
@@ -50,18 +50,18 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Name ="logTitle" Content="Log" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
+                        <Label Name ="logTitle" Content="{local:LangageExtension Key='Config.Log1'}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
 
-                        <Label Name="logDailyLabel" Content="PathDaily" Grid.Row="1" Grid.Column="1"/>
+                        <Label Name="logDailyLabel" Content="{local:LangageExtension Key='Config.Log2'}" Grid.Row="1" Grid.Column="1"/>
                         <TextBox x:Name="logDailyEntry" Grid.Row="1" Grid.Column="2" />
                         <Button x:Name="logDailyExplorer" Grid.Row="1" Grid.Column="3" Content="&#x1F4CB;" Click="pathLogDailyExplorer_Click"/>
 
 
-                        <Label Name="logRTLabel" Content="Path Log RT" Grid.Row="2" Grid.Column="1"/>
+                        <Label Name="logRTLabel" Content="{local:LangageExtension Key='Config.Log3'}" Grid.Row="2" Grid.Column="1"/>
                         <TextBox x:Name="logRTEntry" Grid.Row="2" Grid.Column="2" />
                         <Button x:Name="logRTExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4CB;" Click="pathLogRTExplorer_Click"/>
 
-                        <Label Name="logExtensionlabel" Content="Select: " Grid.Row="3" Grid.Column="1"/>
+                        <Label Name="logExtensionlabel" Content="{local:LangageExtension Key='Config.Log4'}" Grid.Row="3" Grid.Column="1"/>
                         <ComboBox Name="logExtensionSelector"  IsEditable="True" Grid.Row="3" Grid.Column="2" PreviewMouseDown="logExtensionSelector_GotFocus" GotFocus="logExtensionSelector_GotFocus">
                             <ComboBoxItem>.json</ComboBoxItem>
                             <ComboBoxItem>.xml</ComboBoxItem>
@@ -69,7 +69,7 @@
                     </Grid>
                 </Border>
             </TabItem>
-            <TabItem Header="Crypto" Height="20" VerticalAlignment="Top">
+            <TabItem Name="tabCrypto" Header="{local:LangageExtension Key='Config.Tab2'}">
                 <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
 
                     <Grid Margin="5">
@@ -87,18 +87,18 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Name="cryptoTitle" Content="Crypto" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        <Label Name="cryptoTitle" Content="{local:LangageExtension Key='Config.Crypto1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-                        <Label Name="cryptoPathLabel" Content="pathCrypto" Grid.Row="2" Grid.Column="1"/>
+                        <Label Name="cryptoPathLabel" Content="{local:LangageExtension Key='Config.Crypto2'}" Grid.Row="2" Grid.Column="1"/>
                         <TextBox x:Name="cryptoPathEntry" Grid.Row="2" Grid.Column="2"/>
                         <Button x:Name="cryptoPathExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4CB;" Click="cryptoPathExplorer_Click"/>
 
-                        <Label Name="cryptoExtensionsLabel" Content="extensionsCrypto" Grid.Row="3" Grid.Column="1"/>
+                        <Label Name="cryptoExtensionsLabel" Content="{local:LangageExtension Key='Config.Crypto3'}" Grid.Row="3" Grid.Column="1"/>
                         <TextBox x:Name="cryptoExtensionsEntry" Grid.Row="3" Grid.Column="2"/>
                         <ListView Name="cryptoExtensionsListView"  Grid.Row="4" Grid.Column="2">
                             <ListView.View>
                                 <GridView x:Name="cryptoExtensionsGridView">
-                                    <GridViewColumn Header="Extension"  DisplayMemberBinding="{Binding extension}"/>
+                                    <GridViewColumn Header="{local:LangageExtension Key='Config.Crypto4'}"  DisplayMemberBinding="{Binding extension}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -107,7 +107,7 @@
                     </Grid>
                 </Border>
             </TabItem>
-            <TabItem Header="Languages">
+            <TabItem Name="tabLanguages" Header="{local:LangageExtension Key='Config.Tab3'}">
                 <Border Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
 
                     <Grid Margin="5">
@@ -124,9 +124,9 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Name="languageTitle" Content="Languages" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        <Label Name="languageTitle" Content="{local:LangageExtension Key='Config.Languages1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-                        <Label Name="languageLabel" Content="Select: " Grid.Row="2" Grid.Column="1"/>
+                        <Label Name="languageLabel" Content="{local:LangageExtension Key='Config.Languages2'}" Grid.Row="2" Grid.Column="1"/>
                         <ComboBox Name="languageSelector"  IsEditable="True" Grid.Row="2" Grid.Column="2" PreviewMouseDown="languageSelector_GotFocus" GotFocus="languageSelector_GotFocus">
                             <ComboBoxItem>English</ComboBoxItem>
                             <ComboBoxItem>Francais</ComboBoxItem>
@@ -136,7 +136,7 @@
                 </Border>
 
             </TabItem>
-            <TabItem Header="Blocker">
+            <TabItem Name="tabBlocker" Header="{local:LangageExtension Key='Config.Tab4'}">
                 <Border Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
 
                     <Grid Margin="5">
@@ -153,15 +153,15 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Name="blockerTitle" Content="Blocker" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        <Label Name="blockerTitle" Content="{local:LangageExtension Key='Config.Blocker1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-                        <Label Name="blockerlabel" Content="Select: " Grid.Row="2" Grid.Column="1"/>
+                        <Label Name="blockerlabel" Content="{local:LangageExtension Key='Config.Blocker2'}" Grid.Row="2" Grid.Column="1"/>
                         <TextBox x:Name="blockerEntry" Grid.Row="2" Grid.Column="2" />
                     </Grid>
                 </Border>
 
             </TabItem>
-            <TabItem Header="Save Path">
+            <TabItem Name="tabSavePath" Header="{local:LangageExtension Key='Config.Tab5'}">
                 <Border Grid.Row="5" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
 
                     <Grid Margin="5">
@@ -178,10 +178,10 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Name="SavePath" Content="Save Path" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                        <Label Name="SavePath" Content="{local:LangageExtension Key='Config.SavePath1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
 
-                        <Label Name="pathSaveBackupsLabel" Content="pathSaves" Grid.Row="3" Grid.Column="1"/>
+                        <Label Name="pathSaveBackupsLabel" Content="{local:LangageExtension Key='Config.SavePath2'}" Grid.Row="3" Grid.Column="1"/>
                         <TextBox x:Name="pathSaveBackupEntry" Grid.Row="3" Grid.Column="2" />
                         <Button x:Name="pathSaveBackupExplorer" Grid.Row="3" Grid.Column="3" Content="&#x1F4CB;" Click="pathSaveBackupExplorer_Click"/>
 
@@ -190,11 +190,7 @@
 
             </TabItem>
         </TabControl>
-        <Button x:Name="ApplyButton" Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Left" Click="ApplyButton_Click">
-            Apply
-        </Button>
-        <Button x:Name="ResetButton" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="ResetButton_Click">
-            Reset
-        </Button>
+        <Button x:Name="ApplyButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Config.Apply'}"  Margin="5" HorizontalAlignment="Left" Click="ApplyButton_Click"/>
+        <Button x:Name="ResetButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Config.Reset'}" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="ResetButton_Click"/>
     </Grid>
 </UserControl>

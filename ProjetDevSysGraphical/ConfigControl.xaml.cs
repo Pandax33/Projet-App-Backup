@@ -123,6 +123,7 @@ namespace ProjetDevSysGraphical
 
             //refresh content
             Refresh();
+            //MainWindow.ReloadWindow();
         }
 
         private void Refresh()

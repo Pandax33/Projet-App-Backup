@@ -61,11 +61,218 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Oui.
+        ///   Recherche une chaîne localisée semblable à Apply.
         /// </summary>
-        internal static string String1 {
+        internal static string Config_Apply {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("Config.Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Blocker processes : if detected backup is interrupted.
+        /// </summary>
+        internal static string Config_Blocker1 {
+            get {
+                return ResourceManager.GetString("Config.Blocker1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Insert a Process name :.
+        /// </summary>
+        internal static string Config_Blocker2 {
+            get {
+                return ResourceManager.GetString("Config.Blocker2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à CryptoSave Configuration.
+        /// </summary>
+        internal static string Config_Crypto1 {
+            get {
+                return ResourceManager.GetString("Config.Crypto1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à CryptoSave Path :.
+        /// </summary>
+        internal static string Config_Crypto2 {
+            get {
+                return ResourceManager.GetString("Config.Crypto2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à CryptoSave extensions to encrypt :.
+        /// </summary>
+        internal static string Config_Crypto3 {
+            get {
+                return ResourceManager.GetString("Config.Crypto3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extensions.
+        /// </summary>
+        internal static string Config_Crypto4 {
+            get {
+                return ResourceManager.GetString("Config.Crypto4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Change localization.
+        /// </summary>
+        internal static string Config_Languages1 {
+            get {
+                return ResourceManager.GetString("Config.Languages1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select a language :.
+        /// </summary>
+        internal static string Config_Languages2 {
+            get {
+                return ResourceManager.GetString("Config.Languages2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Log Files Configuration.
+        /// </summary>
+        internal static string Config_Log1 {
+            get {
+                return ResourceManager.GetString("Config.Log1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Daily Log Path :.
+        /// </summary>
+        internal static string Config_Log2 {
+            get {
+                return ResourceManager.GetString("Config.Log2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Real-Time Log Path :.
+        /// </summary>
+        internal static string Config_Log3 {
+            get {
+                return ResourceManager.GetString("Config.Log3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Logs Extension type :.
+        /// </summary>
+        internal static string Config_Log4 {
+            get {
+                return ResourceManager.GetString("Config.Log4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reset.
+        /// </summary>
+        internal static string Config_Reset {
+            get {
+                return ResourceManager.GetString("Config.Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Path to backups save file.
+        /// </summary>
+        internal static string Config_SavePath1 {
+            get {
+                return ResourceManager.GetString("Config.SavePath1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Insert the path to your backups save file :.
+        /// </summary>
+        internal static string Config_SavePath2 {
+            get {
+                return ResourceManager.GetString("Config.SavePath2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Log Files.
+        /// </summary>
+        internal static string Config_Tab1 {
+            get {
+                return ResourceManager.GetString("Config.Tab1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à CryptoSave.
+        /// </summary>
+        internal static string Config_Tab2 {
+            get {
+                return ResourceManager.GetString("Config.Tab2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Language.
+        /// </summary>
+        internal static string Config_Tab3 {
+            get {
+                return ResourceManager.GetString("Config.Tab3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Blocker Process.
+        /// </summary>
+        internal static string Config_Tab4 {
+            get {
+                return ResourceManager.GetString("Config.Tab4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save Paths.
+        /// </summary>
+        internal static string Config_Tab5 {
+            get {
+                return ResourceManager.GetString("Config.Tab5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Home.
+        /// </summary>
+        internal static string Selector1 {
+            get {
+                return ResourceManager.GetString("Selector1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Saves.
+        /// </summary>
+        internal static string Selector2 {
+            get {
+                return ResourceManager.GetString("Selector2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Configuration.
+        /// </summary>
+        internal static string Selector3 {
+            get {
+                return ResourceManager.GetString("Selector3", resourceCulture);
             }
         }
     }

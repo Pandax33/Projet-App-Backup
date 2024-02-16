@@ -30,7 +30,7 @@ namespace ProjetDevSysGraphical
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
 
-            return ResourceHelper.GetString("String1") ?? Key;
+            return ResourceHelper.GetString(Key) ?? Key;
         }
     }
 
