@@ -291,42 +291,8 @@ namespace ProjetDevSys.Model
             {
                 Directory.CreateDirectory(easySavePath);
             }
-            
-            var defaultConfig = new
-            {
-                Logging = new
-                {
-                    JsonPath
-                },
-                Langage = new
-                {
-                    Langage = CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US"
-                },
-                RealTimeLogging = new
-                {
-                    JsonPathRealTime
-                },
-                LoadSave = new
-                {
-                    JsonPathSave
-                },
-                LogType = new
-                {
-                    ExtensionType = ".json"
-                },
-                ExtensionListCrypt = new
-                {
-                    ExtensionListCrypt
-                },
-                CryptPath = new
-                {
-                    CryptPath
-                },
-                KeyCrypt = new
-                {
-                    KeyCrypt
-                }
-            };
+
+            var defaultConfig = GetDefaultConfig();
             string json = JsonSerializer.Serialize(defaultConfig, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(configFilePath, json);
             AppConstants.reloadConfig();
