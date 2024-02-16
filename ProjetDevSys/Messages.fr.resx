@@ -336,6 +336,9 @@
   <data name="GestionTaskView34" xml:space="preserve">
     <value>Réponse non valide, veuillez entrer 'y' pour oui ou 'n' pour non.</value>
   </data>
+  <data name="GestionTaskView35" xml:space="preserve">
+    <value>Le nom de Backup existe déjà ou est nul</value>
+  </data>
   <data name="GestionTaskView4" xml:space="preserve">
     <value>Échec de la création de la tâche de sauvegarde.</value>
   </data>

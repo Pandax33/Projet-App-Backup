@@ -118,73 +118,73 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Config.Apply" xml:space="preserve">
-    <value>Apply</value>
+    <value>Appliquer</value>
   </data>
   <data name="Config.Blocker1" xml:space="preserve">
-    <value>Blocker processes : if detected backup is interrupted</value>
+    <value>Processus bloquants : si détecté, interromps la sauvegarde</value>
   </data>
   <data name="Config.Blocker2" xml:space="preserve">
-    <value>Insert a Process name :</value>
+    <value>Processus à bloquer :</value>
   </data>
   <data name="Config.Crypto1" xml:space="preserve">
-    <value>CryptoSave Configuration</value>
+    <value>Configuration de CryptoSave</value>
   </data>
   <data name="Config.Crypto2" xml:space="preserve">
-    <value>CryptoSave Path :</value>
+    <value>Chemin de CryptoSave :</value>
   </data>
   <data name="Config.Crypto3" xml:space="preserve">
-    <value>CryptoSave extensions to encrypt :</value>
+    <value>Extensions à chiffrer par CryptoSave :</value>
   </data>
   <data name="Config.Crypto4" xml:space="preserve">
     <value>Extensions</value>
   </data>
   <data name="Config.Languages1" xml:space="preserve">
-    <value>Change localization</value>
+    <value>Changer la localisation</value>
   </data>
   <data name="Config.Languages2" xml:space="preserve">
-    <value>Select a language :</value>
+    <value>Sélectioner une langue :</value>
   </data>
   <data name="Config.Log1" xml:space="preserve">
-    <value>Log Files Configuration</value>
+    <value>Configuration des fichiers Logs</value>
   </data>
   <data name="Config.Log2" xml:space="preserve">
-    <value>Daily Log Path :</value>
+    <value>Chemin du Log Quotidien :</value>
   </data>
   <data name="Config.Log3" xml:space="preserve">
-    <value>Real-Time Log Path :</value>
+    <value>Chemin du Log Temps réel :</value>
   </data>
   <data name="Config.Log4" xml:space="preserve">
-    <value>Logs Extension type :</value>
+    <value>Type d'extension :</value>
   </data>
   <data name="Config.Reset" xml:space="preserve">
-    <value>Reset</value>
+    <value>Réinitialiser</value>
   </data>
   <data name="Config.SavePath1" xml:space="preserve">
-    <value>Path to backups save file</value>
+    <value>Chemin vers le fichier de sauvegarde des tâches</value>
   </data>
   <data name="Config.SavePath2" xml:space="preserve">
-    <value>Insert the path to your backups save file :</value>
+    <value>Insérer le chemin vers le fichier de sauvegarde :</value>
   </data>
   <data name="Config.Tab1" xml:space="preserve">
-    <value>Log Files</value>
+    <value>Fichiers Log</value>
   </data>
   <data name="Config.Tab2" xml:space="preserve">
     <value>CryptoSave</value>
   </data>
   <data name="Config.Tab3" xml:space="preserve">
-    <value>Language</value>
+    <value>Langues</value>
   </data>
   <data name="Config.Tab4" xml:space="preserve">
-    <value>Blocker Process</value>
+    <value>Processus bloquants</value>
   </data>
   <data name="Config.Tab5" xml:space="preserve">
-    <value>Save Paths</value>
+    <value>Chemin de Sauvegarde</value>
   </data>
   <data name="Selector1" xml:space="preserve">
-    <value>Home</value>
+    <value>Acceuil</value>
   </data>
   <data name="Selector2" xml:space="preserve">
-    <value>Saves</value>
+    <value>Sauvegardes</value>
   </data>
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>

@@ -336,6 +336,9 @@
   <data name="GestionTaskView34" xml:space="preserve">
     <value>Invalid response, please enter 'y' for yes or 'n' for no.</value>
   </data>
+  <data name="GestionTaskView35" xml:space="preserve">
+    <value>The Backup name already exists or is null</value>
+  </data>
   <data name="GestionTaskView4" xml:space="preserve">
     <value>Failed to create backup.</value>
   </data>

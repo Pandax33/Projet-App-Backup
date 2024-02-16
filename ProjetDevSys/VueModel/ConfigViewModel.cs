@@ -59,9 +59,14 @@ namespace ProjetDevSys.VueModel
             return ResourceHelper.GetString("ConfigViewModel1");
         }
 
-        public string EditExtensionListCrypt(string ExtensionListCrypt)
+        public string EditExtensionListCrypt(string ExtensionCrypt)
         {
-            Config.ExtensionListCrypt.Add(ExtensionListCrypt);
+
+            if (!ExtensionCrypt.StartsWith("."))
+            {
+                ExtensionCrypt = "." + ExtensionCrypt;
+            }
+            Config.ExtensionListCrypt.Add(ExtensionCrypt);
             Config.EditConfig();
             return ResourceHelper.GetString("ConfigViewModel1");
         }
