@@ -250,7 +250,7 @@ namespace ProjetDevSys.Model
             // Vérifie si le dossier CryptoSoft n'existe pas
             if (!Directory.Exists(cryptoSoftPath))
             {
-                Console.WriteLine($"Le dossier {cryptoSoftPath} n'existe pas. Téléchargement en cours...");
+                Console.WriteLine(ResourceHelper.GetString("ConfigText1"));
 
                 try
                 {
@@ -261,22 +261,22 @@ namespace ProjetDevSys.Model
                         await File.WriteAllBytesAsync(downloadPath, fileBytes);
                     }
 
-                    Console.WriteLine("Téléchargement terminé. Extraction en cours...");
+                    Console.WriteLine(ResourceHelper.GetString("ConfigText2"));
 
                     // Extrait le fichier téléchargé
                     string extractPath = Path.Combine(easySaveFolder, "CryptoSoftGP5");
                     ZipFile.ExtractToDirectory(downloadPath, extractPath);
 
-                    Console.WriteLine($"Extraction terminée. Fichiers disponibles dans {extractPath}");
+                    Console.WriteLine(ResourceHelper.GetString("ConfigText3"));
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Une erreur est survenue : {ex.Message}");
+                    Console.WriteLine($"{ResourceHelper.GetString("ConfigText4")} {ex.Message}");
                 }
             }
             else
             {
-                Console.WriteLine($"Le dossier {cryptoSoftPath} existe déjà.");
+                Console.WriteLine(ResourceHelper.GetString("ConfigText5"));
             }
         }
 

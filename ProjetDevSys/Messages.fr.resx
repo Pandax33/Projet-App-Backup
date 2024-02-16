@@ -126,6 +126,21 @@
   <data name="BackupJob1" xml:space="preserve">
     <value>Type de sauvegarde non supporté.</value>
   </data>
+  <data name="ConfigText1" xml:space="preserve">
+    <value>Le dossier CryptoSoft n'existe pas. Téléchargement en cours...</value>
+  </data>
+  <data name="ConfigText2" xml:space="preserve">
+    <value>Téléchargement terminé. Extraction en cours...</value>
+  </data>
+  <data name="ConfigText3" xml:space="preserve">
+    <value>Extraction terminée. Fichiers disponibles dans</value>
+  </data>
+  <data name="ConfigText4" xml:space="preserve">
+    <value>Une erreur est survenue :</value>
+  </data>
+  <data name="ConfigText5" xml:space="preserve">
+    <value>Le dossier CryptoSoft existe déjà.</value>
+  </data>
   <data name="ConfigViewModel1" xml:space="preserve">
     <value>Changement réalisé.</value>
   </data>
