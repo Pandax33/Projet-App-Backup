@@ -52,7 +52,7 @@ namespace ProjetDevSys
                 ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
                 CryptPath = config.CryptPath.CryptPath;
                 KeyCrypt = config.KeyCrypt.KeyCrypt;
-                BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess);
+                BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
                 Config.Initialize();
             }
             catch (Exception ex)

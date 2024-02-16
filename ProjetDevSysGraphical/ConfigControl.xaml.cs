@@ -33,21 +33,25 @@ namespace ProjetDevSysGraphical
         private void pathLogDailyExplorer_Click(object sender, RoutedEventArgs e)
         {
             logDailyEntry.Text = AppConstants.OpenFolderDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void pathLogRTExplorer_Click(object sender, RoutedEventArgs e)
         {
             logRTEntry.Text = AppConstants.OpenFolderDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void pathSaveBackupExplorer_Click(object sender, RoutedEventArgs e)
         {
             pathSaveBackupEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void cryptoPathExplorer_Click(object sender, RoutedEventArgs e)
         {
             cryptoPathEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void languageSelector_GotFocus(object sender, RoutedEventArgs e)
@@ -74,7 +78,14 @@ namespace ProjetDevSysGraphical
         {
             if (!string.IsNullOrWhiteSpace(cryptoExtensionsEntry.Text))
             {
-                CryptoExtensions.Add(cryptoExtensionsEntry.Text);
+                if (!cryptoExtensionsEntry.Text.StartsWith("."))
+                {
+                    CryptoExtensions.Add("." + cryptoExtensionsEntry.Text);
+                }
+                else
+                {
+                    CryptoExtensions.Add(cryptoExtensionsEntry.Text);
+                }
                 cryptoExtensionsEntry.Clear();
                 cryptoExtensionsUpdate();
             }
@@ -151,6 +162,7 @@ namespace ProjetDevSysGraphical
 
             //refresh content
             Refresh();
+            //MainWindow.ReloadWindow();
         }
 
         private void Refresh()

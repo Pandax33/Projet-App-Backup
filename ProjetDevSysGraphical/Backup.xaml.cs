@@ -158,7 +158,7 @@ namespace ProjetDevSysGraphical
         public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
-            runSaveTask.RunTaskMultiple(idToLaunch.ToArray());
+            MessageBox.Show(runSaveTask.RunTaskMultiple(idToLaunch.ToArray()), "Run", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
@@ -174,8 +174,9 @@ namespace ProjetDevSysGraphical
 
                 // Call DeleteTask with the extracted index
                 gestionTask.DeleteTask(index);
-                PopUpWPF popUpWPF = new PopUpWPF(buttonName + " " + "Task deleted successfully");
-                popUpWPF.ShowDialog();
+
+                MessageBox.Show(ResourceHelper.GetString("Task.DeleteInfo"), ResourceHelper.GetString("Task.Delete"), MessageBoxButton.OK, MessageBoxImage.Information);
+                GenerateGrid();
             }
         }
 

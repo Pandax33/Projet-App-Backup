@@ -60,7 +60,7 @@ namespace ProjetDevSysGraphical
         }
         #endregion
 
-        private void ButtonValider_Click(object sender, RoutedEventArgs e)
+        private void applyButton_Click(object sender, RoutedEventArgs e)
         {
             GestionTask gestionTask = new GestionTask();
 
@@ -68,42 +68,48 @@ namespace ProjetDevSysGraphical
             {
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == true && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
-                    gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType);
+                    MessageBox.Show(gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType), ResourceHelper.GetString("Task.Popup.Out"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
                     if (mainWindow != null && mainWindow.contentControl.Content is Backup backup)
                     {
                         // Appeler GenerateGrid sur cette instance
                         backup.GenerateGrid();
                     }
+                    Close();
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Le chemin source n'existe pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add1"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileTarget) == false && ProjetDevSys.AppConstants.VerifExist(FileSource) == true)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Le chemin cible n'existe pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add2"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == false)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Les chemins source et cible n'existent pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add3"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            Hide();
+            else MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add4"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void ButtonEnterPath_Click(object sender, RoutedEventArgs e)
         {
             textBoxEnterPath.Text = AppConstants.OpenFolderDialog();
+            Activate();
         }
 
         private void ButtonOutPath_Click(object sender, RoutedEventArgs e)
         {
             textBoxOutPath.Text = AppConstants.OpenFolderDialog();
+            Activate();
         }
     }
 }

@@ -718,6 +718,15 @@ namespace ProjetDevSys {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à The Backup name already exists or is null.
+        /// </summary>
+        internal static string GestionTaskView35 {
+            get {
+                return ResourceManager.GetString("GestionTaskView35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Failed to create backup..
         /// </summary>
         internal static string GestionTaskView4 {
