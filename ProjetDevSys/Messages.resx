@@ -126,6 +126,21 @@
   <data name="BackupJob1" xml:space="preserve">
     <value>Unsupported backup type.</value>
   </data>
+  <data name="ConfigText1" xml:space="preserve">
+    <value>CryptoSoft Folder dooesn't exist. Downloading...</value>
+  </data>
+  <data name="ConfigText2" xml:space="preserve">
+    <value>Download complete. Extracting...</value>
+  </data>
+  <data name="ConfigText3" xml:space="preserve">
+    <value>Extract complete. Folders availables in</value>
+  </data>
+  <data name="ConfigText4" xml:space="preserve">
+    <value>An error occured :</value>
+  </data>
+  <data name="ConfigText5" xml:space="preserve">
+    <value>CryptoSoft folder already exists.</value>
+  </data>
   <data name="ConfigViewModel1" xml:space="preserve">
     <value>Change made.</value>
   </data>
@@ -148,13 +163,52 @@
     <value>4. Backup save file</value>
   </data>
   <data name="ConfigViewText14" xml:space="preserve">
-    <value>5. Exit</value>
+    <value>9. Exit</value>
   </data>
   <data name="ConfigViewText15" xml:space="preserve">
     <value>Invalid language. Please enter 'fr' for French or 'en' for English.</value>
   </data>
+  <data name="ConfigViewText16" xml:space="preserve">
+    <value>Enter extension type for logs (.json/.xml) :</value>
+  </data>
+  <data name="ConfigViewText17" xml:space="preserve">
+    <value>Invalid extension. Please enter '.json' or '.xml'.</value>
+  </data>
+  <data name="ConfigViewText18" xml:space="preserve">
+    <value>5. Log extension type</value>
+  </data>
+  <data name="ConfigViewText19" xml:space="preserve">
+    <value>Please enter an extension type</value>
+  </data>
   <data name="ConfigViewText2" xml:space="preserve">
     <value>Return to the main menu</value>
+  </data>
+  <data name="ConfigViewText20" xml:space="preserve">
+    <value>Invalid extension</value>
+  </data>
+  <data name="ConfigViewText21" xml:space="preserve">
+    <value>Please enter the path to cryptosoft</value>
+  </data>
+  <data name="ConfigViewText22" xml:space="preserve">
+    <value>Invalid path</value>
+  </data>
+  <data name="ConfigViewText23" xml:space="preserve">
+    <value>6. Add an extension to encrypt</value>
+  </data>
+  <data name="ConfigViewText24" xml:space="preserve">
+    <value>7. Edit cryptosoft path</value>
+  </data>
+  <data name="ConfigViewText25" xml:space="preserve">
+    <value>The configuration has been reset.</value>
+  </data>
+  <data name="ConfigViewText26" xml:space="preserve">
+    <value>Please enter the id to be deleted</value>
+  </data>
+  <data name="ConfigViewText27" xml:space="preserve">
+    <value>Invalid identifier</value>
+  </data>
+  <data name="ConfigViewText28" xml:space="preserve">
+    <value>8. Delete an extension to be encrypted</value>
   </data>
   <data name="ConfigViewText3" xml:space="preserve">
     <value>Invalid or non-existent JSON file.</value>
@@ -300,8 +354,14 @@
   <data name="GestionTaskView9" xml:space="preserve">
     <value>Invalid ID.</value>
   </data>
+  <data name="GestionTaskViewText35" xml:space="preserve">
+    <value>Name is already taken. Please enter another.</value>
+  </data>
   <data name="InterfaceStrategy1" xml:space="preserve">
     <value>The source folder does not exist.</value>
+  </data>
+  <data name="InterfaceStrategy2" xml:space="preserve">
+    <value>Task interrupted : blocking process detected</value>
   </data>
   <data name="JsonManager1" xml:space="preserve">
     <value>The file does not exist.</value>
@@ -371,6 +431,9 @@
   </data>
   <data name="RunTaskView21" xml:space="preserve">
     <value>You have no saved task</value>
+  </data>
+  <data name="RunTaskView22" xml:space="preserve">
+    <value>Task blocked : blocking process interrupted</value>
   </data>
   <data name="RunTaskView3" xml:space="preserve">
     <value>Backup done.</value>

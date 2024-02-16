@@ -26,15 +26,38 @@ namespace ProjetDevSys
 
         public void CreateLog()
         {
-            // Configure Newtonsoft.Json to format the JSON file
-            JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
-            string logEntry = JsonConvert.SerializeObject(this, settings);
-
-            // Add the log entry to the JSON file
-            using (StreamWriter streamWriter = File.AppendText(JsonPath))
+            if (AppConstants.ExtensionType == ".json")
             {
-                streamWriter.WriteLine(logEntry);
+                // Configure Newtonsoft.Json to format the JSON file
+                JsonSerializerSettings settings = new JsonSerializerSettings { Formatting = Formatting.Indented };
+                string logEntry = JsonConvert.SerializeObject(this, settings);
+
+                // Add the log entry to the JSON file
+                string completeFilePath = JsonPath + AppConstants.ExtensionType;
+
+                using (StreamWriter streamWriter = File.AppendText(completeFilePath))
+                {
+                    streamWriter.WriteLine(logEntry);
+                }
             }
+            else if(AppConstants.ExtensionType == ".xml")
+            {
+                // Add the log entry to the XML file
+                string completeFilePath = JsonPath + AppConstants.ExtensionType;
+
+                using (StreamWriter streamWriter = File.AppendText(completeFilePath))
+                {
+                    streamWriter.WriteLine("<LogEntry>");
+                    streamWriter.WriteLine("  <Name>" + Name + "</Name>");
+                    streamWriter.WriteLine("  <FileSource>" + FileSource + "</FileSource>");
+                    streamWriter.WriteLine("  <FileTarget>" + FileTarget + "</FileTarget>");
+                    streamWriter.WriteLine("  <FileSize>" + FileSize + "</FileSize>");
+                    streamWriter.WriteLine("  <FileTransferTime>" + FileTransferTime + "</FileTransferTime>");
+                    streamWriter.WriteLine("  <Time>" + Time + "</Time>");
+                    streamWriter.WriteLine("</LogEntry>");
+                }
+            }   
+            
         }
     }
 }

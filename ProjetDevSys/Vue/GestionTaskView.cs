@@ -25,7 +25,20 @@ namespace ProjetDevSys.Vue
             {
                 case "1":
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView13"));
-                    string fileName = Console.ReadLine();
+                    string fileName;
+                    bool isValidName = false;
+                    do
+                    {
+                        fileName = Console.ReadLine().Trim();
+                        isValidName = ((BackupFactory.GetBackupByName(fileName) == null) && !String.IsNullOrWhiteSpace(fileName)) ? true : false;
+                        if (!isValidName)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(ResourceHelper.GetString("GestionTaskViewText35"));
+                            Console.ResetColor();
+                        }
+
+                    } while (!isValidName);
 
                     string sourcePath;
                     bool isValidSource = false;
@@ -48,14 +61,14 @@ namespace ProjetDevSys.Vue
                     do
                     {
                         destinationPath = Console.ReadLine();
-                        if (!AppConstants.VerifPath(destinationPath))
+                        if (!AppConstants.VerifPath(destinationPath) || destinationPath.Contains(sourcePath))
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(ResourceHelper.GetString("GestionTaskView22"));
                             Console.ResetColor(); 
                             Console.WriteLine(ResourceHelper.GetString("GestionTaskView16"));
                         }
-                    } while (!AppConstants.VerifPath(destinationPath));
+                    } while (!AppConstants.VerifPath(destinationPath) || destinationPath.Contains(sourcePath));
 
                     Console.WriteLine(ResourceHelper.GetString("GestionTaskView17"));
                     string backupType = Console.ReadLine().Trim().ToUpper(); 

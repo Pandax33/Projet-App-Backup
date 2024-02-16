@@ -3,15 +3,22 @@ using System;
 using System.Globalization;
 using System.IO;
 using ProjetDevSys.Model;
+using System.Diagnostics;
 
 namespace ProjetDevSys
 {
     public static class AppConstants
     {
-        public static readonly string LogFilePath;
-        public static readonly string Langage;
-        public static readonly string LogFilePathRealTime;
-        public static readonly string JsonSave;
+        public static string LogFilePath;
+        public static string Langage;
+        public static string LogFilePathRealTime;
+        public static string JsonSave;
+        public static string ExtensionType;
+        public static List<string> ExtensionListCrypt;
+        public static string CryptPath;
+        public static string KeyCrypt;
+        
+        public static List<string> BlockerProcess;
 
         static AppConstants()
         {
@@ -21,11 +28,12 @@ namespace ProjetDevSys
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
             string filePath = Path.Combine(easySavePath, "appsettings.json");
-            if (!AppConstants.VerifJson(filePath))
+            if (!VerifJson(filePath))
             {
                 Config.CreateSetting();
             }
-            
+            Config.UpdateLogFilePathIfNeeded();
+            Config.VerifyAndAddMissingConfigElements(filePath,Config.GetDefaultConfig());
             
             try
             {
@@ -40,6 +48,12 @@ namespace ProjetDevSys
                 Langage = config.Langage.Langage;
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
                 JsonSave = config.LoadSave.JsonPathSave;
+                ExtensionType = config.LogType.ExtensionType;
+                ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
+                CryptPath = config.CryptPath.CryptPath;
+                KeyCrypt = config.KeyCrypt.KeyCrypt;
+                BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess);
+                Config.Initialize();
             }
             catch (Exception ex)
             {
@@ -77,6 +91,43 @@ namespace ProjetDevSys
                 return numericId;
             }
             return -1;
+        }
+
+        public static void reloadConfig()
+        {
+            string appsettings = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EasySaveGP5", "appsettings.json");
+            string json = File.ReadAllText(appsettings);
+
+            // Deserialize the JSON to a dynamic type
+            dynamic config = JsonConvert.DeserializeObject(json);
+
+            // Assign the values to the static fields
+            LogFilePath = config.Logging.JsonPath;
+            Langage = config.Langage.Langage;
+            LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
+            JsonSave = config.LoadSave.JsonPathSave;
+            ExtensionType = config.LogType.ExtensionType;
+            ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
+            CryptPath = config.CryptPath.CryptPath;
+            KeyCrypt = config.KeyCrypt.KeyCrypt;
+            BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
+            CultureInfo ci = new CultureInfo(Langage);
+            CultureInfo.CurrentUICulture = ci;
+        }
+
+        public static bool RunningBlockerProcess()
+        {
+            if (BlockerProcess == null || !BlockerProcess.Any()) return false;
+
+            foreach (var processName in BlockerProcess)
+            {
+                if (Process.GetProcessesByName(processName).Any())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
     }
