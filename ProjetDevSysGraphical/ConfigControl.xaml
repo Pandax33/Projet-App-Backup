@@ -54,12 +54,12 @@
 
                         <Label Name="logDailyLabel" Content="{local:LangageExtension Key='Config.Log2'}" Grid.Row="1" Grid.Column="1"/>
                         <TextBox x:Name="logDailyEntry" Grid.Row="1" Grid.Column="2" />
-                        <Button x:Name="logDailyExplorer" Grid.Row="1" Grid.Column="3" Content="&#x1F4CB;" Click="pathLogDailyExplorer_Click"/>
+                        <Button x:Name="logDailyExplorer" Grid.Row="1" Grid.Column="3" Content="&#x1F4C1;" Click="pathLogDailyExplorer_Click"/>
 
 
                         <Label Name="logRTLabel" Content="{local:LangageExtension Key='Config.Log3'}" Grid.Row="2" Grid.Column="1"/>
                         <TextBox x:Name="logRTEntry" Grid.Row="2" Grid.Column="2" />
-                        <Button x:Name="logRTExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4CB;" Click="pathLogRTExplorer_Click"/>
+                        <Button x:Name="logRTExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4C1;" Click="pathLogRTExplorer_Click"/>
 
                         <Label Name="logExtensionlabel" Content="{local:LangageExtension Key='Config.Log4'}" Grid.Row="3" Grid.Column="1"/>
                         <ComboBox Name="logExtensionSelector"  IsEditable="True" Grid.Row="3" Grid.Column="2" PreviewMouseDown="logExtensionSelector_GotFocus" GotFocus="logExtensionSelector_GotFocus">
@@ -91,7 +91,7 @@
 
                         <Label Name="cryptoPathLabel" Content="{local:LangageExtension Key='Config.Crypto2'}" Grid.Row="2" Grid.Column="1"/>
                         <TextBox x:Name="cryptoPathEntry" Grid.Row="2" Grid.Column="2"/>
-                        <Button x:Name="cryptoPathExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4CB;" Click="cryptoPathExplorer_Click"/>
+                        <Button x:Name="cryptoPathExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4C1;" Click="cryptoPathExplorer_Click"/>
 
                         <Label Name="cryptoExtensionsLabel" Content="{local:LangageExtension Key='Config.Crypto3'}" Grid.Row="3" Grid.Column="1"/>
                         <TextBox x:Name="cryptoExtensionsEntry" Grid.Row="3" Grid.Column="2"/>
@@ -183,7 +183,7 @@
 
                         <Label Name="pathSaveBackupsLabel" Content="{local:LangageExtension Key='Config.SavePath2'}" Grid.Row="3" Grid.Column="1"/>
                         <TextBox x:Name="pathSaveBackupEntry" Grid.Row="3" Grid.Column="2" />
-                        <Button x:Name="pathSaveBackupExplorer" Grid.Row="3" Grid.Column="3" Content="&#x1F4CB;" Click="pathSaveBackupExplorer_Click"/>
+                        <Button x:Name="pathSaveBackupExplorer" Grid.Row="3" Grid.Column="3" Content="&#x1F4C1;" Click="pathSaveBackupExplorer_Click"/>
 
                     </Grid>
                 </Border>
