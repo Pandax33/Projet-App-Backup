@@ -28,7 +28,11 @@ namespace ProjetDevSysGraphical
         private void PopUp_Closed(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow.GenerateGrid();
+            if (mainWindow != null && mainWindow.contentControl.Content is Backup backup)
+            {
+                // Appeler GenerateGrid sur cette instance
+                backup.GenerateGrid();
+            }
         }
     }
 }
