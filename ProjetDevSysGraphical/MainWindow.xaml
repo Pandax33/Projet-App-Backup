@@ -6,27 +6,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetDevSysGraphical"
         mc:Ignorable="d"
-        Title="EasySave" MinHeight="400" Height="450" MaxHeight="800" MinWidth="750" Width="800" MaxWidth="1200">
+        Title="EasySave" MinHeight="800" Height="800" MaxHeight="800" MinWidth="1200" Width="1200" MaxWidth="1200"
+        Background="#000022">
+    <!-- Couleur de fond modifiée -->
+
+    <Window.Resources>
+        <Style x:Key="NavigationButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <!-- Taille de police augmentée -->
+            <Setter Property="Padding" Value="12,10"/>
+            <!-- Padding ajusté pour plus d'espace -->
+            <Setter Property="BorderThickness" Value="2"/>
+            <!-- Épaisseur de bordure augmentée -->
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="20" BorderThickness="2" BorderBrush="#FF333333" Background="{TemplateBinding Background}">
+                            <!-- Rayon et épaisseur de bordure augmentés -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <!-- Barre de navigation -->
             <ColumnDefinition Width="*"/>
-            <!-- Contenu existant -->
         </Grid.ColumnDefinitions>
 
-        <!-- Barre de navigation -->
-        <StackPanel Grid.Column="0" VerticalAlignment="Top">
-            <Button Content="Accueil" HorizontalAlignment="Stretch" Margin="10" Click="Home_Click"/>
-            <Button Content="Sauvegarde" HorizontalAlignment="Stretch" Margin="10" Click="Backup_Click"/>
-            <Button Content="Configuration" HorizontalAlignment="Stretch" Margin="10" Click="Settings_Click"/>
-        </StackPanel>
+        <!-- Ajout d'une bordure arrondie autour de la première colonne -->
+        <Border Grid.Column="0" Background="#0094C6" CornerRadius="10" Margin="5">
+            <!-- Couleur de fond et arrondi pour la bordure -->
+            <Grid Margin="10">
+                <!-- Marge intérieure pour respecter l'arrondi -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                    <!-- Hauteur ajustée pour plus d'espace -->
+                    <RowDefinition Height="20"/>
+                    <!-- Espacement augmenté entre les boutons -->
+                    <RowDefinition Height="60"/>
+                    <!-- Hauteur ajustée pour plus d'espace -->
+                    <RowDefinition Height="20"/>
+                    <!-- Espacement augmenté entre les boutons -->
+                    <RowDefinition Height="60"/>
+                    <!-- Hauteur ajustée pour plus d'espace -->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button Content="Accueil" Style="{StaticResource NavigationButtonStyle}" Grid.Row="1" Click="Home_Click"/>
+                <Button Content="Sauvegarde" Style="{StaticResource NavigationButtonStyle}" Grid.Row="3" Click="Backup_Click"/>
+                <Button Content="Configuration" Style="{StaticResource NavigationButtonStyle}" Grid.Row="5" Click="Settings_Click"/>
+            </Grid>
+        </Border>
 
         <!-- Contenu existant déplacé dans la deuxième colonne -->
         <Grid Grid.Column="1">
             <ContentControl x:Name="contentControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
-            
-            
         </Grid>
     </Grid>
 </Window>
