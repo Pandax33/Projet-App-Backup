@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using ProjetDevSys.Model;
@@ -62,6 +64,15 @@ namespace ProjetDevSys.VueModel
             Config.ExtensionListCrypt.Add(ExtensionListCrypt);
             Config.EditConfig();
             return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public string removeExtensionListCrypt(int ExtensionListCrypt)
+        {
+            Config.ExtensionListCrypt.RemoveAt(ExtensionListCrypt);
+
+            Config.EditConfig();
+
+            return ResourceHelper.GetString("ConfigViewModelExtensionRemoved");
         }
         public string ChangeExtensionListCrypt(List<string> ExtensionListCrypt)
         {
@@ -126,6 +137,24 @@ namespace ProjetDevSys.VueModel
             }
 
             return true;
+        }
+
+        public string resetConfig()
+        {
+            Config.ResetSetting();
+            return ResourceHelper.GetString("ConfigViewModel25");
+        }
+
+        public bool verifDeleteExtensionList(int index)
+        {
+            if (index >= 0 && index < AppConstants.ExtensionListCrypt.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }
