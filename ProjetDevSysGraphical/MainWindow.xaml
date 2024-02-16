@@ -6,28 +6,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetDevSysGraphical"
         mc:Ignorable="d"
-        Title="EasySave" MinHeight="800" Height="800" MaxHeight="800" MinWidth="1200" Width="1200" MaxWidth="1200"
-        Background="#000022">
-    <!-- Couleur de fond modifiée -->
+        Title="EasySave" MinHeight="800" Height="800" MinWidth="1200" Width="1200"
+        Background="#000022"
+        Icon="Resources\app.ico">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0"
+                      CornerRadius="0"
+                      CaptionHeight="30" />
+    </WindowChrome.WindowChrome>
 
     <Window.Resources>
+
+        <Style x:Key="TitleBarButtonStyle"
+               TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="bdr_main"
+                                BorderThickness="1"
+                                BorderBrush="Transparent"
+                                Background="Transparent">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              ContentSource="Content" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="bdr_main"
+                                        Property="Background"
+                                        Value="#474747" />
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="bdr_main"
+                                        Property="Background"
+                                        Value="#474747" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CloseButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style x:Key="NavigationButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="Foreground" Value="#FF333333"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="16"/>
-            <!-- Taille de police augmentée -->
+            <!-- Font Size -->
             <Setter Property="Padding" Value="12,10"/>
-            <!-- Padding ajusté pour plus d'espace -->
+            <!-- Padding -->
             <Setter Property="BorderThickness" Value="2"/>
-            <!-- Épaisseur de bordure augmentée -->
+            <!-- Border Thickness -->
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Opacity" Value="0.8"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="20" BorderThickness="2" BorderBrush="#FF333333" Background="{TemplateBinding Background}">
-                            <!-- Rayon et épaisseur de bordure augmentés -->
+                            <!-- thicker border and round corners -->
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -35,30 +91,75 @@
             </Setter>
         </Style>
     </Window.Resources>
-
+    <Border x:Name="mainBorder" BorderThickness="1" BorderBrush="Transparent">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Ajout d'une bordure arrondie autour de la première colonne -->
-        <Border Grid.Column="0" Background="#0094C6" CornerRadius="10" Margin="5">
-            <!-- Couleur de fond et arrondi pour la bordure -->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+            <WrapPanel HorizontalAlignment="left" VerticalAlignment="Center">
+                <Image Source="/Resources/app.ico" />
+                <TextBlock Foreground="White" FontSize="18" Margin="20, 0, 0, 0" VerticalAlignment="Center">EasySave</TextBlock>
+            </WrapPanel>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Style="{StaticResource TitleBarButtonStyle}"
+                        x:Name="buttonMinimize"
+                        Width="30"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        Click="buttonMinimize_Click">
+                    <Image Source="/Resources/minimize.png"
+                           Width="20"
+                           Height="20" />
+
+                </Button>
+                <Button Style="{StaticResource TitleBarButtonStyle}"
+                        x:Name="buttonMaximize"
+                        Width="30"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        Click="buttonMaximize_Click">
+                    <Image x:Name="maximizeImage"
+                           Source="/Resources/maximize.png"
+                           Width="20"
+                           Height="20" />
+                </Button>
+                    <Button Style="{StaticResource CloseButton}"
+                        x:Name="buttonClose"
+                        Width="30"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        Click="buttonClose_Click"
+                            MouseEnter="CloseButton_Enter" MouseLeave="CloseButton_Leave">
+                        <Image Source="/Resources/close.png"
+                           Width="20"
+                           Height="20" />
+                    </Button>
+                
+            </StackPanel>
+            
+        </Grid>
+
+        <!-- round border around selector -->
+        <Border Grid.Column="0" Grid.Row="1" Background="#0094C6" CornerRadius="10" Margin="5">
+            <!-- round colored background -->
             <Grid Margin="10">
-                <!-- Marge intérieure pour respecter l'arrondi -->
+                <!-- inside margin -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="60"/>
-                    <!-- Hauteur ajustée pour plus d'espace -->
                     <RowDefinition Height="20"/>
-                    <!-- Espacement augmenté entre les boutons -->
                     <RowDefinition Height="60"/>
-                    <!-- Hauteur ajustée pour plus d'espace -->
                     <RowDefinition Height="20"/>
-                    <!-- Espacement augmenté entre les boutons -->
                     <RowDefinition Height="60"/>
-                    <!-- Hauteur ajustée pour plus d'espace -->
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -68,9 +169,9 @@
             </Grid>
         </Border>
 
-        <!-- Contenu existant déplacé dans la deuxième colonne -->
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Grid.Row="1">
             <ContentControl x:Name="contentControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
         </Grid>
     </Grid>
+    </Border>
 </Window>
