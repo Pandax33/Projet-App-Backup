@@ -25,7 +25,7 @@ namespace ProjetDevSys.Model
         public static string KeyCrypt { get; set; }
         public static string CryptPath { get; set; }
 
-        public static string BlockerProcess { get; set; }
+        public static List<string> BlockerProcess { get; set; }
         static Config()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -67,7 +67,7 @@ namespace ProjetDevSys.Model
             ExtensionListCrypt = new List<string> { };
             CryptPath = Path.Combine(cryptoSoftPath, "CryptoSoft.exe");
             KeyCrypt = generateKey();
-            BlockerProcess = null;
+            BlockerProcess = new List<string> { };
         }
 
         public static dynamic GetDefaultConfig()
