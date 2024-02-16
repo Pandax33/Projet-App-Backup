@@ -33,7 +33,7 @@ namespace ProjetDevSysGraphical
 
             InitializeComponent();
             Backup = new Backup();
-            
+            contentControl.Content = Backup;
         }
 
         

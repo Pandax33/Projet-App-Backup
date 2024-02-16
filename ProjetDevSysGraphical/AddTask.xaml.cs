@@ -68,7 +68,7 @@ namespace ProjetDevSysGraphical
             {
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == true && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
-                    MessageBox.Show(gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType), "Creation", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType), ResourceHelper.GetString("Task.Popup.Out"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
 
@@ -81,18 +81,18 @@ namespace ProjetDevSysGraphical
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
-                    MessageBox.Show("Le chemin source n'existe pas","probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add1"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileTarget) == false && ProjetDevSys.AppConstants.VerifExist(FileSource) == true)
                 {
-                    MessageBox.Show("Le chemin cible n'existe pas", "probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add2"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == false)
                 {
-                    MessageBox.Show("Les chemins source et cible n'existent pas", "problème", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add3"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else MessageBox.Show("Veuillez valider tous les champs", "probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
+            else MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add4"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
