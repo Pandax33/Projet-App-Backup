@@ -74,7 +74,14 @@ namespace ProjetDevSysGraphical
         {
             if (!string.IsNullOrWhiteSpace(cryptoExtensionsEntry.Text))
             {
-                CryptoExtensions.Add(cryptoExtensionsEntry.Text);
+                if (!cryptoExtensionsEntry.Text.StartsWith("."))
+                {
+                    CryptoExtensions.Add("." + cryptoExtensionsEntry.Text);
+                }
+                else
+                {
+                    CryptoExtensions.Add(cryptoExtensionsEntry.Text);
+                }
                 cryptoExtensionsEntry.Clear();
                 cryptoExtensionsUpdate();
             }
