@@ -98,7 +98,9 @@ namespace ProjetDevSys.Model
             string configFilePath = Path.Combine(easySavePath, "appsettings.json");
             string cryptoSoftZIP = Path.Combine(easySavePath, "CryptoSoftGP5");
             string cryptoSoftPath = Path.Combine(cryptoSoftZIP, "CryptoSoftGP5-main");
-            
+            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EasySaveGP5");
+            Directory.CreateDirectory(folderPath);
+
             InitializeDefault();
             CreateFileWithExtensionIfNotExists(JsonPath);
             CreateFileWithExtensionIfNotExists(JsonPathRealTime);
