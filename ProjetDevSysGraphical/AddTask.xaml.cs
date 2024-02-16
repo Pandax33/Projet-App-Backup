@@ -60,7 +60,7 @@ namespace ProjetDevSysGraphical
         }
         #endregion
 
-        private void ButtonValider_Click(object sender, RoutedEventArgs e)
+        private void applyButton_Click(object sender, RoutedEventArgs e)
         {
             GestionTask gestionTask = new GestionTask();
 
@@ -68,9 +68,10 @@ namespace ProjetDevSysGraphical
             {
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == true && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
-                    gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType);
+                    MessageBox.Show(gestionTask.CreateTask(Name, FileSource, FileTarget, SaveType), "Creation", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+
                     if (mainWindow != null && mainWindow.contentControl.Content is Backup backup)
                     {
                         // Appeler GenerateGrid sur cette instance
@@ -79,21 +80,23 @@ namespace ProjetDevSysGraphical
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Le chemin source n'existe pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show("Le chemin source n'existe pas","probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileTarget) == false && ProjetDevSys.AppConstants.VerifExist(FileSource) == true)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Le chemin cible n'existe pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show("Le chemin cible n'existe pas", "probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == false)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Les chemins source et cible n'existent pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show("Les chemins source et cible n'existent pas", "problème", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            Hide();
+            MessageBox.Show("Veuillez valider tous les champs", "probleme", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void ButtonEnterPath_Click(object sender, RoutedEventArgs e)
