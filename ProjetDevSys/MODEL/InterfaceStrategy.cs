@@ -1,7 +1,9 @@
 ﻿using ProjetDevSys.MODEL;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +39,8 @@ namespace ProjetDevSys.Model
 
         private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime)
         {
+            if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
+
             //file case
             if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
             {
@@ -45,6 +49,8 @@ namespace ProjetDevSys.Model
                 string destinationFilePath = Path.Combine(destinationDir, fileName);
                 FileInfo fileInfo = new FileInfo(sourceDir);
                 long fileSize = fileInfo.Length;
+
+
 
                 File.Copy(sourceDir, destinationFilePath, true);
                 LogRealTime.Timestamp = DateTime.Now;
@@ -57,7 +63,6 @@ namespace ProjetDevSys.Model
             else
             {
                 // Copy every file from the source directory to the destination directory
-
                 foreach (string fichierPath in Directory.GetFiles(sourceDir))
                 {
                     string fileName = Path.GetFileName(fichierPath);
@@ -65,12 +70,45 @@ namespace ProjetDevSys.Model
                     FileInfo fileInfo = new FileInfo(fichierPath);
                     long fileSize = fileInfo.Length;
 
-                    File.Copy(fichierPath, destinationFilePath, true);
-                    LogRealTime.Timestamp = DateTime.Now;
-                    LogRealTime.CurrentSourcePath = fichierPath;
-                    LogRealTime.CurrentTargetPath = destinationFilePath;
-                    LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                    LogRealTime.CreateLog();
+                    if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
+                    {
+                        string executablePath = AppConstants.CryptPath;
+                        string fichierPathCrypto = fichierPath + ".crypto";
+                        string arguments = $" {fichierPath} {fichierPathCrypto} {AppConstants.KeyCrypt}";
+
+                        ProcessStartInfo startInfo = new ProcessStartInfo(executablePath, arguments)
+                        {
+                            RedirectStandardOutput = true,
+                        };
+
+                        using (Process process = new Process())
+                        {
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            // Read the output of the process
+                            string Timecrypt = process.StandardOutput.ReadToEnd();
+                            File.Copy(fichierPathCrypto, destinationFilePath, true);
+                            File.Delete(fichierPathCrypto);
+                            LogRealTime.Timestamp = DateTime.Now;
+                            LogRealTime.CurrentSourcePath = fichierPath;
+                            LogRealTime.CurrentTargetPath = destinationFilePath;
+                            LogRealTime.TimeCrypt = Timecrypt;
+                            LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                            LogRealTime.CreateLog();
+                        }
+
+                    }
+                    else
+                    {
+                        File.Copy(fichierPath, destinationFilePath, true);
+                        LogRealTime.Timestamp = DateTime.Now;
+                        LogRealTime.CurrentSourcePath = fichierPath;
+                        LogRealTime.CurrentTargetPath = destinationFilePath;
+                        LogRealTime.TimeCrypt = "0";
+                        LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                        LogRealTime.CreateLog();
+                    }
                 }
 
                 // Copy all subdirectories recursively
@@ -82,10 +120,10 @@ namespace ProjetDevSys.Model
                     {
                         Directory.CreateDirectory(destinationFolderPath);
                     }
-
                     CopierDossier(dossierPath, destinationFolderPath, LogRealTime);
                 }
             }
+            return;
         }
     }
 
@@ -113,6 +151,8 @@ namespace ProjetDevSys.Model
 
         private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime)
         {
+            if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
+
             //file case
             if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
             {
@@ -142,15 +182,49 @@ namespace ProjetDevSys.Model
                     // Do the copy only if the file does not exist or if the source file is more recent than the destination file
                     if (!File.Exists(fichierDestination) || File.GetLastWriteTime(fichierSource) > File.GetLastWriteTime(fichierDestination))
                     {
-                        File.Copy(fichierSource, fichierDestination, true);
-                        LogRealTime.Timestamp = DateTime.Now;
-                        LogRealTime.CurrentSourcePath = fichierSource;
-                        LogRealTime.CurrentTargetPath = fichierDestination;
-                        LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                        LogRealTime.CreateLog();
+                        if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
+                        {
+                            string executablePath = AppConstants.CryptPath;
+                            string fichierPathCrypto = fichierSource + ".crypto";
+                            string arguments = $" {fichierSource} {fichierPathCrypto} {AppConstants.KeyCrypt}";
+
+                            ProcessStartInfo startInfo = new ProcessStartInfo(executablePath, arguments)
+                            {
+                                RedirectStandardOutput = true,
+                            };
+
+                            using (Process process = new Process())
+                            {
+                                process.StartInfo = startInfo;
+                                process.Start();
+
+                                // Read the output of the process
+                                string Timecrypt = process.StandardOutput.ReadToEnd();
+                                File.Copy(fichierPathCrypto, fichierDestination, true);
+                                File.Delete(fichierPathCrypto);
+                                LogRealTime.Timestamp = DateTime.Now;
+                                LogRealTime.CurrentSourcePath = fichierSource;
+                                LogRealTime.CurrentTargetPath = fichierDestination;
+                                LogRealTime.TimeCrypt = Timecrypt;
+                                LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                                LogRealTime.CreateLog();
+                            }
+
+                        }
+                        else
+                        {
+                            File.Copy(fichierSource, fichierDestination, true);
+                            LogRealTime.Timestamp = DateTime.Now;
+                            LogRealTime.CurrentSourcePath = fichierSource;
+                            LogRealTime.CurrentTargetPath = fichierDestination;
+                            LogRealTime.TimeCrypt = "0";
+                            LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                            LogRealTime.CreateLog();
+                        }
+                        
                     }
                 }
-
+               
                 // Recursively call the method for each subdirectory
                 foreach (string dossierSource in Directory.GetDirectories(sourceDir))
                 {
@@ -165,6 +239,7 @@ namespace ProjetDevSys.Model
                     CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime);
                 }
             }
+            return;
         }
 
     }

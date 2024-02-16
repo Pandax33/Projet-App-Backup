@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ProjetDevSys.Model
 {
-    internal static class BackupFactory
+    public static class BackupFactory
     {
         private static readonly Dictionary<string, Backup> _backups = new Dictionary<string, Backup>();
         private static readonly JsonManager _jsonManager = new JsonManager(AppConstants.JsonSave);

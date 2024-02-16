@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using ProjetDevSys.Model;
+using System.Diagnostics;
 
 namespace ProjetDevSys
 {
@@ -13,6 +14,11 @@ namespace ProjetDevSys
         public static string LogFilePathRealTime;
         public static string JsonSave;
         public static string ExtensionType;
+        public static List<string> ExtensionListCrypt;
+        public static string CryptPath;
+        public static string KeyCrypt;
+        
+        public static List<string> BlockerProcess;
 
         static AppConstants()
         {
@@ -27,7 +33,8 @@ namespace ProjetDevSys
                 Config.CreateSetting();
             }
             Config.UpdateLogFilePathIfNeeded();
-
+            Config.VerifyAndAddMissingConfigElements(filePath,Config.GetDefaultConfig());
+            
             try
             {
                 // Read the file and deserialize the JSON to a dynamic type
@@ -42,6 +49,11 @@ namespace ProjetDevSys
                 LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
                 JsonSave = config.LoadSave.JsonPathSave;
                 ExtensionType = config.LogType.ExtensionType;
+                ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
+                CryptPath = config.CryptPath.CryptPath;
+                KeyCrypt = config.KeyCrypt.KeyCrypt;
+                BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess);
+                Config.Initialize();
             }
             catch (Exception ex)
             {
@@ -95,9 +107,27 @@ namespace ProjetDevSys
             LogFilePathRealTime = config.RealTimeLogging.JsonPathRealTime;
             JsonSave = config.LoadSave.JsonPathSave;
             ExtensionType = config.LogType.ExtensionType;
+            ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
+            CryptPath = config.CryptPath.CryptPath;
+            KeyCrypt = config.KeyCrypt.KeyCrypt;
+            BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
             CultureInfo ci = new CultureInfo(Langage);
             CultureInfo.CurrentUICulture = ci;
+        }
 
+        public static bool RunningBlockerProcess()
+        {
+            if (BlockerProcess == null || !BlockerProcess.Any()) return false;
+
+            foreach (var processName in BlockerProcess)
+            {
+                if (Process.GetProcessesByName(processName).Any())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
     }
