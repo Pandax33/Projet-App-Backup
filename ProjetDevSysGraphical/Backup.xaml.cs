@@ -36,12 +36,63 @@ namespace ProjetDevSysGraphical
         public void GenerateGrid()
         {
             grid.Children.Clear();
-
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
 
             int i = 1; // keep track of the row index
-            buttonNameList.Add("Config");
+            int index = 0;
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            TextBlock Name = new TextBlock
+            {
+                Text = "Name",
+                FontWeight = FontWeights.SemiBold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = 14, // Taille de police ajustée pour l'équilibre
+                Foreground = new SolidColorBrush(Colors.DarkSlateGray), // Couleur du texte
+                FontFamily = new FontFamily("Segoe UI"), // Police de caractère
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
+
+            Name.Margin = new Thickness(5);
+            grid.Children.Add(Name);
+            Grid.SetColumn(Name, 0);
+            Grid.SetRow(Name, 0);
+
+            TextBlock Source = new TextBlock { Text = "Source", FontWeight = FontWeights.Bold, FontSize = 13 };
+            Source.Margin = new Thickness(5);
+            grid.Children.Add(Source);
+            Grid.SetColumn(Source, 1);
+            Grid.SetRow(Source, 0);
+
+            TextBlock Destination = new TextBlock { Text = "Destination", FontWeight = FontWeights.Bold, FontSize = 13 };
+            Destination.Margin = new Thickness(5);
+            grid.Children.Add(Destination);
+            Grid.SetColumn(Destination, 2);
+            Grid.SetRow(Destination, 0);
+
+            TextBlock Type = new TextBlock { Text = "Type", FontWeight = FontWeights.Bold, FontSize = 13 };
+            Type.Margin = new Thickness(5);
+            grid.Children.Add(Type);
+            Grid.SetColumn(Type, 3);
+            Grid.SetRow(Type, 0);
+
+            TextBlock Supprimer = new TextBlock { Text = "Supprimer", FontWeight = FontWeights.Bold, FontSize = 13 };
+            Supprimer.Margin = new Thickness(5);
+            grid.Children.Add(Supprimer);
+            Grid.SetColumn(Supprimer, 4);
+            Grid.SetRow(Supprimer, 0);
+
+            TextBlock Editer = new TextBlock { Text = "Editer", FontWeight = FontWeights.Bold, FontSize = 13 };
+            Editer.Margin = new Thickness(5);
+            grid.Children.Add(Editer);
+            Grid.SetColumn(Editer, 5);
+            Grid.SetRow(Editer, 0);
+
+            TextBlock Selectionner = new TextBlock { Text = "Seletionner", FontWeight = FontWeights.Bold, FontSize = 13 };
+            Selectionner.Margin = new Thickness(5);
+            grid.Children.Add(Selectionner);
+            Grid.SetColumn(Selectionner, 6);
+            Grid.SetRow(Selectionner, 0);
 
             foreach (var backup in backups)
             {
@@ -49,6 +100,10 @@ namespace ProjetDevSysGraphical
                 TextBlock textBlock2 = new TextBlock { Text = backup.Source };
                 TextBlock textBlock3 = new TextBlock { Text = backup.Destination };
                 TextBlock textBlock4 = new TextBlock { Text = backup.Type };
+                textBlock1.Margin = new Thickness(5);
+                textBlock2.Margin = new Thickness(5);
+                textBlock3.Margin = new Thickness(5);
+                textBlock4.Margin = new Thickness(5);
                 grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
                 grid.Children.Add(textBlock1);
                 Grid.SetColumn(textBlock1, 0);
@@ -100,15 +155,16 @@ namespace ProjetDevSysGraphical
 
                 // Add the buttons to the StackPanel
 
-                int index = i-1;
-                buttonDelete.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "Delete";
-                buttonEdit.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "Edit";
-                checkBox.Name = buttonNameList[i] + "_" + i.ToString() + "_" + "CheckBox";
+                
+                buttonDelete.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Delete";
+                buttonEdit.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Edit";
+                checkBox.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "CheckBox";
                 // Add the buttons to the list
                 deleteButtonList.Add(buttonDelete);
                 editButtonList.Add(buttonEdit);
 
                 i++;
+                index ++;
             }
         }
 
