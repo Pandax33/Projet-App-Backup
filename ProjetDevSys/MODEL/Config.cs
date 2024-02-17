@@ -24,6 +24,7 @@ namespace ProjetDevSys.Model
         public static List<string> ExtensionListCrypt { get; set; }
         public static string KeyCrypt { get; set; }
         public static string CryptPath { get; set; }
+        public static string Theme {  get; set; }
 
         public static List<string> BlockerProcess { get; set; }
         static Config()
@@ -52,6 +53,7 @@ namespace ProjetDevSys.Model
             ExtensionListCrypt = AppConstants.ExtensionListCrypt;
             CryptPath = AppConstants.CryptPath;
             KeyCrypt = AppConstants.KeyCrypt;
+            Theme = AppConstants.Theme;
         }
         public static void InitializeDefault()
         {
@@ -68,6 +70,7 @@ namespace ProjetDevSys.Model
             CryptPath = Path.Combine(cryptoSoftPath, "CryptoSoft.exe");
             KeyCrypt = generateKey();
             BlockerProcess = new List<string> { };
+            Theme = "Default";
         }
 
         public static dynamic GetDefaultConfig()
@@ -84,7 +87,8 @@ namespace ProjetDevSys.Model
                 ExtensionListCrypt = new { ExtensionListCrypt },
                 CryptPath = new { CryptPath },
                 KeyCrypt = new { KeyCrypt },
-                BlockerProcess = new { BlockerProcess }
+                BlockerProcess = new { BlockerProcess },
+                WPF = new { Theme }
             };
 
             return defaultConfig;
@@ -138,7 +142,8 @@ namespace ProjetDevSys.Model
                 ExtensionListCrypt = new { ExtensionListCrypt },
                 CryptPath = new { CryptPath },
                 KeyCrypt = new { KeyCrypt },
-                BlockerProcess = new { BlockerProcess }
+                BlockerProcess = new { BlockerProcess },
+                WPF = new { Theme }
             };
 
             // Sérialisation et écriture dans le fichier

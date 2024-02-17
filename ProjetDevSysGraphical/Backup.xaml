@@ -9,9 +9,9 @@
     <UserControl.Resources>
         <!-- Style pour les boutons -->
         <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FF1C3F5D"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#FF1C3F5D"/>
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -23,7 +23,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="10" BorderThickness="2" BorderBrush="#FF333333" Background="{TemplateBinding Background}">
+                        <Border CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource Brush2}" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -53,7 +53,7 @@
         <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Task.AddButton'}"  Style="{StaticResource ButtonStyle}"/>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <Border Background="#208AAE" CornerRadius="10" BorderBrush="#FF1C3F5D" BorderThickness="2">
+            <Border Background="{StaticResource Brush1}" CornerRadius="10" BorderBrush="{StaticResource Brush3}" BorderThickness="2">
                 <Grid x:Name="grid" Background="Transparent">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
