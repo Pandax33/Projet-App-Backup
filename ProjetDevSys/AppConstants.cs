@@ -20,6 +20,8 @@ namespace ProjetDevSys
         
         public static List<string> BlockerProcess;
 
+        public static string Theme;
+
         static AppConstants()
         {
             // Pass to your JSON path
@@ -52,6 +54,7 @@ namespace ProjetDevSys
                 ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
                 CryptPath = config.CryptPath.CryptPath;
                 KeyCrypt = config.KeyCrypt.KeyCrypt;
+                Theme = config.WPF.Theme;
                 BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
                 Config.Initialize();
             }
@@ -111,6 +114,7 @@ namespace ProjetDevSys
             CryptPath = config.CryptPath.CryptPath;
             KeyCrypt = config.KeyCrypt.KeyCrypt;
             BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
+            Theme = config.WPF.Theme;
             CultureInfo ci = new CultureInfo(Langage);
             CultureInfo.CurrentUICulture = ci;
         }

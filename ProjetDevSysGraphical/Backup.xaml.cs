@@ -1,6 +1,7 @@
 ﻿using ProjetDevSys.VueModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,81 +31,143 @@ namespace ProjetDevSysGraphical
         {
             InitializeComponent();
             GenerateGrid();
-            ButtonInstance(stackPanel);
         }
 
         public void GenerateGrid()
         {
-            listView.Items.Clear();
+            grid.Children.Clear();
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
-            foreach (var backup in backups) // backup type = Backup
+
+            int i = 1; // keep track of the row index
+            int index = 0;
+            grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            TextBlock Name = new TextBlock
             {
-                listView.Items.Add(new
-                {
-                    Propriete1 = backup.Name,
-                    Propriete2 = backup.Source,
-                    Propriete3 = backup.Destination,
-                    Propriete4 = backup.Type
-                });
+                Text = ResourceHelper.GetString("Task.Grid.Name"),
+                FontWeight = FontWeights.SemiBold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = 14, // Taille de police ajustée pour l'équilibre
+                Foreground = new SolidColorBrush(Colors.DarkSlateGray), // Couleur du texte
+                FontFamily = new FontFamily("Segoe UI"), // Police de caractère
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
+
+            Name.Margin = new Thickness(5);
+            grid.Children.Add(Name);
+            Grid.SetColumn(Name, 0);
+            Grid.SetRow(Name, 0);
+
+            TextBlock Source = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Source"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            Source.Margin = new Thickness(5);
+            grid.Children.Add(Source);
+            Grid.SetColumn(Source, 1);
+            Grid.SetRow(Source, 0);
+
+            TextBlock Destination = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Target"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            Destination.Margin = new Thickness(5);
+            grid.Children.Add(Destination);
+            Grid.SetColumn(Destination, 2);
+            Grid.SetRow(Destination, 0);
+
+            TextBlock Type = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Type"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            Type.Margin = new Thickness(5);
+            grid.Children.Add(Type);
+            Grid.SetColumn(Type, 3);
+            Grid.SetRow(Type, 0);
+
+            TextBlock Supprimer = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Delete"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            Supprimer.Margin = new Thickness(5);
+            grid.Children.Add(Supprimer);
+            Grid.SetColumn(Supprimer, 4);
+            Grid.SetRow(Supprimer, 0);
+
+            TextBlock Editer = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Edit"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            Editer.Margin = new Thickness(5);
+            grid.Children.Add(Editer);
+            Grid.SetColumn(Editer, 5);
+            Grid.SetRow(Editer, 0);
+
+            TextBlock Selectionner = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Select"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            Selectionner.Margin = new Thickness(5);
+            grid.Children.Add(Selectionner);
+            Grid.SetColumn(Selectionner, 6);
+            Grid.SetRow(Selectionner, 0);
+
+            foreach (var backup in backups)
+            {
+                TextBlock textBlock1 = new TextBlock { Text = backup.Name };
+                TextBlock textBlock2 = new TextBlock { Text = backup.Source };
+                TextBlock textBlock3 = new TextBlock { Text = backup.Destination };
+                TextBlock textBlock4 = new TextBlock { Text = backup.Type };
+                textBlock1.Margin = new Thickness(5);
+                textBlock2.Margin = new Thickness(5);
+                textBlock3.Margin = new Thickness(5);
+                textBlock4.Margin = new Thickness(5);
+                grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+                grid.Children.Add(textBlock1);
+                Grid.SetColumn(textBlock1, 0);
+                Grid.SetRow(textBlock1, i);
+
+                grid.Children.Add(textBlock2);
+                Grid.SetColumn(textBlock2, 1);
+                Grid.SetRow(textBlock2, i);
+
+                grid.Children.Add(textBlock3);
+                Grid.SetColumn(textBlock3, 2);
+                Grid.SetRow(textBlock3, i);
+
+                grid.Children.Add(textBlock4);
+                Grid.SetColumn(textBlock4, 3);
+                Grid.SetRow(textBlock4, i);
+
                 SetButtonName(backup.Name);
-            }
-            ButtonInstance(stackPanel);
-        }
-
-        public void ButtonInstance(StackPanel container)
-        {
-            container.Children.Clear();
-            int[] index = new int[listView.Items.Count];
-            for (int i = 0; i < listView.Items.Count; i++)
-            {
-                index[i] = i;
-
-                // Create a horizontal StackPanel for each row in the DataGrid
-                StackPanel panel = new StackPanel();
-                panel.Orientation = Orientation.Horizontal;
 
                 // Create a button for Delete
                 Button buttonDelete = new Button();
                 buttonDelete.Width = 30;
                 buttonDelete.Height = 30;
-                buttonDelete.Margin = new Thickness(5, 0, 5, 0);
                 buttonDelete.Background = Brushes.Red;
                 buttonDelete.Click += new RoutedEventHandler(ButtonDelete_Click);
+                Grid.SetColumn(buttonDelete, 4);
+                Grid.SetRow(buttonDelete, i);
+                grid.Children.Add(buttonDelete);
 
                 // Create a button for Edit
                 Button buttonEdit = new Button();
-                buttonEdit.Width = 30;
-                buttonEdit.Height = 30;
-                buttonEdit.Margin = new Thickness(5, 0, 5, 0);
+
                 buttonEdit.Background = Brushes.Blue;
                 buttonEdit.Click += new RoutedEventHandler(ButtonEdit_Click);
+                buttonEdit.Width = 30;
+                buttonEdit.Height = 30;
+                Grid.SetColumn(buttonEdit, 5);
+                Grid.SetRow(buttonEdit, i);
+                grid.Children.Add(buttonEdit);
 
                 // Create a checkbox
                 CheckBox checkBox = new CheckBox();
                 checkBox.Width = 30;
                 checkBox.Height = 30;
-                checkBox.Margin = new Thickness(5, 0, 5, 0);
                 checkBox.Click += new RoutedEventHandler(CheckBox_Click);
+                Grid.SetColumn(checkBox, 6);
+                Grid.SetRow(checkBox, i);
+                grid.Children.Add(checkBox);
 
                 // Add the buttons to the StackPanel
-                panel.Children.Add(buttonDelete);
-                panel.Children.Add(buttonEdit);
-                panel.Children.Add(checkBox);
 
-                // Add the StackPanel to the container
-                container.Children.Add(panel);
-
-                buttonDelete.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "Delete";
-                buttonEdit.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "Edit";
-                checkBox.Name = buttonNameList[i] + "_" + index[i].ToString() + "_" + "CheckBox";
+                
+                buttonDelete.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Delete";
+                buttonEdit.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Edit";
+                checkBox.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "CheckBox";
                 // Add the buttons to the list
                 deleteButtonList.Add(buttonDelete);
                 editButtonList.Add(buttonEdit);
+
+                i++;
+                index ++;
             }
         }
 
-       
 
         private void SetButtonName(string buttonName)
         {
@@ -134,21 +197,21 @@ namespace ProjetDevSysGraphical
         }
 
 
-        public void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        public void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
             // Add a new task
             AddTask addTask = new AddTask();
             addTask.ShowDialog();
         }
 
-        public void ButtonlaunchAllTasks_Click(object sender, RoutedEventArgs e)
+        public void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             // Launch all tasks
-            MessageBox.Show(runSaveTask.RunMultipleTask(0, listView.Items.Count), "Run", MessageBoxButton.OK, MessageBoxImage.Information);
+            runSaveTask.RunMultipleTask(0, grid.Children.Count / 4);
         }
 
-        public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
+        public void selectedTasksButton_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             MessageBox.Show(runSaveTask.RunTaskMultiple(idToLaunch.ToArray()), "Run", MessageBoxButton.OK, MessageBoxImage.Information);
