@@ -368,6 +368,12 @@ namespace ProjetDevSysGraphical
                 editTask.ShowDialog();
             }
         }
+
+        private void addTaskButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddTask addTask = new AddTask();
+            addTask.ShowDialog();
+        }
     }
 }
 #endregion

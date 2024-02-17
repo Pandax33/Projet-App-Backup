@@ -51,7 +51,7 @@
 
         <Button x:Name="selectedTasksButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Task.LaunchSelect'}" Click="selectedTasksButton_Click" Style="{StaticResource ButtonStyle}"/>
         <Button x:Name="allTasksButton" Grid.Row="1" Grid.Column="1" Content="{local:LangageExtension Key='Task.LaunchAll'}" Click="allTasksButton_Click"  Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Task.AddButton'}"  Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Task.AddButton'}"  Style="{StaticResource ButtonStyle}" Click="addTaskButton_Click_1"/>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Border Background="{StaticResource Brush1}" CornerRadius="10" BorderBrush="{StaticResource Brush3}" BorderThickness="2">
