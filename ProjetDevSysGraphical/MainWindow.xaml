@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ProjetDevSysGraphical"
         mc:Ignorable="d"
         Title="EasySave" MinHeight="800" Height="800" MinWidth="1200" Width="1200"
-        Background="#000022"
+        Background="{StaticResource BrushBG}"
         Icon="Resources\app.ico">
 
     <WindowChrome.WindowChrome>
@@ -68,8 +68,8 @@
         </Style>
         
         <Style x:Key="NavigationButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FFFFFF"/>
-            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="16"/>
             <!-- Font Size -->
@@ -82,7 +82,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="20" BorderThickness="2" BorderBrush="#FF333333" Background="{TemplateBinding Background}">
+                        <Border CornerRadius="20" BorderThickness="2" BorderBrush="{StaticResource Brush4}" Background="{TemplateBinding Background}">
                             <!-- thicker border and round corners -->
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -106,33 +106,34 @@
             <WrapPanel HorizontalAlignment="left" VerticalAlignment="Center">
                 <Image Source="/Resources/app.ico" />
                 <TextBlock Foreground="White" FontSize="18" Margin="20, 0, 0, 0" VerticalAlignment="Center">EasySave</TextBlock>
-            </WrapPanel>
-            <StackPanel Orientation="Horizontal"
+                </WrapPanel>
+                <Border Height="2" Background="{StaticResource Brush4}" Margin="45,28,45,0"/>
+                <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button Style="{StaticResource TitleBarButtonStyle}"
+                    <Button Style="{StaticResource TitleBarButtonStyle}"
                         x:Name="buttonMinimize"
                         Width="30"
                         Background="Transparent"
                         BorderBrush="Transparent"
                         WindowChrome.IsHitTestVisibleInChrome="True"
                         Click="buttonMinimize_Click">
-                    <Image Source="/Resources/minimize.png"
+                        <Image Source="/Resources/minimize.png"
                            Width="20"
                            Height="20" />
 
-                </Button>
-                <Button Style="{StaticResource TitleBarButtonStyle}"
+                    </Button>
+                    <Button Style="{StaticResource TitleBarButtonStyle}"
                         x:Name="buttonMaximize"
                         Width="30"
                         Background="Transparent"
                         BorderBrush="Transparent"
                         WindowChrome.IsHitTestVisibleInChrome="True"
                         Click="buttonMaximize_Click">
-                    <Image x:Name="maximizeImage"
+                        <Image x:Name="maximizeImage"
                            Source="/Resources/maximize.png"
                            Width="20"
                            Height="20" />
-                </Button>
+                    </Button>
                     <Button Style="{StaticResource CloseButton}"
                         x:Name="buttonClose"
                         Width="30"
@@ -143,13 +144,12 @@
                            Width="20"
                            Height="20" />
                     </Button>
-                
-            </StackPanel>
-            
-        </Grid>
+                </StackPanel>
+
+            </Grid>
 
         <!-- round border around selector -->
-        <Border Grid.Column="0" Grid.Row="1" Background="#0094C6" CornerRadius="10" Margin="5">
+        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Brush2}" CornerRadius="10" Margin="5">
             <!-- round colored background -->
             <Grid Margin="10">
                 <!-- inside margin -->

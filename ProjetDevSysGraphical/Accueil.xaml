@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock Foreground="Wheat" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="{local:LangageExtension Key='Home1'}"/>
+        <TextBlock Foreground="{StaticResource Brush1}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="{local:LangageExtension Key='Home1'}"/>
     </Grid>
 </UserControl>
 
