@@ -27,6 +27,7 @@ namespace ProjetDevSysGraphical
         {
             InitializeComponent();
             Id = id;
+            taskName.Content = name;
             sourcePathEntry.Text = fileSource;
             targetPathEntry.Text = fileTarget;
 

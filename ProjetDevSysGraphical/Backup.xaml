@@ -48,9 +48,9 @@
             <RowDefinition Height="Auto" MinHeight="50"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="selectedTasksButton" Grid.Row="1" Grid.Column="0" Content="Lancer les tâches selectionnées" Click="selectedTasksButton_Click" Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="allTasksButton" Grid.Row="1" Grid.Column="1" Content="Lancer les tâches sur cette page" Click="allTasksButton_Click"  Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="Ajouter une tâche" Click="addTaskButton_Click"  Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="selectedTasksButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Task.LaunchSelect'}" Click="selectedTasksButton_Click" Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="allTasksButton" Grid.Row="1" Grid.Column="1" Content="{local:LangageExtension Key='Task.LaunchAll'}" Click="allTasksButton_Click"  Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Task.AddButton'}"  Style="{StaticResource ButtonStyle}"/>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Border Background="#208AAE" CornerRadius="10" BorderBrush="#FF1C3F5D" BorderThickness="2">
