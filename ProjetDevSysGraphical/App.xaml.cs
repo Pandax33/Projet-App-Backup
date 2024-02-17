@@ -22,6 +22,7 @@ namespace ProjetDevSysGraphical
     public static class ThemeLoader
     {
         private static List<SolidColorBrush> ThemeBrush;
+        private static List<FontFamily> ThemeFont;
 
         static ThemeLoader()
         {
@@ -30,16 +31,29 @@ namespace ProjetDevSysGraphical
             Color B2;
             Color B3;
             Color B4;
+            Color B5;
+            FontFamily FontTittle;
+            FontFamily FontButton;
+            FontFamily FontGrid;
             string theme = ProjetDevSys.AppConstants.Theme;
 
+            //B1 = Background GRID + Bouton
+            //B2 = Background Barre de navigation
+            //B3 = Font Color Bouton
+            //B4 = Border Color bouton Navigation
+            //B5 = Font Color Grid
             switch (theme)
             {
                 case "Legacy":
-                    BG = (Color)ColorConverter.ConvertFromString("#000022");
-                    B1 = (Color)ColorConverter.ConvertFromString("#FF1C3F5D");
-                    B2 = (Color)ColorConverter.ConvertFromString("#0094C6");
-                    B3 = (Color)ColorConverter.ConvertFromString("#FFFFFF");
-                    B4 = (Color)ColorConverter.ConvertFromString("#FF333333");
+                    BG = (Color)ColorConverter.ConvertFromString("#463F3A");
+                    B1 = (Color)ColorConverter.ConvertFromString("#8A817C");
+                    B2 = (Color)ColorConverter.ConvertFromString("#BCB8B1");
+                    B3 = (Color)ColorConverter.ConvertFromString("#F4F3EE");
+                    B4 = (Color)ColorConverter.ConvertFromString("#E0AFA0");
+                    B5 = (Color)ColorConverter.ConvertFromString("#F4F3EE");
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
                     break;
                 case "Moche":
 
@@ -48,13 +62,32 @@ namespace ProjetDevSysGraphical
                     B2 = (Color)ColorConverter.ConvertFromString("#EBBAB9");
                     B3 = (Color)ColorConverter.ConvertFromString("#388697");
                     B4 = (Color)ColorConverter.ConvertFromString("#B5FFE1");
+                    B5 = (Color)ColorConverter.ConvertFromString("#353839");
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
                     break;
                 default:
-                    BG = (Color)ColorConverter.ConvertFromString("#463F3A");
-                    B1 = (Color)ColorConverter.ConvertFromString("#8A817C");
-                    B2 = (Color)ColorConverter.ConvertFromString("#BCB8B1");
-                    B3 = (Color)ColorConverter.ConvertFromString("#F4F3EE");
-                    B4 = (Color)ColorConverter.ConvertFromString("#E0AFA0");
+                    BG = (Color)ColorConverter.ConvertFromString("#252627");
+                    B1 = (Color)ColorConverter.ConvertFromString("#D3D4D9"); 
+                    B2 = (Color)ColorConverter.ConvertFromString("#4B88A2"); 
+                    B3 = (Color)ColorConverter.ConvertFromString("#353839");
+                    B4 = (Color)ColorConverter.ConvertFromString("#ADD8E6");
+                    B5 = (Color)ColorConverter.ConvertFromString("#353839");
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
+                    break;
+                case "Leandro":
+                    BG = (Color)ColorConverter.ConvertFromString("#4B88A2"); // Platinum #4B88A2
+                    B1 = (Color)ColorConverter.ConvertFromString("#D3D4D9"); // Air Force Blue
+                    B2 = (Color)ColorConverter.ConvertFromString("#B80A21"); // Fire Brick
+                    B3 = (Color)ColorConverter.ConvertFromString("#252627"); // Eerie Black
+                    B4 = (Color)ColorConverter.ConvertFromString("#FFF9FB"); // Snow
+                    B5 = (Color)ColorConverter.ConvertFromString("#353839");
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
                     break;
             }
 
@@ -63,8 +96,10 @@ namespace ProjetDevSysGraphical
             SolidColorBrush brush2= new SolidColorBrush(B2);
             SolidColorBrush brush3= new SolidColorBrush(B3);
             SolidColorBrush brush4= new SolidColorBrush(B4);
+            SolidColorBrush brush5= new SolidColorBrush(B5);
 
-            ThemeBrush = new List<SolidColorBrush>() { brushBG, brush1, brush2, brush3, brush4 };
+            ThemeBrush = new List<SolidColorBrush>() { brushBG, brush1, brush2, brush3, brush4, brush5};
+            ThemeFont = new List<FontFamily>() { FontTittle,FontButton,FontGrid,};
         }
             public static void LoadTheme()
         {
@@ -73,6 +108,14 @@ namespace ProjetDevSysGraphical
             Application.Current.Resources["Brush2"] = ThemeBrush[2];
             Application.Current.Resources["Brush3"] = ThemeBrush[3];
             Application.Current.Resources["Brush4"] = ThemeBrush[4];
+            Application.Current.Resources["Brush5"] = ThemeBrush[5];
+            Application.Current.Resources["FontTittle"] = ThemeFont[0];
+            Application.Current.Resources["FontButton"] = ThemeFont[1];
+            Application.Current.Resources["FontGrid"] = ThemeFont[2];
+            Application.Current.Resources["FontSizeTittle"] = 16.0;
+            Application.Current.Resources["FontSizeNavigationButton"] = 16.0;
+            Application.Current.Resources["FontSizeButton"] = 14.0;
+            Application.Current.Resources["FontSizeGrid"] = 14.0;
         }
     }
 
