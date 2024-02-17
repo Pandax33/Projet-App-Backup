@@ -11,10 +11,11 @@
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource Brush1}"/>
             <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+            
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeButton}"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontButton}"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Cursor" Value="Hand"/>

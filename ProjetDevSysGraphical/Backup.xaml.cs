@@ -45,10 +45,10 @@ namespace ProjetDevSysGraphical
             TextBlock Name = new TextBlock
             {
                 Text = ResourceHelper.GetString("Task.Grid.Name"),
-                FontWeight = FontWeights.SemiBold, // Utilisation de SemiBold pour un effet gras moins intense
-                FontSize = 14, // Taille de police ajustée pour l'équilibre
-                Foreground = new SolidColorBrush(Colors.DarkSlateGray), // Couleur du texte
-                FontFamily = new FontFamily("Segoe UI"), // Police de caractère
+                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
                 TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
                 Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
             };
@@ -58,37 +58,91 @@ namespace ProjetDevSysGraphical
             Grid.SetColumn(Name, 0);
             Grid.SetRow(Name, 0);
 
-            TextBlock Source = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Source"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Source = new TextBlock
+            {
+                Text = ResourceHelper.GetString("Task.Grid.Source"),
+                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
             Source.Margin = new Thickness(5);
             grid.Children.Add(Source);
             Grid.SetColumn(Source, 1);
             Grid.SetRow(Source, 0);
 
-            TextBlock Destination = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Target"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Destination = new TextBlock
+            {
+                Text = ResourceHelper.GetString("Task.Grid.Target"),
+                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
             Destination.Margin = new Thickness(5);
             grid.Children.Add(Destination);
             Grid.SetColumn(Destination, 2);
             Grid.SetRow(Destination, 0);
 
-            TextBlock Type = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Type"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Type = new TextBlock
+            {
+                Text = ResourceHelper.GetString("Task.Grid.Type"),
+                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
             Type.Margin = new Thickness(5);
             grid.Children.Add(Type);
             Grid.SetColumn(Type, 3);
             Grid.SetRow(Type, 0);
 
-            TextBlock Supprimer = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Delete"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Supprimer = new TextBlock
+            {
+                Text = ResourceHelper.GetString("Task.Grid.Delete"),
+                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
             Supprimer.Margin = new Thickness(5);
             grid.Children.Add(Supprimer);
             Grid.SetColumn(Supprimer, 4);
             Grid.SetRow(Supprimer, 0);
 
-            TextBlock Editer = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Edit"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Editer = new TextBlock
+            {
+                Text = ResourceHelper.GetString("Task.Grid.Edit"),
+                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
             Editer.Margin = new Thickness(5);
             grid.Children.Add(Editer);
             Grid.SetColumn(Editer, 5);
             Grid.SetRow(Editer, 0);
 
-            TextBlock Selectionner = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Select"), FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Selectionner = new TextBlock
+            {
+                Text = ResourceHelper.GetString("Task.Grid.Select"),
+                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+            };
             Selectionner.Margin = new Thickness(5);
             grid.Children.Add(Selectionner);
             Grid.SetColumn(Selectionner, 6);
@@ -96,15 +150,56 @@ namespace ProjetDevSysGraphical
 
             foreach (var backup in backups)
             {
-                TextBlock textBlock1 = new TextBlock { Text = backup.Name };
-                TextBlock textBlock2 = new TextBlock { Text = backup.Source };
-                TextBlock textBlock3 = new TextBlock { Text = backup.Destination };
-                TextBlock textBlock4 = new TextBlock { Text = backup.Type };
-                textBlock1.Margin = new Thickness(5);
-                textBlock2.Margin = new Thickness(5);
-                textBlock3.Margin = new Thickness(5);
-                textBlock4.Margin = new Thickness(5);
+                var commonFontSize = (double)Application.Current.Resources["FontSizeGrid"];
+                var commonFontFamily = (FontFamily)Application.Current.Resources["FontGrid"];
+                var commonForeground = (SolidColorBrush)Application.Current.Resources["Brush5"];
+                var commonMargin = new Thickness(5);
+                var ButtonMargin = new Thickness(3);
+
+                // Create TextBlocks with common styling and set them to bold
+                TextBlock textBlock1 = new TextBlock
+                {
+                    Text = backup.Name,
+                    Margin = commonMargin,
+                    FontSize = commonFontSize,
+                    FontFamily = commonFontFamily,
+                    Foreground = commonForeground,
+                    FontWeight = FontWeights.Bold // Set to bold
+                };
+
+                TextBlock textBlock2 = new TextBlock
+                {
+                    Text = backup.Source,
+                    Margin = commonMargin,
+                    FontSize = commonFontSize,
+                    FontFamily = commonFontFamily,
+                    Foreground = commonForeground,
+                    FontWeight = FontWeights.SemiBold // Set to bold
+                };
+
+                TextBlock textBlock3 = new TextBlock
+                {
+                    Text = backup.Destination,
+                    Margin = commonMargin,
+                    FontSize = commonFontSize,
+                    FontFamily = commonFontFamily,
+                    Foreground = commonForeground,
+                    FontWeight = FontWeights.SemiBold // Set to bold
+                };
+
+                TextBlock textBlock4 = new TextBlock
+                {
+                    Text = backup.Type,
+                    Margin = commonMargin,
+                    FontSize = commonFontSize,
+                    FontFamily = commonFontFamily,
+                    Foreground = commonForeground,
+                    FontWeight = FontWeights.SemiBold // Set to bold
+                };
+
+                // Add TextBlocks to the grid and set their positions
                 grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+
                 grid.Children.Add(textBlock1);
                 Grid.SetColumn(textBlock1, 0);
                 Grid.SetRow(textBlock1, i);
@@ -121,25 +216,46 @@ namespace ProjetDevSysGraphical
                 Grid.SetColumn(textBlock4, 3);
                 Grid.SetRow(textBlock4, i);
 
+                // Continue with your code
                 SetButtonName(backup.Name);
 
-                // Create a button for Delete
-                Button buttonDelete = new Button();
-                buttonDelete.Width = 30;
-                buttonDelete.Height = 30;
-                buttonDelete.Background = Brushes.Red;
+                Button buttonDelete = new Button
+                {
+                    Width = 30,
+                    Height = 30,
+                    Margin = ButtonMargin,
+                    Content = new TextBlock
+                    {
+                        Text = "✖",
+                        Foreground = Brushes.Red,
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    },
+                    Style = (Style)Application.Current.Resources["NavigationButtonStyle"], // Apply the common style
+                    ToolTip = "Delete"
+                };
                 buttonDelete.Click += new RoutedEventHandler(ButtonDelete_Click);
                 Grid.SetColumn(buttonDelete, 4);
                 Grid.SetRow(buttonDelete, i);
                 grid.Children.Add(buttonDelete);
 
                 // Create a button for Edit
-                Button buttonEdit = new Button();
-
-                buttonEdit.Background = Brushes.Blue;
+                Button buttonEdit = new Button
+                {
+                    Width = 30,
+                    Height = 30,
+                    Margin = ButtonMargin,
+                    Content = new TextBlock
+                    {
+                        Text = "✏",
+                        Foreground = Brushes.Blue,
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    },
+                    Style = (Style)Application.Current.Resources["NavigationButtonStyle"], // Apply the common style
+                    ToolTip = "Edit"
+                };
                 buttonEdit.Click += new RoutedEventHandler(ButtonEdit_Click);
-                buttonEdit.Width = 30;
-                buttonEdit.Height = 30;
                 Grid.SetColumn(buttonEdit, 5);
                 Grid.SetRow(buttonEdit, i);
                 grid.Children.Add(buttonEdit);
