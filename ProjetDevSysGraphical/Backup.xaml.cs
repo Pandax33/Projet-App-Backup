@@ -197,21 +197,21 @@ namespace ProjetDevSysGraphical
         }
 
 
-        public void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        public void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
             // Add a new task
             AddTask addTask = new AddTask();
             addTask.ShowDialog();
         }
 
-        public void ButtonlaunchAllTasks_Click(object sender, RoutedEventArgs e)
+        public void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             // Launch all tasks
             runSaveTask.RunMultipleTask(0, grid.Children.Count / 4);
         }
 
-        public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
+        public void selectedTasksButton_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             MessageBox.Show(runSaveTask.RunTaskMultiple(idToLaunch.ToArray()), "Run", MessageBoxButton.OK, MessageBoxImage.Information);
