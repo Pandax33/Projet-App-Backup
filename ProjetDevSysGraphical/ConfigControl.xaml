@@ -13,7 +13,14 @@
             <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
         </Style>
-        
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -51,7 +58,16 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Name ="logTitle" Content="{local:LangageExtension Key='Config.Log1'}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
-
+                        <Button Grid.Column="2" Grid.Row="0" Content="?" FontFamily="Segoe UI Symbol" FontSize="20" Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button.ToolTip>
+                                <ToolTip>
+                                    <Border Background="LightBlue" CornerRadius="5">
+                                        <Label FontWeight="Bold">Information</Label>
+                                    </Border>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+                        
                         <Label Name="logDailyLabel" Content="{local:LangageExtension Key='Config.Log2'}" Grid.Row="1" Grid.Column="1"/>
                         <TextBox x:Name="logDailyEntry" Grid.Row="1" Grid.Column="2" />
                         <Button x:Name="logDailyExplorer" Grid.Row="1" Grid.Column="3" Content="&#x1F4C1;" Click="pathLogDailyExplorer_Click"/>
