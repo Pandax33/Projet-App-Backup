@@ -349,11 +349,38 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Delete.
+        /// </summary>
+        internal static string Task_Grid_Delete {
+            get {
+                return ResourceManager.GetString("Task.Grid.Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Edit.
+        /// </summary>
+        internal static string Task_Grid_Edit {
+            get {
+                return ResourceManager.GetString("Task.Grid.Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Name.
         /// </summary>
         internal static string Task_Grid_Name {
             get {
                 return ResourceManager.GetString("Task.Grid.Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select.
+        /// </summary>
+        internal static string Task_Grid_Select {
+            get {
+                return ResourceManager.GetString("Task.Grid.Select", resourceCulture);
             }
         }
         

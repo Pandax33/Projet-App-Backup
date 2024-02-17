@@ -44,7 +44,7 @@ namespace ProjetDevSysGraphical
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             TextBlock Name = new TextBlock
             {
-                Text = "Name",
+                Text = ResourceHelper.GetString("Task.Grid.Name"),
                 FontWeight = FontWeights.SemiBold, // Utilisation de SemiBold pour un effet gras moins intense
                 FontSize = 14, // Taille de police ajustée pour l'équilibre
                 Foreground = new SolidColorBrush(Colors.DarkSlateGray), // Couleur du texte
@@ -58,37 +58,37 @@ namespace ProjetDevSysGraphical
             Grid.SetColumn(Name, 0);
             Grid.SetRow(Name, 0);
 
-            TextBlock Source = new TextBlock { Text = "Source", FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Source = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Source"), FontWeight = FontWeights.Bold, FontSize = 13 };
             Source.Margin = new Thickness(5);
             grid.Children.Add(Source);
             Grid.SetColumn(Source, 1);
             Grid.SetRow(Source, 0);
 
-            TextBlock Destination = new TextBlock { Text = "Destination", FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Destination = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Target"), FontWeight = FontWeights.Bold, FontSize = 13 };
             Destination.Margin = new Thickness(5);
             grid.Children.Add(Destination);
             Grid.SetColumn(Destination, 2);
             Grid.SetRow(Destination, 0);
 
-            TextBlock Type = new TextBlock { Text = "Type", FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Type = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Type"), FontWeight = FontWeights.Bold, FontSize = 13 };
             Type.Margin = new Thickness(5);
             grid.Children.Add(Type);
             Grid.SetColumn(Type, 3);
             Grid.SetRow(Type, 0);
 
-            TextBlock Supprimer = new TextBlock { Text = "Supprimer", FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Supprimer = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Delete"), FontWeight = FontWeights.Bold, FontSize = 13 };
             Supprimer.Margin = new Thickness(5);
             grid.Children.Add(Supprimer);
             Grid.SetColumn(Supprimer, 4);
             Grid.SetRow(Supprimer, 0);
 
-            TextBlock Editer = new TextBlock { Text = "Editer", FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Editer = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Edit"), FontWeight = FontWeights.Bold, FontSize = 13 };
             Editer.Margin = new Thickness(5);
             grid.Children.Add(Editer);
             Grid.SetColumn(Editer, 5);
             Grid.SetRow(Editer, 0);
 
-            TextBlock Selectionner = new TextBlock { Text = "Seletionner", FontWeight = FontWeights.Bold, FontSize = 13 };
+            TextBlock Selectionner = new TextBlock { Text = ResourceHelper.GetString("Task.Grid.Select"), FontWeight = FontWeights.Bold, FontSize = 13 };
             Selectionner.Margin = new Thickness(5);
             grid.Children.Add(Selectionner);
             Grid.SetColumn(Selectionner, 6);
@@ -197,21 +197,21 @@ namespace ProjetDevSysGraphical
         }
 
 
-        public void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        public void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
             // Add a new task
             AddTask addTask = new AddTask();
             addTask.ShowDialog();
         }
 
-        public void ButtonlaunchAllTasks_Click(object sender, RoutedEventArgs e)
+        public void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             // Launch all tasks
             runSaveTask.RunMultipleTask(0, grid.Children.Count / 4);
         }
 
-        public void ButtonlaunchSelectedTasks_Click(object sender, RoutedEventArgs e)
+        public void selectedTasksButton_Click(object sender, RoutedEventArgs e)
         {
             RunSaveTask runSaveTask = new RunSaveTask();
             MessageBox.Show(runSaveTask.RunTaskMultiple(idToLaunch.ToArray()), "Run", MessageBoxButton.OK, MessageBoxImage.Information);

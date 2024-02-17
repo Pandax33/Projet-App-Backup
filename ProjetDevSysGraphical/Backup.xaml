@@ -18,6 +18,8 @@
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Margin" Value="5"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -34,17 +36,29 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+    
     <Grid>
-        <Button x:Name="button" Content="Ajouter une tâche" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="136" Click="ButtonAdd_Click" Height="50" Margin="0,0,10,20" Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="launchSelectedTasks" Content="Lancer les tâches selectionnées" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="211" Click="ButtonlaunchSelectedTasks_Click" Height="50" Margin="10,0,0,20" Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="launchAllTasks" Content="Lancer les tâches sur cette page" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="231" Click="ButtonlaunchAllTasks_Click" Height="50" Margin="234,0,0,20" Style="{StaticResource ButtonStyle}"/>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="10,80,10,80">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="50"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="selectedTasksButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Task.LaunchSelect'}" Click="selectedTasksButton_Click" Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="allTasksButton" Grid.Row="1" Grid.Column="1" Content="{local:LangageExtension Key='Task.LaunchAll'}" Click="allTasksButton_Click"  Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Task.AddButton'}"  Style="{StaticResource ButtonStyle}"/>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Border Background="#208AAE" CornerRadius="10" BorderBrush="#FF1C3F5D" BorderThickness="2">
                 <Grid x:Name="grid" Background="Transparent">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-
                     </Grid.RowDefinitions>
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -55,7 +69,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Adding TextBlock -->
+                    <!-- Code-Behind implementation for all backups -->
                 </Grid>
             </Border>
         </ScrollViewer>

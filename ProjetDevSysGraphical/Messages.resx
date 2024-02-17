@@ -213,8 +213,17 @@
   <data name="Task.Edit.Title" xml:space="preserve">
     <value>Edit a task</value>
   </data>
+  <data name="Task.Grid.Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Task.Grid.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="Task.Grid.Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="Task.Grid.Select" xml:space="preserve">
+    <value>Select</value>
   </data>
   <data name="Task.Grid.Source" xml:space="preserve">
     <value>Source</value>

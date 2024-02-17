@@ -5,7 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetDevSysGraphical"
         mc:Ignorable="d"
-        Title="{local:LangageExtension Key='Task.Edit.Title'}" MinHeight="175" MaxHeight="300" MinWidth="250" MaxWidth="600">
+        Title="{local:LangageExtension Key='Task.Edit.Title'}" MinHeight="185" MaxHeight="300" MinWidth="250" MaxWidth="600" Height="200" Width="400">
+    
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="MaxWidth" Value="400" />
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,23 +30,23 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="{local:LangageExtension Key='Task.Prompt1'}" Grid.Column="0" Grid.Row="0"/>
-        <TextBlock Name="task_name" Text="task_name" Grid.Column="1" Grid.Row="0"/>
+        <Label Content="{local:LangageExtension Key='Task.Prompt1'}" Grid.Row="0" Grid.Column="0" />
+        <Label x:Name="taskName" Grid.Row="0" Grid.Column="1" Margin="5"/>
 
-        <TextBlock Text="{local:LangageExtension Key='Task.Prompt2'}" Grid.Column="0" Grid.Row="1" />
-        <TextBox x:Name="textBoxEnterPath" Grid.Column="1" Grid.Row="1" Text="{Binding EnterPath, Mode=TwoWay}" TextChanged="textBoxEnterPath_TextChanged"/>
-        <Button x:Name="EnterButton" Content="&#x1F4C1;" Grid.Row="1" Grid.Column="2" Click="ButtonEnterPath_Click" Height="20" Grid.RowSpan="2" VerticalAlignment="Top"/>
+        <Label Content="{local:LangageExtension Key='Task.Prompt2'}"  Grid.Row="1" Grid.Column="0" />
+        <TextBox x:Name="sourcePathEntry" Grid.Row="1" Grid.Column="1" Margin="5"/>
+        <Button x:Name="sourcePathExplorer" Content="&#x1F4C1;" Grid.Row="1" Grid.Column="2" Margin="5" Click="sourcePathExplorer_Click"/>
 
-        <TextBlock Text="{local:LangageExtension Key='Task.Prompt3'}" Grid.Column="0" Grid.Row="2" />
-        <TextBox x:Name="textBoxOutPath" Grid.Column="1" Grid.Row="2" Text="{Binding OutPath, Mode=TwoWay}" TextChanged="textBoxOutPath_TextChanged"/>
-        <Button x:Name="DestinationButton" Content="&#x1F4C1;" Grid.Row="2" Grid.Column="2"  Click="ButtonOutPath_Click"/>
+        <Label Content="{local:LangageExtension Key='Task.Prompt3'}" Grid.Column="0" Grid.Row="2" />
+        <TextBox x:Name="targetPathEntry" Grid.Row="2" Grid.Column="1" Margin="5"/>
+        <Button x:Name="targetPathExplorer" Content="&#x1F4C1;" Grid.Row="2" Grid.Column="2" Margin="5"  Click="targetPathExplorer_Click"/>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
-            <RadioButton Content="{local:LangageExtension Key='Task.Type1'}" x:Name="radioButtonComplete" GroupName="BackupType" VerticalAlignment="Center" Margin="0,0,5,0" IsChecked="{Binding IsCompleteBackup, Mode=TwoWay}" Checked="radioButtonComplete_Checked"/>
-            <RadioButton Content="{local:LangageExtension Key='Task.Type2'}" x:Name="radioButtonDifferentielle" GroupName="BackupType" IsChecked="{Binding IsDifferentialBackup, Mode=TwoWay}" Checked="radioButtonDifferentielle_Checked"/>
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton Content="{local:LangageExtension Key='Task.Type1'}" x:Name="typeRadioButtonComplete" GroupName="BackupType" Margin="10"/>
+            <RadioButton Content="{local:LangageExtension Key='Task.Type2'}" x:Name="typeRadioButtonDifferential" GroupName="BackupType" Margin="10"/>
         </StackPanel>
 
-        <Button Name="cancelButton"  Content="{local:LangageExtension Key='Task.Cancel'}" Grid.Row="4" Grid.Column="0" Margin="5" Width="100" Click="cancelButton_Click"/>
-        <Button Name="applyButton" Content="{local:LangageExtension Key='Task.Apply'}" Grid.Row="4" Grid.Column="1" Margin="5" Width="100"  Click="applyButton_Click"/>
+        <Button Name="cancelButton"  Content="{local:LangageExtension Key='Task.Cancel'}" Grid.Row="4" Grid.Column="1" Width="50" HorizontalAlignment="Left" Click="cancelButton_Click"/>
+        <Button Name="applyButton" Content="{local:LangageExtension Key='Task.Apply'}" Grid.Row="4" Grid.Column="1" Width="50" HorizontalAlignment="Right" Click="applyButton_Click"/>
     </Grid>
 </Window>
