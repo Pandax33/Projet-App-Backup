@@ -34,6 +34,13 @@ namespace ProjetDevSysGraphical
 
             switch (theme)
             {
+                case "Legacy":
+                    BG = (Color)ColorConverter.ConvertFromString("#000022");
+                    B1 = (Color)ColorConverter.ConvertFromString("#FF1C3F5D");
+                    B2 = (Color)ColorConverter.ConvertFromString("#0094C6");
+                    B3 = (Color)ColorConverter.ConvertFromString("#FFFFFF");
+                    B4 = (Color)ColorConverter.ConvertFromString("#FF333333");
+                    break;
                 case "Moche":
 
                     BG = (Color)ColorConverter.ConvertFromString("#08415C");
