@@ -24,7 +24,7 @@ namespace ProjetDevSysGraphical
         private List<Button> editButtonList = new List<Button>();
         private List<string> buttonNameList = new List<string>();
         private List<int> idToLaunch = new List<int>();
-        private Backup Backup;
+        private BackupView Backup;
 
         public MainWindow()
         {
@@ -32,7 +32,7 @@ namespace ProjetDevSysGraphical
             CultureInfo.CurrentUICulture = ci;
 
             InitializeComponent();
-            Backup = new Backup();
+            Backup = new BackupView();
             contentControl.Content = Backup;
         }
 

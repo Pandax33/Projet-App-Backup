@@ -58,11 +58,11 @@ namespace ProjetDevSysGraphical
             {
                 if (ProjetDevSys.AppConstants.VerifExist(source) == true && ProjetDevSys.AppConstants.VerifExist(target) == true)
                 {
-                    MessageBox.Show(gestionTask.EditTask(Id, source, target, type), ResourceHelper.GetString("Task.Popup.Out"), MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(gestionTask.EditTask(Id, target,source, type), ResourceHelper.GetString("Task.Popup.Out"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                     // Appeler GenerateGrid sur cette instance
-                    if (mainWindow != null && mainWindow.contentControl.Content is Backup backup) backup.GenerateGrid();
+                    if (mainWindow != null && mainWindow.contentControl.Content is BackupView backup) backup.GenerateGrid();
                     Close();
                 }
 
