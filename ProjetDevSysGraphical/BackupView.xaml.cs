@@ -11,23 +11,25 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjetDevSysGraphical.VueModel;
 
 namespace ProjetDevSysGraphical
 {
     /// <summary>
     /// Logique d'interaction pour Backup.xaml
     /// </summary>
-    public partial class Backup : UserControl
+    public partial class BackupView : UserControl
     {
         private GestionTask gestionTask = new GestionTask();
         private List<Button> deleteButtonList = new List<Button>();
         private List<Button> editButtonList = new List<Button>();
         private List<string> buttonNameList = new List<string>();
         private List<int> idToLaunch = new List<int>();
-        public Backup()
+        public BackupView()
         {
             InitializeComponent();
             GenerateGrid();
@@ -320,17 +322,43 @@ namespace ProjetDevSysGraphical
             addTask.ShowDialog();
         }
 
-        public void allTasksButton_Click(object sender, RoutedEventArgs e)
+        public async void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
-            RunSaveTask runSaveTask = new RunSaveTask();
+            RunTaskAsync runSaveTask = new RunTaskAsync();
             // Launch all tasks
-            runSaveTask.RunMultipleTask(0, grid.Children.Count / 4);
+            try
+            {
+                // Ici, je suppose que vous souhaitez afficher le résultat dans une MessageBox.
+                // Adaptez cette partie comme nécessaire.
+                string result = await runSaveTask.RunMultipleTaskAsync(0, grid.Children.Count / 4);
+                MessageBox.Show(result, "Run", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                // Gérez les exceptions ici
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        public void selectedTasksButton_Click(object sender, RoutedEventArgs e)
+
+        public async void selectedTasksButton_Click(object sender, RoutedEventArgs e)
         {
-            RunSaveTask runSaveTask = new RunSaveTask();
-            MessageBox.Show(runSaveTask.RunTaskMultiple(idToLaunch.ToArray()), "Run", MessageBoxButton.OK, MessageBoxImage.Information);
+            RunTaskAsync runSaveTask = new RunTaskAsync();
+            // Obtenez le contexte de synchronisation actuel pour l'UI thread
+            SynchronizationContext context = SynchronizationContext.Current;
+
+            try
+            {
+                // Await l'opération asynchrone et stockez le résultat
+                string result = await runSaveTask.RunTaskMultipleAsync(idToLaunch.ToArray(), context);
+                // Affichez le résultat dans une MessageBox après la fin des tâches
+                MessageBox.Show(result, "Run", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                // Gérez ou loggez l'exception si nécessaire
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)

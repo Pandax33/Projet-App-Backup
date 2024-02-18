@@ -58,7 +58,8 @@ namespace ProjetDevSys.Model
                 LogRealTime.CurrentSourcePath = sourceDir;
                 LogRealTime.CurrentTargetPath = destinationFilePath;
                 LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                AppConstants.backupProgress[name] = LogRealTime.Progress;
+                AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
+
                 Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
 
                 LogRealTime.CreateLog();
@@ -99,7 +100,8 @@ namespace ProjetDevSys.Model
                             LogRealTime.CurrentTargetPath = destinationFilePath;
                             LogRealTime.TimeCrypt = Timecrypt;
                             LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                            AppConstants.backupProgress[name] = LogRealTime.Progress;
+                            AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
+
                             Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
                             LogRealTime.CreateLog();
                         }
@@ -113,7 +115,8 @@ namespace ProjetDevSys.Model
                         LogRealTime.CurrentTargetPath = destinationFilePath;
                         LogRealTime.TimeCrypt = "0";
                         LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                        AppConstants.backupProgress[name] = LogRealTime.Progress;
+                        AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
+
                         Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
                         LogRealTime.CreateLog();
                     }

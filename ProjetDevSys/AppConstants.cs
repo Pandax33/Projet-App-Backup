@@ -23,6 +23,8 @@ namespace ProjetDevSys
         public static List<string> BlockerProcess;
 
         public static string Theme;
+        public delegate void BackupProgressUpdatedEventHandler(string backupName, double progress);
+        public static event BackupProgressUpdatedEventHandler BackupProgressUpdated;
 
         static AppConstants()
         {
@@ -70,7 +72,11 @@ namespace ProjetDevSys
         {
             return File.Exists(path);
         }
-
+        public static void UpdateBackupProgress(string name, double progress)
+        {
+            backupProgress[name] = progress;
+            BackupProgressUpdated?.Invoke(name, progress);
+        }
         public static bool VerifExist(string path)
         {
             return Directory.Exists(path) || File.Exists(path);

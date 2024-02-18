@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjetDevSys.Model
 {
-    internal class BackupJob
+    public class BackupJob
     {
         public DateTime DateDebut { get; set; }
         public int NbFichier { get; set; }

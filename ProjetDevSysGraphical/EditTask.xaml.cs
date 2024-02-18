@@ -62,7 +62,7 @@ namespace ProjetDevSysGraphical
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
                     // Appeler GenerateGrid sur cette instance
-                    if (mainWindow != null && mainWindow.contentControl.Content is Backup backup) backup.GenerateGrid();
+                    if (mainWindow != null && mainWindow.contentControl.Content is BackupView backup) backup.GenerateGrid();
                     Close();
                 }
 
