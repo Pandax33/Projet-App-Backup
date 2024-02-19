@@ -181,5 +181,11 @@ namespace ProjetDevSys.VueModel
             }
         }
 
+        public void EditTheme(string theme)
+        {
+            Config.Theme = theme;
+            Config.EditConfig();
+        }
+
     }
 }

@@ -32,6 +32,11 @@ namespace ProjetDevSysGraphical
             CultureInfo.CurrentUICulture = ci;
 
             InitializeComponent();
+            
+            //position
+            this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2 + SystemParameters.WorkArea.Left;
+            this.Top = (SystemParameters.WorkArea.Height - this.Height) / 2 + SystemParameters.WorkArea.Top;
+
             Backup = new BackupView();
             contentControl.Content = Backup;
         }
@@ -53,7 +58,7 @@ namespace ProjetDevSysGraphical
 
         private void MainWindow_Closed(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Application.Current.Shutdown();
+            //Application.Current.Shutdown();
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -97,6 +102,15 @@ namespace ProjetDevSysGraphical
         private void CloseButton_Leave(object sender, MouseEventArgs e)
         {
             mainBorder.BorderBrush = Brushes.Transparent;
+        }
+
+        public void HotReload()
+        {
+            ThemeLoader.LoadTheme();
+            MainWindow newWindow = new MainWindow();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
         }
     }
 }
