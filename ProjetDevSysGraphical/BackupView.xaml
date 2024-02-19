@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ProjetDevSysGraphical.Backup"
+﻿<UserControl x:Class="ProjetDevSysGraphical.BackupView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,10 +11,11 @@
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource Brush1}"/>
             <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+            
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeButton}"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontButton}"/>
             <Setter Property="Padding" Value="10,5"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -50,7 +51,7 @@
 
         <Button x:Name="selectedTasksButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Task.LaunchSelect'}" Click="selectedTasksButton_Click" Style="{StaticResource ButtonStyle}"/>
         <Button x:Name="allTasksButton" Grid.Row="1" Grid.Column="1" Content="{local:LangageExtension Key='Task.LaunchAll'}" Click="allTasksButton_Click"  Style="{StaticResource ButtonStyle}"/>
-        <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Task.AddButton'}"  Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="addTaskButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Task.AddButton'}"  Style="{StaticResource ButtonStyle}" Click="addTaskButton_Click_1"/>
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Border Background="{StaticResource Brush1}" CornerRadius="10" BorderBrush="{StaticResource Brush3}" BorderThickness="2">

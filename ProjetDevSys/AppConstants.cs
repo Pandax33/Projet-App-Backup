@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using ProjetDevSys.Model;
 using System.Diagnostics;
+using System.Collections.Concurrent;
 
 namespace ProjetDevSys
 {
@@ -17,10 +18,13 @@ namespace ProjetDevSys
         public static List<string> ExtensionListCrypt;
         public static string CryptPath;
         public static string KeyCrypt;
-        
+        public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
+
         public static List<string> BlockerProcess;
 
         public static string Theme;
+        public delegate void BackupProgressUpdatedEventHandler(string backupName, double progress);
+        public static event BackupProgressUpdatedEventHandler BackupProgressUpdated;
 
         static AppConstants()
         {
@@ -68,7 +72,11 @@ namespace ProjetDevSys
         {
             return File.Exists(path);
         }
-
+        public static void UpdateBackupProgress(string name, double progress)
+        {
+            backupProgress[name] = progress;
+            BackupProgressUpdated?.Invoke(name, progress);
+        }
         public static bool VerifExist(string path)
         {
             return Directory.Exists(path) || File.Exists(path);
