@@ -5,201 +5,711 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjetDevSysGraphical"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="800">
+             d:DesignHeight="1300" d:DesignWidth="1300">
     <UserControl.Resources>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand" Background="{StaticResource Brush2}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Background="{StaticResource Brush2}" BorderBrush="{StaticResource Brush3}" BorderThickness="2">
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="{TemplateBinding Background}" 
+                                                BorderBrush="{StaticResource Brush3}" 
+                                                BorderThickness="2"
+                                                CornerRadius="5">
+                                                    <ContentPresenter/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonBottomStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource Brush2}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="330" Color="Gray"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="ToolTipService.InitialShowDelay" Value="1"/>
+        </Style>
+        
+        <Style x:Key="HelpButton" TargetType="Button">
+            <Setter Property="Content" Value="?" />
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="{StaticResource Brush2}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="4,2" 
+                        BorderBrush="{TemplateBinding Background}" 
+                        CornerRadius="20" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Brush4}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="RepeatButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="{StaticResource Brush1}" CornerRadius="5"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="TextBox">
-            <Setter Property="MaxWidth" Value="400" />
+            <Setter Property="MaxWidth" Value="600" />
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
             <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="Background" Value="{StaticResource Brush2}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="FontSize" Value="12"/>
         </Style>
-        
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Background="{StaticResource Brush2}"
+                            CornerRadius="5">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Explorer" TargetType="Button">
+            <Setter Property="Content" Value="&#x1F4C1;"/>
+            <Setter Property="Background" Value="{StaticResource Brush2}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" CornerRadius="5" BorderThickness="2" BorderBrush="{StaticResource Brush2}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Brush4}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="{StaticResource Brush2}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="BorderBrush" Value="{StaticResource Brush2}"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border
+                  x:Name="Border" 
+                  Grid.ColumnSpan="2"
+                  CornerRadius="0"
+                  Background="{StaticResource Brush2}"
+                  BorderBrush="{StaticResource Brush4}"
+                  BorderThickness="1" />
+                <Border 
+                  Grid.Column="0"
+                  CornerRadius="0" 
+                  Margin="1" 
+                  Background="{StaticResource Brush2}" 
+                  BorderBrush="{StaticResource Brush4}"
+                  BorderThickness="0,0,1,0" />
+                <Path 
+                  x:Name="Arrow"
+                  Grid.Column="1"     
+                  Fill="{StaticResource Brush4}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+                />
+            </Grid>
+            <ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#808080" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="#E0E0E0" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="#EEEEEE" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="#AAAAAA" />
+                <Setter Property="Foreground" Value="#888888"/>
+                <Setter TargetName="Arrow" Property="Fill" Value="#888888" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton 
+                            Name="ToggleButton" 
+                            Template="{StaticResource ComboBoxToggleButton}" 
+                            Grid.Column="2" 
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="3,3,23,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}" 
+                            Template="{StaticResource ComboBoxTextBox}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Margin="3,3,23,3"
+                            Focusable="True" 
+                            Background="{StaticResource Brush2}"
+                            Foreground="{StaticResource Brush3}"
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup 
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True" 
+                            Focusable="False"
+                            PopupAnimation="Slide">
+
+                                <Grid Name="DropDown"
+                              SnapsToDevicePixels="True"                
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                                x:Name="DropDownBorder"
+                                Background="{StaticResource Brush2}"
+
+                                BorderThickness="1"
+                                BorderBrush="{StaticResource Brush4}"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{StaticResource Brush4}"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"  Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="{StaticResource Brush4}" />
+                    <Setter Property="Foreground" Value="{StaticResource Brush3}" />
+                    <Setter Property="BorderThickness" Value="0"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border
+                         BorderBrush="Transparent"
+                         BorderThickness="0"
+                         CornerRadius="5"
+                         Background="{TemplateBinding Background}">
+                            <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="Auto" Margin="0" Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="0"/>
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="{StaticResource Brush2}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListView">
+                        <Border CornerRadius="10" BorderBrush="{StaticResource Brush4}" BorderThickness="1" Background="{TemplateBinding Background}">
+                            <ScrollViewer>
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border Name="Border"
+                              Padding="2"
+                              SnapsToDevicePixels="true">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource Brush1}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Label" x:Key="TitleStyle">
+            <Setter Property="FontFamily" Value="{StaticResource FontTitle}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Label" x:Key="BaseFont">
+            <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <TabControl>
-            <TabItem Name="tabLog" Header="{local:LangageExtension Key='Config.Tab1'}" >
-                <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
-                    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="50"/>
+
+        </Grid.RowDefinitions>
+
+        <Button x:Name="ApplyButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Config.Apply'}" Style="{StaticResource ButtonBottomStyle}" HorizontalAlignment="Left" Click="ApplyButton_Click"/>
+        <Button x:Name="ResetButton" Grid.Row="1" Grid.Column="2" Content="{local:LangageExtension Key='Config.Reset'}" Style="{StaticResource ButtonBottomStyle}" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="ResetButton_Click"/>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+            <Border Background="{StaticResource Brush1}" CornerRadius="20" BorderBrush="{StaticResource Brush3}" BorderThickness="2">
+                    <Grid x:Name="grid" Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Name ="logTitle" Content="{local:LangageExtension Key='Config.Log1'}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
-
-                        <Label Name="logDailyLabel" Content="{local:LangageExtension Key='Config.Log2'}" Grid.Row="1" Grid.Column="1"/>
-                        <TextBox x:Name="logDailyEntry" Grid.Row="1" Grid.Column="2" />
-                        <Button x:Name="logDailyExplorer" Grid.Row="1" Grid.Column="3" Content="&#x1F4C1;" Click="pathLogDailyExplorer_Click"/>
-
-
-                        <Label Name="logRTLabel" Content="{local:LangageExtension Key='Config.Log3'}" Grid.Row="2" Grid.Column="1"/>
-                        <TextBox x:Name="logRTEntry" Grid.Row="2" Grid.Column="2" />
-                        <Button x:Name="logRTExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4C1;" Click="pathLogRTExplorer_Click"/>
-
-                        <Label Name="logExtensionlabel" Content="{local:LangageExtension Key='Config.Log4'}" Grid.Row="3" Grid.Column="1"/>
-                        <ComboBox Name="logExtensionSelector"  IsEditable="True" Grid.Row="3" Grid.Column="2" PreviewMouseDown="logExtensionSelector_GotFocus" GotFocus="logExtensionSelector_GotFocus">
-                            <ComboBoxItem>.json</ComboBoxItem>
-                            <ComboBoxItem>.xml</ComboBoxItem>
-                        </ComboBox>
-                    </Grid>
-                </Border>
-            </TabItem>
-            <TabItem Name="tabCrypto" Header="{local:LangageExtension Key='Config.Tab2'}">
-                <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
-
-                    <Grid Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
+                        <Border Grid.Row="0" Grid.Column="0">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Name="cryptoTitle" Content="{local:LangageExtension Key='Config.Crypto1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                            <Label Name ="logTitle" Content="{local:LangageExtension Key='Config.Log1'}" Style="{StaticResource TitleStyle}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
 
-                        <Label Name="cryptoPathLabel" Content="{local:LangageExtension Key='Config.Crypto2'}" Grid.Row="2" Grid.Column="1"/>
-                        <TextBox x:Name="cryptoPathEntry" Grid.Row="2" Grid.Column="2"/>
-                        <Button x:Name="cryptoPathExplorer" Grid.Row="2" Grid.Column="3" Content="&#x1F4C1;" Click="cryptoPathExplorer_Click"/>
+                            <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                            <Label Name="logDailyLabel" Style="{StaticResource BaseFont}"  Content="{local:LangageExtension Key='Config.Log2'}" Grid.Row="1" Grid.Column="1"/>
+                            <TextBox x:Name="logDailyEntry" Grid.Row="1" Grid.Column="2" />
+                                <Button x:Name="logDailyExplorer" Grid.Row="1" Grid.Column="3" Style="{StaticResource Explorer}" Click="pathLogDailyExplorer_Click"/>
 
-                        <Label Name="cryptoExtensionsLabel" Content="{local:LangageExtension Key='Config.Crypto3'}" Grid.Row="3" Grid.Column="1"/>
-                        <TextBox x:Name="cryptoExtensionsEntry" Grid.Row="3" Grid.Column="2"/>
-                        <ListView Name="cryptoExtensionsListView"  Grid.Row="4" Grid.Column="2">
-                            <ListView.View>
-                                <GridView x:Name="cryptoExtensionsGridView">
-                                    <GridViewColumn Header="{local:LangageExtension Key='Config.Crypto4'}"  DisplayMemberBinding="{Binding extension}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <Button Name="cryptoExtensionsAdd" Grid.Row="3"  Grid.Column="3" Margin="5" Background="LightGreen" Foreground="Green" Click="cryptoExtensionsAdd_Click" Width="20" Height="20">+</Button>
-                        <Button Name="cryptoExtensionsRemove" Grid.Row="4"  Grid.Column="3" Margin="5" Background="Red" Foreground="DarkRed" VerticalAlignment="Top" Click="cryptoExtensionsRemove_Click" Width="20" Height="20">-</Button>
+                            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                                <Label Name="logRTLabel" Style="{StaticResource BaseFont}"  Content="{local:LangageExtension Key='Config.Log3'}" Grid.Row="2" Grid.Column="1"/>
+                            <TextBox x:Name="logRTEntry" Grid.Row="2" Grid.Column="2" />
+                                <Button x:Name="logRTExplorer" Grid.Row="2" Grid.Column="3" Style="{StaticResource Explorer}" Click="pathLogRTExplorer_Click"/>
+
+                            <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                                <Label Name="logExtensionlabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Log4'}" Grid.Row="3" Grid.Column="1"/>
+                            <ComboBox Name="logExtensionSelector" Grid.Row="3" Grid.Column="2">
+                                <ComboBoxItem>.json</ComboBoxItem>
+                                <ComboBoxItem>.xml</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Grid.Column="0">
+
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                                <Label Name="cryptoTitle" Content="{local:LangageExtension Key='Config.Crypto1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                                <Label Name="cryptoPathLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Crypto2'}" Grid.Row="2" Grid.Column="1"/>
+                            <TextBox x:Name="cryptoPathEntry" Grid.Row="2" Grid.Column="2"/>
+                            <Button x:Name="cryptoPathExplorer" Grid.Row="2" Grid.Column="3" Style="{StaticResource Explorer}" Click="cryptoPathExplorer_Click"/>
+
+                            <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                                <Label Name="cryptoExtensionsLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Crypto3'}" Grid.Row="3" Grid.Column="1"/>
+                            <TextBox x:Name="cryptoExtensionsEntry" Grid.Row="3" Grid.Column="2"/>
+                                <ListView Name="cryptoExtensionsListView"  Grid.Row="4" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                                    <ListView.View>
+                                        <GridView x:Name="cryptoExtensionsGridView">
+                                            <GridViewColumn Header="{local:LangageExtension Key='Config.Crypto4'}"  DisplayMemberBinding="{Binding extension}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            <Button Name="cryptoExtensionsAdd" Grid.Row="3"  Grid.Column="3" Margin="5" Background="LightGreen" Foreground="Green" Click="cryptoExtensionsAdd_Click" Width="20" Height="20">+</Button>
+                            <Button Name="cryptoExtensionsRemove" Grid.Row="4"  Grid.Column="3" Margin="5" Background="Red" Foreground="DarkRed" VerticalAlignment="Top" Click="cryptoExtensionsRemove_Click" Width="20" Height="20">-</Button>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Grid.Column="0">
+
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                                <Label Name="languageTitle" Content="{local:LangageExtension Key='Config.Languages1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                                <Label Name="languageLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Languages2'}" Grid.Row="2" Grid.Column="1"/>
+                            <ComboBox Name="languageSelector" Grid.Row="2" Grid.Column="2">
+                                <ComboBoxItem>English</ComboBoxItem>
+                                <ComboBoxItem>Francais</ComboBoxItem>
+                            </ComboBox>
+
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="0">
+
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                                <Label Name="blockerTitle" Content="{local:LangageExtension Key='Config.Blocker1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                            <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                <Button.ToolTip>
+                                    <ToolTip>
+                                        <Border>
+                                            <Label FontWeight="Bold">
+                                                Information
+                                            </Label>
+                                        </Border>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                                <Label Name="blockerLabel"  Style="{StaticResource BaseFont}" Content="extensionsCrypto" Grid.Row="2" Grid.Column="1"/>
+                            <TextBox x:Name="blockerEntry" Grid.Row="2" Grid.Column="2"/>
+                            <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                                <ListView.View>
+                                    <GridView x:Name="blockerGridView">
+                                        <GridViewColumn Header="processes"  DisplayMemberBinding="{Binding process}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Button Name="blockerAdd" Grid.Row="2"  Grid.Column="3" Margin="5" Background="LightGreen" Foreground="Green" Click="blockerAdd_Click" Width="20" Height="20">+</Button>
+                            <Button Name="blockerRemove" Grid.Row="3"  Grid.Column="3" Margin="5" Background="Red" Foreground="DarkRed" VerticalAlignment="Top" Click="blockerRemove_Click" Width="20" Height="20">-</Button>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="4" Grid.Column="0">
+
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                                <Label Name="SavePath" Content="{local:LangageExtension Key='Config.SavePath1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+
+                                <Label Name="pathSaveBackupsLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.SavePath2'}" Grid.Row="3" Grid.Column="1"/>
+                            <TextBox x:Name="pathSaveBackupEntry" Grid.Row="3" Grid.Column="2" />
+                                <Button x:Name="pathSaveBackupExplorer" Grid.Row="3" Grid.Column="3" Style="{StaticResource Explorer}" Click="pathSaveBackupExplorer_Click"/>
+
+                        </Grid>
+                    </Border>
+                        <Border Grid.Row="5" Grid.Column="0">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Name="themeTitle" Content="{local:LangageExtension Key='Config.Themes1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                                <Label Name="themeLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Themes2'}" Grid.Row="2" Grid.Column="1"/>
+                                <ComboBox Name="themeSelector"  Grid.Row="2" Grid.Column="2">
+                                    <ComboBoxItem>Default</ComboBoxItem>
+                                    <ComboBoxItem>Legacy</ComboBoxItem>
+                                    <ComboBoxItem>Moche</ComboBoxItem>
+                                </ComboBox>
+                            </Grid>
+                        </Border>
                     </Grid>
-                </Border>
-            </TabItem>
-            <TabItem Name="tabLanguages" Header="{local:LangageExtension Key='Config.Tab3'}">
-                <Border Grid.Row="3" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
-
-                    <Grid Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Name="languageTitle" Content="{local:LangageExtension Key='Config.Languages1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-
-                        <Label Name="languageLabel" Content="{local:LangageExtension Key='Config.Languages2'}" Grid.Row="2" Grid.Column="1"/>
-                        <ComboBox Name="languageSelector"  IsEditable="True" Grid.Row="2" Grid.Column="2" PreviewMouseDown="languageSelector_GotFocus" GotFocus="languageSelector_GotFocus">
-                            <ComboBoxItem>English</ComboBoxItem>
-                            <ComboBoxItem>Francais</ComboBoxItem>
-                        </ComboBox>
-
-                    </Grid>
-                </Border>
-
-            </TabItem>
-            <TabItem Name="tabBlocker" Header="{local:LangageExtension Key='Config.Tab4'}">
-                <Border Grid.Row="4" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
-
-                    <Grid Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Name="blockerTitle" Content="{local:LangageExtension Key='Config.Blocker1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-
-                        <Label Name="blockerLabel" Content="extensionsCrypto" Grid.Row="2" Grid.Column="1"/>
-                        <TextBox x:Name="blockerEntry" Grid.Row="2" Grid.Column="2"/>
-                        <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2">
-                            <ListView.View>
-                                <GridView x:Name="blockerGridView">
-                                    <GridViewColumn Header="processes"  DisplayMemberBinding="{Binding process}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <Button Name="blockerAdd" Grid.Row="2"  Grid.Column="3" Margin="5" Background="LightGreen" Foreground="Green" Click="blockerAdd_Click" Width="20" Height="20">+</Button>
-                        <Button Name="blockerRemove" Grid.Row="3"  Grid.Column="3" Margin="5" Background="Red" Foreground="DarkRed" VerticalAlignment="Top" Click="blockerRemove_Click" Width="20" Height="20">-</Button>
-                    </Grid>
-                </Border>
-
-            </TabItem>
-            <TabItem Name="tabSavePath" Header="{local:LangageExtension Key='Config.Tab5'}">
-                <Border Grid.Row="5" Grid.Column="1" BorderBrush="Black" BorderThickness="2" Margin="10">
-
-                    <Grid Margin="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label Name="SavePath" Content="{local:LangageExtension Key='Config.SavePath1'}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-
-
-                        <Label Name="pathSaveBackupsLabel" Content="{local:LangageExtension Key='Config.SavePath2'}" Grid.Row="3" Grid.Column="1"/>
-                        <TextBox x:Name="pathSaveBackupEntry" Grid.Row="3" Grid.Column="2" />
-                        <Button x:Name="pathSaveBackupExplorer" Grid.Row="3" Grid.Column="3" Content="&#x1F4C1;" Click="pathSaveBackupExplorer_Click"/>
-
-                    </Grid>
-                </Border>
-
-            </TabItem>
-        </TabControl>
-        <Button x:Name="ApplyButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Config.Apply'}"  Margin="5" HorizontalAlignment="Left" Click="ApplyButton_Click"/>
-        <Button x:Name="ResetButton" Grid.Row="1" Grid.Column="0" Content="{local:LangageExtension Key='Config.Reset'}" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Right" Click="ResetButton_Click"/>
+            </Border>
+        </Grid>
+    </ScrollViewer>
     </Grid>
 </UserControl>

@@ -24,7 +24,9 @@ namespace ProjetDevSysGraphical
         private static List<SolidColorBrush> ThemeBrush;
         private static List<FontFamily> ThemeFont;
 
-        static ThemeLoader()
+
+
+        private static void themeSelector()
         {
             Color BG;
             Color B1;
@@ -34,6 +36,7 @@ namespace ProjetDevSysGraphical
             Color B5;
             FontFamily FontTittle;
             FontFamily FontButton;
+            FontFamily FontBase;
             FontFamily FontGrid;
             string theme = ProjetDevSys.AppConstants.Theme;
 
@@ -54,6 +57,7 @@ namespace ProjetDevSysGraphical
                     FontTittle = new FontFamily("Roboto");
                     FontButton = new FontFamily("Roboto");
                     FontGrid = new FontFamily("Roboto");
+                    FontBase= new FontFamily("Roboto");
                     break;
                 case "Moche":
 
@@ -63,20 +67,22 @@ namespace ProjetDevSysGraphical
                     B3 = (Color)ColorConverter.ConvertFromString("#388697");
                     B4 = (Color)ColorConverter.ConvertFromString("#B5FFE1");
                     B5 = (Color)ColorConverter.ConvertFromString("#353839");
-                    FontTittle = new FontFamily("Roboto");
-                    FontButton = new FontFamily("Roboto");
-                    FontGrid = new FontFamily("Roboto");
+                    FontTittle = new FontFamily("Comic Sans MS");
+                    FontButton = new FontFamily("Comic Sans MS");
+                    FontGrid = new FontFamily("Comic Sans MS");
+                    FontBase = new FontFamily("Comic Sans MS");
                     break;
                 default:
                     BG = (Color)ColorConverter.ConvertFromString("#252627");
-                    B1 = (Color)ColorConverter.ConvertFromString("#D3D4D9"); 
-                    B2 = (Color)ColorConverter.ConvertFromString("#4B88A2"); 
+                    B1 = (Color)ColorConverter.ConvertFromString("#D3D4D9");
+                    B2 = (Color)ColorConverter.ConvertFromString("#4B88A2");
                     B3 = (Color)ColorConverter.ConvertFromString("#353839");
                     B4 = (Color)ColorConverter.ConvertFromString("#ADD8E6");
                     B5 = (Color)ColorConverter.ConvertFromString("#353839");
                     FontTittle = new FontFamily("Roboto");
                     FontButton = new FontFamily("Roboto");
                     FontGrid = new FontFamily("Roboto");
+                    FontBase = new FontFamily("Roboto");
                     break;
                 case "Leandro":
                     BG = (Color)ColorConverter.ConvertFromString("#4B88A2"); // Platinum #4B88A2
@@ -88,21 +94,28 @@ namespace ProjetDevSysGraphical
                     FontTittle = new FontFamily("Roboto");
                     FontButton = new FontFamily("Roboto");
                     FontGrid = new FontFamily("Roboto");
+                    FontBase = new FontFamily("Roboto");
                     break;
             }
 
             SolidColorBrush brushBG = new SolidColorBrush(BG);
-            SolidColorBrush brush1= new SolidColorBrush(B1);
-            SolidColorBrush brush2= new SolidColorBrush(B2);
-            SolidColorBrush brush3= new SolidColorBrush(B3);
-            SolidColorBrush brush4= new SolidColorBrush(B4);
-            SolidColorBrush brush5= new SolidColorBrush(B5);
+            SolidColorBrush brush1 = new SolidColorBrush(B1);
+            SolidColorBrush brush2 = new SolidColorBrush(B2);
+            SolidColorBrush brush3 = new SolidColorBrush(B3);
+            SolidColorBrush brush4 = new SolidColorBrush(B4);
+            SolidColorBrush brush5 = new SolidColorBrush(B5);
+            Application.Current.Resources["FontTitle"] = FontTittle;
+            Application.Current.Resources["FontButton"] = FontButton;
+            Application.Current.Resources["FontBase"] = FontBase;
 
-            ThemeBrush = new List<SolidColorBrush>() { brushBG, brush1, brush2, brush3, brush4, brush5};
-            ThemeFont = new List<FontFamily>() { FontTittle,FontButton,FontGrid,};
+
+            ThemeBrush = new List<SolidColorBrush>() { brushBG, brush1, brush2, brush3, brush4, brush5 };
+            ThemeFont = new List<FontFamily>() { FontTittle, FontButton, FontGrid, };
         }
-            public static void LoadTheme()
+
+        public static void LoadTheme()
         {
+            themeSelector();
             Application.Current.Resources["BrushBG"] = ThemeBrush[0];
             Application.Current.Resources["Brush1"] = ThemeBrush[1];
             Application.Current.Resources["Brush2"] = ThemeBrush[2];

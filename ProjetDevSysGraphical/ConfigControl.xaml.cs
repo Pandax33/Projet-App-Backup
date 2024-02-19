@@ -54,15 +54,6 @@ namespace ProjetDevSysGraphical
             App.Current.MainWindow.Activate();
         }
 
-        private void languageSelector_GotFocus(object sender, RoutedEventArgs e)
-        {
-            languageSelector.IsDropDownOpen = true;
-        }
-        private void logExtensionSelector_GotFocus(object sender, RoutedEventArgs e)
-        {
-            logExtensionSelector.IsDropDownOpen = true;
-        }
-
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to reset all settings ?", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -142,6 +133,8 @@ namespace ProjetDevSysGraphical
 
             ProjetDevSys.VueModel.ConfigViewModel configViewModel = new ConfigViewModel();
 
+            bool needRestart = false;
+
             //Paths
             if (!String.IsNullOrWhiteSpace(pathSaveBackupEntry.Text)) configViewModel.EditerJsonPathSave(pathSaveBackupEntry.Text);
             if (!String.IsNullOrWhiteSpace(logDailyEntry.Text)) configViewModel.EditerJsonPath(logDailyEntry.Text);
@@ -151,7 +144,11 @@ namespace ProjetDevSysGraphical
             if (logExtensionSelector.Text != null) configViewModel.EditExtensionType(logExtensionSelector.Text);
 
             //language
-            if (languageSelector.Text != null) configViewModel.EditerLangage(GetLangageCulture(languageSelector.Text));
+            if (languageSelector.Text != null) 
+            {
+                configViewModel.EditerLangage(GetLangageCulture(languageSelector.Text));
+                needRestart = true;
+            }
 
             //crypto
             if (CryptoExtensions != null) configViewModel.ChangeExtensionListCrypt(new List<string>(CryptoExtensions));
@@ -160,9 +157,18 @@ namespace ProjetDevSysGraphical
             //blocker Process
             if (blockerProcesses != null) configViewModel.ChangeBlockerProcessList(new List<string>(blockerProcesses));
 
+            if (themeSelector.Text != null)
+            {
+                configViewModel.EditTheme(themeSelector.Text);
+                needRestart = true;
+            }
             //refresh content
             Refresh();
-            //MainWindow.ReloadWindow();
+            if (needRestart)
+            {
+                var mainWindow = App.Current.MainWindow as MainWindow;
+                mainWindow?.HotReload();
+            }
         }
 
         private void Refresh()
@@ -194,6 +200,10 @@ namespace ProjetDevSysGraphical
             {
                 foreach (string processes in ProjetDevSys.AppConstants.BlockerProcess) blockerProcesses.Add(processes);
             }
+
+            //theme
+            themeSelector.Text = ProjetDevSys.AppConstants.Theme;
+
             blockerUpdate();
         }
         public static string GetLangageCulture(string langage)
