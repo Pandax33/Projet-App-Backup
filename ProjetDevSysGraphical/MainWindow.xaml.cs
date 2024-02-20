@@ -65,12 +65,12 @@ namespace ProjetDevSysGraphical
         {
             contentControl.Content = new ConfigControl();
         }
-        private void buttonMinimize_Click(object sender, RoutedEventArgs e)
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
         }
 
-        private void buttonMaximize_Click(object sender, RoutedEventArgs e)
+        private void ButtonMaximize_Click(object sender, RoutedEventArgs e)
         {
             if (this.WindowState == WindowState.Maximized)
             {
@@ -84,7 +84,7 @@ namespace ProjetDevSysGraphical
             }
         }
 
-        private void buttonClose_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

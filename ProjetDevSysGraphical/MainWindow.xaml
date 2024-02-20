@@ -117,7 +117,7 @@
                         Background="Transparent"
                         BorderBrush="Transparent"
                         WindowChrome.IsHitTestVisibleInChrome="True"
-                        Click="buttonMinimize_Click">
+                        Click="ButtonMinimize_Click">
                         <Image Source="/Resources/minimize.png"
                            Width="20"
                            Height="20" />
@@ -129,7 +129,7 @@
                         Background="Transparent"
                         BorderBrush="Transparent"
                         WindowChrome.IsHitTestVisibleInChrome="True"
-                        Click="buttonMaximize_Click">
+                        Click="ButtonMaximize_Click">
                         <Image x:Name="maximizeImage"
                            Source="/Resources/maximize.png"
                            Width="20"
@@ -139,7 +139,7 @@
                         x:Name="buttonClose"
                         Width="30"
                         WindowChrome.IsHitTestVisibleInChrome="True"
-                        Click="buttonClose_Click"
+                        Click="ButtonClose_Click"
                             MouseEnter="CloseButton_Enter" MouseLeave="CloseButton_Leave">
                         <Image Source="/Resources/close.png"
                            Width="20"

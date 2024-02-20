@@ -402,6 +402,6 @@ namespace ProjetDevSysGraphical
             AddTask addTask = new AddTask();
             addTask.ShowDialog();
         }
+        #endregion
     }
 }
-#endregion
