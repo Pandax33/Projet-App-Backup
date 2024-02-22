@@ -156,6 +156,12 @@
   <data name="Config.Log4" xml:space="preserve">
     <value>Logs Extension type :</value>
   </data>
+  <data name="Config.Priority1" xml:space="preserve">
+    <value>Priority files</value>
+  </data>
+  <data name="Config.Priority3" xml:space="preserve">
+    <value>Extension of files to prioritize:</value>
+  </data>
   <data name="Config.Reset" xml:space="preserve">
     <value>Reset</value>
   </data>

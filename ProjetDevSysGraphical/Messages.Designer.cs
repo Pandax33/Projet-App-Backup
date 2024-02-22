@@ -178,6 +178,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Priority files.
+        /// </summary>
+        internal static string Config_Priority1 {
+            get {
+                return ResourceManager.GetString("Config.Priority1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Extension of files to prioritize:.
+        /// </summary>
+        internal static string Config_Priority3 {
+            get {
+                return ResourceManager.GetString("Config.Priority3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Reset.
         /// </summary>
         internal static string Config_Reset {
