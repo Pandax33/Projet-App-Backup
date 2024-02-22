@@ -570,7 +570,7 @@
                                 <ListView Name="cryptoExtensionsListView"  Grid.Row="4" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                     <ListView.View>
                                         <GridView x:Name="cryptoExtensionsGridView">
-                                            <GridViewColumn Header="{local:LangageExtension Key='Config.Crypto4'}"  DisplayMemberBinding="{Binding extension}"/>
+                                            <GridViewColumn Width="500"  Header="{local:LangageExtension Key='Config.Crypto4'}"  DisplayMemberBinding="{Binding extension}"/>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
@@ -649,7 +649,7 @@
                             <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                 <ListView.View>
                                     <GridView x:Name="blockerGridView">
-                                        <GridViewColumn Header="processes"  DisplayMemberBinding="{Binding process}"/>
+                                        <GridViewColumn Width="750" Header="processes"  DisplayMemberBinding="{Binding process}"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
