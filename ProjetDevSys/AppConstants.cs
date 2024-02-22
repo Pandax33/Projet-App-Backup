@@ -19,6 +19,8 @@ namespace ProjetDevSys
         public static string CryptPath;
         public static string KeyCrypt;
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
+        public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
+
 
         public static List<string> BlockerProcess;
 
@@ -141,6 +143,23 @@ namespace ProjetDevSys
 
             return false;
         }
+        public static void PauseBackup(string backupName)
+        {
+            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
+            {
+                handle.Reset(); // Met en pause
+            }
+        }
+
+        public static void ResumeBackup(string backupName)
+        {
+            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
+            {
+                handle.Set(); // Reprend l'exécution
+            }
+        }
+
+
 
     }
 }

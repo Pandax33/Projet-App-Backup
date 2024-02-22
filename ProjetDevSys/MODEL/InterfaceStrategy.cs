@@ -52,7 +52,7 @@ namespace ProjetDevSys.Model
                 long fileSize = fileInfo.Length;
 
 
-
+                AppConstants.BackupPauseHandles[name].WaitOne();
                 File.Copy(sourceDir, destinationFilePath, true);
                 LogRealTime.Timestamp = DateTime.Now;
                 LogRealTime.CurrentSourcePath = sourceDir;
@@ -85,7 +85,7 @@ namespace ProjetDevSys.Model
                         {
                             RedirectStandardOutput = true,
                         };
-
+                        AppConstants.BackupPauseHandles[name].WaitOne();
                         using (Process process = new Process())
                         {
                             process.StartInfo = startInfo;
@@ -109,6 +109,7 @@ namespace ProjetDevSys.Model
                     }
                     else
                     {
+                        AppConstants.BackupPauseHandles[name].WaitOne();
                         File.Copy(fichierPath, destinationFilePath, true);
                         LogRealTime.Timestamp = DateTime.Now;
                         LogRealTime.CurrentSourcePath = fichierPath;

@@ -33,12 +33,16 @@ namespace ProjetDevSysGraphical.VueModel
                 {
                     try
                     {
-                        backupJob.Save();
+                        var mre = new ManualResetEvent(true); // true signifie qu'il n'est pas en attente au départ
+                        ProjetDevSys.AppConstants.BackupPauseHandles.TryAdd(backup.Name, mre);
                         // Utilisation de SynchronizationContext pour la mise à jour de l'UI
                         context.Post(_ =>
                         {
                             ProjetDevSys.AppConstants.backupProgress.TryAdd(backup.Name, 0);
+                            
+                            
                         }, null);
+                        backupJob.Save();
                     }
                     catch (Exception ex)
                     {
