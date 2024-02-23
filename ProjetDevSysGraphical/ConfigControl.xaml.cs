@@ -23,6 +23,7 @@ namespace ProjetDevSysGraphical
     public partial class ConfigControl : UserControl
     {
         public ObservableCollection<string> CryptoExtensions { get; set; }
+        public ObservableCollection<string> PriorityExtensions { get; set; }
         public ObservableCollection<string> blockerProcesses { get; set; }
         public ConfigControl()
         {
@@ -33,30 +34,31 @@ namespace ProjetDevSysGraphical
         private void pathLogDailyExplorer_Click(object sender, RoutedEventArgs e)
         {
             logDailyEntry.Text = AppConstants.OpenFolderDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void pathLogRTExplorer_Click(object sender, RoutedEventArgs e)
         {
             logRTEntry.Text = AppConstants.OpenFolderDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void pathSaveBackupExplorer_Click(object sender, RoutedEventArgs e)
         {
             pathSaveBackupEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void cryptoPathExplorer_Click(object sender, RoutedEventArgs e)
         {
             cryptoPathEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
         }
 
-        private void languageSelector_GotFocus(object sender, RoutedEventArgs e)
+        private void priorityPathExplorer_Click(object sender, RoutedEventArgs e)
         {
-            languageSelector.IsDropDownOpen = true;
-        }
-        private void logExtensionSelector_GotFocus(object sender, RoutedEventArgs e)
-        {
-            logExtensionSelector.IsDropDownOpen = true;
+            cryptoPathEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
@@ -104,6 +106,44 @@ namespace ProjetDevSysGraphical
                 cryptoExtensionsListView.Items.Add(new { extension = extensions });
             }
         }
+
+        private void priorityExtensionsAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(priorityExtensionsEntry.Text))
+            {
+                if (!priorityExtensionsEntry.Text.StartsWith("."))
+                {
+                    PriorityExtensions.Add("." + priorityExtensionsEntry.Text);
+                }
+                else
+                {
+                    PriorityExtensions.Add(priorityExtensionsEntry.Text);
+                }
+                priorityExtensionsEntry.Clear();
+                priorityExtensionsUpdate();
+            }
+        }
+
+        private void priorityExtensionsRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (priorityExtensionsListView.SelectedItem != null)
+            {
+                PriorityExtensions.Remove((priorityExtensionsListView.SelectedItem as dynamic).extension);
+                priorityExtensionsUpdate();
+            }
+        }
+
+        private void priorityExtensionsUpdate()
+        {
+            priorityExtensionsListView.Items.Clear();
+            foreach (string extensions in PriorityExtensions)
+            {
+                priorityExtensionsListView.Items.Add(new { extension = extensions });
+            }
+        }
+
+        /// -----------------
+
         private void blockerAdd_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(blockerEntry.Text))
@@ -138,6 +178,8 @@ namespace ProjetDevSysGraphical
 
             ProjetDevSys.VueModel.ConfigViewModel configViewModel = new ConfigViewModel();
 
+            bool needRestart = false;
+
             //Paths
             if (!String.IsNullOrWhiteSpace(pathSaveBackupEntry.Text)) configViewModel.EditerJsonPathSave(pathSaveBackupEntry.Text);
             if (!String.IsNullOrWhiteSpace(logDailyEntry.Text)) configViewModel.EditerJsonPath(logDailyEntry.Text);
@@ -147,7 +189,11 @@ namespace ProjetDevSysGraphical
             if (logExtensionSelector.Text != null) configViewModel.EditExtensionType(logExtensionSelector.Text);
 
             //language
-            if (languageSelector.Text != null) configViewModel.EditerLangage(GetLangageCulture(languageSelector.Text));
+            if (languageSelector.Text != null) 
+            {
+                configViewModel.EditerLangage(GetLangageCulture(languageSelector.Text));
+                needRestart = true;
+            }
 
             //crypto
             if (CryptoExtensions != null) configViewModel.ChangeExtensionListCrypt(new List<string>(CryptoExtensions));
@@ -156,9 +202,20 @@ namespace ProjetDevSysGraphical
             //blocker Process
             if (blockerProcesses != null) configViewModel.ChangeBlockerProcessList(new List<string>(blockerProcesses));
 
+            if (themeSelector.Text != null)
+            {
+                configViewModel.EditTheme(themeSelector.Text);
+                needRestart = true;
+            }
+            //priority
+            if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
             //refresh content
             Refresh();
-            //MainWindow.ReloadWindow();
+            if (needRestart)
+            {
+                var mainWindow = App.Current.MainWindow as MainWindow;
+                mainWindow?.HotReload();
+            }
         }
 
         private void Refresh()
@@ -190,7 +247,16 @@ namespace ProjetDevSysGraphical
             {
                 foreach (string processes in ProjetDevSys.AppConstants.BlockerProcess) blockerProcesses.Add(processes);
             }
-            blockerUpdate();
+
+            //theme
+            themeSelector.Text = ProjetDevSys.AppConstants.Theme;
+            // priority extensions
+            PriorityExtensions = new ObservableCollection<string>();
+            if (ProjetDevSys.AppConstants.ExtensionListPriority != null)
+            {
+                foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListPriority) PriorityExtensions.Add(extensions);
+            }
+            priorityExtensionsUpdate();
         }
         public static string GetLangageCulture(string langage)
         {

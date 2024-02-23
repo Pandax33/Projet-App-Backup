@@ -86,6 +86,32 @@ namespace ProjetDevSys.VueModel
             return ResourceHelper.GetString("ConfigViewModel1");
         }
 
+        public string EditExtensionListPriority(string ExtensionPriority)
+        {
+            if (!ExtensionPriority.StartsWith("."))
+            {
+                ExtensionPriority = "." + ExtensionPriority;
+            }
+            Config.ExtensionListPriority.Add(ExtensionPriority);
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
+        public string removeExtensionListPriority(int ExtensionListPriority)
+        {
+            Config.ExtensionListPriority.RemoveAt(ExtensionListPriority);
+
+            Config.EditConfig();
+
+            return ResourceHelper.GetString("ConfigViewModelExtensionRemoved");
+        }
+        public string ChangeExtensionListPriority(List<string> ExtensionListPriority)
+        {
+            Config.ExtensionListPriority = ExtensionListPriority;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
         public string EditCryptPath(string CryptPath)
         {
             Config.CryptPath = CryptPath;
@@ -179,6 +205,24 @@ namespace ProjetDevSys.VueModel
             {
                 return false;
             }
+        }
+
+        public bool verifDeleteExtensionListPriority(int index)
+        {
+            if (index >= 0 && index < AppConstants.ExtensionListPriority.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void EditTheme(string theme)
+        {
+            Config.Theme = theme;
+            Config.EditConfig();
         }
 
     }

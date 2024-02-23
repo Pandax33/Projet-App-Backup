@@ -22,98 +22,85 @@ namespace ProjetDevSysGraphical
     /// </summary>
     public partial class EditTask : Window
     {
-        public int Id { get; set; }
-        public string FileSource { get; set; }
-        public string FileTarget { get; set; }
-        public string SaveType { get; set; }
-
+        int Id;
         public EditTask(int id, string name, string fileSource, string fileTarget, string saveType)
         {
             InitializeComponent();
             Id = id;
-            FileSource = fileSource;
-            FileTarget = fileTarget;
-            SaveType = saveType;
+            taskName.Content = name;
+            sourcePathEntry.Text = fileSource;
+            targetPathEntry.Text = fileTarget;
 
-            task_name.Text = name;
-            textBoxEnterPath.Text = FileSource;
-            textBoxOutPath.Text = FileTarget;
-            if (SaveType == "A")
+            if (saveType == "A")
             {
-                radioButtonComplete.IsChecked = true;
+                typeRadioButtonComplete.IsChecked = true;
             }
-            if (SaveType == "B")
+            if (saveType == "B")
             {
-                radioButtonDifferentielle.IsChecked = true;
+                typeRadioButtonDifferential.IsChecked = true;
             }
         }
 
-        private void textBoxEnterPath_TextChanged(object sender, TextChangedEventArgs e)
+        private void applyButton_Click(object sender, RoutedEventArgs e)
         {
-            string source = textBoxEnterPath.Text;
-            FileSource = source;
-        }
+            string source = sourcePathEntry.Text;
+            string target = targetPathEntry.Text;
+            string type = typeSelector();
 
-        private void textBoxOutPath_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string target = textBoxOutPath.Text;
-            FileTarget = target;
-        }
+            GestionTask gestionTask = new GestionTask();
 
-        private void radioButtonComplete_Checked(object sender, RoutedEventArgs e)
-        {
-            SaveType = "A";
-        }
-
-        private void radioButtonDifferentielle_Checked(object sender, RoutedEventArgs e)
-        {
-            SaveType = "B";
-        }
-
-        private void ButtonValider_Click(object sender, RoutedEventArgs e)
-        {
-            if (FileSource != null && FileTarget != null && SaveType != null)
+            if (source == null || target == null || type == null)
             {
-                GestionTask gestionTask = new GestionTask();
+                MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add4"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
-                if (ProjetDevSys.AppConstants.VerifExist(FileSource) == true && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
+            else
+            {
+                if (ProjetDevSys.AppConstants.VerifExist(source) == true && ProjetDevSys.AppConstants.VerifExist(target) == true)
                 {
-                    gestionTask.EditTask(Id, FileTarget, FileSource, SaveType);
+                    MessageBox.Show(gestionTask.EditTask(Id, target,source, type), ResourceHelper.GetString("Task.Popup.Out"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-                    if (mainWindow != null && mainWindow.contentControl.Content is Backup backup)
-                    {
-                        // Appeler GenerateGrid sur cette instance
-                        backup.GenerateGrid();
-                    }
+                    // Appeler GenerateGrid sur cette instance
+                    if (mainWindow != null && mainWindow.contentControl.Content is BackupView backup) backup.GenerateGrid();
+                    Close();
                 }
-                if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == true)
+
+                else if (ProjetDevSys.AppConstants.VerifExist(source) == false && ProjetDevSys.AppConstants.VerifExist(target) == false)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Le chemin source n'existe pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add3"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (ProjetDevSys.AppConstants.VerifExist(FileTarget) == false && ProjetDevSys.AppConstants.VerifExist(FileSource) == true)
+                else if (ProjetDevSys.AppConstants.VerifExist(source) == false)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Le chemin cible n'existe pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add1"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                if (ProjetDevSys.AppConstants.VerifExist(FileSource) == false && ProjetDevSys.AppConstants.VerifExist(FileTarget) == false)
+                else if (ProjetDevSys.AppConstants.VerifExist(target) == false)
                 {
-                    PopUpWPF popUpWPF = new PopUpWPF("Les chemins source et cible n'existent pas");
-                    popUpWPF.ShowDialog();
+                    MessageBox.Show(ResourceHelper.GetString("Task.Popup.Add2"), ResourceHelper.GetString("Task.Popup.Warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            Hide();
+        }
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
-        private void ButtonEnterPath_Click(object sender, RoutedEventArgs e)
+        private void sourcePathExplorer_Click(object sender, RoutedEventArgs e)
         {
-            textBoxEnterPath.Text = AppConstants.OpenFolderDialog();
+            sourcePathEntry.Text = AppConstants.OpenFolderDialog();
+            Activate();
+        }
+        private void targetPathExplorer_Click(Object sender, RoutedEventArgs e)
+        {
+            targetPathEntry.Text = AppConstants.OpenFolderDialog();
+            Activate();
         }
 
-        private void ButtonOutPath_Click(object sender, RoutedEventArgs e)
+        private string typeSelector()
         {
-            textBoxOutPath.Text = AppConstants.OpenFolderDialog();
+            if (typeRadioButtonComplete.IsChecked == true) return "A";
+            else if (typeRadioButtonDifferential.IsChecked == true) return "B";
+            return null;
         }
     }
 }

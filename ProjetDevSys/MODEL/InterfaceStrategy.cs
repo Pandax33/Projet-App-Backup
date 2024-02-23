@@ -1,4 +1,5 @@
-﻿using ProjetDevSys.MODEL;
+﻿using Newtonsoft.Json.Linq;
+using ProjetDevSys.MODEL;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ProjetDevSys.Model
 {
@@ -28,7 +30,7 @@ namespace ProjetDevSys.Model
                     Directory.CreateDirectory(backup.Destination);
                 }
                 // Copy folder and under folders
-                CopierDossier(backup.Source, backup.Destination, LogRealTime);
+                CopierDossier(backup.Source, backup.Destination, LogRealTime, backup.Name);
             }
             else
             {
@@ -37,7 +39,7 @@ namespace ProjetDevSys.Model
 
         }
 
-        private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime)
+        private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime, string name)
         {
             if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
 
@@ -50,13 +52,21 @@ namespace ProjetDevSys.Model
                 FileInfo fileInfo = new FileInfo(sourceDir);
                 long fileSize = fileInfo.Length;
 
-
-
+                AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                if (cts.Token.IsCancellationRequested)
+                {
+                    return;
+                }
+                AppConstants.BackupPauseHandles[name].WaitOne();
                 File.Copy(sourceDir, destinationFilePath, true);
                 LogRealTime.Timestamp = DateTime.Now;
                 LogRealTime.CurrentSourcePath = sourceDir;
                 LogRealTime.CurrentTargetPath = destinationFilePath;
                 LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
+
+                Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
+
                 LogRealTime.CreateLog();
             }
 
@@ -80,7 +90,12 @@ namespace ProjetDevSys.Model
                         {
                             RedirectStandardOutput = true,
                         };
-
+                        AppConstants.BackupPauseHandles[name].WaitOne();
+                        AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                        if (cts.Token.IsCancellationRequested)
+                        {
+                            return;
+                        }
                         using (Process process = new Process())
                         {
                             process.StartInfo = startInfo;
@@ -95,18 +110,30 @@ namespace ProjetDevSys.Model
                             LogRealTime.CurrentTargetPath = destinationFilePath;
                             LogRealTime.TimeCrypt = Timecrypt;
                             LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                            AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
+
+                            Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
                             LogRealTime.CreateLog();
                         }
 
                     }
                     else
                     {
+                        AppConstants.BackupPauseHandles[name].WaitOne();
+                        AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                        if (cts.Token.IsCancellationRequested)
+                        {
+                            return;
+                        }
                         File.Copy(fichierPath, destinationFilePath, true);
                         LogRealTime.Timestamp = DateTime.Now;
                         LogRealTime.CurrentSourcePath = fichierPath;
                         LogRealTime.CurrentTargetPath = destinationFilePath;
                         LogRealTime.TimeCrypt = "0";
                         LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                        AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
+
+                        Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
                         LogRealTime.CreateLog();
                     }
                 }
@@ -120,7 +147,7 @@ namespace ProjetDevSys.Model
                     {
                         Directory.CreateDirectory(destinationFolderPath);
                     }
-                    CopierDossier(dossierPath, destinationFolderPath, LogRealTime);
+                    CopierDossier(dossierPath, destinationFolderPath, LogRealTime,name);
                 }
             }
             return;
@@ -140,7 +167,7 @@ namespace ProjetDevSys.Model
                 }
 
                 // Call the recursive method to copy the files
-                CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime);
+                CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime,backup.Name);
             }
             else
             {
@@ -149,7 +176,7 @@ namespace ProjetDevSys.Model
 
         }
 
-        private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime)
+        private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime,string name)
         {
             if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
 
@@ -167,6 +194,8 @@ namespace ProjetDevSys.Model
                 LogRealTime.CurrentSourcePath = sourceDir;
                 LogRealTime.CurrentTargetPath = destinationFilePath;
                 LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                AppConstants.backupProgress[name] = LogRealTime.Progress;
+                Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
                 LogRealTime.CreateLog();
             }
             else
@@ -187,7 +216,12 @@ namespace ProjetDevSys.Model
                             string executablePath = AppConstants.CryptPath;
                             string fichierPathCrypto = fichierSource + ".crypto";
                             string arguments = $" {fichierSource} {fichierPathCrypto} {AppConstants.KeyCrypt}";
-
+                            AppConstants.BackupPauseHandles[name].WaitOne();
+                            AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                            if (cts.Token.IsCancellationRequested)
+                            {
+                                return;
+                            }
                             ProcessStartInfo startInfo = new ProcessStartInfo(executablePath, arguments)
                             {
                                 RedirectStandardOutput = true,
@@ -207,18 +241,28 @@ namespace ProjetDevSys.Model
                                 LogRealTime.CurrentTargetPath = fichierDestination;
                                 LogRealTime.TimeCrypt = Timecrypt;
                                 LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                                AppConstants.backupProgress[name] = LogRealTime.Progress;
+                                Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
                                 LogRealTime.CreateLog();
                             }
 
                         }
                         else
                         {
+                            AppConstants.BackupPauseHandles[name].WaitOne();
+                            AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                            if (cts.Token.IsCancellationRequested)
+                            {
+                                return;
+                            }
                             File.Copy(fichierSource, fichierDestination, true);
                             LogRealTime.Timestamp = DateTime.Now;
                             LogRealTime.CurrentSourcePath = fichierSource;
                             LogRealTime.CurrentTargetPath = fichierDestination;
                             LogRealTime.TimeCrypt = "0";
                             LogRealTime.UpdateCurrentFileAndSize(fileSize);
+                            AppConstants.backupProgress[name] = LogRealTime.Progress;
+                            Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
                             LogRealTime.CreateLog();
                         }
                         
@@ -236,7 +280,7 @@ namespace ProjetDevSys.Model
                         Directory.CreateDirectory(dossierDestination);
                     }
 
-                    CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime);
+                    CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime,name) ;
                 }
             }
             return;

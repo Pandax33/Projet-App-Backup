@@ -24,6 +24,7 @@ namespace ProjetDevSysGraphical
                     return dialog.FileName;
                 }
             }
+            App.Current.MainWindow.Activate();
             return "";
         }
         public static string OpenFileDialog()

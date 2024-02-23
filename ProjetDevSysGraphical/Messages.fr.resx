@@ -156,6 +156,12 @@
   <data name="Config.Log4" xml:space="preserve">
     <value>Type d'extension :</value>
   </data>
+  <data name="Config.Priority1" xml:space="preserve">
+    <value>Fichiers prioritaires</value>
+  </data>
+  <data name="Config.Priority3" xml:space="preserve">
+    <value>Extension des fichiers à prioriser :</value>
+  </data>
   <data name="Config.Reset" xml:space="preserve">
     <value>Réinitialiser</value>
   </data>
@@ -180,6 +186,9 @@
   <data name="Config.Tab5" xml:space="preserve">
     <value>Chemin de Sauvegarde</value>
   </data>
+  <data name="Home1" xml:space="preserve">
+    <value>Bienvenue !</value>
+  </data>
   <data name="Selector1" xml:space="preserve">
     <value>Acceuil</value>
   </data>
@@ -188,5 +197,86 @@
   </data>
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
+  </data>
+  <data name="Task.Add.Title" xml:space="preserve">
+    <value>Ajouter une tâche</value>
+  </data>
+  <data name="Task.Add1" xml:space="preserve">
+    <value>Nom :</value>
+  </data>
+  <data name="Task.Add2" xml:space="preserve">
+    <value>Source :</value>
+  </data>
+  <data name="Task.Add3" xml:space="preserve">
+    <value>Cible :</value>
+  </data>
+  <data name="Task.AddButton" xml:space="preserve">
+    <value>Ajouter une tâche</value>
+  </data>
+  <data name="Task.Apply" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="Task.Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Task.Delete" xml:space="preserve">
+    <value>Tâche supprimée avec succès</value>
+  </data>
+  <data name="Task.DeleteInfo" xml:space="preserve">
+    <value>Résultat</value>
+  </data>
+  <data name="Task.Edit.Title" xml:space="preserve">
+    <value>Editer une tâche</value>
+  </data>
+  <data name="Task.Grid.Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Task.Grid.Edit" xml:space="preserve">
+    <value>Editer</value>
+  </data>
+  <data name="Task.Grid.Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Task.Grid.Select" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="Task.Grid.Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="Task.Grid.Target" xml:space="preserve">
+    <value>Cible</value>
+  </data>
+  <data name="Task.Grid.Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Task.LaunchAll" xml:space="preserve">
+    <value>Lancer toutes les tâches</value>
+  </data>
+  <data name="Task.LaunchSelect" xml:space="preserve">
+    <value>Lancer les tâches sélectionnées</value>
+  </data>
+  <data name="Task.Popup.Add1" xml:space="preserve">
+    <value>Problème : la source n'existe pas</value>
+  </data>
+  <data name="Task.Popup.Add2" xml:space="preserve">
+    <value>Problème : la cible n'existe pas</value>
+  </data>
+  <data name="Task.Popup.Add3" xml:space="preserve">
+    <value>Problème : ni la source ni la cible n'existent</value>
+  </data>
+  <data name="Task.Popup.Add4" xml:space="preserve">
+    <value>Veuillez fournir toutes les informations</value>
+  </data>
+  <data name="Task.Popup.Out" xml:space="preserve">
+    <value>Résultat</value>
+  </data>
+  <data name="Task.Popup.Warning" xml:space="preserve">
+    <value>Problème</value>
+  </data>
+  <data name="Task.Type1" xml:space="preserve">
+    <value>Complète</value>
+  </data>
+  <data name="Task.Type2" xml:space="preserve">
+    <value>Differentielle</value>
   </data>
 </root>
