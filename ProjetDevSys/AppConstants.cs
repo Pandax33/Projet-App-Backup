@@ -20,6 +20,7 @@ namespace ProjetDevSys
         public static string KeyCrypt;
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
         public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
+        public static ConcurrentDictionary<string, CancellationTokenSource> BackupCancellations = new ConcurrentDictionary<string, CancellationTokenSource>();
 
 
         public static List<string> BlockerProcess;
@@ -159,6 +160,15 @@ namespace ProjetDevSys
             }
         }
 
+        public static void StopBackup(string backupName)
+        {
+            if (BackupCancellations.TryGetValue(backupName, out var cts))
+            {
+                cts.Cancel(); // Envoie une demande d'annulation à la tâche
+            }
+
+            
+        }
 
 
     }
