@@ -1,4 +1,5 @@
-﻿using ProjetDevSys.MODEL;
+﻿using Newtonsoft.Json.Linq;
+using ProjetDevSys.MODEL;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -51,8 +52,12 @@ namespace ProjetDevSys.Model
                 FileInfo fileInfo = new FileInfo(sourceDir);
                 long fileSize = fileInfo.Length;
 
-
-
+                AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                if (cts.Token.IsCancellationRequested)
+                {
+                    return;
+                }
+                AppConstants.BackupPauseHandles[name].WaitOne();
                 File.Copy(sourceDir, destinationFilePath, true);
                 LogRealTime.Timestamp = DateTime.Now;
                 LogRealTime.CurrentSourcePath = sourceDir;
@@ -85,7 +90,12 @@ namespace ProjetDevSys.Model
                         {
                             RedirectStandardOutput = true,
                         };
-
+                        AppConstants.BackupPauseHandles[name].WaitOne();
+                        AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                        if (cts.Token.IsCancellationRequested)
+                        {
+                            return;
+                        }
                         using (Process process = new Process())
                         {
                             process.StartInfo = startInfo;
@@ -109,6 +119,12 @@ namespace ProjetDevSys.Model
                     }
                     else
                     {
+                        AppConstants.BackupPauseHandles[name].WaitOne();
+                        AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                        if (cts.Token.IsCancellationRequested)
+                        {
+                            return;
+                        }
                         File.Copy(fichierPath, destinationFilePath, true);
                         LogRealTime.Timestamp = DateTime.Now;
                         LogRealTime.CurrentSourcePath = fichierPath;
@@ -200,7 +216,12 @@ namespace ProjetDevSys.Model
                             string executablePath = AppConstants.CryptPath;
                             string fichierPathCrypto = fichierSource + ".crypto";
                             string arguments = $" {fichierSource} {fichierPathCrypto} {AppConstants.KeyCrypt}";
-
+                            AppConstants.BackupPauseHandles[name].WaitOne();
+                            AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                            if (cts.Token.IsCancellationRequested)
+                            {
+                                return;
+                            }
                             ProcessStartInfo startInfo = new ProcessStartInfo(executablePath, arguments)
                             {
                                 RedirectStandardOutput = true,
@@ -228,6 +249,12 @@ namespace ProjetDevSys.Model
                         }
                         else
                         {
+                            AppConstants.BackupPauseHandles[name].WaitOne();
+                            AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                            if (cts.Token.IsCancellationRequested)
+                            {
+                                return;
+                            }
                             File.Copy(fichierSource, fichierDestination, true);
                             LogRealTime.Timestamp = DateTime.Now;
                             LogRealTime.CurrentSourcePath = fichierSource;

@@ -325,12 +325,13 @@ namespace ProjetDevSysGraphical
         public async void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
             RunTaskAsync runSaveTask = new RunTaskAsync();
+            SynchronizationContext context = SynchronizationContext.Current;
             // Launch all tasks
             try
             {
                 // Ici, je suppose que vous souhaitez afficher le résultat dans une MessageBox.
                 // Adaptez cette partie comme nécessaire.
-                string result = await runSaveTask.RunMultipleTaskAsync(0, grid.Children.Count / 4);
+                string result = await runSaveTask.RunMultipleTaskAsync(0, grid.Children.Count / 4, context);
                 MessageBox.Show(result, "Run", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
