@@ -18,6 +18,7 @@ namespace ProjetDevSys
         public static List<string> ExtensionListCrypt;
         public static string CryptPath;
         public static string KeyCrypt;
+        public static List<string> ExtensionListPriority;
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
 
         public static List<string> BlockerProcess;
@@ -58,6 +59,7 @@ namespace ProjetDevSys
                 ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
                 CryptPath = config.CryptPath.CryptPath;
                 KeyCrypt = config.KeyCrypt.KeyCrypt;
+                ExtensionListPriority = new List<string>(config.ExtensionListPriority.ExtensionListPriority.ToObject<List<string>>());
                 Theme = config.WPF.Theme;
                 BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
                 Config.Initialize();
@@ -119,6 +121,7 @@ namespace ProjetDevSys
             JsonSave = config.LoadSave.JsonPathSave;
             ExtensionType = config.LogType.ExtensionType;
             ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
+            ExtensionListPriority = new List<string>(config.ExtensionListPriority.ExtensionListPriority.ToObject<List<string>>());
             CryptPath = config.CryptPath.CryptPath;
             KeyCrypt = config.KeyCrypt.KeyCrypt;
             BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
