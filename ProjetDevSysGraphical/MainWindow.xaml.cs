@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using ProjetDevSys.VueModel;
+//using System.Windows.Forms;
 
 namespace ProjetDevSysGraphical
 {
@@ -25,6 +26,8 @@ namespace ProjetDevSysGraphical
         private List<string> buttonNameList = new List<string>();
         private List<int> idToLaunch = new List<int>();
         private BackupView Backup;
+
+        //private NotifyIcon _notifyIcon;
 
         public MainWindow()
         {

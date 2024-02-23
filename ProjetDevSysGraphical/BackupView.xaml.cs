@@ -29,6 +29,8 @@ namespace ProjetDevSysGraphical
         private List<Button> editButtonList = new List<Button>();
         private List<string> buttonNameList = new List<string>();
         private List<int> idToLaunch = new List<int>();
+
+        private int? shiftSelected = null;
         public BackupView()
         {
             InitializeComponent();
@@ -37,128 +39,174 @@ namespace ProjetDevSysGraphical
 
         public void GenerateGrid()
         {
+
+
+            selectedTasksButton.Content += $" : {idToLaunch.Count}"; //prepare the button with value
             grid.Children.Clear();
+            grid.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
 
             int i = 1; // keep track of the row index
             int index = 0;
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            TextBlock Name = new TextBlock
+
+            TextBlock ID = new TextBlock
             {
-                Text = ResourceHelper.GetString("Task.Grid.Name"),
-                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                Text = ResourceHelper.GetString("Task.Grid.ID"),
+                FontWeight = FontWeights.Bold, // Utilisation de Bold pour mise en valeur
                 FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
                 Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
                 FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
                 TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
-                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+                Padding = new Thickness(2, 4, 2, 4), // Ajout d'un peu d'espacement interne
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+            ID.Margin = new Thickness(5);
+            grid.Children.Add(ID);
+            Grid.SetColumn(ID, 0);
+            Grid.SetRow(ID, 0);
+
+            TextBlock Name = new TextBlock
+            {
+                Text = ResourceHelper.GetString("Task.Grid.Name"),
+                FontWeight = FontWeights.Bold, // Utilisation de Bold pour mise en valeur
+                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
+                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
+                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
+                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
+                Padding = new Thickness(2, 4, 2, 4), // Ajout d'un peu d'espacement interne
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
 
             Name.Margin = new Thickness(5);
             grid.Children.Add(Name);
-            Grid.SetColumn(Name, 0);
+            Grid.SetColumn(Name, 1);
             Grid.SetRow(Name, 0);
 
             TextBlock Source = new TextBlock
             {
                 Text = ResourceHelper.GetString("Task.Grid.Source"),
-                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontWeight = FontWeights.SemiBold, // Utilisation de Bold pour mise en valeur
                 FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
                 Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
                 FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
                 TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
-                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+                Padding = new Thickness(2, 4, 2, 4), // Ajout d'un peu d'espacement interne
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
             Source.Margin = new Thickness(5);
             grid.Children.Add(Source);
-            Grid.SetColumn(Source, 1);
+            Grid.SetColumn(Source, 2);
             Grid.SetRow(Source, 0);
 
             TextBlock Destination = new TextBlock
             {
                 Text = ResourceHelper.GetString("Task.Grid.Target"),
-                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontWeight = FontWeights.Bold, // Utilisation de Bold pour mise en valeur
                 FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
                 Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
                 FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
                 TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
-                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+                Padding = new Thickness(2, 4, 2, 4), // Ajout d'un peu d'espacement interne
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
             Destination.Margin = new Thickness(5);
             grid.Children.Add(Destination);
-            Grid.SetColumn(Destination, 2);
+            Grid.SetColumn(Destination, 3);
             Grid.SetRow(Destination, 0);
 
             TextBlock Type = new TextBlock
             {
                 Text = ResourceHelper.GetString("Task.Grid.Type"),
-                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontWeight = FontWeights.Bold, // Utilisation de Bold pour mise en valeur
                 FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
                 Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
                 FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
                 TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
-                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+                Padding = new Thickness(2, 4, 2, 4), // Ajout d'un peu d'espacement interne
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
             Type.Margin = new Thickness(5);
             grid.Children.Add(Type);
-            Grid.SetColumn(Type, 3);
+            Grid.SetColumn(Type, 4);
             Grid.SetRow(Type, 0);
 
             TextBlock Supprimer = new TextBlock
             {
                 Text = ResourceHelper.GetString("Task.Grid.Delete"),
-                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontWeight = FontWeights.Bold, // Utilisation de Bold pour mise en valeur
                 FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
                 Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
                 FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
                 TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
-                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+                Padding = new Thickness(2, 4, 2, 4), // Ajout d'un peu d'espacement interne
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
             Supprimer.Margin = new Thickness(5);
             grid.Children.Add(Supprimer);
-            Grid.SetColumn(Supprimer, 4);
+            Grid.SetColumn(Supprimer, 5);
             Grid.SetRow(Supprimer, 0);
 
             TextBlock Editer = new TextBlock
             {
                 Text = ResourceHelper.GetString("Task.Grid.Edit"),
-                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
+                FontWeight = FontWeights.Bold, // Utilisation de Bold pour mise en valeur
                 FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
                 Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
                 FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
                 TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
-                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
+                Padding = new Thickness(2, 4, 2, 4), // Ajout d'un peu d'espacement interne
+                HorizontalAlignment = HorizontalAlignment.Center,
             };
             Editer.Margin = new Thickness(5);
             grid.Children.Add(Editer);
-            Grid.SetColumn(Editer, 5);
+            Grid.SetColumn(Editer, 6);
             Grid.SetRow(Editer, 0);
 
-            TextBlock Selectionner = new TextBlock
-            {
-                Text = ResourceHelper.GetString("Task.Grid.Select"),
-                FontWeight = FontWeights.Bold, // Utilisation de SemiBold pour un effet gras moins intense
-                FontSize = (double)Application.Current.Resources["FontSizeTittle"], // Taille de police ajustée pour l'équilibre depuis les ressources
-                Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"], // Couleur du texte depuis les ressources
-                FontFamily = (FontFamily)Application.Current.Resources["FontGrid"], // Police de caractère depuis les ressources
-                TextWrapping = TextWrapping.Wrap, // Activation du retour à la ligne automatique
-                Padding = new Thickness(2, 4, 2, 4) // Ajout d'un peu d'espacement interne
-            };
-            Selectionner.Margin = new Thickness(5);
-            grid.Children.Add(Selectionner);
-            Grid.SetColumn(Selectionner, 6);
-            Grid.SetRow(Selectionner, 0);
 
             foreach (var backup in backups)
             {
                 var commonFontSize = (double)Application.Current.Resources["FontSizeGrid"];
                 var commonFontFamily = (FontFamily)Application.Current.Resources["FontGrid"];
                 var commonForeground = (SolidColorBrush)Application.Current.Resources["Brush5"];
-                var commonMargin = new Thickness(5);
-                var ButtonMargin = new Thickness(3);
+                var commonMargin = new Thickness(5,10,5,5);
+                var ButtonMargin = new Thickness(3,3,3,10);
+
+                //Add highlighters
+                if (i < backups.Count()+1)
+                {
+                    Border highlighter = new Border
+                    {
+                        Name = $"HighlighterBackup{i}",
+                        Height = 50,
+                        Background = (SolidColorBrush)Application.Current.Resources["Brush1"],
+                        Margin = new Thickness(0, 5, 0, 5),
+                        VerticalAlignment = VerticalAlignment.Bottom,
+                        CornerRadius = new CornerRadius(10),
+                    };
+
+                    grid.Children.Add(highlighter);
+                    Grid.SetColumn(highlighter, 0);
+                    Grid.SetRow(highlighter, i);
+                    Grid.SetColumnSpan(highlighter, 8);
+                };
 
                 // Create TextBlocks with common styling and set them to bold
+                //ID
+                TextBlock textBlockID = new TextBlock
+                {
+                    Text = $"#{i} ",
+                    Margin = commonMargin,
+                    FontSize = commonFontSize,
+                    FontFamily = commonFontFamily,
+                    Foreground = commonForeground,
+                    FontWeight = FontWeights.Bold, // Set to bold
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+
+                //Name
                 TextBlock textBlock1 = new TextBlock
                 {
                     Text = backup.Name,
@@ -166,9 +214,12 @@ namespace ProjetDevSysGraphical
                     FontSize = commonFontSize,
                     FontFamily = commonFontFamily,
                     Foreground = commonForeground,
-                    FontWeight = FontWeights.Bold // Set to bold
+                    FontWeight = FontWeights.Bold, // Set to bold
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                 };
 
+                //Source
                 TextBlock textBlock2 = new TextBlock
                 {
                     Text = backup.Source,
@@ -176,9 +227,12 @@ namespace ProjetDevSysGraphical
                     FontSize = commonFontSize,
                     FontFamily = commonFontFamily,
                     Foreground = commonForeground,
-                    FontWeight = FontWeights.SemiBold // Set to bold
+                    FontWeight = FontWeights.Medium, // Set to bold
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                 };
 
+                //Target
                 TextBlock textBlock3 = new TextBlock
                 {
                     Text = backup.Destination,
@@ -186,36 +240,45 @@ namespace ProjetDevSysGraphical
                     FontSize = commonFontSize,
                     FontFamily = commonFontFamily,
                     Foreground = commonForeground,
-                    FontWeight = FontWeights.SemiBold // Set to bold
+                    FontWeight = FontWeights.Medium, // Set to bold
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                 };
 
+                //Type
                 TextBlock textBlock4 = new TextBlock
                 {
-                    Text = backup.Type,
+                    Text = GetTypeBackupName(backup.Type),
                     Margin = commonMargin,
                     FontSize = commonFontSize,
                     FontFamily = commonFontFamily,
                     Foreground = commonForeground,
-                    FontWeight = FontWeights.SemiBold // Set to bold
+                    FontWeight = FontWeights.Medium, // Set to bold
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                 };
 
                 // Add TextBlocks to the grid and set their positions
                 grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
+                grid.Children.Add(textBlockID);
+                Grid.SetColumn(textBlockID, 0);
+                Grid.SetRow(textBlockID, i);
+
                 grid.Children.Add(textBlock1);
-                Grid.SetColumn(textBlock1, 0);
+                Grid.SetColumn(textBlock1, 1);
                 Grid.SetRow(textBlock1, i);
 
                 grid.Children.Add(textBlock2);
-                Grid.SetColumn(textBlock2, 1);
+                Grid.SetColumn(textBlock2, 2);
                 Grid.SetRow(textBlock2, i);
 
                 grid.Children.Add(textBlock3);
-                Grid.SetColumn(textBlock3, 2);
+                Grid.SetColumn(textBlock3, 3);
                 Grid.SetRow(textBlock3, i);
 
                 grid.Children.Add(textBlock4);
-                Grid.SetColumn(textBlock4, 3);
+                Grid.SetColumn(textBlock4, 4);
                 Grid.SetRow(textBlock4, i);
 
                 // Continue with your code
@@ -229,15 +292,16 @@ namespace ProjetDevSysGraphical
                     Content = new TextBlock
                     {
                         Text = "✖",
-                        Foreground = Brushes.Red,
-                        TextAlignment = TextAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center
+                        Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
+                        //TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Top,
                     },
                     Style = (Style)Application.Current.Resources["NavigationButtonStyle"], // Apply the common style
                     ToolTip = "Delete"
                 };
+                buttonDelete.Style = AppConstants.GridButtonStyle();
                 buttonDelete.Click += new RoutedEventHandler(ButtonDelete_Click);
-                Grid.SetColumn(buttonDelete, 4);
+                Grid.SetColumn(buttonDelete, 5);
                 Grid.SetRow(buttonDelete, i);
                 grid.Children.Add(buttonDelete);
 
@@ -250,33 +314,23 @@ namespace ProjetDevSysGraphical
                     Content = new TextBlock
                     {
                         Text = "✏",
-                        Foreground = Brushes.Blue,
+                        Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
                         TextAlignment = TextAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center
+                        VerticalAlignment = VerticalAlignment.Top,
                     },
-                    Style = (Style)Application.Current.Resources["NavigationButtonStyle"], // Apply the common style
                     ToolTip = "Edit"
                 };
+                buttonEdit.Style = AppConstants.GridButtonStyle();
                 buttonEdit.Click += new RoutedEventHandler(ButtonEdit_Click);
-                Grid.SetColumn(buttonEdit, 5);
+                Grid.SetColumn(buttonEdit, 6);
                 Grid.SetRow(buttonEdit, i);
                 grid.Children.Add(buttonEdit);
-
-                // Create a checkbox
-                CheckBox checkBox = new CheckBox();
-                checkBox.Width = 30;
-                checkBox.Height = 30;
-                checkBox.Click += new RoutedEventHandler(CheckBox_Click);
-                Grid.SetColumn(checkBox, 6);
-                Grid.SetRow(checkBox, i);
-                grid.Children.Add(checkBox);
 
                 // Add the buttons to the StackPanel
 
                 
                 buttonDelete.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Delete";
                 buttonEdit.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Edit";
-                checkBox.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "CheckBox";
                 // Add the buttons to the list
                 deleteButtonList.Add(buttonDelete);
                 editButtonList.Add(buttonEdit);
@@ -286,6 +340,15 @@ namespace ProjetDevSysGraphical
             }
         }
 
+        private string GetTypeBackupName(string type)
+        {
+            switch(type)
+            {
+                case "A": return ResourceHelper.GetString("Task.Type1");
+                case "B": return ResourceHelper.GetString("Task.Type2");
+                default: return "Error";
+            }
+        }
 
         private void SetButtonName(string buttonName)
         {
@@ -293,27 +356,6 @@ namespace ProjetDevSysGraphical
         }
 
         #region ButtonClicks
-        private void CheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            CheckBox clicked = sender as CheckBox;
-            if (clicked != null)
-            {
-                // Extract the index from the button's name
-                int index = int.Parse(clicked.Name.Split('_')[1]);
-
-                if (clicked.IsChecked == true)
-                {
-                    // Add the index to the list if it is checked
-                    idToLaunch.Add(index);
-                }
-                else
-                {
-                    // Delete the index from the list if it is unchecked
-                    idToLaunch.Remove(index);
-                }
-            }
-        }
-
 
         public void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
@@ -401,6 +443,95 @@ namespace ProjetDevSysGraphical
         {
             AddTask addTask = new AddTask();
             addTask.ShowDialog();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //Get as Grid
+            var grid = sender as Grid;
+            if (grid == null) return;
+
+            //Get position
+            var clickPosition = e.GetPosition(grid);
+
+            //link row
+            int rowIndex = 0;
+            double accumulatedHeight = 0.0;
+            foreach (var rowDefinition in grid.RowDefinitions)
+            {
+                accumulatedHeight += rowDefinition.ActualHeight;
+                if (accumulatedHeight >= clickPosition.Y)
+                    break;
+                rowIndex++;
+            }
+
+            RowSelector(rowIndex, Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift));
+
+            selectedTasksButton.Content = ResourceHelper.GetString("Task.LaunchSelect") + $" : {idToLaunch.Count}";
+
+        }
+
+        private void RowSelector(int rowIndex, bool shiftDown=false)
+        {
+            if (shiftDown)
+            {
+                if (!shiftSelected.HasValue)
+                {
+                    //If first selected
+                    shiftSelected = rowIndex;
+                }
+                else
+                {
+                    //Second selection
+                    if (shiftSelected > rowIndex)
+                    {
+                        int temp = (int)shiftSelected; //shiftSelected is int? so it can be null. Cast required.
+                        shiftSelected = rowIndex;
+                        rowIndex = temp;
+                    }
+
+                    for (int i = (int)shiftSelected; i <= rowIndex; i++)
+                    {
+                        RowSelector(i); 
+                    }
+
+                    //reset
+                    shiftSelected = null;
+                }
+            }
+            else
+            {
+                //reset shift
+                shiftSelected = null;
+                if (rowIndex < grid.Children.Count)
+                {
+                    var highlighter = grid.Children
+                        .OfType<Border>()
+                        .FirstOrDefault(b => Grid.GetRow(b) == rowIndex);
+
+                    var currentBrush = highlighter.Background as SolidColorBrush;
+
+                    var brushBase = (SolidColorBrush)Application.Current.Resources["Brush1"];
+                    var brushHighlight = (SolidColorBrush)Application.Current.Resources["Brush2"];
+
+                    if (currentBrush != null && currentBrush.Color == brushBase.Color)
+                    {
+                        highlighter.Background = brushHighlight;
+                        if (!idToLaunch.Contains(rowIndex))
+                        {
+                            idToLaunch.Add(rowIndex);
+                        }
+                    }
+                    else
+                    {
+                        highlighter.Background = brushBase;
+                        if (idToLaunch.Contains(rowIndex))
+                        {
+                            idToLaunch.Remove(rowIndex);
+                        }
+                    }
+                }
+            }
         }
     }
 }

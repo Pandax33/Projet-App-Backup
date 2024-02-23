@@ -228,6 +228,9 @@
   <data name="Task.Grid.Edit" xml:space="preserve">
     <value>Editer</value>
   </data>
+  <data name="Task.Grid.ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
   <data name="Task.Grid.Name" xml:space="preserve">
     <value>Nom</value>
   </data>
