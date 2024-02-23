@@ -64,7 +64,7 @@ namespace ProjetDevSysGraphical
                     BG = (Color)ColorConverter.ConvertFromString("#08415C");
                     B1 = (Color)ColorConverter.ConvertFromString("#CC2936");
                     B2 = (Color)ColorConverter.ConvertFromString("#EBBAB9");
-                    B3 = (Color)ColorConverter.ConvertFromString("#388697");
+                    B3 = (Color)ColorConverter.ConvertFromString("#000000");
                     B4 = (Color)ColorConverter.ConvertFromString("#B5FFE1");
                     B5 = (Color)ColorConverter.ConvertFromString("#353839");
                     FontTittle = new FontFamily("Comic Sans MS");

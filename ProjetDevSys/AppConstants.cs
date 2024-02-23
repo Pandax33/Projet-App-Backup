@@ -18,7 +18,11 @@ namespace ProjetDevSys
         public static List<string> ExtensionListCrypt;
         public static string CryptPath;
         public static string KeyCrypt;
+        public static List<string> ExtensionListPriority;
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
+        public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
+        public static ConcurrentDictionary<string, CancellationTokenSource> BackupCancellations = new ConcurrentDictionary<string, CancellationTokenSource>();
+
 
         public static List<string> BlockerProcess;
 
@@ -58,6 +62,7 @@ namespace ProjetDevSys
                 ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
                 CryptPath = config.CryptPath.CryptPath;
                 KeyCrypt = config.KeyCrypt.KeyCrypt;
+                ExtensionListPriority = new List<string>(config.ExtensionListPriority.ExtensionListPriority.ToObject<List<string>>());
                 Theme = config.WPF.Theme;
                 BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
                 Config.Initialize();
@@ -119,6 +124,7 @@ namespace ProjetDevSys
             JsonSave = config.LoadSave.JsonPathSave;
             ExtensionType = config.LogType.ExtensionType;
             ExtensionListCrypt = new List<string>(config.ExtensionListCrypt.ExtensionListCrypt.ToObject<List<string>>());
+            ExtensionListPriority = new List<string>(config.ExtensionListPriority.ExtensionListPriority.ToObject<List<string>>());
             CryptPath = config.CryptPath.CryptPath;
             KeyCrypt = config.KeyCrypt.KeyCrypt;
             BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
@@ -141,6 +147,32 @@ namespace ProjetDevSys
 
             return false;
         }
+        public static void PauseBackup(string backupName)
+        {
+            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
+            {
+                handle.Reset(); // Met en pause
+            }
+        }
+
+        public static void ResumeBackup(string backupName)
+        {
+            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
+            {
+                handle.Set(); // Reprend l'exécution
+            }
+        }
+
+        public static void StopBackup(string backupName)
+        {
+            if (BackupCancellations.TryGetValue(backupName, out var cts))
+            {
+                cts.Cancel(); // Envoie une demande d'annulation à la tâche
+            }
+
+            
+        }
+
 
     }
 }

@@ -42,7 +42,7 @@ namespace ProjetDevSysGraphical
         }
         public void UpdateGridWithBackupProgress()
         {
-            // Clear existing rows
+            // Clear existing rows and content
             BackupsGrid.RowDefinitions.Clear();
             BackupsGrid.Children.Clear();
 
@@ -51,10 +51,13 @@ namespace ProjetDevSysGraphical
             {
                 BackupsGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
+                // Nom de la sauvegarde
                 var nameLabel = new TextBlock { Text = $"Nom de la backup : {backup.Key}" };
                 Grid.SetRow(nameLabel, row);
                 Grid.SetColumn(nameLabel, 0);
+                BackupsGrid.Children.Add(nameLabel);
 
+                // Barre de progression
                 var progressBar = new ProgressBar
                 {
                     Value = backup.Value,
@@ -64,12 +67,66 @@ namespace ProjetDevSysGraphical
                 };
                 Grid.SetRow(progressBar, row);
                 Grid.SetColumn(progressBar, 1);
-
-                BackupsGrid.Children.Add(nameLabel);
                 BackupsGrid.Children.Add(progressBar);
+
+                // Bouton de pause
+                var pauseButton = new Button
+                {
+                    Content = "Pause",
+                    Tag = backup.Key // Utilisez le Tag pour stocker le nom de la sauvegarde
+                };
+                pauseButton.Click += PauseButton_Click; // Abonnez-vous à l'événement Click
+                Grid.SetRow(pauseButton, row);
+                Grid.SetColumn(pauseButton, 2);
+                BackupsGrid.Children.Add(pauseButton);
+
+                // Bouton de reprise
+                var repriseButton = new Button
+                {
+                    Content = "Reprise",
+                    Tag = backup.Key // Utilisez le Tag pour stocker le nom de la sauvegarde
+                };
+                repriseButton.Click += RepriseButton_Click; // Abonnez-vous à l'événement Click
+                Grid.SetRow(repriseButton, row);
+                Grid.SetColumn(repriseButton, 3);
+                BackupsGrid.Children.Add(repriseButton);
+
+                // Bouton Stop
+                var stopButton = new Button
+                {
+                    Content = "Stop",
+                    Tag = backup.Key // Utilisez le Tag pour stocker le nom de la sauvegarde
+                };
+                stopButton.Click += StopButton_Click; // Abonnez-vous à l'événement Click
+                Grid.SetRow(stopButton, row);
+                Grid.SetColumn(stopButton, 4); // Assurez-vous que c'est la bonne colonne
+                BackupsGrid.Children.Add(stopButton);
 
                 row++;
             }
         }
+
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            ProjetDevSys.AppConstants.PauseBackup(button.Tag.ToString());
+            
+        }
+
+        private void RepriseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            ProjetDevSys.AppConstants.ResumeBackup(button.Tag.ToString());
+
+        }
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null) return;
+
+            var backupName = button.Tag.ToString();
+            ProjetDevSys.AppConstants.StopBackup(backupName); // Implémentez cette méthode pour arrêter la sauvegarde
+        }
+
     }
 }
