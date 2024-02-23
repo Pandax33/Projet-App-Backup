@@ -375,7 +375,7 @@ namespace ProjetDevSysGraphical
                 // Call DeleteTask with the extracted index
                 gestionTask.DeleteTask(index);
 
-                MessageBox.Show(ResourceHelper.GetString("Task.DeleteInfo"), ResourceHelper.GetString("Task.Delete"), MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show(ResourceHelper.GetString("Task.DeleteInfo"), ResourceHelper.GetString("Task.Delete"), MessageBoxButton.OK, MessageBoxImage.Information);
                 GenerateGrid();
             }
         }
