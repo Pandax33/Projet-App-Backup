@@ -23,6 +23,7 @@ namespace ProjetDevSysGraphical
     public partial class ConfigControl : UserControl
     {
         public ObservableCollection<string> CryptoExtensions { get; set; }
+        public ObservableCollection<string> PriorityExtensions { get; set; }
         public ObservableCollection<string> blockerProcesses { get; set; }
         public ConfigControl()
         {
@@ -49,6 +50,12 @@ namespace ProjetDevSysGraphical
         }
 
         private void cryptoPathExplorer_Click(object sender, RoutedEventArgs e)
+        {
+            cryptoPathEntry.Text = AppConstants.OpenFileDialog();
+            App.Current.MainWindow.Activate();
+        }
+
+        private void priorityPathExplorer_Click(object sender, RoutedEventArgs e)
         {
             cryptoPathEntry.Text = AppConstants.OpenFileDialog();
             App.Current.MainWindow.Activate();
@@ -99,6 +106,44 @@ namespace ProjetDevSysGraphical
                 cryptoExtensionsListView.Items.Add(new { extension = extensions });
             }
         }
+
+        private void priorityExtensionsAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(priorityExtensionsEntry.Text))
+            {
+                if (!priorityExtensionsEntry.Text.StartsWith("."))
+                {
+                    PriorityExtensions.Add("." + priorityExtensionsEntry.Text);
+                }
+                else
+                {
+                    PriorityExtensions.Add(priorityExtensionsEntry.Text);
+                }
+                priorityExtensionsEntry.Clear();
+                priorityExtensionsUpdate();
+            }
+        }
+
+        private void priorityExtensionsRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (priorityExtensionsListView.SelectedItem != null)
+            {
+                PriorityExtensions.Remove((priorityExtensionsListView.SelectedItem as dynamic).extension);
+                priorityExtensionsUpdate();
+            }
+        }
+
+        private void priorityExtensionsUpdate()
+        {
+            priorityExtensionsListView.Items.Clear();
+            foreach (string extensions in PriorityExtensions)
+            {
+                priorityExtensionsListView.Items.Add(new { extension = extensions });
+            }
+        }
+
+        /// -----------------
+
         private void blockerAdd_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(blockerEntry.Text))
@@ -162,6 +207,13 @@ namespace ProjetDevSysGraphical
                 configViewModel.EditTheme(themeSelector.Text);
                 needRestart = true;
             }
+            //priority
+            if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
+            //fileSize
+            if (fileSize.Text != null)
+            {
+                configViewModel.EditFileSize(int.Parse(fileSize.Text), fileSizeUnit.Text);
+            }
             //refresh content
             Refresh();
             if (needRestart)
@@ -203,8 +255,16 @@ namespace ProjetDevSysGraphical
 
             //theme
             themeSelector.Text = ProjetDevSys.AppConstants.Theme;
-
-            blockerUpdate();
+            // priority extensions
+            PriorityExtensions = new ObservableCollection<string>();
+            if (ProjetDevSys.AppConstants.ExtensionListPriority != null)
+            {
+                foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListPriority) PriorityExtensions.Add(extensions);
+            }
+            // FileSize
+            int fileSize = ProjetDevSys.AppConstants.FileSize;
+            languageSelector.SelectedItem = Language;
+            languageSelector.Text = language;
         }
         public static string GetLangageCulture(string langage)
         {

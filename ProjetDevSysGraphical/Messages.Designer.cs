@@ -124,6 +124,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Size:.
+        /// </summary>
+        internal static string Config_FileSize1 {
+            get {
+                return ResourceManager.GetString("Config.FileSize1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unit:.
+        /// </summary>
+        internal static string Config_FileSize2 {
+            get {
+                return ResourceManager.GetString("Config.FileSize2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Change localization.
         /// </summary>
         internal static string Config_Languages1 {

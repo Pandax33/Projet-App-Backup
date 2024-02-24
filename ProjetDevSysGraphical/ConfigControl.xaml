@@ -570,7 +570,7 @@
                                 <ListView Name="cryptoExtensionsListView"  Grid.Row="4" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                     <ListView.View>
                                         <GridView x:Name="cryptoExtensionsGridView">
-                                            <GridViewColumn Header="{local:LangageExtension Key='Config.Crypto4'}"  DisplayMemberBinding="{Binding extension}"/>
+                                            <GridViewColumn Width="500"  Header="{local:LangageExtension Key='Config.Crypto4'}"  DisplayMemberBinding="{Binding extension}"/>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
@@ -649,7 +649,7 @@
                             <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                 <ListView.View>
                                     <GridView x:Name="blockerGridView">
-                                        <GridViewColumn Header="processes"  DisplayMemberBinding="{Binding process}"/>
+                                        <GridViewColumn Width="750" Header="processes"  DisplayMemberBinding="{Binding process}"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
@@ -681,12 +681,43 @@
                                 <Button x:Name="pathSaveBackupExplorer" Grid.Row="3" Grid.Column="3" Style="{StaticResource Explorer}" Click="pathSaveBackupExplorer_Click"/>
 
                         </Grid>
+                        
+                        
                     </Border>
-                        <Border Grid.Row="5" Grid.Column="0">
+                    <Border Grid.Row="5" Grid.Column="0">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                 <ColumnDefinition Width="Auto"/>
+                                 <ColumnDefinition Width="Auto"/>
+                                 <ColumnDefinition Width="*"/>
+                                 <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Name="themeTitle" Content="{local:LangageExtension Key='Config.Themes1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                            <Label Name="themeLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Themes2'}" Grid.Row="2" Grid.Column="1"/>
+                            <ComboBox Name="themeSelector"  Grid.Row="2" Grid.Column="2">
+                                 <ComboBoxItem>Default</ComboBoxItem>
+                                 <ComboBoxItem>Legacy</ComboBoxItem>
+                                 <ComboBoxItem>Moche</ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+
+
+                        <Border Grid.Row="7" Grid.Column="0">
+
                             <Grid Margin="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -697,18 +728,80 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Name="themeTitle" Content="{local:LangageExtension Key='Config.Themes1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <Border>
+                                                <Label FontWeight="Bold">
+                                                    Information
+                                                </Label>
+                                            </Border>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Label Name="priorityTitle" Content="{local:LangageExtension Key='Config.Priority1'}" Style="{StaticResource TitleStyle}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-                                <Label Name="themeLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Themes2'}" Grid.Row="2" Grid.Column="1"/>
-                                <ComboBox Name="themeSelector"  Grid.Row="2" Grid.Column="2">
-                                    <ComboBoxItem>Default</ComboBoxItem>
-                                    <ComboBoxItem>Legacy</ComboBoxItem>
-                                    <ComboBoxItem>Moche</ComboBoxItem>
+                                <Button Grid.Column="0" Grid.Row="3" Style="{StaticResource HelpButton}" ToolTipService.InitialShowDelay="0" Margin="5">
+                                    <Button.ToolTip>
+                                        <ToolTip>
+                                            <Border>
+                                                <Label FontWeight="Bold">
+                                                    Information
+                                                </Label>
+                                            </Border>
+                                        </ToolTip>
+                                    </Button.ToolTip>
+                                </Button>
+                                <Label Name="priorityExtensionsLabel" Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Priority3'}" Grid.Row="3" Grid.Column="1"/>
+                                <TextBox x:Name="priorityExtensionsEntry" Grid.Row="3" Grid.Column="2"/>
+                                <ListView Name="priorityExtensionsListView"  Grid.Row="4" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                                    <ListView.View>
+                                        <GridView x:Name="priorityExtensionsGridView">
+                                            <GridViewColumn Header="{local:LangageExtension Key='Config.priority4'}"  DisplayMemberBinding="{Binding extension}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Button Name="priorityExtensionsAdd" Grid.Row="3"  Grid.Column="3" Margin="5" Background="LightGreen" Foreground="Green" Click="priorityExtensionsAdd_Click" Width="20" Height="20">+</Button>
+                                <Button Name="priorityExtensionsRemove" Grid.Row="4"  Grid.Column="3" Margin="5" Background="Red" Foreground="DarkRed" VerticalAlignment="Top" Click="priorityExtensionsRemove_Click" Width="20" Height="20">-</Button>
+                            </Grid>
+                        </Border>
+                        
+                        <!-- _______________________Debut de la feature avec bloquage pour + de n octets______________ -->
+                        <Border Grid.Row="6" Grid.Column="0">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{local:LangageExtension Key='Config.FileSize1'}" Margin="0,0,0,5"/>
+                                <TextBox Name="fileSize" Width="200" Margin="0,0,0,10"/>
+
+                                <TextBlock Text="{local:LangageExtension Key='Config.FileSize2'}" Margin="0,0,0,5"/>
+                                <ComboBox Name="fileSizeUnit" Width="200">
+                                    <ComboBoxItem Content="Octet"/>
+                                    <ComboBoxItem Content="Ko"/>
+                                    <ComboBoxItem Content="Mo"/>
+                                    <ComboBoxItem Content="Go"/>
+                                    <!-- Add other unit if needed -->
                                 </ComboBox>
                             </Grid>
                         </Border>
+                        <!-- _______________________Debut Fin de la feature avec bloquage pour + de n octets _______________________ -->
+                        
                     </Grid>
+                
             </Border>
+            
         </Grid>
     </ScrollViewer>
     </Grid>

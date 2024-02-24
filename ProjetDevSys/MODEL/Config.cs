@@ -25,8 +25,10 @@ namespace ProjetDevSys.Model
         public static string KeyCrypt { get; set; }
         public static string CryptPath { get; set; }
         public static string Theme {  get; set; }
-
         public static List<string> BlockerProcess { get; set; }
+        public static List<string> ExtensionListPriority { get; set; }
+        public static int FileSize { get; set; }
+
         static Config()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -43,6 +45,11 @@ namespace ProjetDevSys.Model
             return CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US";
         }
 
+        private static int GetFileSize()
+        {
+            return 0;
+        }
+
         public static void Initialize()
         {
             JsonPath = AppConstants.LogFilePath;
@@ -54,6 +61,8 @@ namespace ProjetDevSys.Model
             CryptPath = AppConstants.CryptPath;
             KeyCrypt = AppConstants.KeyCrypt;
             Theme = AppConstants.Theme;
+            ExtensionListPriority = AppConstants.ExtensionListPriority;
+            FileSize = AppConstants.FileSize;
         }
         public static void InitializeDefault()
         {
@@ -66,10 +75,12 @@ namespace ProjetDevSys.Model
             Langage = GetLanguage();
             JsonPathSave = Path.Combine(easySavePath, "Backlist.json");
             ExtensionType = ".json";
-            ExtensionListCrypt = new List<string> { };
+            ExtensionListCrypt = new List<string> {};
             CryptPath = Path.Combine(cryptoSoftPath, "CryptoSoft.exe");
             KeyCrypt = generateKey();
             BlockerProcess = new List<string> { };
+            ExtensionListPriority = new List<string> { };
+            FileSize = -1;
             Theme = "Default";
         }
 
@@ -88,7 +99,10 @@ namespace ProjetDevSys.Model
                 CryptPath = new { CryptPath },
                 KeyCrypt = new { KeyCrypt },
                 BlockerProcess = new { BlockerProcess },
+                ExtensionListPriority = new { ExtensionListPriority },
+                FileSize = -1,
                 WPF = new { Theme }
+
             };
 
             return defaultConfig;
@@ -143,6 +157,8 @@ namespace ProjetDevSys.Model
                 CryptPath = new { CryptPath },
                 KeyCrypt = new { KeyCrypt },
                 BlockerProcess = new { BlockerProcess },
+                ExtensionListPriority = new { ExtensionListPriority },
+                FileSize = new { FileSize },
                 WPF = new { Theme }
             };
 
@@ -322,7 +338,8 @@ namespace ProjetDevSys.Model
                 {"ExtensionListCrypt", new { ExtensionListCrypt = defaultConfig.ExtensionListCrypt.ExtensionListCrypt }},
                 {"CryptPath", new { CryptPath = defaultConfig.CryptPath.CryptPath }},
                 {"KeyCrypt", new { KeyCrypt = defaultConfig.KeyCrypt.KeyCrypt }},
-                {"BlockerProcess", new { BlockerProcess = defaultConfig.BlockerProcess.BlockerProcess }}
+                {"BlockerProcess", new { BlockerProcess = defaultConfig.BlockerProcess.BlockerProcess }},
+                {"ExtensionListPriority", new { ExtensionListPriority = defaultConfig.ExtensionListPriority.ExtensionListPriority }}
             };
 
             // Parcourir chaque élément par défaut pour s'assurer qu'il est présent dans la configuration; sinon, l'ajouter
