@@ -138,6 +138,9 @@
   <data name="Config.Crypto4" xml:space="preserve">
     <value>Extensions</value>
   </data>
+  <data name="Config.FileSize0" xml:space="preserve">
+    <value>Size of heavy files</value>
+  </data>
   <data name="Config.FileSize1" xml:space="preserve">
     <value>Size:</value>
   </data>

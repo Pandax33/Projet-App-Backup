@@ -435,6 +435,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -711,7 +712,7 @@
                     </Border>
 
 
-                        <Border Grid.Row="7" Grid.Column="0">
+                        <Border Grid.Row="6" Grid.Column="0">
 
                             <Grid Margin="5">
                                 <Grid.RowDefinitions>
@@ -766,13 +767,11 @@
                             </Grid>
                         </Border>
                         
-                        <!-- _______________________Debut de la feature avec bloquage pour + de n octets______________ -->
-                        <Border Grid.Row="6" Grid.Column="0">
+                        <Border Grid.Row="7" Grid.Column="0">
                             <Grid Margin="5">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -783,21 +782,21 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="{local:LangageExtension Key='Config.FileSize1'}" Margin="0,0,0,5"/>
-                                <TextBox Name="fileSize" Width="200" Margin="0,0,0,10"/>
+                                <Label Name="FileSizeTitle" Content="{local:LangageExtension Key='Config.FileSize0'}" Style="{StaticResource TitleStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-                                <TextBlock Text="{local:LangageExtension Key='Config.FileSize2'}" Margin="0,0,0,5"/>
-                                <ComboBox Name="fileSizeUnit" Width="200">
+                                <TextBlock Text="{local:LangageExtension Key='Config.FileSize1'}"  Grid.Row="1" Grid.Column="1"/>
+                                <TextBox Name="fileSize"  Grid.Row="1" Grid.Column="2"/>
+
+                                <TextBlock Text="{local:LangageExtension Key='Config.FileSize2'}"  Grid.Row="2" Grid.Column="1"/>
+                                <ComboBox Name="fileSizeUnit"  Grid.Row="2" Grid.Column="2">
                                     <ComboBoxItem Content="Octet"/>
                                     <ComboBoxItem Content="Ko"/>
                                     <ComboBoxItem Content="Mo"/>
                                     <ComboBoxItem Content="Go"/>
-                                    <!-- Add other unit if needed -->
                                 </ComboBox>
+
                             </Grid>
                         </Border>
-                        <!-- _______________________Debut Fin de la feature avec bloquage pour + de n octets _______________________ -->
-                        
                     </Grid>
                 
             </Border>

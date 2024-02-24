@@ -207,8 +207,6 @@ namespace ProjetDevSysGraphical
                 configViewModel.EditTheme(themeSelector.Text);
                 needRestart = true;
             }
-            //priority
-            if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
             //fileSize
             if (fileSize.Text != null)
             {

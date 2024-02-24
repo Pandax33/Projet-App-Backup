@@ -124,6 +124,15 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Size of heavy files.
+        /// </summary>
+        internal static string Config_FileSize0 {
+            get {
+                return ResourceManager.GetString("Config.FileSize0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Size:.
         /// </summary>
         internal static string Config_FileSize1 {
