@@ -509,7 +509,7 @@ namespace ProjetDevSysGraphical
                     var highlighter = grid.Children
                         .OfType<Border>()
                         .FirstOrDefault(b => Grid.GetRow(b) == rowIndex);
-
+                    if (highlighter == null) return;
                     var currentBrush = highlighter.Background as SolidColorBrush;
 
                     var brushBase = (SolidColorBrush)Application.Current.Resources["Brush1"];
