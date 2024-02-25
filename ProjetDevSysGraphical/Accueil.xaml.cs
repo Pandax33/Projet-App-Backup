@@ -127,6 +127,5 @@ namespace ProjetDevSysGraphical
             var backupName = button.Tag.ToString();
             ProjetDevSys.AppConstants.StopBackup(backupName); // Implémentez cette méthode pour arrêter la sauvegarde
         }
-
     }
 }

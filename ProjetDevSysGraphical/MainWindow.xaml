@@ -66,7 +66,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style x:Key="NavigationButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource Brush1}"/>
             <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
@@ -93,20 +93,20 @@
         </Style>
     </Window.Resources>
     <Border x:Name="mainBorder" BorderThickness="1" BorderBrush="Transparent">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <WrapPanel HorizontalAlignment="left" VerticalAlignment="Center">
-                <Image Source="/Resources/app.ico" />
-                <TextBlock Foreground="White" FontSize="18" Margin="20, 0, 0, 0" VerticalAlignment="Center">EasySave</TextBlock>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                <WrapPanel HorizontalAlignment="left" VerticalAlignment="Center">
+                    <Image Source="/Resources/app.ico" />
+                    <TextBlock Foreground="White" FontSize="18" Margin="20, 0, 0, 0" VerticalAlignment="Center">EasySave</TextBlock>
                 </WrapPanel>
                 <Border Height="2" Background="{StaticResource Brush4}" Margin="45,28,45,0"/>
                 <StackPanel Orientation="Horizontal"
@@ -147,32 +147,33 @@
                     </Button>
                 </StackPanel>
 
-        </Grid>
-
-        <!-- round border around selector -->
-        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Brush2}" CornerRadius="10" Margin="5">
-            <!-- round colored background -->
-            <Grid Margin="10">
-                <!-- inside margin -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Button Content="{local:LangageExtension Key='Selector1'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="1" Click="Home_Click"/>
-                <Button Content="{local:LangageExtension Key='Selector2'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="3" Click="Backup_Click"/>
-                <Button Content="{local:LangageExtension Key='Selector3'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="5" Click="Settings_Click"/>
             </Grid>
-        </Border>
 
-        <Grid Grid.Column="1" Grid.Row="1">
-            <ContentControl x:Name="contentControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+            <!-- round border around selector -->
+            <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Brush2}" CornerRadius="10" Margin="5">
+                <!-- round colored background -->
+                <Grid Margin="10">
+                    <!-- inside margin -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <CheckBox x:Name="Server" Content="Enable Server Client" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,194,0,0" Checked="Server_Checked"/>
+
+                    <Button Content="{local:LangageExtension Key='Selector1'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="1" Click="Home_Click"/>
+                    <Button Content="{local:LangageExtension Key='Selector2'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="3" Click="Backup_Click"/>
+                    <Button Content="{local:LangageExtension Key='Selector3'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="5" Click="Settings_Click"/>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Column="1" Grid.Row="1">
+                <ContentControl x:Name="contentControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10"/>
+            </Grid>
         </Grid>
-    </Grid>
     </Border>
 </Window>

@@ -112,5 +112,19 @@ namespace ProjetDevSysGraphical
             newWindow.Show();
             this.Close();
         }
+
+        private void Server_Checked(object sender, RoutedEventArgs e)
+        {
+            Server server = new Server(this);
+
+            if (Server.IsChecked == true)
+            {
+                Task.Run(() => server.Start());
+            }
+            else
+            {
+                server.Stop();
+            }
+        }
     }
 }
