@@ -115,7 +115,7 @@ namespace ProjetDevSysGraphical
 
         private void Server_Checked(object sender, RoutedEventArgs e)
         {
-            Server server = new Server(this);
+            Server server = new Server();
 
             if (Server.IsChecked == true)
             {
