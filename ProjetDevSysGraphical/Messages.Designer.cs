@@ -385,6 +385,15 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à ID.
+        /// </summary>
+        internal static string Task_Grid_ID {
+            get {
+                return ResourceManager.GetString("Task.Grid.ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Name.
         /// </summary>
         internal static string Task_Grid_Name {
