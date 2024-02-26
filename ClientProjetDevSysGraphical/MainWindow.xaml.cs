@@ -123,11 +123,25 @@ namespace ClientProjetDevSysGraphical
             if (isConnect == true)
             {
                 await StopClient();
+                return;
             }
             if (isConnect == false)
             {
                 await StartClient();
+                return;
             }
+        }
+
+        private async Task<string> SendRequestAsync(string request)
+        {
+            byte[] requestData = Encoding.UTF8.GetBytes(request);
+            await clientSocket.SendAsync(new ArraySegment<byte>(requestData), SocketFlags.None);
+
+            byte[] buffer = new byte[1024];
+            int bytesRead = await clientSocket.ReceiveAsync(new ArraySegment<byte>(buffer), SocketFlags.None);
+            string response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+            return response;
         }
 
         private async Task StartClient()
@@ -135,13 +149,13 @@ namespace ClientProjetDevSysGraphical
             try
             {
                 clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                await clientSocket.ConnectAsync(IPAddress.Parse("127.0.0.1"), 1234);
+                clientSocket.Connect(IPAddress.Parse("127.0.0.1"), 1234);
 
                 isConnect = true;
                 connectButton.Content = "Disconnect";
 
-                // Démarrez une boucle de réception en arrière-plan
-                await Task.Run(ReceiveFromServer);
+                string logFilePath = await SendRequestAsync("GetLogFilePath");
+                MessageBox.Show($"Log file path received from server: {logFilePath}");
             }
             catch (Exception ex)
             {
@@ -162,28 +176,6 @@ namespace ClientProjetDevSysGraphical
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur lors de la déconnexion du serveur : " + ex.Message);
-            }
-        }
-
-        private async Task ReceiveFromServer()
-        {
-            try
-            {
-                byte[] buffer = new byte[1024];
-                while (true)
-                {
-                    int bytesRead = await clientSocket.ReceiveAsync(new ArraySegment<byte>(buffer), SocketFlags.None);
-                    if (bytesRead > 0)
-                    {
-                        // Traitez les données reçues du serveur ici
-                        string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                        // Afficher le message ou effectuer d'autres opérations
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur lors de la réception des données du serveur : " + ex.Message);
             }
         }
     }

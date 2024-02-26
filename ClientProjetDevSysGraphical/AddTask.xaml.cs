@@ -72,16 +72,52 @@ namespace ClientProjetDevSysGraphical
             Close();
         }
 
-        private void sourcePathExplorer_Click(object sender, RoutedEventArgs e)
+        private async void sourcePathExplorer_Click(object sender, RoutedEventArgs e)
         {
-            sourcePathEntry.Text = AppConstants.OpenFolderDialog();
-            Activate();
+            try
+            {
+                // Envoyer une requête au serveur pour ouvrir le dialogue de sélection de dossier
+                await AppConstants.SendRequestAsync("OpenFolderDialog");
+
+                // Attendre la réponse du serveur contenant le chemin du dossier sélectionné
+                string selectedFolderPath = await AppConstants.ReceiveResponseAsync();
+
+                // Mettre à jour l'interface utilisateur avec le chemin du dossier sélectionné
+                sourcePathEntry.Text = selectedFolderPath;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de la sélection du dossier source : " + ex.Message);
+            }
+            finally
+            {
+                Activate();
+            }
         }
-        private void targetPathExplorer_Click(Object sender, RoutedEventArgs e)
+
+        private async void targetPathExplorer_Click(object sender, RoutedEventArgs e)
         {
-            targetPathEntry.Text = AppConstants.OpenFolderDialog();
-            Activate();
+            try
+            {
+                // Envoyer une requête au serveur pour ouvrir le dialogue de sélection de dossier
+                await AppConstants.SendRequestAsync("OpenFolderDialog");
+
+                // Attendre la réponse du serveur contenant le chemin du dossier sélectionné
+                string selectedFolderPath = await AppConstants.ReceiveResponseAsync();
+
+                // Mettre à jour l'interface utilisateur avec le chemin du dossier sélectionné
+                targetPathEntry.Text = selectedFolderPath;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de la sélection du dossier cible : " + ex.Message);
+            }
+            finally
+            {
+                Activate();
+            }
         }
+
 
         private string typeSelector()
         {

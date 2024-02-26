@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.IO;
+using System.Threading.Tasks;
 
 namespace ProjetDevSysGraphical
 {
@@ -19,7 +15,7 @@ namespace ProjetDevSysGraphical
 
         public Server()
         {
-            
+
         }
 
         public async Task Start()
@@ -31,12 +27,17 @@ namespace ProjetDevSysGraphical
 
             try
             {
-                Socket clientSocket = serverSocket.Accept(); // Accepter la connexion entrante
-                clientSockets.Add(clientSocket);
+                while (isServerRunning)
+                {
+                    Socket clientSocket = await serverSocket.AcceptAsync(); // Accepter la connexion entrante de manière asynchrone
+                    clientSockets.Add(clientSocket);
+
+                    Task.Run(() => HandleClient(clientSocket)); // Démarrer un nouveau thread pour gérer le client
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur lors de la connexion avec le client : " + ex.Message);
+                // Gérer l'exception
             }
             finally
             {
@@ -59,6 +60,46 @@ namespace ProjetDevSysGraphical
                 serverSocket.Close();
                 isServerRunning = false;
             }
+        }
+
+        private async Task HandleClient(Socket clientSocket)
+        {
+            try
+            {
+                while (isServerRunning)
+                {
+                    byte[] buffer = new byte[1024];
+                    int bytesRead = await clientSocket.ReceiveAsync(new ArraySegment<byte>(buffer), SocketFlags.None);
+                    string request = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                    // Traiter la demande du client et renvoyer la réponse
+                    string response = await ProcessRequestAsync(request);
+
+                    byte[] responseData = Encoding.UTF8.GetBytes(response);
+                    await clientSocket.SendAsync(new ArraySegment<byte>(responseData), SocketFlags.None);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Gérer l'exception
+            }
+            finally
+            {
+                clientSocket.Shutdown(SocketShutdown.Both);
+                clientSocket.Close();
+                clientSockets.Remove(clientSocket);
+            }
+        }
+
+        private async Task<string> ProcessRequestAsync(string request)
+        {
+            if (request == "GetLogFilePath")
+            {
+                return ProjetDevSys.AppConstants.LogFilePath;
+            }
+
+            // Si la demande n'est pas reconnue, renvoyez une réponse indiquant une demande non valide
+            return "InvalidRequest";
         }
     }
 }
