@@ -785,10 +785,10 @@
                                 <Label Name="FileSizeTitle" Content="{local:LangageExtension Key='Config.FileSize0'}" Style="{StaticResource TitleStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
                                 <TextBlock Text="{local:LangageExtension Key='Config.FileSize1'}" Foreground="{StaticResource Brush3}" Grid.Row="1" Grid.Column="1"/>
-                                <TextBox Name="fileSize"  Grid.Row="1" Grid.Column="2"/>
+                                <TextBox Name="fileSizeSelector"  Grid.Row="1" Grid.Column="2"/>
 
                                 <TextBlock Text="{local:LangageExtension Key='Config.FileSize2'}" Foreground="{StaticResource Brush3}" Grid.Row="2" Grid.Column="1"/>
-                                <ComboBox Name="fileSizeUnit"  Grid.Row="2" Grid.Column="2">
+                                <ComboBox Name="fileSizeUnitSelector"  Grid.Row="2" Grid.Column="2">
                                     <ComboBoxItem Content="Octet"/>
                                     <ComboBoxItem Content="Ko"/>
                                     <ComboBoxItem Content="Mo"/>

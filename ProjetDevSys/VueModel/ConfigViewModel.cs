@@ -158,6 +158,7 @@ namespace ProjetDevSys.VueModel
                     Config.FileSize = FileSize * 1000000000;
                     break;
             }
+            Config.FileSizeUnit = FileSizeUnit;
             Config.EditConfig();
             return ResourceHelper.GetString("ConfigViewModel1");
         }

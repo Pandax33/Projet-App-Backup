@@ -28,6 +28,7 @@ namespace ProjetDevSys.Model
         public static List<string> BlockerProcess { get; set; }
         public static List<string> ExtensionListPriority { get; set; }
         public static int FileSize { get; set; }
+        public static string FileSizeUnit { get; set; }
 
         static Config()
         {
@@ -45,11 +46,6 @@ namespace ProjetDevSys.Model
             return CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US";
         }
 
-        private static int GetFileSize()
-        {
-            return 0;
-        }
-
         public static void Initialize()
         {
             JsonPath = AppConstants.LogFilePath;
@@ -63,6 +59,8 @@ namespace ProjetDevSys.Model
             Theme = AppConstants.Theme;
             ExtensionListPriority = AppConstants.ExtensionListPriority;
             FileSize = AppConstants.FileSize;
+            FileSizeUnit = AppConstants.FileSizeUnit;
+
         }
         public static void InitializeDefault()
         {
@@ -81,6 +79,7 @@ namespace ProjetDevSys.Model
             BlockerProcess = new List<string> { };
             ExtensionListPriority = new List<string> { };
             FileSize = -1;
+            FileSizeUnit = "Octet";
             Theme = "Default";
         }
 
@@ -100,9 +99,9 @@ namespace ProjetDevSys.Model
                 KeyCrypt = new { KeyCrypt },
                 BlockerProcess = new { BlockerProcess },
                 ExtensionListPriority = new { ExtensionListPriority },
-                FileSize = -1,
+                FileSize = new { FileSize },
+                FileSizeUnit = new { FileSizeUnit},
                 WPF = new { Theme }
-
             };
 
             return defaultConfig;
@@ -159,6 +158,7 @@ namespace ProjetDevSys.Model
                 BlockerProcess = new { BlockerProcess },
                 ExtensionListPriority = new { ExtensionListPriority },
                 FileSize = new { FileSize },
+                FileSizeUnit = new { FileSizeUnit },
                 WPF = new { Theme }
             };
 
@@ -339,7 +339,10 @@ namespace ProjetDevSys.Model
                 {"CryptPath", new { CryptPath = defaultConfig.CryptPath.CryptPath }},
                 {"KeyCrypt", new { KeyCrypt = defaultConfig.KeyCrypt.KeyCrypt }},
                 {"BlockerProcess", new { BlockerProcess = defaultConfig.BlockerProcess.BlockerProcess }},
+                {"FileSize", new { FileSize = defaultConfig.FileSize.FileSize }},
+                {"FileSizeUnit", new { FileSizeUnit = defaultConfig.FileSizeUnit.FileSizeUnit }},
                 {"ExtensionListPriority", new { ExtensionListPriority = defaultConfig.ExtensionListPriority.ExtensionListPriority }}
+
             };
 
             // Parcourir chaque élément par défaut pour s'assurer qu'il est présent dans la configuration; sinon, l'ajouter
