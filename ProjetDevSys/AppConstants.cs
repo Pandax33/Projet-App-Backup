@@ -30,6 +30,9 @@ namespace ProjetDevSys
         public static string Theme;
         public delegate void BackupProgressUpdatedEventHandler(string backupName, double progress);
         public static event BackupProgressUpdatedEventHandler BackupProgressUpdated;
+        public static readonly Mutex sizeMutex = new Mutex();
+        public static readonly Mutex priorityMutex = new Mutex();
+
 
         static AppConstants()
         {
