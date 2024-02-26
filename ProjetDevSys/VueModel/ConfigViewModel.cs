@@ -138,7 +138,7 @@ namespace ProjetDevSys.VueModel
             return ResourceHelper.GetString("ConfigViewModel1");
         }
 
-        public string EditFileSize(int FileSize, string FileSizeUnit)
+        public string EditFileSize(long FileSize, string FileSizeUnit)
         {
             switch (FileSizeUnit)
             {

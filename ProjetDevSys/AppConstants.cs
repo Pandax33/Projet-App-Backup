@@ -19,7 +19,7 @@ namespace ProjetDevSys
         public static string CryptPath;
         public static string KeyCrypt;
         public static List<string> ExtensionListPriority;
-        public static int FileSize;
+        public static long FileSize;
         public static string FileSizeUnit;
 
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
@@ -33,7 +33,8 @@ namespace ProjetDevSys
         public static event BackupProgressUpdatedEventHandler BackupProgressUpdated;
         public static readonly Mutex sizeMutex = new Mutex();
         public static readonly Mutex priorityMutex = new Mutex();
-
+        public static ManualResetEvent processEvent = new ManualResetEvent(true);
+        public static ManualResetEvent priorityEvent = new ManualResetEvent(true);
 
         static AppConstants()
         {

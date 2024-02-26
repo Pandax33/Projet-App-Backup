@@ -19,15 +19,31 @@ namespace ProjetDevSysGraphical.VueModel
 
             List<Task> tasks = new List<Task>();
             IEnumerable<Backup> allBackups = BackupFactory.GetAllBackups();
+            List<BackupJob> backupJobs = new List<BackupJob>();
+            ProjetDevSys.AppConstants.priorityEvent.Reset();
             foreach (int id in tab)
             {
                 Backup backup = BackupFactory.GetBackupByIndex(id);
+                if (backup != null)
+                {
+                    BackupJob backupJob = new BackupJob(backup);
+                    backupJob.CreateLogRealTime(); // Préparer le job de sauvegarde
+                    backupJobs.Add(backupJob);
+                }
+            }
 
+            foreach (BackupJob backupJob in backupJobs)
+            {
+                Backup backup = backupJob.Backup;
                 if (backup == null)
                 {
                     continue;
                 }
-                BackupJob backupJob = new BackupJob(backup);
+                if (backup == null)
+                {
+                    continue;
+                }
+                backupJob.CreateLogRealTime();
                 tasks.Add(Task.Run(() =>
                 {
                     try
@@ -44,7 +60,7 @@ namespace ProjetDevSysGraphical.VueModel
                             
                             
                         }, null);
-                        backupJob.Save();
+                        backupJob.SavePrio();
                     }
                     catch (Exception ex)
                     {
@@ -54,6 +70,29 @@ namespace ProjetDevSysGraphical.VueModel
             }
 
             await Task.WhenAll(tasks);
+            ProjetDevSys.AppConstants.priorityEvent.Set();
+            List<Task> tasksNoPriority = new List<Task>();
+            foreach (BackupJob backupJob in backupJobs)
+            {
+                Backup backup = backupJob.Backup;
+                if (backup == null)
+                {
+                    continue;
+                }
+                tasksNoPriority.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        backupJob.Save();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error during backup for {backup.Name}: {ex}");
+                    }
+                }));
+            }
+
+            await Task.WhenAll(tasksNoPriority);
             foreach (var backup in allBackups)
             {
                 ProjetDevSys.AppConstants.BackupCancellations.TryRemove(backup.Name, out _);

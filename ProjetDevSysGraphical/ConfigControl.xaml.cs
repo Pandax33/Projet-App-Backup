@@ -210,7 +210,7 @@ namespace ProjetDevSysGraphical
             //fileSize
             if (fileSizeSelector.Text != null)
             {
-                configViewModel.EditFileSize(int.Parse(fileSizeSelector.Text), fileSizeUnitSelector.Text);
+                configViewModel.EditFileSize(long.Parse(fileSizeSelector.Text), fileSizeUnitSelector.Text);
             }
             //priority
             if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
@@ -263,7 +263,7 @@ namespace ProjetDevSysGraphical
             }
             priorityExtensionsUpdate();
             // FileSize
-            int fileSize = ProjetDevSys.AppConstants.FileSize;
+            long fileSize = ProjetDevSys.AppConstants.FileSize;
             string fileSizeUnit = ProjetDevSys.AppConstants.FileSizeUnit;
             fileSizeUnitSelector.SelectedItem = "Octet";
             fileSizeUnitSelector.Text = "Octet";
