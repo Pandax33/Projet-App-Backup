@@ -27,6 +27,8 @@ namespace ProjetDevSys.Model
         public static string Theme {  get; set; }
         public static List<string> BlockerProcess { get; set; }
         public static List<string> ExtensionListPriority { get; set; }
+        public static long FileSize { get; set; }
+        public static string FileSizeUnit { get; set; }
 
         static Config()
         {
@@ -56,6 +58,9 @@ namespace ProjetDevSys.Model
             KeyCrypt = AppConstants.KeyCrypt;
             Theme = AppConstants.Theme;
             ExtensionListPriority = AppConstants.ExtensionListPriority;
+            FileSize = AppConstants.FileSize;
+            FileSizeUnit = AppConstants.FileSizeUnit;
+
         }
         public static void InitializeDefault()
         {
@@ -73,6 +78,8 @@ namespace ProjetDevSys.Model
             KeyCrypt = generateKey();
             BlockerProcess = new List<string> { };
             ExtensionListPriority = new List<string> { };
+            FileSize = 1000000000;
+            FileSizeUnit = "Octet";
             Theme = "Default";
         }
 
@@ -92,8 +99,9 @@ namespace ProjetDevSys.Model
                 KeyCrypt = new { KeyCrypt },
                 BlockerProcess = new { BlockerProcess },
                 ExtensionListPriority = new { ExtensionListPriority },
+                FileSize = new { FileSize },
+                FileSizeUnit = new { FileSizeUnit},
                 WPF = new { Theme }
-
             };
 
             return defaultConfig;
@@ -149,6 +157,8 @@ namespace ProjetDevSys.Model
                 KeyCrypt = new { KeyCrypt },
                 BlockerProcess = new { BlockerProcess },
                 ExtensionListPriority = new { ExtensionListPriority },
+                FileSize = new { FileSize },
+                FileSizeUnit = new { FileSizeUnit },
                 WPF = new { Theme }
             };
 
@@ -329,7 +339,10 @@ namespace ProjetDevSys.Model
                 {"CryptPath", new { CryptPath = defaultConfig.CryptPath.CryptPath }},
                 {"KeyCrypt", new { KeyCrypt = defaultConfig.KeyCrypt.KeyCrypt }},
                 {"BlockerProcess", new { BlockerProcess = defaultConfig.BlockerProcess.BlockerProcess }},
+                {"FileSize", new { FileSize = defaultConfig.FileSize.FileSize }},
+                {"FileSizeUnit", new { FileSizeUnit = defaultConfig.FileSizeUnit.FileSizeUnit }},
                 {"ExtensionListPriority", new { ExtensionListPriority = defaultConfig.ExtensionListPriority.ExtensionListPriority }}
+
             };
 
             // Parcourir chaque élément par défaut pour s'assurer qu'il est présent dans la configuration; sinon, l'ajouter

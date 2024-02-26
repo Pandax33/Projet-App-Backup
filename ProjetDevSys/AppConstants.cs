@@ -19,14 +19,22 @@ namespace ProjetDevSys
         public static string CryptPath;
         public static string KeyCrypt;
         public static List<string> ExtensionListPriority;
+        public static long FileSize;
+        public static string FileSizeUnit;
+
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
         public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
         public static ConcurrentDictionary<string, CancellationTokenSource> BackupCancellations = new ConcurrentDictionary<string, CancellationTokenSource>();
+
         public static List<string> BlockerProcess;
         public static readonly Mutex appMutex = new Mutex(true, "AppConstantsMutex");
         public static string Theme;
         public delegate void BackupProgressUpdatedEventHandler(string backupName, double progress);
         public static event BackupProgressUpdatedEventHandler BackupProgressUpdated;
+        public static readonly Mutex sizeMutex = new Mutex();
+        public static readonly Mutex priorityMutex = new Mutex();
+        public static ManualResetEvent processEvent = new ManualResetEvent(true);
+        public static ManualResetEvent priorityEvent = new ManualResetEvent(true);
 
         static AppConstants()
         {
@@ -63,6 +71,8 @@ namespace ProjetDevSys
                 ExtensionListPriority = new List<string>(config.ExtensionListPriority.ExtensionListPriority.ToObject<List<string>>());
                 Theme = config.WPF.Theme;
                 BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
+                FileSize = config.FileSize.FileSize;
+                FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
                 Config.Initialize();
             }
             catch (Exception ex)
@@ -127,6 +137,8 @@ namespace ProjetDevSys
             KeyCrypt = config.KeyCrypt.KeyCrypt;
             BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
             Theme = config.WPF.Theme;
+            FileSize = config.FileSize.FileSize;
+            FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
             CultureInfo ci = new CultureInfo(Langage);
             CultureInfo.CurrentUICulture = ci;
         }

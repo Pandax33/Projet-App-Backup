@@ -121,37 +121,46 @@
     <value>Appliquer</value>
   </data>
   <data name="Config.Blocker1" xml:space="preserve">
-    <value>Processus bloquants : si détecté, interromps la sauvegarde</value>
+    <value>Processus bloquants</value>
   </data>
   <data name="Config.Blocker2" xml:space="preserve">
-    <value>Processus à bloquer :</value>
+    <value>Processus :</value>
   </data>
   <data name="Config.Crypto1" xml:space="preserve">
-    <value>Configuration de CryptoSave</value>
+    <value>CryptoSave</value>
   </data>
   <data name="Config.Crypto2" xml:space="preserve">
-    <value>Chemin de CryptoSave :</value>
+    <value>Chemin du logiciel :</value>
   </data>
   <data name="Config.Crypto3" xml:space="preserve">
-    <value>Extensions à chiffrer par CryptoSave :</value>
+    <value>Extensions à chiffrer :</value>
   </data>
   <data name="Config.Crypto4" xml:space="preserve">
     <value>Extensions</value>
   </data>
+  <data name="Config.FileSize0" xml:space="preserve">
+    <value>Taille minimale des fichiers lourds</value>
+  </data>
+  <data name="Config.FileSize1" xml:space="preserve">
+    <value>Taille minimale :</value>
+  </data>
+  <data name="Config.FileSize2" xml:space="preserve">
+    <value>Unité :</value>
+  </data>
   <data name="Config.Languages1" xml:space="preserve">
-    <value>Changer la localisation</value>
+    <value>Langue</value>
   </data>
   <data name="Config.Languages2" xml:space="preserve">
-    <value>Sélectioner une langue :</value>
+    <value>Langue :</value>
   </data>
   <data name="Config.Log1" xml:space="preserve">
-    <value>Configuration des fichiers Logs</value>
+    <value>Fichiers de logs</value>
   </data>
   <data name="Config.Log2" xml:space="preserve">
-    <value>Chemin du Log Quotidien :</value>
+    <value>Chemin des logs journaliers :</value>
   </data>
   <data name="Config.Log3" xml:space="preserve">
-    <value>Chemin du Log Temps réel :</value>
+    <value>Chemin des logs en temps réel :</value>
   </data>
   <data name="Config.Log4" xml:space="preserve">
     <value>Type d'extension :</value>
@@ -160,19 +169,19 @@
     <value>Fichiers prioritaires</value>
   </data>
   <data name="Config.Priority3" xml:space="preserve">
-    <value>Extension des fichiers à prioriser :</value>
+    <value>Extension à prioriser :</value>
   </data>
   <data name="Config.Reset" xml:space="preserve">
     <value>Réinitialiser</value>
   </data>
   <data name="Config.SavePath1" xml:space="preserve">
-    <value>Chemin vers le fichier de sauvegarde des tâches</value>
+    <value>Sauvegarde des tâches</value>
   </data>
   <data name="Config.SavePath2" xml:space="preserve">
-    <value>Insérer le chemin vers le fichier de sauvegarde :</value>
+    <value>Fichier de sauvegarde :</value>
   </data>
   <data name="Config.Tab1" xml:space="preserve">
-    <value>Fichiers Log</value>
+    <value>Fichiers logs</value>
   </data>
   <data name="Config.Tab2" xml:space="preserve">
     <value>CryptoSave</value>
@@ -184,16 +193,22 @@
     <value>Processus bloquants</value>
   </data>
   <data name="Config.Tab5" xml:space="preserve">
-    <value>Chemin de Sauvegarde</value>
+    <value>Chemin de sauvegarde</value>
+  </data>
+  <data name="Config.Themes1" xml:space="preserve">
+    <value>Thème de l'application</value>
+  </data>
+  <data name="Config.Themes2" xml:space="preserve">
+    <value>Thème : </value>
   </data>
   <data name="Home1" xml:space="preserve">
     <value>Bienvenue !</value>
   </data>
   <data name="Selector1" xml:space="preserve">
-    <value>Acceuil</value>
+    <value>Accueil</value>
   </data>
   <data name="Selector2" xml:space="preserve">
-    <value>Sauvegardes</value>
+    <value>Sauvegarde</value>
   </data>
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>

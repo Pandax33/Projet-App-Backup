@@ -40,22 +40,16 @@ namespace ProjetDevSys.MODEL
 
                 if (blockerProcessFound)
                 {
-                    foreach (var backupName in AppConstants.backupProgress.Keys)
-                    {
-                        AppConstants.PauseBackup(backupName);
-                    }
+                    AppConstants.processEvent.Reset(); // Met en pause toutes les sauvegardes.
                 }
                 else
                 {
-                    // Reprend toutes les sauvegardes en pause
-                    foreach (var backupName in AppConstants.backupProgress.Keys)
-                    {
-                        AppConstants.ResumeBackup(backupName);
-                    }
+                    AppConstants.processEvent.Set(); // Reprend toutes les sauvegardes.
                 }
 
-                Thread.Sleep(2000);
+                Thread.Sleep(2000); // Fréquence de vérification des processus bloquants.
             }
         }
+
     }
 }

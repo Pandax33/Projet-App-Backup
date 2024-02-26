@@ -138,6 +138,31 @@ namespace ProjetDevSys.VueModel
             return ResourceHelper.GetString("ConfigViewModel1");
         }
 
+        public string EditFileSize(long FileSize, string FileSizeUnit)
+        {
+            switch (FileSizeUnit)
+            {
+                case "Octet":
+                    Config.FileSize = FileSize * 1;
+                    break;
+
+                case "Ko":
+                    Config.FileSize = FileSize * 1000;
+                    break;
+
+                case "Mo":
+                    Config.FileSize = FileSize * 1000000;
+                    break;
+
+                case "Go":
+                    Config.FileSize = FileSize * 1000000000;
+                    break;
+            }
+            Config.FileSizeUnit = FileSizeUnit;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
         public bool verifInputLanguage(string input)
         {
             if (input == "fr" || input == "en")
