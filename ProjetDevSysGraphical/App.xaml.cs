@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using ProjetDevSys.MODEL;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 using System.Windows.Media;
@@ -14,7 +15,8 @@ namespace ProjetDevSysGraphical
         {
             base.OnStartup(e);
 
-
+            ProcessWatcher processWatcher = new ProcessWatcher();
+            processWatcher.StartWatching();
             ThemeLoader.LoadTheme();
         }
     }
@@ -96,7 +98,7 @@ namespace ProjetDevSysGraphical
                     FontGrid = new FontFamily("Roboto");
                     FontBase = new FontFamily("Roboto");
                     break;
-                case "Damien":
+                case "Raimon":
                     BG = (Color)ColorConverter.ConvertFromString("#3d6ca6"); // blue
                     B1 = (Color)ColorConverter.ConvertFromString("#0d161f"); // dark
                     B2 = (Color)ColorConverter.ConvertFromString("#2E517B"); // deep blue

@@ -13,7 +13,6 @@ namespace ProjetDevSysGraphical.VueModel
     {
         public async Task<string> RunTaskMultipleAsync(int[] tab, SynchronizationContext context)
         {
-            if (ProjetDevSys.AppConstants.RunningBlockerProcess()) return ResourceHelper.GetString("RunTaskView22");
 
             int tasksCount = tab.Length;
             if (tasksCount == 0) return "No backups specified.";
@@ -65,7 +64,6 @@ namespace ProjetDevSysGraphical.VueModel
 
         public async Task<string> RunMultipleTaskAsync(int idDebut, int idFin, SynchronizationContext context)
         {
-            if (ProjetDevSys.AppConstants.RunningBlockerProcess()) return ResourceHelper.GetString("RunTaskView22");
 
             IEnumerable<Backup> allBackups = BackupFactory.GetBackupsInRange(idDebut, idFin);
             if (!allBackups.Any()) return "No backups found in the specified range.";
