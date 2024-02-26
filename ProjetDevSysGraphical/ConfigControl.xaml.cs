@@ -208,9 +208,9 @@ namespace ProjetDevSysGraphical
                 needRestart = true;
             }
             //fileSize
-            if (fileSize.Text != null)
+            if (fileSizeSelector.Text != null)
             {
-                configViewModel.EditFileSize(int.Parse(fileSize.Text), fileSizeUnit.Text);
+                configViewModel.EditFileSize(int.Parse(fileSizeSelector.Text), fileSizeUnitSelector.Text);
             }
             //priority
             if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
@@ -261,11 +261,13 @@ namespace ProjetDevSysGraphical
             {
                 foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListPriority) PriorityExtensions.Add(extensions);
             }
+            priorityExtensionsUpdate();
             // FileSize
             int fileSize = ProjetDevSys.AppConstants.FileSize;
-            languageSelector.SelectedItem = Language;
-            languageSelector.Text = language;
-            priorityExtensionsUpdate();
+            string fileSizeUnit = ProjetDevSys.AppConstants.FileSizeUnit;
+            fileSizeUnitSelector.SelectedItem = "Octet";
+            fileSizeUnitSelector.Text = "Octet";
+            fileSizeSelector.Text = fileSize.ToString();
         }
         public static string GetLangageCulture(string langage)
         {

@@ -20,6 +20,7 @@ namespace ProjetDevSys
         public static string KeyCrypt;
         public static List<string> ExtensionListPriority;
         public static int FileSize;
+        public static string FileSizeUnit;
 
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
         public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
@@ -67,6 +68,7 @@ namespace ProjetDevSys
                 Theme = config.WPF.Theme;
                 BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
                 FileSize = config.FileSize.FileSize;
+                FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
                 Config.Initialize();
             }
             catch (Exception ex)
@@ -132,6 +134,7 @@ namespace ProjetDevSys
             BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
             Theme = config.WPF.Theme;
             FileSize = config.FileSize.FileSize;
+            FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
             CultureInfo ci = new CultureInfo(Langage);
             CultureInfo.CurrentUICulture = ci;
         }
