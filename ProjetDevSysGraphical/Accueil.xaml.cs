@@ -87,11 +87,11 @@ namespace ProjetDevSysGraphical
 
                 var nameLabel = new TextBlock { 
                     Text = backup.Key,
-                    HorizontalAlignment = HorizontalAlignment.Right,
+                    HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(5, 10, 20, 5),
+                    Margin = commonMargin,
                     FontSize = (double)Application.Current.Resources["FontSizeGrid"],
-                    FontFamily = (FontFamily)Application.Current.Resources["FontGrid"],
+                    FontFamily = (FontFamily)Application.Current.Resources["FontTitle"],
                     Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
                     FontWeight = FontWeights.Bold,
                 };
