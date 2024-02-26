@@ -645,7 +645,7 @@
                                         </ToolTip>
                                     </Button.ToolTip>
                                 </Button>
-                                <Label Name="blockerLabel"  Style="{StaticResource BaseFont}" Content="extensionsCrypto" Grid.Row="2" Grid.Column="1"/>
+                                <Label Name="blockerLabel"  Style="{StaticResource BaseFont}" Content="{local:LangageExtension Key='Config.Blocker2'}" Grid.Row="2" Grid.Column="1"/>
                                 <TextBox x:Name="blockerEntry" Grid.Row="2" Grid.Column="2"/>
                                 <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                     <ListView.View>
@@ -707,6 +707,7 @@
                                     <ComboBoxItem>Default</ComboBoxItem>
                                     <ComboBoxItem>Legacy</ComboBoxItem>
                                     <ComboBoxItem>Moche</ComboBoxItem>
+                                    <ComboBoxItem>Portugal</ComboBoxItem>
                                 </ComboBox>
                             </Grid>
                         </Border>

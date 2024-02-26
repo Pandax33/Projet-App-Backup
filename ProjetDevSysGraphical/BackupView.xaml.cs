@@ -327,8 +327,6 @@ namespace ProjetDevSysGraphical
                 grid.Children.Add(buttonEdit);
 
                 // Add the buttons to the StackPanel
-
-                
                 buttonDelete.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Delete";
                 buttonEdit.Name = buttonNameList[index] + "_" + index.ToString() + "_" + "Edit";
                 // Add the buttons to the list
