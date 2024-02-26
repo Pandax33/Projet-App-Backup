@@ -198,6 +198,12 @@
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
   </data>
+  <data name="Selector4" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="Selector5" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
   <data name="Task.Add.Title" xml:space="preserve">
     <value>Add a task</value>
   </data>

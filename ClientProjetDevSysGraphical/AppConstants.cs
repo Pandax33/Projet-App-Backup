@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
@@ -9,25 +8,23 @@ namespace ClientProjetDevSysGraphical
 {
     public static class AppConstants
     {
-        // Définissez les champs nécessaires ici
-
         private static Socket serverSocket;
 
         static AppConstants()
         {
-            // Initialisez la connexion au serveur
+            // Initialize server socket
             serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            serverSocket.Connect("127.0.0.1", 1234); // Remplacez par l'adresse et le port de votre serveur
+            serverSocket.Connect("127.0.0.1", 1234);
         }
 
         public static async Task<string> GetLogFilePathFromServerAsync()
         {
             try
             {
-                // Envoie une demande au serveur
+                // Ask server for log file path
                 await SendRequestAsync("GetLogFilePath");
 
-                // Attend la réponse du serveur
+                // Wait for server response
                 string response = await ReceiveResponseAsync();
 
                 return response;

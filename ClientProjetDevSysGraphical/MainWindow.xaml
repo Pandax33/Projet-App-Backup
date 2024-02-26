@@ -165,7 +165,7 @@
                     </Grid.RowDefinitions>
                     <Button Content="{local:LangageExtension Key='Selector1'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="1" Click="Home_Click"/>
                     <Button Content="{local:LangageExtension Key='Selector2'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="3" Click="Backup_Click"/>
-                    <Button x:Name="connectButton" Content="Connect" Style="{StaticResource NavigationButtonStyle}" Grid.Row="4" Click="Connect_Click" Height="60" Margin="0,20,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
+                    <Button x:Name="connectButton" Content="{local:LangageExtension Key='Selector4'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="4" Click="Connect_Click" Height="60" Margin="0,20,0,0" Grid.RowSpan="2" VerticalAlignment="Top"/>
                 </Grid>
             </Border>
 
