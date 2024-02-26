@@ -27,7 +27,7 @@ namespace ProjetDevSys.Model
         public static string Theme {  get; set; }
         public static List<string> BlockerProcess { get; set; }
         public static List<string> ExtensionListPriority { get; set; }
-        public static int FileSize { get; set; }
+        public static long FileSize { get; set; }
         public static string FileSizeUnit { get; set; }
 
         static Config()
