@@ -787,8 +787,7 @@
                                 <TextBlock Text="{local:LangageExtension Key='Config.FileSize1'}" Foreground="{StaticResource Brush3}" Grid.Row="1" Grid.Column="1"/>
                                 <TextBox Name="fileSizeSelector"  Grid.Row="1" Grid.Column="2"/>
 
-                                <TextBlock Text="{local:LangageExtension Key='Config.FileSize2'}" Foreground="{StaticResource Brush3}" Grid.Row="2" Grid.Column="1"/>
-                                <ComboBox Name="fileSizeUnitSelector"  Grid.Row="2" Grid.Column="2">
+                                <ComboBox Name="fileSizeUnitSelector"  Grid.Row="1" Grid.Column="3">
                                     <ComboBoxItem Content="Octet"/>
                                     <ComboBoxItem Content="Ko"/>
                                     <ComboBoxItem Content="Mo"/>
