@@ -518,17 +518,17 @@ namespace ProjetDevSysGraphical
                     if (currentBrush != null && currentBrush.Color == brushBase.Color)
                     {
                         highlighter.Background = brushHighlight;
-                        if (!idToLaunch.Contains(rowIndex))
+                        if (!idToLaunch.Contains(rowIndex-1)) //Don't forget the offset : Graphically starts at index 1. idToLaunch starts at index 0.
                         {
-                            idToLaunch.Add(rowIndex);
+                            idToLaunch.Add(rowIndex-1);
                         }
                     }
                     else
                     {
                         highlighter.Background = brushBase;
-                        if (idToLaunch.Contains(rowIndex))
+                        if (idToLaunch.Contains(rowIndex-1)) //Don't forget the offset : Graphically starts at index 1. idToLaunch starts at index 0.
                         {
-                            idToLaunch.Remove(rowIndex);
+                            idToLaunch.Remove(rowIndex-1);
                         }
                     }
                 }
