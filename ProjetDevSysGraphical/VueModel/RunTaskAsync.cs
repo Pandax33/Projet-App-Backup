@@ -32,7 +32,7 @@ namespace ProjetDevSysGraphical.VueModel
                 {
                     try
                     {
-                        var mre = new ManualResetEvent(true); // true signifie qu'il n'est pas en attente au départ
+                        ManualResetEvent mre = new ManualResetEvent(true); // true signifie qu'il n'est pas en attente au départ
                         ProjetDevSys.AppConstants.BackupPauseHandles.TryAdd(backup.Name, mre);
                         var cts = new CancellationTokenSource();
                         ProjetDevSys.AppConstants.BackupCancellations[backup.Name] = cts;
@@ -72,8 +72,8 @@ namespace ProjetDevSysGraphical.VueModel
 
             foreach (Backup backup in allBackups)
             {
-                var cts = new CancellationTokenSource();
-                var mre = new ManualResetEvent(true); // Initialized as not paused
+                CancellationTokenSource cts = new CancellationTokenSource();
+                ManualResetEvent mre = new ManualResetEvent(true); // Initialized as not paused
                 ProjetDevSys.AppConstants.BackupCancellations.TryAdd(backup.Name, cts);
                 ProjetDevSys.AppConstants.BackupPauseHandles.TryAdd(backup.Name, mre);
 
