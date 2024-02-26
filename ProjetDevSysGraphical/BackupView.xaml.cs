@@ -371,14 +371,11 @@ namespace ProjetDevSysGraphical
             // Launch all tasks
             try
             {
-                // Ici, je suppose que vous souhaitez afficher le résultat dans une MessageBox.
-                // Adaptez cette partie comme nécessaire.
                 string result = await runSaveTask.RunMultipleTaskAsync(0, grid.Children.Count / 4, context);
                 MessageBox.Show(result, "Run", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                // Gérez les exceptions ici
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
