@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProjetDevSys.Model;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +25,9 @@ namespace ProjetDevSysGraphical
         public Accueil()
         {
             InitializeComponent();
-            UpdateGridWithBackupProgress();
+            GenerateGrid();
             ProjetDevSys.AppConstants.BackupProgressUpdated += AppConstants_BackupProgressUpdated;
+
         }
 
         ~Accueil()
@@ -33,14 +36,24 @@ namespace ProjetDevSysGraphical
         }
         private void AppConstants_BackupProgressUpdated(string backupName, double progress)
         {
-            // Assurez-vous que l'opération se déroule sur le thread de l'UI
             Dispatcher.Invoke(() =>
             {
-                // Mettre à jour l'interface utilisateur ici
-                UpdateGridWithBackupProgress();
+                string progressBarId = $"ProgressBar_{backupName}";
+                ProgressBar progressBar = BackupsGrid.Children
+                    .OfType<ProgressBar>()
+                    .FirstOrDefault(pb => pb.Name.Equals(progressBarId));
+
+                if (progressBar != null)
+                {
+                    progressBar.Value = progress;
+                }
+                else
+                {
+                    GenerateGrid();
+                }
             });
         }
-        public void UpdateGridWithBackupProgress()
+        public void GenerateGrid()
         {
             // Clear existing rows and content
             BackupsGrid.RowDefinitions.Clear();
@@ -51,55 +64,112 @@ namespace ProjetDevSysGraphical
             {
                 BackupsGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
-                // Nom de la sauvegarde
-                var nameLabel = new TextBlock { Text = $"Nom de la backup : {backup.Key}" };
+                //Add highlighters
+                if (row <= ProjetDevSys.AppConstants.backupProgress.Count())
+                {
+                    Border border = new Border
+                    {
+                        Name = $"BorderBackup{row}",
+                        Height = 50,
+                        Background = (SolidColorBrush)Application.Current.Resources["Brush2"],
+                        Margin = new Thickness(0, 5, 0, 5),
+                        VerticalAlignment = VerticalAlignment.Bottom,
+                        CornerRadius = new CornerRadius(10),
+                    };
+
+                    BackupsGrid.Children.Add(border);
+                    Grid.SetColumn(border, 0);
+                    Grid.SetRow(border, row);
+                    Grid.SetColumnSpan(border, 8);
+                };
+
+                var commonMargin = new Thickness(5, 10, 5, 5);
+
+                var nameLabel = new TextBlock { 
+                    Text = backup.Key,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(5, 10, 20, 5),
+                    FontSize = (double)Application.Current.Resources["FontSizeGrid"],
+                    FontFamily = (FontFamily)Application.Current.Resources["FontGrid"],
+                    Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
+                    FontWeight = FontWeights.Bold,
+                };
                 Grid.SetRow(nameLabel, row);
                 Grid.SetColumn(nameLabel, 0);
                 BackupsGrid.Children.Add(nameLabel);
 
-                // Barre de progression
+
                 var progressBar = new ProgressBar
                 {
+                    Name = $"ProgressBar_{backup.Key}",
                     Value = backup.Value,
                     Maximum = 100,
                     Minimum = 0,
-                    Width = 200
+                    Width = 200,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = commonMargin,
                 };
                 Grid.SetRow(progressBar, row);
                 Grid.SetColumn(progressBar, 1);
                 BackupsGrid.Children.Add(progressBar);
 
-                // Bouton de pause
-                var pauseButton = new Button
+                Button toggleButton = new Button
                 {
-                    Content = "Pause",
-                    Tag = backup.Key // Utilisez le Tag pour stocker le nom de la sauvegarde
+                    Tag = backup.Key,
+                    Width = 30,
+                    Height = 30,
+                    Margin = commonMargin,
+                    Content = new TextBlock
+                    {
+                        Text = "▶",
+                        Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Top,
+                    },
                 };
-                pauseButton.Click += PauseButton_Click; // Abonnez-vous à l'événement Click
-                Grid.SetRow(pauseButton, row);
-                Grid.SetColumn(pauseButton, 2);
-                BackupsGrid.Children.Add(pauseButton);
 
-                // Bouton de reprise
-                var repriseButton = new Button
-                {
-                    Content = "Reprise",
-                    Tag = backup.Key // Utilisez le Tag pour stocker le nom de la sauvegarde
-                };
-                repriseButton.Click += RepriseButton_Click; // Abonnez-vous à l'événement Click
-                Grid.SetRow(repriseButton, row);
-                Grid.SetColumn(repriseButton, 3);
-                BackupsGrid.Children.Add(repriseButton);
+                toggleButton.Style = AppConstants.GridButtonStyle();
+                bool isPaused = false; //initial state (logic-wise)
 
-                // Bouton Stop
-                var stopButton = new Button
+                toggleButton.Click += (sender, e) =>
                 {
-                    Content = "Stop",
-                    Tag = backup.Key // Utilisez le Tag pour stocker le nom de la sauvegarde
+                    if (isPaused)
+                    {
+                        toggleButton.Content = "⏸";
+                        RepriseButton_Click(sender, e); 
+                    }
+                    else
+                    {
+                        toggleButton.Content = "▶";
+                        PauseButton_Click(sender, e);
+                    }
+                    isPaused = !isPaused;
                 };
-                stopButton.Click += StopButton_Click; // Abonnez-vous à l'événement Click
+
+                Grid.SetRow(toggleButton, row);
+                Grid.SetColumn(toggleButton, 2); 
+                BackupsGrid.Children.Add(toggleButton);
+
+                Button stopButton = new Button
+                {
+                    Tag = backup.Key,
+                    Width = 30,
+                    Height = 30,
+                    Margin = commonMargin,
+                    Content = new TextBlock
+                    {
+                        Text = "■",
+                        Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Top,
+                    },
+                };
+                stopButton.Style = AppConstants.GridButtonStyle();
+                stopButton.Click += StopButton_Click; 
                 Grid.SetRow(stopButton, row);
-                Grid.SetColumn(stopButton, 4); // Assurez-vous que c'est la bonne colonne
+                Grid.SetColumn(stopButton, 4);
                 BackupsGrid.Children.Add(stopButton);
 
                 row++;
@@ -125,8 +195,20 @@ namespace ProjetDevSysGraphical
             if (button == null) return;
 
             var backupName = button.Tag.ToString();
-            ProjetDevSys.AppConstants.StopBackup(backupName); // Implémentez cette méthode pour arrêter la sauvegarde
+            ProjetDevSys.AppConstants.StopBackup(backupName);
         }
 
+    }
+    class ProgressBarDash : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return new Thickness(0, 0, -(double)value, 0);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
