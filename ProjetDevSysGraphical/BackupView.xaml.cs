@@ -34,16 +34,14 @@ namespace ProjetDevSysGraphical
         public BackupView()
         {
             InitializeComponent();
-            GenerateGrid();
+            GenerateGrid(); 
+            grid.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
+            selectedTasksButton.Content += $" : 0"; //prepare the button with empty value
         }
 
         public void GenerateGrid()
         {
-
-
-            selectedTasksButton.Content += $" : {idToLaunch.Count}"; //prepare the button with value
             grid.Children.Clear();
-            grid.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
             BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
             var backups = backupGridViewModel.GetAllBackupsModel();
 
