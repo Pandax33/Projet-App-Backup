@@ -25,7 +25,7 @@ namespace ProjetDevSysGraphical
         private static List<FontFamily> ThemeFont;
 
 
-
+        
         private static void themeSelector()
         {
             Color BG;
@@ -91,6 +91,18 @@ namespace ProjetDevSysGraphical
                     B3 = (Color)ColorConverter.ConvertFromString("#252627"); // Eerie Black
                     B4 = (Color)ColorConverter.ConvertFromString("#FFF9FB"); // Snow
                     B5 = (Color)ColorConverter.ConvertFromString("#353839");
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
+                    FontBase = new FontFamily("Roboto");
+                    break;
+                case "Damien":
+                    BG = (Color)ColorConverter.ConvertFromString("#3d6ca6"); // blue
+                    B1 = (Color)ColorConverter.ConvertFromString("#0d161f"); // dark
+                    B2 = (Color)ColorConverter.ConvertFromString("#2E517B"); // deep blue
+                    B3 = (Color)ColorConverter.ConvertFromString("#F0E6A8"); // cream
+                    B4 = (Color)ColorConverter.ConvertFromString("#e9c557"); // golden
+                    B5 = (Color)ColorConverter.ConvertFromString("#e9c557"); //golden
                     FontTittle = new FontFamily("Roboto");
                     FontButton = new FontFamily("Roboto");
                     FontGrid = new FontFamily("Roboto");
