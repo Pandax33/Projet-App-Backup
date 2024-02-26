@@ -78,7 +78,7 @@ namespace ProjetDevSys.Model
             KeyCrypt = generateKey();
             BlockerProcess = new List<string> { };
             ExtensionListPriority = new List<string> { };
-            FileSize = -1;
+            FileSize = 1000000000;
             FileSizeUnit = "Octet";
             Theme = "Default";
         }
