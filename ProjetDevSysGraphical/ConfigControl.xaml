@@ -708,6 +708,7 @@
                                     <ComboBoxItem>Legacy</ComboBoxItem>
                                     <ComboBoxItem>Moche</ComboBoxItem>
                                     <ComboBoxItem>Portugal</ComboBoxItem>
+                                    <ComboBoxItem>Raimon</ComboBoxItem>
                                 </ComboBox>
                             </Grid>
                         </Border>
