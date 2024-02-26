@@ -207,6 +207,11 @@ namespace ProjetDevSysGraphical
                 configViewModel.EditTheme(themeSelector.Text);
                 needRestart = true;
             }
+            //fileSize
+            if (fileSize.Text != null)
+            {
+                configViewModel.EditFileSize(int.Parse(fileSize.Text), fileSizeUnit.Text);
+            }
             //priority
             if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
             //refresh content
@@ -256,6 +261,10 @@ namespace ProjetDevSysGraphical
             {
                 foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListPriority) PriorityExtensions.Add(extensions);
             }
+            // FileSize
+            int fileSize = ProjetDevSys.AppConstants.FileSize;
+            languageSelector.SelectedItem = Language;
+            languageSelector.Text = language;
             priorityExtensionsUpdate();
         }
         public static string GetLangageCulture(string langage)

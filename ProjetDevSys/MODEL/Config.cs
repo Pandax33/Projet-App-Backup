@@ -27,6 +27,7 @@ namespace ProjetDevSys.Model
         public static string Theme {  get; set; }
         public static List<string> BlockerProcess { get; set; }
         public static List<string> ExtensionListPriority { get; set; }
+        public static int FileSize { get; set; }
 
         static Config()
         {
@@ -44,6 +45,11 @@ namespace ProjetDevSys.Model
             return CultureInfo.CurrentUICulture.Name.StartsWith("fr") ? "fr-FR" : "en-US";
         }
 
+        private static int GetFileSize()
+        {
+            return 0;
+        }
+
         public static void Initialize()
         {
             JsonPath = AppConstants.LogFilePath;
@@ -56,6 +62,7 @@ namespace ProjetDevSys.Model
             KeyCrypt = AppConstants.KeyCrypt;
             Theme = AppConstants.Theme;
             ExtensionListPriority = AppConstants.ExtensionListPriority;
+            FileSize = AppConstants.FileSize;
         }
         public static void InitializeDefault()
         {
@@ -73,6 +80,7 @@ namespace ProjetDevSys.Model
             KeyCrypt = generateKey();
             BlockerProcess = new List<string> { };
             ExtensionListPriority = new List<string> { };
+            FileSize = -1;
             Theme = "Default";
         }
 
@@ -92,6 +100,7 @@ namespace ProjetDevSys.Model
                 KeyCrypt = new { KeyCrypt },
                 BlockerProcess = new { BlockerProcess },
                 ExtensionListPriority = new { ExtensionListPriority },
+                FileSize = -1,
                 WPF = new { Theme }
 
             };
@@ -149,6 +158,7 @@ namespace ProjetDevSys.Model
                 KeyCrypt = new { KeyCrypt },
                 BlockerProcess = new { BlockerProcess },
                 ExtensionListPriority = new { ExtensionListPriority },
+                FileSize = new { FileSize },
                 WPF = new { Theme }
             };
 
