@@ -352,7 +352,6 @@ namespace ProjetDevSysGraphical
         }
 
         #region ButtonClicks
-
         public void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
             // Add a new task
@@ -464,6 +463,7 @@ namespace ProjetDevSysGraphical
             selectedTasksButton.Content = ResourceHelper.GetString("Task.LaunchSelect") + $" : {idToLaunch.Count}";
 
         }
+        #endregion
 
         private void RowSelector(int rowIndex, bool shiftDown=false)
         {
@@ -529,4 +529,3 @@ namespace ProjetDevSysGraphical
         }
     }
 }
-#endregion
