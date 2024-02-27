@@ -53,7 +53,7 @@ namespace ProjetDevSys.MODEL
 
             if (SizeRemaining != 0)
             {
-                Progress = Progress + (CurrentFileSize * 100) / TotalSize;
+                Progress = 100 - (SizeRemaining * 100) / TotalSize;
             }
             else
             {
@@ -152,6 +152,91 @@ namespace ProjetDevSys.MODEL
                 }
 
                 SizeRemaining = TotalSize;
+            }
+            if (TotalSize == 0)
+            {
+                Progress = 100;
+            }
+        }
+
+        public void CalculateFolderSizeAndFileCountDifferential(string sourcePath, string destinationPath)
+        {
+            TotalFiles = 0;
+            TotalSize = 0;
+            Progress = 0;
+
+            if (!Directory.Exists(sourcePath) || !Directory.Exists(destinationPath))
+            {
+                throw new IOException("One or both of the paths do not exist.");
+            }
+
+            DirectoryInfo sourceDirInfo = new DirectoryInfo(sourcePath);
+            DirectoryInfo destDirInfo = new DirectoryInfo(destinationPath);
+
+            CalculateDifferential(sourceDirInfo, destDirInfo);
+
+            void CalculateDifferential(DirectoryInfo sourceDir, DirectoryInfo destDir)
+            {
+                FileInfo[] sourceFiles = sourceDir.GetFiles();
+                FileInfo[] destFiles = destDir.GetFiles();
+
+                Dictionary<string, FileInfo> destFilesDict = destFiles.ToDictionary(f => f.Name);
+
+                foreach (FileInfo sourceFile in sourceFiles)
+                {
+                    if (destFilesDict.TryGetValue(sourceFile.Name, out FileInfo destFile))
+                    {
+                        if (sourceFile.LastWriteTime != destFile.LastWriteTime)
+                        {
+                            TotalFiles++;
+                            TotalSize += sourceFile.Length;
+                        }
+                    }
+                    else
+                    {
+                        TotalFiles++;
+                        TotalSize += sourceFile.Length;
+                    }
+                }
+
+                DirectoryInfo[] sourceSubDirs = sourceDir.GetDirectories();
+                foreach (DirectoryInfo subdir in sourceSubDirs)
+                {
+                    // Find the matching subdirectory in the destination
+                    DirectoryInfo destSubDir = destDir.GetDirectories(subdir.Name).FirstOrDefault();
+                    if (destSubDir != null)
+                    {
+                        CalculateDifferential(subdir, destSubDir);
+                    }
+                    else
+                    {
+                        CalculateFolder(subdir);
+                    }
+                }
+            }
+            void CalculateFolder(DirectoryInfo directory)
+            {
+                try
+                {
+                    foreach (FileInfo file in directory.GetFiles())
+                    {
+                        TotalFiles++;
+                        TotalSize += file.Length;
+                    }
+                    foreach (DirectoryInfo dir in directory.GetDirectories())
+                    {
+                        CalculateFolder(dir);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine($"Cannot access {directory.FullName}: {ex.Message}");
+                }
+            }
+
+            if (TotalSize == 0)
+            {
+                Progress = 100;
             }
         }
     } 

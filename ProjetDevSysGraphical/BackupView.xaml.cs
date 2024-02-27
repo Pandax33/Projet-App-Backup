@@ -352,7 +352,6 @@ namespace ProjetDevSysGraphical
         }
 
         #region ButtonClicks
-
         public void addTaskButton_Click(object sender, RoutedEventArgs e)
         {
             // Add a new task
@@ -419,17 +418,25 @@ namespace ProjetDevSysGraphical
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
-            if (clickedButton != null)
+            // Extract the index from the button's name
+            string buttonName = clickedButton.Name;
+            buttonName = buttonName.Split('_')[0];
+
+            BackupGridViewModel backupGridViewModel = new BackupGridViewModel();
+            var backups = backupGridViewModel.GetAllBackupsModel();
+            foreach (var backup in backups)
             {
-                // Extract the index from the button's name
-                string buttonName = clickedButton.Name;
-                buttonName = buttonName.Split('_')[0];
+                if (backup.Name == buttonName)
+                {
+                    if (clickedButton != null)
+                    {
+                        int index = int.Parse(clickedButton.Name.Split('_')[1]);
 
-                int index = int.Parse(clickedButton.Name.Split('_')[1]);
-
-                // Call EditTask view
-                EditTask editTask = new EditTask(index, buttonName, null, null, null);
-                editTask.ShowDialog();
+                        // Call EditTask view
+                        EditTask editTask = new EditTask(index, buttonName, backup.Source, backup.Destination, backup.Type);
+                        editTask.ShowDialog();
+                    }
+                }
             }
         }
 
@@ -464,6 +471,7 @@ namespace ProjetDevSysGraphical
             selectedTasksButton.Content = ResourceHelper.GetString("Task.LaunchSelect") + $" : {idToLaunch.Count}";
 
         }
+        #endregion
 
         private void RowSelector(int rowIndex, bool shiftDown=false)
         {
@@ -529,4 +537,3 @@ namespace ProjetDevSysGraphical
         }
     }
 }
-#endregion

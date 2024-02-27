@@ -9,7 +9,7 @@ namespace ProjetDevSys.MODEL
 {
     public static class FileUtility
     {
-        public static void CopierFichier(string sourceFilePath, string destinationDir, LogRealTime LogRealTime, string name)
+        public static void CopierFichier(string sourceFilePath, string destinationDir, LogRealTime LogRealTime, string name, string TimeCrypt = "0")
         {
             string fileName = Path.GetFileName(sourceFilePath);
             string destinationFilePath = Path.Combine(destinationDir, fileName);
@@ -23,7 +23,7 @@ namespace ProjetDevSys.MODEL
             try
             {
                 File.Copy(sourceFilePath, destinationFilePath, true);
-                MiseAJourLogEtProgression(LogRealTime, sourceFilePath, destinationFilePath, fileSize, name, "0");
+                MiseAJourLogEtProgression(LogRealTime, sourceFilePath, destinationFilePath, fileSize, name, TimeCrypt);
             }
             finally
             {
@@ -36,7 +36,10 @@ namespace ProjetDevSys.MODEL
 
         public static void TraiterEtCopierFichierCrypte(string sourceFilePath, string destinationDir, LogRealTime LogRealTime, string name)
         {
-            string fichierPathCrypto = sourceFilePath + ".crypto";
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(sourceFilePath);
+
+            string extension = Path.GetExtension(sourceFilePath);
+            string fichierPathCrypto = $"{Path.GetDirectoryName(sourceFilePath)}{Path.DirectorySeparatorChar}{fileNameWithoutExtension}_crypto{extension}";
             string arguments = $" {sourceFilePath} {fichierPathCrypto} {AppConstants.KeyCrypt}";
 
             AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
@@ -62,11 +65,11 @@ namespace ProjetDevSys.MODEL
                 process.WaitForExit();
 
                 // Lit la sortie standard pour obtenir le temps de cryptage
-                string timeCrypt = process.StandardOutput.ReadToEnd();
+                string timeCrypt = process.StandardOutput.ReadLine();
 
                 if (process.ExitCode == 0)
                 {
-                    CopierFichier(fichierPathCrypto, destinationDir, LogRealTime, name);
+                    CopierFichier(fichierPathCrypto, destinationDir, LogRealTime, name, timeCrypt);
 
                     File.Delete(fichierPathCrypto);
 
