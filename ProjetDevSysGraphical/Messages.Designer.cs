@@ -295,6 +295,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à App theme.
+        /// </summary>
+        internal static string Config_Themes1 {
+            get {
+                return ResourceManager.GetString("Config.Themes1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Theme:.
+        /// </summary>
+        internal static string Config_Themes2 {
+            get {
+                return ResourceManager.GetString("Config.Themes2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Welcome !.
         /// </summary>
         internal static string Home1 {

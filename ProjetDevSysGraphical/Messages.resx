@@ -195,6 +195,12 @@
   <data name="Config.Tab5" xml:space="preserve">
     <value>Save Paths</value>
   </data>
+  <data name="Config.Themes1" xml:space="preserve">
+    <value>App theme</value>
+  </data>
+  <data name="Config.Themes2" xml:space="preserve">
+    <value>Theme:</value>
+  </data>
   <data name="Home1" xml:space="preserve">
     <value>Welcome !</value>
   </data>
