@@ -11,7 +11,7 @@ namespace ProjetDevSys.MODEL
     public class ProcessWatcher
     {
         private Thread watcherThread;
-        private bool isWatching;
+        public bool isWatching;
         public bool blockerProcessFound;
 
         public ProcessWatcher()
@@ -33,7 +33,7 @@ namespace ProjetDevSys.MODEL
             isWatching = false;
         }
 
-        private void WatchProcess()
+        public void WatchProcess()
         {
             while (isWatching)
             {

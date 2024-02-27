@@ -12,7 +12,7 @@ namespace ProjetDevSysGraphical
     public partial class App : Application
     {
 
-        ProcessWatcher processWatcher = new ProcessWatcher();
+        public ProcessWatcher processWatcher = new ProcessWatcher();
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

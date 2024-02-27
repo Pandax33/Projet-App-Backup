@@ -331,7 +331,7 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à A Blocker process is in use (no saves made).
+        ///   Recherche une chaîne localisée semblable à A Blocker process is in use (your backups will be done when the process is closed).
         /// </summary>
         internal static string RunTaskView4 {
             get {
