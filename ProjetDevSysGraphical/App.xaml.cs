@@ -146,6 +146,18 @@ namespace ProjetDevSysGraphical
                     FontGrid = new FontFamily("Roboto");
                     FontBase = new FontFamily("Roboto");
                     break;
+                    case "Dark":
+                    BG = (Color)ColorConverter.ConvertFromString("#000000"); // black
+                    B1 = (Color)ColorConverter.ConvertFromString("#1C1C1C"); // dark
+                    B2 = (Color)ColorConverter.ConvertFromString("#2E2E2E"); // deep dark
+                    B3 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); // white
+                    B4 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); // white
+                    B5 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); //white
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
+                    FontBase = new FontFamily("Roboto");
+                    break;
             }
 
             SolidColorBrush brushBG = new SolidColorBrush(BG);
