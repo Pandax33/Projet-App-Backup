@@ -124,6 +124,33 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Size of heavy files.
+        /// </summary>
+        internal static string Config_FileSize0 {
+            get {
+                return ResourceManager.GetString("Config.FileSize0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Size:.
+        /// </summary>
+        internal static string Config_FileSize1 {
+            get {
+                return ResourceManager.GetString("Config.FileSize1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unit:.
+        /// </summary>
+        internal static string Config_FileSize2 {
+            get {
+                return ResourceManager.GetString("Config.FileSize2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Change localization.
         /// </summary>
         internal static string Config_Languages1 {
@@ -273,6 +300,42 @@ namespace ProjetDevSysGraphical {
         internal static string Home1 {
             get {
                 return ResourceManager.GetString("Home1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to reset all settings ?.
+        /// </summary>
+        internal static string ResetConfig {
+            get {
+                return ResourceManager.GetString("ResetConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save done.
+        /// </summary>
+        internal static string RunTaskView11 {
+            get {
+                return ResourceManager.GetString("RunTaskView11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à saves done.
+        /// </summary>
+        internal static string RunTaskView12 {
+            get {
+                return ResourceManager.GetString("RunTaskView12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à All the saves are done.
+        /// </summary>
+        internal static string RunTaskView6 {
+            get {
+                return ResourceManager.GetString("RunTaskView6", resourceCulture);
             }
         }
         

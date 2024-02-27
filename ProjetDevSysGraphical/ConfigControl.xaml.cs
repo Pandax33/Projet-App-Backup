@@ -63,7 +63,7 @@ namespace ProjetDevSysGraphical
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset all settings ?", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show($"{ResourceHelper.GetString("ResetConfig")}", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 ProjetDevSys.VueModel.ConfigViewModel config = new ConfigViewModel();
@@ -207,6 +207,11 @@ namespace ProjetDevSysGraphical
                 configViewModel.EditTheme(themeSelector.Text);
                 needRestart = true;
             }
+            //fileSize
+            if (fileSizeSelector.Text != null)
+            {
+                configViewModel.EditFileSize(long.Parse(fileSizeSelector.Text), fileSizeUnitSelector.Text);
+            }
             //priority
             if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
             //refresh content
@@ -247,6 +252,7 @@ namespace ProjetDevSysGraphical
             {
                 foreach (string processes in ProjetDevSys.AppConstants.BlockerProcess) blockerProcesses.Add(processes);
             }
+            blockerUpdate();
 
             //theme
             themeSelector.Text = ProjetDevSys.AppConstants.Theme;
@@ -257,6 +263,12 @@ namespace ProjetDevSysGraphical
                 foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListPriority) PriorityExtensions.Add(extensions);
             }
             priorityExtensionsUpdate();
+            // FileSize
+            long fileSize = ProjetDevSys.AppConstants.FileSize;
+            string fileSizeUnit = ProjetDevSys.AppConstants.FileSizeUnit;
+            fileSizeUnitSelector.SelectedItem = "Octet";
+            fileSizeUnitSelector.Text = "Octet";
+            fileSizeSelector.Text = fileSize.ToString();
         }
         public static string GetLangageCulture(string langage)
         {

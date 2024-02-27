@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,7 +48,7 @@ namespace ProjetDevSysGraphical
                     MessageBox.Show(gestionTask.CreateTask(name, source, target, type), ResourceHelper.GetString("Task.Popup.Out"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     MainWindow mainWindow = Application.Current.MainWindow as MainWindow;                        
-                    // Appeler GenerateGrid sur cette instance
+                    //update grid
                     if (mainWindow != null && mainWindow.contentControl.Content is BackupView backup) backup.GenerateGrid();
                     Close();
                 }
@@ -88,6 +89,22 @@ namespace ProjetDevSysGraphical
             if (typeRadioButtonComplete.IsChecked == true) return "A";
             else if (typeRadioButtonDifferential.IsChecked == true) return "B";
             return null;
+        }
+
+
+        private void nameEntry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var name = sender as TextBox;
+            if (name == null) return;
+
+            int cursorPosition = name.SelectionStart; //Register cursor position to restore it
+
+            string nospace = name.Text.Replace(" ", "_");
+            string cleanText = Regex.Replace(nospace, "[^a-zA-Z0-9-_]", "");
+
+            name.Text = cleanText;
+
+            name.SelectionStart = Math.Min(cursorPosition, name.Text.Length);
         }
     }
 }

@@ -151,13 +151,13 @@
     <value>Entrez le chemin du fichier Json, la langue, le chemin du fichier Json en temps réel, et le chemin du fichier Json sauvegardé séparés par des virgules:"</value>
   </data>
   <data name="ConfigViewText10" xml:space="preserve">
-    <value>1. Fichier de logs journaliers</value>
+    <value>1. Logs journaliers</value>
   </data>
   <data name="ConfigViewText11" xml:space="preserve">
     <value>2. Langue</value>
   </data>
   <data name="ConfigViewText12" xml:space="preserve">
-    <value>3. Fichier de logs en temps réel</value>
+    <value>3. Logs en temps réel</value>
   </data>
   <data name="ConfigViewText13" xml:space="preserve">
     <value>4. Fichier de sauvegarde des backups</value>

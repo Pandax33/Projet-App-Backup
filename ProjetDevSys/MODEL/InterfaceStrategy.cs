@@ -14,6 +14,7 @@ namespace ProjetDevSys.Model
     interface IBackupStrategy
     {
         void Save(Backup backupContexte, LogRealTime LogRealTime);
+        void SavePrio(Backup backupContexte, LogRealTime LogRealTime);
     }
 
     class SaveCompleteStrategy : IBackupStrategy
@@ -24,7 +25,6 @@ namespace ProjetDevSys.Model
             // Check if the source directory exists
             if (File.Exists(backup.Source) || Directory.Exists(backup.Source))
             {
-                // Be sure that the destination directory exists
                 if (!Directory.Exists(backup.Destination))
                 {
                     Directory.CreateDirectory(backup.Destination);
@@ -39,124 +39,127 @@ namespace ProjetDevSys.Model
 
         }
 
+        public void SavePrio(Backup backup, LogRealTime LogRealTime)
+        {
+            // Check if the source directory exists
+            if (File.Exists(backup.Source) || Directory.Exists(backup.Source))
+            {
+                if (!Directory.Exists(backup.Destination))
+                {
+                    Directory.CreateDirectory(backup.Destination);
+                }
+                // Copy folder and under folders
+                CopierDossierPrio(backup.Source, backup.Destination, LogRealTime, backup.Name);
+            }
+            else
+            {
+                throw new DirectoryNotFoundException(ResourceHelper.GetString("InterfaceStrategy1"));
+            }
+
+        }
+
         private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime, string name)
         {
-            if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
-
-            //file case
-            if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
+            if (!Directory.Exists(sourceDir) && File.Exists(sourceDir)) // Cas copie fichier unique
             {
-
-                string fileName = Path.GetFileName(sourceDir);
-                string destinationFilePath = Path.Combine(destinationDir, fileName);
                 FileInfo fileInfo = new FileInfo(sourceDir);
-                long fileSize = fileInfo.Length;
+                if (!AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower())) // Exclut les extensions prioritaires
+                {
+                    FileUtility.CopierFichier(sourceDir, destinationDir, LogRealTime, name);
+                }
+            }
+            else // Cas copie dossier
+            {
+                foreach (string fichierPath in Directory.GetFiles(sourceDir))
+                {
+                    FileInfo fileInfo = new FileInfo(fichierPath);
+                    AppConstants.BackupPauseHandles[name].WaitOne();
+                    AppConstants.processEvent.WaitOne();
+                    AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                    if (!AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower())) // Exclut les extensions prioritaires
+                    {
+                        if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
+                        {
+                            FileUtility.TraiterEtCopierFichierCrypte(fichierPath, destinationDir, LogRealTime, name);
+                        }
+                        else
+                        {
+                            FileUtility.CopierFichier(fichierPath, destinationDir, LogRealTime, name);
+                        }
+                    }
+                }
 
+                foreach (string dossierPath in Directory.GetDirectories(sourceDir))
+                {
+                    string destinationFolderPath = Path.Combine(destinationDir, Path.GetFileName(dossierPath));
+                    Directory.CreateDirectory(destinationFolderPath);
+                    CopierDossier(dossierPath, destinationFolderPath, LogRealTime, name);
+                }
+            }
+        }
+
+        private void CopierDossierPrio(string sourceDir, string destinationDir, LogRealTime LogRealTime, string name)
+        {
+            if (!Directory.Exists(sourceDir) && File.Exists(sourceDir))
+            {
+                AppConstants.BackupPauseHandles[name].WaitOne();
+                AppConstants.processEvent.WaitOne();
                 AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
                 if (cts.Token.IsCancellationRequested)
                 {
                     return;
                 }
-                AppConstants.BackupPauseHandles[name].WaitOne();
-                File.Copy(sourceDir, destinationFilePath, true);
-                LogRealTime.Timestamp = DateTime.Now;
-                LogRealTime.CurrentSourcePath = sourceDir;
-                LogRealTime.CurrentTargetPath = destinationFilePath;
-                LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
 
-                Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
-
-                LogRealTime.CreateLog();
+                // Vérifie si le fichier unique doit être copié en fonction de son extension.
+                CopierFichierSiPrioritaire(sourceDir, destinationDir, LogRealTime, name);
             }
-
             else
             {
-                // Copy every file from the source directory to the destination directory
                 foreach (string fichierPath in Directory.GetFiles(sourceDir))
                 {
-                    string fileName = Path.GetFileName(fichierPath);
-                    string destinationFilePath = Path.Combine(destinationDir, fileName);
-                    FileInfo fileInfo = new FileInfo(fichierPath);
-                    long fileSize = fileInfo.Length;
-
-                    if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
+                    AppConstants.BackupPauseHandles[name].WaitOne();
+                    AppConstants.processEvent.WaitOne();
+                    AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                    if (cts.Token.IsCancellationRequested)
                     {
-                        string executablePath = AppConstants.CryptPath;
-                        string fichierPathCrypto = fichierPath + ".crypto";
-                        string arguments = $" {fichierPath} {fichierPathCrypto} {AppConstants.KeyCrypt}";
-
-                        ProcessStartInfo startInfo = new ProcessStartInfo(executablePath, arguments)
-                        {
-                            RedirectStandardOutput = true,
-                        };
-                        AppConstants.BackupPauseHandles[name].WaitOne();
-                        AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
-                        if (cts.Token.IsCancellationRequested)
-                        {
-                            return;
-                        }
-                        using (Process process = new Process())
-                        {
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            // Read the output of the process
-                            string Timecrypt = process.StandardOutput.ReadToEnd();
-                            File.Copy(fichierPathCrypto, destinationFilePath, true);
-                            File.Delete(fichierPathCrypto);
-                            LogRealTime.Timestamp = DateTime.Now;
-                            LogRealTime.CurrentSourcePath = fichierPath;
-                            LogRealTime.CurrentTargetPath = destinationFilePath;
-                            LogRealTime.TimeCrypt = Timecrypt;
-                            LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                            AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
-
-                            Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
-                            LogRealTime.CreateLog();
-                        }
-
+                        return;
                     }
-                    else
-                    {
-                        AppConstants.BackupPauseHandles[name].WaitOne();
-                        AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
-                        if (cts.Token.IsCancellationRequested)
-                        {
-                            return;
-                        }
-                        File.Copy(fichierPath, destinationFilePath, true);
-                        LogRealTime.Timestamp = DateTime.Now;
-                        LogRealTime.CurrentSourcePath = fichierPath;
-                        LogRealTime.CurrentTargetPath = destinationFilePath;
-                        LogRealTime.TimeCrypt = "0";
-                        LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                        AppConstants.UpdateBackupProgress(name, LogRealTime.Progress);
 
-                        Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
-                        LogRealTime.CreateLog();
+                    FileInfo fileInfo = new FileInfo(fichierPath);
+                    if (AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower())) // Filtre par extension prioritaire
+                    {
+                        if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
+                        {
+                            FileUtility.TraiterEtCopierFichierCrypte(fichierPath, destinationDir, LogRealTime, name);
+                        }
+                        else
+                        {
+                            FileUtility.CopierFichier(fichierPath, destinationDir, LogRealTime, name);
+                        }
                     }
                 }
 
-                // Copy all subdirectories recursively
                 foreach (string dossierPath in Directory.GetDirectories(sourceDir))
                 {
-                    string folderName = Path.GetFileName(dossierPath);
-                    string destinationFolderPath = Path.Combine(destinationDir, folderName);
-                    if (!Directory.Exists(destinationFolderPath))
-                    {
-                        Directory.CreateDirectory(destinationFolderPath);
-                    }
-                    CopierDossier(dossierPath, destinationFolderPath, LogRealTime,name);
+                    string destinationFolderPath = Path.Combine(destinationDir, Path.GetFileName(dossierPath));
+                    Directory.CreateDirectory(destinationFolderPath);
+                    CopierDossierPrio(dossierPath, destinationFolderPath, LogRealTime, name);
                 }
             }
-            return;
+        }
+
+        private void CopierFichierSiPrioritaire(string sourceFilePath, string destinationDir, LogRealTime LogRealTime, string name)
+        {
+            FileInfo fileInfo = new FileInfo(sourceFilePath);
+            if (AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower()))
+            {
+                FileUtility.CopierFichier(sourceFilePath, destinationDir, LogRealTime, name);
+            }
         }
     }
 
     class SaveDiffStrategy : IBackupStrategy
     {
-       
         public void Save(Backup backup, LogRealTime LogRealTime)
         {
             if (File.Exists(backup.Source) || Directory.Exists(backup.Source))
@@ -166,125 +169,127 @@ namespace ProjetDevSys.Model
                     Directory.CreateDirectory(backup.Destination);
                 }
 
-                // Call the recursive method to copy the files
-                CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime,backup.Name);
+                CopierDossierDifferenciel(backup.Source, backup.Destination, LogRealTime, backup.Name);
             }
             else
             {
-                throw new DirectoryNotFoundException(ResourceHelper.GetString("InterfaceStrategy1"));
+                throw new DirectoryNotFoundException($"La source spécifiée n'existe pas : {backup.Source}");
             }
-
         }
 
-        private void CopierDossierDifferenciel(string sourceDir, string destinationDir,LogRealTime LogRealTime,string name)
+        public void SavePrio(Backup backup, LogRealTime LogRealTime)
         {
-            if (AppConstants.RunningBlockerProcess()) new Exception(ResourceHelper.GetString("InterfaceStrategy2"));
-
-            //file case
-            if (!(Directory.Exists(sourceDir)) && File.Exists(sourceDir))
+            if (File.Exists(backup.Source) || Directory.Exists(backup.Source))
             {
+                if (!Directory.Exists(backup.Destination))
+                {
+                    Directory.CreateDirectory(backup.Destination);
+                }
 
-                string fileName = Path.GetFileName(sourceDir);
-                string destinationFilePath = Path.Combine(destinationDir, fileName);
-                FileInfo fileInfo = new FileInfo(sourceDir);
-                long fileSize = fileInfo.Length;
-
-                File.Copy(sourceDir, destinationFilePath, true);
-                LogRealTime.Timestamp = DateTime.Now;
-                LogRealTime.CurrentSourcePath = sourceDir;
-                LogRealTime.CurrentTargetPath = destinationFilePath;
-                LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                AppConstants.backupProgress[name] = LogRealTime.Progress;
-                Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
-                LogRealTime.CreateLog();
+                CopierDossierDifferencielPrio(backup.Source, backup.Destination, LogRealTime, backup.Name);
             }
             else
             {
-                // Copy every file from the source directory to the destination directory
+                throw new DirectoryNotFoundException($"La source spécifiée n'existe pas : {backup.Source}");
+            }
+        }
+
+        private void CopierDossierDifferenciel(string sourceDir, string destinationDir, LogRealTime LogRealTime, string name)
+        {
+            if (!Directory.Exists(sourceDir) && File.Exists(sourceDir))
+            {
+                CopierFichierSiNonPrioritaireEtNecessaire(sourceDir, destinationDir, LogRealTime, name);
+            }
+            else
+            {
                 foreach (string fichierSource in Directory.GetFiles(sourceDir))
                 {
-                    string fileName = Path.GetFileName(fichierSource);
-                    string fichierDestination = Path.Combine(destinationDir, fileName);
-                    FileInfo fileInfo = new FileInfo(fichierSource);
-                    long fileSize = fileInfo.Length;
-
-                    // Do the copy only if the file does not exist or if the source file is more recent than the destination file
-                    if (!File.Exists(fichierDestination) || File.GetLastWriteTime(fichierSource) > File.GetLastWriteTime(fichierDestination))
+                    AppConstants.BackupPauseHandles[name].WaitOne();
+                    AppConstants.processEvent.WaitOne();
+                    AppConstants.priorityEvent.WaitOne();
+                    AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                    if (cts.Token.IsCancellationRequested)
                     {
-                        if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
-                        {
-                            string executablePath = AppConstants.CryptPath;
-                            string fichierPathCrypto = fichierSource + ".crypto";
-                            string arguments = $" {fichierSource} {fichierPathCrypto} {AppConstants.KeyCrypt}";
-                            AppConstants.BackupPauseHandles[name].WaitOne();
-                            AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
-                            if (cts.Token.IsCancellationRequested)
-                            {
-                                return;
-                            }
-                            ProcessStartInfo startInfo = new ProcessStartInfo(executablePath, arguments)
-                            {
-                                RedirectStandardOutput = true,
-                            };
-
-                            using (Process process = new Process())
-                            {
-                                process.StartInfo = startInfo;
-                                process.Start();
-
-                                // Read the output of the process
-                                string Timecrypt = process.StandardOutput.ReadToEnd();
-                                File.Copy(fichierPathCrypto, fichierDestination, true);
-                                File.Delete(fichierPathCrypto);
-                                LogRealTime.Timestamp = DateTime.Now;
-                                LogRealTime.CurrentSourcePath = fichierSource;
-                                LogRealTime.CurrentTargetPath = fichierDestination;
-                                LogRealTime.TimeCrypt = Timecrypt;
-                                LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                                AppConstants.backupProgress[name] = LogRealTime.Progress;
-                                Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
-                                LogRealTime.CreateLog();
-                            }
-
-                        }
-                        else
-                        {
-                            AppConstants.BackupPauseHandles[name].WaitOne();
-                            AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
-                            if (cts.Token.IsCancellationRequested)
-                            {
-                                return;
-                            }
-                            File.Copy(fichierSource, fichierDestination, true);
-                            LogRealTime.Timestamp = DateTime.Now;
-                            LogRealTime.CurrentSourcePath = fichierSource;
-                            LogRealTime.CurrentTargetPath = fichierDestination;
-                            LogRealTime.TimeCrypt = "0";
-                            LogRealTime.UpdateCurrentFileAndSize(fileSize);
-                            AppConstants.backupProgress[name] = LogRealTime.Progress;
-                            Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
-                            LogRealTime.CreateLog();
-                        }
-                        
+                        return; // Si stop on ferme la fonction
                     }
+                    CopierFichierSiNonPrioritaireEtNecessaire(fichierSource, destinationDir, LogRealTime, name);
                 }
-               
-                // Recursively call the method for each subdirectory
+
                 foreach (string dossierSource in Directory.GetDirectories(sourceDir))
                 {
-                    string nomDossier = Path.GetFileName(dossierSource);
-                    string dossierDestination = Path.Combine(destinationDir, nomDossier);
-
+                    string dossierDestination = Path.Combine(destinationDir, Path.GetFileName(dossierSource));
                     if (!Directory.Exists(dossierDestination))
                     {
                         Directory.CreateDirectory(dossierDestination);
                     }
-
-                    CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime,name) ;
+                    CopierDossierDifferenciel(dossierSource, dossierDestination, LogRealTime, name);
                 }
             }
-            return;
         }
 
+        private void CopierFichierSiNonPrioritaireEtNecessaire(string sourceFilePath, string destinationDir, LogRealTime LogRealTime, string name)
+        {
+            FileInfo fileInfo = new FileInfo(sourceFilePath);
+            if (!AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower()) &&(!File.Exists(Path.Combine(destinationDir, fileInfo.Name)) ||fileInfo.LastWriteTimeUtc > new FileInfo(Path.Combine(destinationDir, fileInfo.Name)).LastWriteTimeUtc))
+            {
+                if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
+                {
+                    FileUtility.TraiterEtCopierFichierCrypte(sourceFilePath, destinationDir, LogRealTime, name);
+                }
+                else
+                {
+                    FileUtility.CopierFichier(sourceFilePath, destinationDir, LogRealTime, name);
+                }
+            }
+        }
+
+        private void CopierDossierDifferencielPrio(string sourceDir, string destinationDir, LogRealTime LogRealTime, string name)
+        {
+            // La logique de base reste similaire, mais avec un filtre supplémentaire sur les extensions prioritaires
+            if (!Directory.Exists(sourceDir) && File.Exists(sourceDir))
+            {
+                CopierFichierSiPrioritaireEtNecessaire(sourceDir, destinationDir, LogRealTime, name);
+            }
+            else
+            {
+                foreach (string fichierSource in Directory.GetFiles(sourceDir))
+                {
+                    AppConstants.BackupPauseHandles[name].WaitOne();
+                    AppConstants.processEvent.WaitOne();
+                    AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        return;
+                    }
+                    CopierFichierSiPrioritaireEtNecessaire(fichierSource, destinationDir, LogRealTime, name);
+                }
+
+                foreach (string dossierSource in Directory.GetDirectories(sourceDir))
+                {
+                    string dossierDestination = Path.Combine(destinationDir, Path.GetFileName(dossierSource));
+                    if (!Directory.Exists(dossierDestination))
+                    {
+                        Directory.CreateDirectory(dossierDestination);
+                    }
+                    CopierDossierDifferencielPrio(dossierSource, dossierDestination, LogRealTime, name);
+                }
+            }
+        }
+
+        private void CopierFichierSiPrioritaireEtNecessaire(string sourceFilePath, string destinationDir, LogRealTime LogRealTime, string name)
+        {
+            FileInfo fileInfo = new FileInfo(sourceFilePath);
+            if (AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower()) &&(!File.Exists(Path.Combine(destinationDir, fileInfo.Name)) ||fileInfo.LastWriteTimeUtc > new FileInfo(Path.Combine(destinationDir, fileInfo.Name)).LastWriteTimeUtc))
+            {
+                if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
+                {
+                    FileUtility.TraiterEtCopierFichierCrypte(sourceFilePath, destinationDir, LogRealTime, name);
+                }
+                else
+                {
+                    FileUtility.CopierFichier(sourceFilePath, destinationDir, LogRealTime, name);
+                }
+            }
+        }
     }
 }

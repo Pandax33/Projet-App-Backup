@@ -11,13 +11,17 @@ namespace ProjetDevSysGraphical
     /// </summary>
     public partial class App : Application
     {
+
+        ProcessWatcher processWatcher = new ProcessWatcher();
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
-            ProcessWatcher processWatcher = new ProcessWatcher();
             processWatcher.StartWatching();
             ThemeLoader.LoadTheme();
+        }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            processWatcher.StopWatching();
         }
     }
 
@@ -105,6 +109,18 @@ namespace ProjetDevSysGraphical
                     B3 = (Color)ColorConverter.ConvertFromString("#F0E6A8"); // cream
                     B4 = (Color)ColorConverter.ConvertFromString("#e9c557"); // golden
                     B5 = (Color)ColorConverter.ConvertFromString("#e9c557"); //golden
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
+                    FontBase = new FontFamily("Roboto");
+                    break;
+                case "Portugal":
+                    BG = (Color)ColorConverter.ConvertFromString("#046A38"); // green
+                    B1 = (Color)ColorConverter.ConvertFromString("#DA291C"); // red
+                    B2 = (Color)ColorConverter.ConvertFromString("#FFE900"); // yellow
+                    B3 = (Color)ColorConverter.ConvertFromString("#002D72"); // blue
+                    B4 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); // white
+                    B5 = (Color)ColorConverter.ConvertFromString("#000000"); //black
                     FontTittle = new FontFamily("Roboto");
                     FontButton = new FontFamily("Roboto");
                     FontGrid = new FontFamily("Roboto");

@@ -31,7 +31,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Content="{local:LangageExtension Key='Task.Prompt1'}" Grid.Row="0" Grid.Column="0" />
-        <TextBox x:Name="nameEntry" Grid.Row="0" Grid.Column="1" Margin="5"/>
+        <TextBox x:Name="nameEntry" Grid.Row="0" Grid.Column="1" Margin="5" TextChanged="nameEntry_TextChanged"/>
 
         <Label Content="{local:LangageExtension Key='Task.Prompt2'}" Grid.Row="1" Grid.Column="0"/>
         <TextBox x:Name="sourcePathEntry" Grid.Row="1" Grid.Column="1" Margin="5"/>

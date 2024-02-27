@@ -6,14 +6,73 @@
              xmlns:local="clr-namespace:ProjetDevSysGraphical"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="ProgressBar">
+            <Setter Property="Foreground" Value="{StaticResource Brush2}"/>
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <ControlTemplate.Resources>
+                            <local:ProgressBarDash x:Key="sttc"/>
+                        </ControlTemplate.Resources>
+                        <!-- Appliquez la transformation au Border pour affecter la forme globale de la ProgressBar -->
+                        <Border BorderBrush="{StaticResource Brush4}" BorderThickness="0" Background="{StaticResource Brush1}" CornerRadius="0" Padding="0" ClipToBounds="True" RenderTransformOrigin="0,0">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <SkewTransform AngleX="-35"/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                            <Grid x:Name="PART_Track">
+                                <!-- La transformation appliquée à PART_Indicator reste inchangée -->
+                                <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" Fill="{StaticResource Brush4}" RenderTransformOrigin="0,0">
+                                </Rectangle>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="{StaticResource FontSizeButton}"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontButton}"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource Brush2}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="330" Color="Gray"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid x:Name="BackupsGrid">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!-- Dynamiquement ajouté dans le code-behind -->
+        <!-- Dynamically managed in code-behind-->
     </Grid>
 </UserControl>
