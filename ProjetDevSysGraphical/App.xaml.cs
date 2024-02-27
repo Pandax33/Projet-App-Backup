@@ -1,4 +1,5 @@
 ﻿using ProjetDevSys.MODEL;
+using ProjetDevSysGraphical.VueModel;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -29,7 +30,8 @@ namespace ProjetDevSysGraphical
                 Application.Current.Shutdown();
                 return;
             }
-
+            SynchronizationContext context = SynchronizationContext.Current;
+            BackupManager.SetSynchronizationContext(context);
             base.OnStartup(e);
             processWatcher.StartWatching();
             ThemeLoader.LoadTheme();

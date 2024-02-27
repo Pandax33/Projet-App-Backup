@@ -25,7 +25,7 @@ namespace ProjetDevSys
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
         public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
         public static ConcurrentDictionary<string, CancellationTokenSource> BackupCancellations = new ConcurrentDictionary<string, CancellationTokenSource>();
-
+        public static ConcurrentDictionary<string, string> backupState = new ConcurrentDictionary<string, string>();
         public static List<string> BlockerProcess;
         public static readonly Mutex appMutex = new Mutex(true, "AppConstantsMutex");
         public static string Theme;
