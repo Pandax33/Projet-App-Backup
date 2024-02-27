@@ -12,6 +12,7 @@ namespace ProjetDevSys.MODEL
     {
         private Thread watcherThread;
         private bool isWatching;
+        public bool blockerProcessFound;
 
         public ProcessWatcher()
         {
@@ -36,7 +37,7 @@ namespace ProjetDevSys.MODEL
         {
             while (isWatching)
             {
-                bool blockerProcessFound = AppConstants.RunningBlockerProcess();
+                blockerProcessFound = AppConstants.RunningBlockerProcess();
 
                 if (blockerProcessFound)
                 {

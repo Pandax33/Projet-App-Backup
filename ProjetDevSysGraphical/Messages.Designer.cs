@@ -331,6 +331,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à A Blocker process is in use (no saves made).
+        /// </summary>
+        internal static string RunTaskView4 {
+            get {
+                return ResourceManager.GetString("RunTaskView4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Processus Error.
+        /// </summary>
+        internal static string RunTaskView5 {
+            get {
+                return ResourceManager.GetString("RunTaskView5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à All the saves are done.
         /// </summary>
         internal static string RunTaskView6 {
