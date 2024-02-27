@@ -36,10 +36,6 @@ namespace ProjetDevSysGraphical.VueModel
                     ProjetDevSys.AppConstants.BackupCancellations[backup.Name] = cts;
                 }
             }
-            foreach (var backupProgress in ProjetDevSys.AppConstants.backupProgress)
-            {
-                Debug.WriteLine($"Backup: {backupProgress.Key}, Progress: {backupProgress.Value}");
-            }
             ExecuteBackups(); 
         }
 
@@ -50,7 +46,7 @@ namespace ProjetDevSysGraphical.VueModel
                 if (!ProjetDevSys.AppConstants.backupState.ContainsKey(backupJob.Backup.Name))
                 {
                     ProjetDevSys.AppConstants.backupState.TryAdd(backupJob.Backup.Name, "In Progress");
-                    await ExecuteBackupAsync(backupJob);
+                    ExecuteBackupAsync(backupJob);
                 }
             }
 
@@ -76,6 +72,10 @@ namespace ProjetDevSysGraphical.VueModel
                     ProjetDevSys.AppConstants.BackupCancellations.TryRemove(backupJob.Backup.Name, out _);
                     ProjetDevSys.AppConstants.BackupPauseHandles.TryRemove(backupJob.Backup.Name, out _);
                     ProjetDevSys.AppConstants.backupProgress.TryRemove(backupJob.Backup.Name, out _);
+                    lock (backupQueue)
+                    {
+                        backupQueue.Remove(backupJob);
+                    }
                 }
                 catch (Exception ex)
                 {
