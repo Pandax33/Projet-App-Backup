@@ -29,7 +29,7 @@ namespace ClientProjetDevSysGraphical
         private List<int> idToLaunch = new List<int>();
         private Accueil Accueil;
         private bool isConnect = false;
-        private LangageExtension LangageExtension;
+        private LangageExtension LangageExtension = new LangageExtension();
 
         private Socket clientSocket;
 
@@ -153,10 +153,10 @@ namespace ClientProjetDevSysGraphical
                 clientSocket.Connect(IPAddress.Parse("127.0.0.1"), 1234);
 
                 isConnect = true;
-                connectButton.Content = $"{LangageExtension.Key="Selector5"}";
+                connectButton.Content = $"{LangageExtension.Key = "Selector5"}";
 
                 string logFilePath = await SendRequestAsync("GetLogFilePath");
-                MessageBox.Show($"Log file path received from server: {logFilePath}");
+                MessageBox.Show($"{LangageExtension.Key = "Client.StartClient"} {logFilePath}");
             }
             catch (Exception ex)
             {
@@ -172,7 +172,8 @@ namespace ClientProjetDevSysGraphical
                 await Task.Delay(100); // Attendre un bref délai pour permettre au serveur de recevoir la notification de fermeture
                 clientSocket.Close();
                 isConnect = false;
-                connectButton.Content = $"{LangageExtension.Key="Selector4"}";
+                connectButton.Content = $"{LangageExtension.Key = "Selector4"}";
+                MessageBox.Show($"{LangageExtension.Key = "Client.StopClient"}");
             }
             catch (Exception ex)
             {

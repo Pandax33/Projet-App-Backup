@@ -61,6 +61,24 @@ namespace ClientProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Log file path received from server:.
+        /// </summary>
+        internal static string Client_StartClient {
+            get {
+                return ResourceManager.GetString("Client.StartClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à User disconnected.
+        /// </summary>
+        internal static string Client_StopClient {
+            get {
+                return ResourceManager.GetString("Client.StopClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Apply.
         /// </summary>
         internal static string Config_Apply {
@@ -300,6 +318,24 @@ namespace ClientProjetDevSysGraphical {
         internal static string Selector3 {
             get {
                 return ResourceManager.GetString("Selector3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Connect.
+        /// </summary>
+        internal static string Selector4 {
+            get {
+                return ResourceManager.GetString("Selector4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Disconnect.
+        /// </summary>
+        internal static string Selector5 {
+            get {
+                return ResourceManager.GetString("Selector5", resourceCulture);
             }
         }
         

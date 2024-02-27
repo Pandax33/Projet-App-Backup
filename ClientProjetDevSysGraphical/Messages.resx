@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Client.StartClient" xml:space="preserve">
+    <value>Log file path received from server:</value>
+  </data>
+  <data name="Client.StopClient" xml:space="preserve">
+    <value>User disconnected</value>
+  </data>
   <data name="Config.Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
