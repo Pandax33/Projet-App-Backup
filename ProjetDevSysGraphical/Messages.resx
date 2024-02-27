@@ -213,6 +213,12 @@
   <data name="RunTaskView12" xml:space="preserve">
     <value>saves done</value>
   </data>
+  <data name="RunTaskView4" xml:space="preserve">
+    <value>A Blocker process is in use (your backups will be done when the process is closed)</value>
+  </data>
+  <data name="RunTaskView5" xml:space="preserve">
+    <value>Processus Error</value>
+  </data>
   <data name="RunTaskView6" xml:space="preserve">
     <value>All the saves are done</value>
   </data>

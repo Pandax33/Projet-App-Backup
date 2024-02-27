@@ -12,7 +12,7 @@ namespace ProjetDevSysGraphical
     public partial class App : Application
     {
 
-        ProcessWatcher processWatcher = new ProcessWatcher();
+        public ProcessWatcher processWatcher = new ProcessWatcher();
         private static Mutex mutex = null;
         protected override void OnStartup(StartupEventArgs e)
         {
