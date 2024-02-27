@@ -76,6 +76,10 @@ namespace ProjetDevSys.Model
                     AppConstants.BackupPauseHandles[name].WaitOne();
                     AppConstants.processEvent.WaitOne();
                     AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
+                    if (cts.Token.IsCancellationRequested)
+                    {
+                        return;
+                    }
                     if (!AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower())) // Exclut les extensions prioritaires
                     {
                         if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))

@@ -195,6 +195,12 @@
   <data name="Config.Tab5" xml:space="preserve">
     <value>Save Paths</value>
   </data>
+  <data name="Config.Themes1" xml:space="preserve">
+    <value>App theme</value>
+  </data>
+  <data name="Config.Themes2" xml:space="preserve">
+    <value>Theme:</value>
+  </data>
   <data name="Home1" xml:space="preserve">
     <value>Welcome !</value>
   </data>
@@ -207,6 +213,12 @@
   <data name="RunTaskView12" xml:space="preserve">
     <value>saves done</value>
   </data>
+  <data name="RunTaskView4" xml:space="preserve">
+    <value>A Blocker process is in use (your backups will be done when the process is closed)</value>
+  </data>
+  <data name="RunTaskView5" xml:space="preserve">
+    <value>Processus Error</value>
+  </data>
   <data name="RunTaskView6" xml:space="preserve">
     <value>All the saves are done</value>
   </data>
@@ -218,6 +230,9 @@
   </data>
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
+  </data>
+  <data name="StartupPopup1" xml:space="preserve">
+    <value>Proceedings are already underway.</value>
   </data>
   <data name="Task.Add.Title" xml:space="preserve">
     <value>Add a task</value>

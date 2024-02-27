@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProjetDevSys;
+using System.Windows;
 
 
 namespace ProjetDevSysGraphical.VueModel
@@ -67,6 +68,11 @@ namespace ProjetDevSysGraphical.VueModel
                         Console.WriteLine($"Error during backup for {backup.Name}: {ex}");
                     }
                 }));
+            }
+            ProcessWatcherViewModel processWatcherViewModel = new ProcessWatcherViewModel();
+            if (processWatcherViewModel.Blockerprocess() == true)
+            {
+                MessageBox.Show(ResourceHelper.GetString("RunTaskView4"), ResourceHelper.GetString("RunTaskView5"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
             await Task.WhenAll(tasks);
@@ -167,6 +173,11 @@ namespace ProjetDevSysGraphical.VueModel
                         Console.WriteLine($"Error during backup for {backup.Name}: {ex}");
                     }
                 }));
+            }
+            ProcessWatcherViewModel processWatcherViewModel = new ProcessWatcherViewModel();
+            if (processWatcherViewModel.Blockerprocess() == true)
+            {
+                MessageBox.Show(ResourceHelper.GetString("RunTaskView4"), ResourceHelper.GetString("RunTaskView5"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
             await Task.WhenAll(tasks);

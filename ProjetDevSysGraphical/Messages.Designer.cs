@@ -295,6 +295,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à App theme.
+        /// </summary>
+        internal static string Config_Themes1 {
+            get {
+                return ResourceManager.GetString("Config.Themes1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Theme:.
+        /// </summary>
+        internal static string Config_Themes2 {
+            get {
+                return ResourceManager.GetString("Config.Themes2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Welcome !.
         /// </summary>
         internal static string Home1 {
@@ -331,6 +349,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à A Blocker process is in use (your backups will be done when the process is closed).
+        /// </summary>
+        internal static string RunTaskView4 {
+            get {
+                return ResourceManager.GetString("RunTaskView4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Processus Error.
+        /// </summary>
+        internal static string RunTaskView5 {
+            get {
+                return ResourceManager.GetString("RunTaskView5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à All the saves are done.
         /// </summary>
         internal static string RunTaskView6 {
@@ -363,6 +399,15 @@ namespace ProjetDevSysGraphical {
         internal static string Selector3 {
             get {
                 return ResourceManager.GetString("Selector3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Proceedings are already underway..
+        /// </summary>
+        internal static string StartupPopup1 {
+            get {
+                return ResourceManager.GetString("StartupPopup1", resourceCulture);
             }
         }
         

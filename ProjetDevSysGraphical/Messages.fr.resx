@@ -213,6 +213,12 @@
   <data name="RunTaskView12" xml:space="preserve">
     <value>sauvegardes effectuées</value>
   </data>
+  <data name="RunTaskView4" xml:space="preserve">
+    <value>Un processus Bloquant est en cours d'utilisation (vos sauvegardes seront effectuées lorsque le processus sera fermé)</value>
+  </data>
+  <data name="RunTaskView5" xml:space="preserve">
+    <value>Processus Erreur</value>
+  </data>
   <data name="RunTaskView6" xml:space="preserve">
     <value>Toutes les sauvegardes ont été effectuées</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
+  </data>
+  <data name="StartupPopup1" xml:space="preserve">
+    <value>Une instance est déjà en cours.</value>
   </data>
   <data name="Task.Add.Title" xml:space="preserve">
     <value>Ajouter une tâche</value>

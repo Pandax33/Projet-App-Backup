@@ -12,9 +12,24 @@ namespace ProjetDevSysGraphical
     public partial class App : Application
     {
 
-        ProcessWatcher processWatcher = new ProcessWatcher();
+        public ProcessWatcher processWatcher = new ProcessWatcher();
+        private static Mutex mutex = null;
         protected override void OnStartup(StartupEventArgs e)
         {
+
+            const string mutexName = "StartMutex";
+
+            // Tentative de création d'un Mutex.
+            bool createdNew;
+            mutex = new Mutex(true, mutexName, out createdNew);
+
+            if (!createdNew)
+            {
+                MessageBox.Show(ResourceHelper.GetString("StartupPopup1"));
+                Application.Current.Shutdown();
+                return;
+            }
+
             base.OnStartup(e);
             processWatcher.StartWatching();
             ThemeLoader.LoadTheme();
@@ -22,6 +37,11 @@ namespace ProjetDevSysGraphical
         protected override void OnExit(ExitEventArgs e)
         {
             processWatcher.StopWatching();
+            if (mutex != null)
+            {
+                mutex.ReleaseMutex();
+            }
+            base.OnExit(e);
         }
     }
 
@@ -121,6 +141,18 @@ namespace ProjetDevSysGraphical
                     B3 = (Color)ColorConverter.ConvertFromString("#002D72"); // blue
                     B4 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); // white
                     B5 = (Color)ColorConverter.ConvertFromString("#000000"); //black
+                    FontTittle = new FontFamily("Roboto");
+                    FontButton = new FontFamily("Roboto");
+                    FontGrid = new FontFamily("Roboto");
+                    FontBase = new FontFamily("Roboto");
+                    break;
+                    case "Dark":
+                    BG = (Color)ColorConverter.ConvertFromString("#000000"); // black
+                    B1 = (Color)ColorConverter.ConvertFromString("#1C1C1C"); // dark
+                    B2 = (Color)ColorConverter.ConvertFromString("#2E2E2E"); // deep dark
+                    B3 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); // white
+                    B4 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); // white
+                    B5 = (Color)ColorConverter.ConvertFromString("#FFFFFF"); //white
                     FontTittle = new FontFamily("Roboto");
                     FontButton = new FontFamily("Roboto");
                     FontGrid = new FontFamily("Roboto");

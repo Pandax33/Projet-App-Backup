@@ -233,7 +233,7 @@ namespace ProjetDevSys.MODEL
                     System.Console.WriteLine($"Cannot access {directory.FullName}: {ex.Message}");
                 }
             }
-
+            SizeRemaining = TotalSize;
             if (TotalSize == 0)
             {
                 Progress = 100;

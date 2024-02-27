@@ -361,6 +361,9 @@ namespace ProjetDevSysGraphical
 
         public async void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mainWindow.contentControl.Content = new Accueil();
+
             RunTaskAsync runSaveTask = new RunTaskAsync();
             SynchronizationContext context = SynchronizationContext.Current;
             // Launch all tasks
@@ -378,6 +381,9 @@ namespace ProjetDevSysGraphical
 
         public async void selectedTasksButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mainWindow.contentControl.Content = new Accueil();
+
             RunTaskAsync runSaveTask = new RunTaskAsync();
             // Obtenez le contexte de synchronisation actuel pour l'UI thread
             SynchronizationContext context = SynchronizationContext.Current;
@@ -435,6 +441,7 @@ namespace ProjetDevSysGraphical
                         // Call EditTask view
                         EditTask editTask = new EditTask(index, buttonName, backup.Source, backup.Destination, backup.Type);
                         editTask.ShowDialog();
+                        return;
                     }
                 }
             }
