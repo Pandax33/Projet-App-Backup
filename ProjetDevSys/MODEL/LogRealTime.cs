@@ -53,7 +53,7 @@ namespace ProjetDevSys.MODEL
 
             if (SizeRemaining != 0)
             {
-                Progress = Progress + (CurrentFileSize * 100) / TotalSize;
+                Progress = 100 - (SizeRemaining * 100) / TotalSize;
             }
             else
             {
