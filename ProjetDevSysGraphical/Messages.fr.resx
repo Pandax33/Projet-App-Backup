@@ -225,6 +225,9 @@
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
   </data>
+  <data name="StartupPopup1" xml:space="preserve">
+    <value>Une instance est déjà en cours.</value>
+  </data>
   <data name="Task.Add.Title" xml:space="preserve">
     <value>Ajouter une tâche</value>
   </data>
