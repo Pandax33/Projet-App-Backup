@@ -98,7 +98,18 @@ namespace ProjetDevSysGraphical.VueModel
                 ProjetDevSys.AppConstants.BackupCancellations.TryRemove(backup.Name, out _);
                 ProjetDevSys.AppConstants.BackupPauseHandles.TryRemove(backup.Name, out _);
             }
-            return ResourceHelper.GetString("RunTaskView11");
+            if (backupJobs.Count() == 1)
+            {
+                string message = ResourceHelper.GetString("RunTaskView11");
+                return message;
+            }
+            if (backupJobs.Count() > 1)
+            {
+                int count = backupJobs.Count();
+                string message = ResourceHelper.GetString("RunTaskView12");
+                return $"{count} {message}";
+            }
+            return null;
         }
 
         public async Task<string> RunMultipleTaskAsync(int idDebut, int idFin, SynchronizationContext context)
@@ -188,9 +199,8 @@ namespace ProjetDevSysGraphical.VueModel
                 ProjetDevSys.AppConstants.BackupPauseHandles.TryRemove(backup.Name, out _);
             }
 
-            return ResourceHelper.GetString("RunTaskView6");
+            string message = ResourceHelper.GetString("RunTaskView6");
+            return message;
         }
-
-
     }
 }

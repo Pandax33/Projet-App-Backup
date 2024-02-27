@@ -198,6 +198,18 @@
   <data name="Home1" xml:space="preserve">
     <value>Welcome !</value>
   </data>
+  <data name="ResetConfig" xml:space="preserve">
+    <value>Are you sure you want to reset all settings ?</value>
+  </data>
+  <data name="RunTaskView11" xml:space="preserve">
+    <value>Save done</value>
+  </data>
+  <data name="RunTaskView12" xml:space="preserve">
+    <value>saves done</value>
+  </data>
+  <data name="RunTaskView6" xml:space="preserve">
+    <value>All the saves are done</value>
+  </data>
   <data name="Selector1" xml:space="preserve">
     <value>Home</value>
   </data>

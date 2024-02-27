@@ -304,6 +304,42 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure you want to reset all settings ?.
+        /// </summary>
+        internal static string ResetConfig {
+            get {
+                return ResourceManager.GetString("ResetConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Save done.
+        /// </summary>
+        internal static string RunTaskView11 {
+            get {
+                return ResourceManager.GetString("RunTaskView11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à saves done.
+        /// </summary>
+        internal static string RunTaskView12 {
+            get {
+                return ResourceManager.GetString("RunTaskView12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à All the saves are done.
+        /// </summary>
+        internal static string RunTaskView6 {
+            get {
+                return ResourceManager.GetString("RunTaskView6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Home.
         /// </summary>
         internal static string Selector1 {

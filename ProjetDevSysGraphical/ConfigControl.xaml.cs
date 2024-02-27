@@ -63,7 +63,7 @@ namespace ProjetDevSysGraphical
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset all settings ?", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show($"{ResourceHelper.GetString("ResetConfig")}", "Confirm Reset", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 ProjetDevSys.VueModel.ConfigViewModel config = new ConfigViewModel();
