@@ -441,6 +441,7 @@ namespace ProjetDevSysGraphical
                         // Call EditTask view
                         EditTask editTask = new EditTask(index, buttonName, backup.Source, backup.Destination, backup.Type);
                         editTask.ShowDialog();
+                        return;
                     }
                 }
             }
