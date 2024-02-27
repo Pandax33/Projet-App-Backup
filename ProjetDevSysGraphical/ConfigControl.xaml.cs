@@ -252,6 +252,7 @@ namespace ProjetDevSysGraphical
             {
                 foreach (string processes in ProjetDevSys.AppConstants.BlockerProcess) blockerProcesses.Add(processes);
             }
+            blockerUpdate();
 
             //theme
             themeSelector.Text = ProjetDevSys.AppConstants.Theme;
