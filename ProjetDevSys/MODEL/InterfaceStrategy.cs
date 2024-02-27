@@ -60,8 +60,6 @@ namespace ProjetDevSys.Model
 
         private void CopierDossier(string sourceDir, string destinationDir, LogRealTime LogRealTime, string name)
         {
-            
-
             if (!Directory.Exists(sourceDir) && File.Exists(sourceDir)) // Cas copie fichier unique
             {
                 FileInfo fileInfo = new FileInfo(sourceDir);
@@ -75,6 +73,9 @@ namespace ProjetDevSys.Model
                 foreach (string fichierPath in Directory.GetFiles(sourceDir))
                 {
                     FileInfo fileInfo = new FileInfo(fichierPath);
+                    AppConstants.BackupPauseHandles[name].WaitOne();
+                    AppConstants.processEvent.WaitOne();
+                    AppConstants.BackupCancellations.TryGetValue(name, out CancellationTokenSource cts);
                     if (!AppConstants.ExtensionListPriority.Contains(fileInfo.Extension.ToLower())) // Exclut les extensions prioritaires
                     {
                         if (AppConstants.ExtensionListCrypt.Contains(fileInfo.Extension))
