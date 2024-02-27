@@ -69,6 +69,11 @@ namespace ProjetDevSysGraphical.VueModel
                     }
                 }));
             }
+            ProcessWatcherViewModel processWatcherViewModel = new ProcessWatcherViewModel();
+            if (processWatcherViewModel.Blockerprocess() == true)
+            {
+                MessageBox.Show(ResourceHelper.GetString("RunTaskView4"), ResourceHelper.GetString("RunTaskView5"), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
             await Task.WhenAll(tasks);
             ProjetDevSys.AppConstants.priorityEvent.Set();
