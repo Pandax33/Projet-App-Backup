@@ -43,7 +43,15 @@ namespace ProjetDevSys.Model
 
         public void CreateLogRealTime()
         {
-            LogRealTime.CalculateFolderSizeAndFileCount(Backup.Source);
+            if(Backup.Type == "A")
+            {
+                LogRealTime.CalculateFolderSizeAndFileCount(Backup.Source);
+            }
+            if(Backup.Type == "B")
+            {
+                LogRealTime.CalculateFolderSizeAndFileCountDifferential(Backup.Source,Backup.Destination);
+            }
+            
             
         }
 

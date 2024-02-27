@@ -56,7 +56,7 @@ namespace ProjetDevSysGraphical.VueModel
                         context.Post(_ =>
                         {
                             
-                            ProjetDevSys.AppConstants.backupProgress.TryAdd(backup.Name, 0);
+                            ProjetDevSys.AppConstants.backupProgress.TryAdd(backup.Name, backupJob.LogRealTime.Progress);
                             
                             
                         }, null);
@@ -156,7 +156,7 @@ namespace ProjetDevSysGraphical.VueModel
                         context.Post(_ =>
                         {
 
-                            ProjetDevSys.AppConstants.backupProgress.TryAdd(backup.Name, 0);
+                            ProjetDevSys.AppConstants.backupProgress.TryAdd(backup.Name, backupJob.LogRealTime.Progress);
 
 
                         }, null);
