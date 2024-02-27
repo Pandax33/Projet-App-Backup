@@ -65,7 +65,7 @@ namespace ProjetDevSys.MODEL
                 process.WaitForExit();
 
                 // Lit la sortie standard pour obtenir le temps de cryptage
-                string timeCrypt = process.StandardOutput.ReadToEnd();
+                string timeCrypt = process.StandardOutput.ReadLine();
 
                 if (process.ExitCode == 0)
                 {
