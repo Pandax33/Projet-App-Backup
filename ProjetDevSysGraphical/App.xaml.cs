@@ -13,8 +13,23 @@ namespace ProjetDevSysGraphical
     {
 
         ProcessWatcher processWatcher = new ProcessWatcher();
+        private static Mutex mutex = null;
         protected override void OnStartup(StartupEventArgs e)
         {
+
+            const string mutexName = "StartMutex";
+
+            // Tentative de création d'un Mutex.
+            bool createdNew;
+            mutex = new Mutex(true, mutexName, out createdNew);
+
+            if (!createdNew)
+            {
+                MessageBox.Show(ResourceHelper.GetString("StartupPopup1"));
+                Application.Current.Shutdown();
+                return;
+            }
+
             base.OnStartup(e);
             processWatcher.StartWatching();
             ThemeLoader.LoadTheme();
@@ -22,6 +37,11 @@ namespace ProjetDevSysGraphical
         protected override void OnExit(ExitEventArgs e)
         {
             processWatcher.StopWatching();
+            if (mutex != null)
+            {
+                mutex.ReleaseMutex();
+            }
+            base.OnExit(e);
         }
     }
 

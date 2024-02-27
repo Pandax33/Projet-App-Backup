@@ -367,6 +367,15 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Proceedings are already underway..
+        /// </summary>
+        internal static string StartupPopup1 {
+            get {
+                return ResourceManager.GetString("StartupPopup1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add a task.
         /// </summary>
         internal static string Task_Add_Title {
