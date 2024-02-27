@@ -137,12 +137,12 @@ namespace ProjetDevSysGraphical
                 {
                     if (isPaused)
                     {
-                        toggleButton.Content = "⏸";
+                        toggleButton.Content = "▶";
                         RepriseButton_Click(sender, e); 
                     }
                     else
                     {
-                        toggleButton.Content = "▶";
+                        toggleButton.Content = "⏸";
                         PauseButton_Click(sender, e);
                     }
                     isPaused = !isPaused;
@@ -194,7 +194,7 @@ namespace ProjetDevSysGraphical
             var button = sender as Button;
             if (button == null) return;
 
-            var backupName = button.Tag.ToString();
+            string backupName = button.Tag.ToString();
             ProjetDevSys.AppConstants.StopBackup(backupName);
         }
 
