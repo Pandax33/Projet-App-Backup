@@ -15,6 +15,7 @@ namespace ProjetDevSysGraphical
 
         public ProcessWatcher processWatcher = new ProcessWatcher();
         private static Mutex mutex = null;
+        public BackupCompletionWatcher backupCompletionWatcher;
         protected override void OnStartup(StartupEventArgs e)
         {
 
@@ -32,13 +33,16 @@ namespace ProjetDevSysGraphical
             }
             SynchronizationContext context = SynchronizationContext.Current;
             BackupManager.SetSynchronizationContext(context);
+            backupCompletionWatcher = new BackupCompletionWatcher(context);
             base.OnStartup(e);
+            backupCompletionWatcher.StartWatching();
             processWatcher.StartWatching();
             ThemeLoader.LoadTheme();
         }
         protected override void OnExit(ExitEventArgs e)
         {
             processWatcher.StopWatching();
+            backupCompletionWatcher.StopWatching();
             if (mutex != null)
             {
                 mutex.ReleaseMutex();

@@ -68,7 +68,7 @@ namespace ProjetDevSysGraphical.VueModel
                     ProjetDevSys.AppConstants.priorityEvent.Set();
                     backupJob.Save();
                     string value;
-                    ProjetDevSys.AppConstants.backupState.TryRemove(backupJob.Backup.Name, out value);
+                    ProjetDevSys.AppConstants.backupState[backupJob.Backup.Name] = "Completed";
                     ProjetDevSys.AppConstants.BackupCancellations.TryRemove(backupJob.Backup.Name, out _);
                     ProjetDevSys.AppConstants.BackupPauseHandles.TryRemove(backupJob.Backup.Name, out _);
                     lock (backupQueue)
