@@ -12,9 +12,12 @@ namespace EasySave_Client
 {
     public static class ClientSocket
     {
-        private static readonly string ServerIp = "10.176.128.236";
+        public static string ServerIp;
         private static readonly int ServerPort = 1324;
         private static Socket _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        public static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        public static ManualResetEvent PauseListen = new ManualResetEvent(true);
+        public static bool isRunning;
 
         public static void EnsureConnected()
         {
@@ -24,6 +27,7 @@ namespace EasySave_Client
                 {
                     _clientSocket.Connect(ServerIp, ServerPort);
                     MessageBox.Show("Connecté au serveur.");
+                    isRunning = true;
                 }
                 catch (Exception ex)
                 {
@@ -34,17 +38,17 @@ namespace EasySave_Client
 
         public static void SendCommand(string command)
         {
-            EnsureConnected(); // Assurez-vous d'être connecté avant d'envoyer une commande
-            try
+            if (isRunning)
             {
-                byte[] buffer = Encoding.UTF8.GetBytes(command);
-                _clientSocket.Send(buffer);
-                MessageBox.Show($"Commande envoyée : {command}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erreur lors de l'envoi de la commande : {ex.Message}");
-                // Tentative de reconnexion ou gestion de l'erreur
+                try
+                {
+                    byte[] buffer = Encoding.UTF8.GetBytes(command);
+                    _clientSocket.Send(buffer);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Erreur lors de l'envoi de la commande : {ex.Message}");
+                }
             }
         }
 
@@ -104,7 +108,7 @@ namespace EasySave_Client
         {
 
             string responseJson = SendAndReceiveCommand("get_backup_progress");
-            Dictionary<string, double> progressDict = JsonSerializer.Deserialize<Dictionary<string, double>>(responseJson);        
+            Dictionary<string, double> progressDict = JsonSerializer.Deserialize<Dictionary<string, double>>(responseJson);
             Dictionary<string, double> progress = new Dictionary<string, double>(progressDict);
             if (progress != null)
             {
@@ -128,17 +132,37 @@ namespace EasySave_Client
 
         public static void PauseBackup(string backupName)
         {
-            SendCommand($"pause_{backupName}");
+            PauseListen.Reset();
+            string response = SendAndReceiveCommand($"pause_{backupName}");
+            PauseListen.Set();
         }
 
         public static void ResumeBackup(string backupName)
         {
-            SendCommand($"resume_{backupName}");
+            PauseListen.Reset();
+            string response = SendAndReceiveCommand($"resume_{backupName}");
+            PauseListen.Set();
         }
 
         public static void StopBackup(string backupName)
         {
-            SendCommand($"stop_{backupName}");
+            PauseListen.Reset();
+            string response = SendAndReceiveCommand($"stop_{backupName}");
+            PauseListen.Set();
+        }
+
+        public static async void ListenServer()
+        {
+            
+            while (!cancellationTokenSource.Token.IsCancellationRequested)
+            {
+                PauseListen.WaitOne();
+                ClientSocket.GetBackupProgress();
+                Accueil.CurrentInstance?.GenerateGrid();
+
+                await Task.Delay(1000, cancellationTokenSource.Token);
+
+            }
         }
     }
 }

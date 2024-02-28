@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
 using NewtonSoft = Newtonsoft.Json.JsonConvert;
+using ProjetDevSys.MODEL;
 
 
 
@@ -171,6 +172,22 @@ namespace ProjetDevSys.Model
             string jsonString = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(filePath, jsonString);
             AppConstants.reloadConfig();
+            if(IsServOn)
+            {
+                if(AppConstants.serverThread == null)
+                {
+                    ProjetDevSys.AppConstants.serverThread = new Thread(ProjetDevSys.AppConstants.StartServer) { IsBackground = true };
+                    ProjetDevSys.AppConstants.serverThread.Start();
+                }
+            }
+            else
+            {
+                Server.serverRunning = false;
+                if (ProjetDevSys.AppConstants.serverSocket != null)
+                {
+                    ProjetDevSys.AppConstants.serverSocket.Close();
+                }
+            }
             CreateFileWithExtensionIfNotExists(JsonPath);
             CreateFileWithExtensionIfNotExists(JsonPathRealTime);
         }

@@ -14,56 +14,20 @@ namespace ProjetDevSysGraphical
     /// </summary>
     public partial class App : Application
     {
-        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ThemeLoader.LoadTheme();
-            try
-            {
-                ClientSocket.EnsureConnected();
-                ListenServer();
-            }
-            catch (InvalidOperationException ex) 
-            {
-                MessageBox.Show(ex.Message, "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                // Ferme l'application depuis le thread UI
-                Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
-            }
-            catch (Exception ex) // Attrape toutes les autres exceptions imprévues
-            {
-                MessageBox.Show($"Une erreur inattendue est survenue : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
-            }
+            ThemeLoader.LoadTheme();  
 
         }
         protected override void OnExit(ExitEventArgs e)
         {
-            cancellationTokenSource.Cancel();
+            ClientSocket.cancellationTokenSource.Cancel();
             base.OnExit(e);
         }
 
-        private async void ListenServer()
-        {
-            try
-            {
-                while (!cancellationTokenSource.Token.IsCancellationRequested)
-                {
-                    ClientSocket.GetBackupProgress();
-                    Accueil.CurrentInstance?.GenerateGrid();
-                    
-                    await Task.Delay(1000, cancellationTokenSource.Token); 
 
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
     }
 
     public static class ThemeLoader

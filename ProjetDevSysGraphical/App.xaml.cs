@@ -20,9 +20,7 @@ namespace ProjetDevSysGraphical
         public ProcessWatcher processWatcher;
         private static Mutex mutex = null;
         public BackupCompletionWatcher backupCompletionWatcher;
-        private Thread serverThread;
-        private volatile bool serverRunning = true; // Contrôle l'exécution du serveur
-        private Socket serverSocket;
+        private volatile bool serverRunning = true;
         protected override void OnStartup(StartupEventArgs e)
         {
 
@@ -45,19 +43,22 @@ namespace ProjetDevSysGraphical
             base.OnStartup(e);
             backupCompletionWatcher.StartWatching();
             processWatcher.StartWatching();
-            serverThread = new Thread(StartServer) { IsBackground = true };
-            serverThread.Start();
+            if (ProjetDevSys.AppConstants.IsServOn)
+            {
+                ProjetDevSys.AppConstants.serverThread = new Thread(ProjetDevSys.AppConstants.StartServer) { IsBackground = true };
+                ProjetDevSys.AppConstants.serverThread.Start();
+            }
             ThemeLoader.LoadTheme();
         }
         protected override void OnExit(ExitEventArgs e)
         {
             processWatcher.StopWatching();
             backupCompletionWatcher.StopWatching();
-            serverRunning = false;
+            Server.serverRunning = false;
 
-            if (serverSocket != null)
+            if (ProjetDevSys.AppConstants.serverSocket != null)
             {
-                serverSocket.Close();
+                ProjetDevSys.AppConstants.serverSocket.Close();
             }
             if (mutex != null)
             {
@@ -66,29 +67,6 @@ namespace ProjetDevSysGraphical
             base.OnExit(e);
         }
 
-        private void StartServer()
-        {
-            try
-            {
-                Socket serverSocket = Server.SeConnecter();
-                Console.WriteLine("Serveur démarré. En attente de connexions...");
-
-                while (serverRunning)
-                {
-                    Socket clientSocket = Server.AccepterConnexion(serverSocket);
-                    Server.clients.Add(clientSocket);
-
-                    // Gérer chaque client dans un thread séparé
-                    Thread clientThread = new Thread(() => Server.GestionClient(clientSocket));
-                    clientThread.IsBackground = true;
-                    clientThread.Start();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Erreur lors du démarrage du serveur: {ex.Message}");
-            }
-        }
     }
 
     public static class ThemeLoader
