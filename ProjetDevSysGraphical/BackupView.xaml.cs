@@ -368,6 +368,11 @@ namespace ProjetDevSysGraphical
             try
             {
                 BackupManager.AddBackupToQueue(idList);
+                ProcessWatcherViewModel processWatcherViewModel = new ProcessWatcherViewModel();
+                if (processWatcherViewModel.Blockerprocess() == true)
+                {
+                    MessageBox.Show(ResourceHelper.GetString("RunTaskView4"), ResourceHelper.GetString("RunTaskView5"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             catch (Exception ex)
             {
@@ -391,7 +396,11 @@ namespace ProjetDevSysGraphical
             try
             {
                 BackupManager.AddBackupToQueue(idList);
-
+                ProcessWatcherViewModel processWatcherViewModel = new ProcessWatcherViewModel();
+                if (processWatcherViewModel.Blockerprocess() == true)
+                {
+                    MessageBox.Show(ResourceHelper.GetString("RunTaskView4"), ResourceHelper.GetString("RunTaskView5"), MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             catch (Exception ex)
             {
@@ -460,7 +469,7 @@ namespace ProjetDevSysGraphical
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //Get as Grid
-            var grid = sender as Grid;
+            Grid grid = sender as Grid;
             if (grid == null) return;
 
             //Get position

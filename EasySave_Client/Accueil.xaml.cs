@@ -1,4 +1,4 @@
-﻿using ProjetDevSys.Model;
+﻿using EasySave_Client;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,37 +22,15 @@ namespace ProjetDevSysGraphical
     /// </summary>
     public partial class Accueil : UserControl
     {
+        public static Accueil CurrentInstance { get; private set; }
         public Accueil()
         {
             InitializeComponent();
             GenerateGrid();
-            ProjetDevSys.AppConstants.BackupProgressUpdated += AppConstants_BackupProgressUpdated;
+            CurrentInstance = this;
 
         }
-
-        ~Accueil()
-        {
-            ProjetDevSys.AppConstants.BackupProgressUpdated -= AppConstants_BackupProgressUpdated;
-        }
-        private void AppConstants_BackupProgressUpdated(string backupName, double progress)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                string progressBarId = $"ProgressBar_{backupName}";
-                ProgressBar progressBar = BackupsGrid.Children
-                    .OfType<ProgressBar>()
-                    .FirstOrDefault(pb => pb.Name.Equals(progressBarId));
-
-                if (progressBar != null)
-                {
-                    progressBar.Value = progress;
-                }
-                else
-                {
-                    GenerateGrid();
-                }
-            });
-        }
+      
         public void GenerateGrid()
         {
             // Clear existing rows and content
@@ -60,12 +38,17 @@ namespace ProjetDevSysGraphical
             BackupsGrid.Children.Clear();
 
             int row = 0;
-            foreach (var backup in ProjetDevSys.AppConstants.backupProgress)
+            if (BackupsGrid == null)
+            {
+                Console.WriteLine("BackupsGrid est null.");
+                return;
+            }
+            foreach (var backup in AppConstants.backupProgress)
             {
                 BackupsGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
                 //Add highlighters
-                if (row <= ProjetDevSys.AppConstants.backupProgress.Count())
+                if (row <= AppConstants.backupProgress.Count())
                 {
                     Border border = new Border
                     {
@@ -83,9 +66,9 @@ namespace ProjetDevSysGraphical
                     Grid.SetColumnSpan(border, 8);
                 };
 
-                Thickness commonMargin = new Thickness(5, 10, 5, 5);
+                var commonMargin = new Thickness(5, 10, 5, 5);
 
-                TextBlock nameLabel = new TextBlock { 
+                var nameLabel = new TextBlock { 
                     Text = backup.Key,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
@@ -100,7 +83,7 @@ namespace ProjetDevSysGraphical
                 BackupsGrid.Children.Add(nameLabel);
 
 
-                ProgressBar progressBar = new ProgressBar
+                var progressBar = new ProgressBar
                 {
                     Name = $"ProgressBar_{backup.Key}",
                     Value = backup.Value,
@@ -178,24 +161,24 @@ namespace ProjetDevSysGraphical
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            ProjetDevSys.AppConstants.PauseBackup(button.Tag.ToString());
+            var button = sender as Button;
+            ClientSocket.PauseBackup(button.Tag.ToString());
             
         }
 
         private void RepriseButton_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            ProjetDevSys.AppConstants.ResumeBackup(button.Tag.ToString());
+            var button = sender as Button;
+            ClientSocket.ResumeBackup(button.Tag.ToString());
 
         }
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
+            var button = sender as Button;
             if (button == null) return;
 
             string backupName = button.Tag.ToString();
-            ProjetDevSys.AppConstants.StopBackup(backupName);
+            ClientSocket.StopBackup(backupName);
         }
 
     }

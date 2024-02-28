@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetDevSys", "ProjetDevSy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetDevSysGraphical", "ProjetDevSysGraphical\ProjetDevSysGraphical.csproj", "{D4C8BCA6-AC5B-4CBD-BC78-FF22E270ADF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projet_Dev_Systeme_UnitTest", "Projet_Dev_Systeme_UnitTest\Projet_Dev_Systeme_UnitTest.csproj", "{A5D29CFF-65AC-41BE-8A67-4EB9457789AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projet_Dev_Systeme_UnitTest", "Projet_Dev_Systeme_UnitTest\Projet_Dev_Systeme_UnitTest.csproj", "{A5D29CFF-65AC-41BE-8A67-4EB9457789AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySave_Client", "EasySave_Client\EasySave_Client.csproj", "{6DEF3E83-092A-4C3E-B21C-FF4268BBB2BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{A5D29CFF-65AC-41BE-8A67-4EB9457789AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5D29CFF-65AC-41BE-8A67-4EB9457789AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5D29CFF-65AC-41BE-8A67-4EB9457789AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DEF3E83-092A-4C3E-B21C-FF4268BBB2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DEF3E83-092A-4C3E-B21C-FF4268BBB2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DEF3E83-092A-4C3E-B21C-FF4268BBB2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DEF3E83-092A-4C3E-B21C-FF4268BBB2BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

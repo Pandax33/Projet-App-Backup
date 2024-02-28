@@ -183,8 +183,7 @@ namespace ProjetDevSys
                 cts.Cancel(); // Envoie une demande d'annulation à la tâche
                 backupState.TryAdd(backupName, "Stop");
             }
-
-            
+      
         }
 
 
