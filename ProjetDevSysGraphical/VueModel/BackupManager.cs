@@ -28,6 +28,7 @@ namespace ProjetDevSysGraphical.VueModel
                 if (backup != null && !ProjetDevSys.AppConstants.backupState.ContainsKey(backup.Name))
                 {
                     BackupJob backupJob = new BackupJob(backup);
+                    backupJob.CreateLogRealTime();
                     backupQueue.Add(backupJob);
                     ProjetDevSys.AppConstants.backupProgress.TryAdd(backup.Name, backupJob.LogRealTime.Progress);
                     ManualResetEvent mre = new ManualResetEvent(true);
@@ -36,7 +37,7 @@ namespace ProjetDevSysGraphical.VueModel
                     ProjetDevSys.AppConstants.BackupCancellations[backup.Name] = cts;
                 }
             }
-            ExecuteBackups(); 
+            ExecuteBackups();
         }
 
         private static async void ExecuteBackups()
@@ -62,13 +63,14 @@ namespace ProjetDevSysGraphical.VueModel
             {
                 try
                 {
-                    backupJob.CreateLogRealTime();
+                    ProjetDevSys.AppConstants.EventState.TryAdd("priotiryEvent", "Pause");
                     ProjetDevSys.AppConstants.priorityEvent.Reset();
                     backupJob.SavePrio();
                     ProjetDevSys.AppConstants.priorityEvent.Set();
+                    ProjetDevSys.AppConstants.EventState.TryAdd("priotiryEvent", "Libre");
                     backupJob.Save();
                     string value;
-                    ProjetDevSys.AppConstants.backupState.TryRemove(backupJob.Backup.Name, out value);
+                    ProjetDevSys.AppConstants.backupState[backupJob.Backup.Name] = "Completed";
                     ProjetDevSys.AppConstants.BackupCancellations.TryRemove(backupJob.Backup.Name, out _);
                     ProjetDevSys.AppConstants.BackupPauseHandles.TryRemove(backupJob.Backup.Name, out _);
                     lock (backupQueue)

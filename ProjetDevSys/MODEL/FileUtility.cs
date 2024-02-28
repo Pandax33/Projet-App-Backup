@@ -17,6 +17,7 @@ namespace ProjetDevSys.MODEL
 
             if (fileSize > AppConstants.FileSize)
             {
+                AppConstants.EventState.TryAdd("sizeMutex", "Pause");
                 AppConstants.sizeMutex.WaitOne();
             }
 
@@ -30,6 +31,7 @@ namespace ProjetDevSys.MODEL
                 if (fileSize > AppConstants.FileSize)
                 {
                     AppConstants.sizeMutex.ReleaseMutex();
+                    AppConstants.EventState.TryAdd("sizeMutex", "Libre");
                 }
             }
         }
