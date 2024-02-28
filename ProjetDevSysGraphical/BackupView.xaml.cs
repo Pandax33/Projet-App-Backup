@@ -361,45 +361,49 @@ namespace ProjetDevSysGraphical
 
         public async void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mainWindow.contentControl.Content = new Accueil();
 
-            RunTaskAsync runSaveTask = new RunTaskAsync();
             SynchronizationContext context = SynchronizationContext.Current;
-            // Launch all tasks
+            int taskCount = grid.Children.Count / 4;
+            int[] idList = Enumerable.Range(0, taskCount).ToArray();
             try
             {
-                string result = await runSaveTask.RunMultipleTaskAsync(0, grid.Children.Count / 4, context);
-                MessageBox.Show(result, "Run", MessageBoxButton.OK, MessageBoxImage.Information);
+                BackupManager.AddBackupToQueue(idList);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (mainWindow != null)
+            {
+                mainWindow.contentControl.Content = new Accueil();
             }
         }
 
 
         public async void selectedTasksButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mainWindow.contentControl.Content = new Accueil();
-
-            RunTaskAsync runSaveTask = new RunTaskAsync();
-            // Obtenez le contexte de synchronisation actuel pour l'UI thread
+    
             SynchronizationContext context = SynchronizationContext.Current;
+            BackupManager.SetSynchronizationContext(context);
+            int[] idList = idToLaunch.ToArray();
 
             try
             {
-                // Await l'opération asynchrone et stockez le résultat
-                string result = await runSaveTask.RunTaskMultipleAsync(idToLaunch.ToArray(), context);
-                // Affichez le résultat dans une MessageBox après la fin des tâches
-                MessageBox.Show(result, "Run", MessageBoxButton.OK, MessageBoxImage.Information);
+                BackupManager.AddBackupToQueue(idList);
+
             }
             catch (Exception ex)
             {
-                // Gérez ou loggez l'exception si nécessaire
-                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                // En cas d'erreur, affichez un message
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (mainWindow != null)
+            {
+                mainWindow.contentControl.Content = new Accueil();
+            }
+
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
