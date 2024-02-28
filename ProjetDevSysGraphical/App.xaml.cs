@@ -36,7 +36,7 @@ namespace ProjetDevSysGraphical
             SynchronizationContext context = SynchronizationContext.Current;
             BackupManager.SetSynchronizationContext(context);
             backupCompletionWatcher = new BackupCompletionWatcher(context);
-            ProcessWatcher processWatcher = new ProcessWatcher(context);
+            processWatcher = new ProcessWatcher(context);
             base.OnStartup(e);
             backupCompletionWatcher.StartWatching();
             processWatcher.StartWatching();
