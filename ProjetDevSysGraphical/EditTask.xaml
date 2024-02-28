@@ -5,48 +5,183 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetDevSysGraphical"
         mc:Ignorable="d"
-        Title="{local:LangageExtension Key='Task.Edit.Title'}" MinHeight="185" MaxHeight="300" MinWidth="250" MaxWidth="600" Height="200" Width="400">
-    
-    <Window.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="MaxWidth" Value="400" />
-            <Setter Property="TextWrapping" Value="NoWrap"/>
-            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
-        </Style>
-    </Window.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+        Background="{StaticResource BrushBG}"
+        Title="{local:LangageExtension Key='Task.Edit.Title'}"  MinHeight="250" MaxHeight="500" MinWidth="400" Height="250" Width="500">
 
-        <Label Content="{local:LangageExtension Key='Task.Prompt1'}" Grid.Row="0" Grid.Column="0" />
-        <Label x:Name="taskName" Grid.Row="0" Grid.Column="1" Margin="5"/>
+    <WindowChrome.WindowChrome>
+            <WindowChrome GlassFrameThickness="0"
+                      CornerRadius="0"
+                      CaptionHeight="30" />
+        </WindowChrome.WindowChrome>
 
-        <Label Content="{local:LangageExtension Key='Task.Prompt2'}"  Grid.Row="1" Grid.Column="0" />
-        <TextBox x:Name="sourcePathEntry" Grid.Row="1" Grid.Column="1" Margin="5"/>
-        <Button x:Name="sourcePathExplorer" Content="&#x1F4C1;" Grid.Row="1" Grid.Column="2" Margin="5" Click="sourcePathExplorer_Click"/>
+        <Window.Resources>
+            <Style x:Key="ButtonBottomStyle" TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource Brush1}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Width" Value="300"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource Brush2}" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="330" Color="Gray"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="Explorer" TargetType="Button">
+                <Setter Property="Content" Value="&#x1F4C1;"/>
+                <Setter Property="Background" Value="{StaticResource Brush2}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Name="border" CornerRadius="5" BorderThickness="2" BorderBrush="{StaticResource Brush2}" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Brush4}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{StaticResource Brush2}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="MaxWidth" Value="600" />
+                <Setter Property="TextWrapping" Value="NoWrap"/>
+                <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+                <Setter Property="Background" Value="{StaticResource Brush2}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="1"/>
+                <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+            <Style TargetType="Label" x:Key="TitleStyle">
+                <Setter Property="FontFamily" Value="{StaticResource FontTitle}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="Label" x:Key="BaseFont">
+                <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+            <Style TargetType="RadioButton">
+                <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Background" Value="{StaticResource Brush2}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+            <Style TargetType="ScrollBar">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid>
+                                <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageUpCommand" Background="{StaticResource Brush2}"/>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Background="{StaticResource Brush2}" BorderBrush="{StaticResource Brush3}" BorderThickness="2">
+                                            <Thumb.Template>
+                                                <ControlTemplate TargetType="Thumb">
+                                                    <Border Background="{TemplateBinding Background}" 
+                                                BorderBrush="{StaticResource Brush3}" 
+                                                BorderThickness="2"
+                                                CornerRadius="5">
+                                                        <ContentPresenter/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Thumb.Template>
+                                        </Thumb>
+                                    </Track.Thumb>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="ScrollBar.PageDownCommand"/>
+                                    </Track.IncreaseRepeatButton>
+                                </Track>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="RepeatButton">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RepeatButton">
+                            <Border Background="{StaticResource Brush2}" CornerRadius="5"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Window.Resources>
 
-        <Label Content="{local:LangageExtension Key='Task.Prompt3'}" Grid.Column="0" Grid.Row="2" />
-        <TextBox x:Name="targetPathEntry" Grid.Row="2" Grid.Column="1" Margin="5"/>
-        <Button x:Name="targetPathExplorer" Content="&#x1F4C1;" Grid.Row="2" Grid.Column="2" Margin="5"  Click="targetPathExplorer_Click"/>
+    <Border BorderBrush="{StaticResource Brush4}" BorderThickness="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <RadioButton Content="{local:LangageExtension Key='Task.Type1'}" x:Name="typeRadioButtonComplete" GroupName="BackupType" Margin="10"/>
-            <RadioButton Content="{local:LangageExtension Key='Task.Type2'}" x:Name="typeRadioButtonDifferential" GroupName="BackupType" Margin="10"/>
-        </StackPanel>
+            <Label Content="{local:LangageExtension Key='Task.Edit.Title'}" Style="{StaticResource TitleStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <Button Name="cancelButton"  Content="{local:LangageExtension Key='Task.Cancel'}" Grid.Row="4" Grid.Column="1" Width="50" HorizontalAlignment="Left" Click="cancelButton_Click"/>
-        <Button Name="applyButton" Content="{local:LangageExtension Key='Task.Apply'}" Grid.Row="4" Grid.Column="1" Width="50" HorizontalAlignment="Right" Click="applyButton_Click"/>
-    </Grid>
+            <Label Content="{local:LangageExtension Key='Task.Prompt1'}" Style="{StaticResource BaseFont}" Grid.Row="1" Grid.Column="0" />
+            <Label x:Name="taskName" Style="{StaticResource BaseFont}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+            <Label Content="{local:LangageExtension Key='Task.Prompt2'}" Style="{StaticResource BaseFont}" Grid.Row="2" Grid.Column="0" />
+            <TextBox x:Name="sourcePathEntry" Grid.Row="2" Grid.Column="1" Margin="5"/>
+            <Button x:Name="sourcePathExplorer" Content="&#x1F4C1;" Grid.Row="2" Grid.Column="2" Margin="5" Click="sourcePathExplorer_Click" Style="{StaticResource Explorer}"/>
+
+            <Label Content="{local:LangageExtension Key='Task.Prompt3'}" Style="{StaticResource BaseFont}" Grid.Column="0" Grid.Row="3" />
+            <TextBox x:Name="targetPathEntry" Grid.Row="3" Grid.Column="1" Margin="5"/>
+            <Button x:Name="targetPathExplorer" Content="&#x1F4C1;" Grid.Row="3" Grid.Column="2" Margin="5"  Click="targetPathExplorer_Click" Style="{StaticResource Explorer}"/>
+
+            <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <RadioButton Content="{local:LangageExtension Key='Task.Type1'}" x:Name="typeRadioButtonComplete" GroupName="BackupType" Margin="10"/>
+                <RadioButton Content="{local:LangageExtension Key='Task.Type2'}" x:Name="typeRadioButtonDifferential" GroupName="BackupType" Margin="10"/>
+            </StackPanel>
+
+            <Button Name="cancelButton"  Content="{local:LangageExtension Key='Task.Cancel'}" Grid.Row="5" Grid.Column="1" Width="100" HorizontalAlignment="Left" Click="cancelButton_Click" Margin="5" Style="{StaticResource ButtonBottomStyle}"/>
+            <Button Name="applyButton" Content="{local:LangageExtension Key='Task.Apply'}" Grid.Row="5" Grid.Column="1" Width="100" HorizontalAlignment="Right" Click="applyButton_Click" Margin="5" Style="{StaticResource ButtonBottomStyle}"/>
+        </Grid>
+    </Border>
 </Window>
