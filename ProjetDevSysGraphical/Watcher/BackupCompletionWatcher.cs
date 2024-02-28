@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetDevSysGraphical.VueModel
+namespace ProjetDevSysGraphical.Watcher
 {
     public class BackupCompletionWatcher
     {
@@ -49,7 +49,7 @@ namespace ProjetDevSysGraphical.VueModel
                 foreach (var backupName in completedBackups)
                 {
                     string unused;
-                    ProjetDevSys.AppConstants.backupState.TryRemove(backupName, out unused); 
+                    ProjetDevSys.AppConstants.backupState.TryRemove(backupName, out unused);
 
                     uiContext.Post(_ => ShowBackupCompletePopup(backupName), null);
                 }
@@ -60,8 +60,6 @@ namespace ProjetDevSysGraphical.VueModel
 
         private void ShowBackupCompletePopup(string backupName)
         {
-            // Implémentez la logique pour afficher une popup.
-            // Assurez-vous que cette méthode soit appelée de manière thread-safe si elle manipule des éléments UI.
             System.Windows.MessageBox.Show($"Backup {backupName} completed successfully!", "Backup Complete", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
     }

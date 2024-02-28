@@ -26,20 +26,21 @@ namespace ProjetDevSys
         public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
         public static ConcurrentDictionary<string, CancellationTokenSource> BackupCancellations = new ConcurrentDictionary<string, CancellationTokenSource>();
         public static ConcurrentDictionary<string, string> backupState = new ConcurrentDictionary<string, string>();
+        public static ConcurrentDictionary<string, string> EventState = new ConcurrentDictionary<string, string>();
         public static List<string> BlockerProcess;
         public static readonly Mutex appMutex = new Mutex(true, "AppConstantsMutex");
         public static string Theme;
         public delegate void BackupProgressUpdatedEventHandler(string backupName, double progress);
         public static event BackupProgressUpdatedEventHandler BackupProgressUpdated;
         public static readonly Mutex sizeMutex = new Mutex();
-        public static readonly Mutex priorityMutex = new Mutex();
         public static ManualResetEvent processEvent = new ManualResetEvent(true);
         public static ManualResetEvent priorityEvent = new ManualResetEvent(true);
 
         static AppConstants()
         {
-            // Pass to your JSON path
-            //string filePath = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            EventState.TryAdd("sizeMutex", "Libre");
+            EventState.TryAdd("processEvent", "Libre");
+            EventState.TryAdd("priorityEvent", "Libre");
             string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string easySavePath = Path.Combine(appDataPath, "EasySaveGP5");
@@ -162,6 +163,7 @@ namespace ProjetDevSys
             if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
             {
                 handle.Reset(); // Met en pause
+                backupState.TryAdd(backupName, "Pause");
             }
         }
 
@@ -170,6 +172,7 @@ namespace ProjetDevSys
             if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
             {
                 handle.Set(); // Reprend l'exécution
+                backupState.TryAdd(backupName, "In Progress");
             }
         }
 
@@ -178,6 +181,7 @@ namespace ProjetDevSys
             if (BackupCancellations.TryGetValue(backupName, out var cts))
             {
                 cts.Cancel(); // Envoie une demande d'annulation à la tâche
+                backupState.TryAdd(backupName, "Stop");
             }
 
             

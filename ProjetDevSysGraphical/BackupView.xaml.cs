@@ -361,21 +361,23 @@ namespace ProjetDevSysGraphical
 
         public async void allTasksButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mainWindow.contentControl.Content = new Accueil();
 
-            RunTaskAsync runSaveTask = new RunTaskAsync();
             SynchronizationContext context = SynchronizationContext.Current;
-            // Launch all tasks
+            int taskCount = grid.Children.Count / 4;
+            int[] idList = Enumerable.Range(0, taskCount).ToArray();
             try
             {
-                string result = await runSaveTask.RunMultipleTaskAsync(0, grid.Children.Count / 4, context);
-                MessageBox.Show(result, "Run", MessageBoxButton.OK, MessageBoxImage.Information);
+                BackupManager.AddBackupToQueue(idList);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }            
+            }
+            MainWindow mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            if (mainWindow != null)
+            {
+                mainWindow.contentControl.Content = new Accueil();
+            }
         }
 
 

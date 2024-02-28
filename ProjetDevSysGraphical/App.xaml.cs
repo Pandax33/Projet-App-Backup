@@ -1,8 +1,10 @@
 ﻿using ProjetDevSys.MODEL;
 using ProjetDevSysGraphical.VueModel;
+using ProjetDevSysGraphical.Watcher;
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace ProjetDevSysGraphical
@@ -13,7 +15,7 @@ namespace ProjetDevSysGraphical
     public partial class App : Application
     {
 
-        public ProcessWatcher processWatcher = new ProcessWatcher();
+        public ProcessWatcher processWatcher;
         private static Mutex mutex = null;
         public BackupCompletionWatcher backupCompletionWatcher;
         protected override void OnStartup(StartupEventArgs e)
@@ -34,6 +36,7 @@ namespace ProjetDevSysGraphical
             SynchronizationContext context = SynchronizationContext.Current;
             BackupManager.SetSynchronizationContext(context);
             backupCompletionWatcher = new BackupCompletionWatcher(context);
+            ProcessWatcher processWatcher = new ProcessWatcher(context);
             base.OnStartup(e);
             backupCompletionWatcher.StartWatching();
             processWatcher.StartWatching();

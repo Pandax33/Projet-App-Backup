@@ -14,8 +14,7 @@ using ProjetDevSys.MODEL;
 CultureInfo ci = new CultureInfo(AppConstants.Langage);
 CultureInfo.CurrentUICulture = ci;
 BackupFactory.LoadBackupsFromJson();
-ProcessWatcher processWatcher = new ProcessWatcher();
-processWatcher.StartWatching();
+
 
 MenuPrincipal menuPrincipal = new MenuPrincipal();
 menuPrincipal.PrincipalMenu();
