@@ -231,6 +231,9 @@
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
   </data>
+  <data name="Selector4" xml:space="preserve">
+    <value>Connection</value>
+  </data>
   <data name="StartupPopup1" xml:space="preserve">
     <value>Proceedings are already underway.</value>
   </data>

@@ -1,4 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using EasySave_Client;
+using System.Collections.Concurrent;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -45,5 +47,6 @@ namespace ProjetDevSysGraphical
 
             return navigationButtonStyle;
         }
+
     }
 }

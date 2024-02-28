@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using EasySave_Client;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -100,6 +101,11 @@ namespace ProjetDevSysGraphical
             Application.Current.MainWindow = newWindow;
             newWindow.Show();
             this.Close();
+        }
+
+        private void Ip_Click(object sender, RoutedEventArgs e)
+        {
+            contentControl.Content = new IpView();
         }
     }
 }
