@@ -212,6 +212,11 @@ namespace ProjetDevSysGraphical
             {
                 configViewModel.EditFileSize(long.Parse(fileSizeSelector.Text), fileSizeUnitSelector.Text);
             }
+            //IsServOn
+            if (IsServOnSelector.IsChecked.Value != null)
+            {
+                configViewModel.EditServerStatus(IsServOnSelector.IsChecked.Value);
+            }
             //priority
             if (PriorityExtensions != null) configViewModel.ChangeExtensionListPriority(new List<string>(PriorityExtensions));
             //refresh content
@@ -245,7 +250,9 @@ namespace ProjetDevSysGraphical
                 foreach (string extensions in ProjetDevSys.AppConstants.ExtensionListCrypt) CryptoExtensions.Add(extensions);
             }
             cryptoExtensionsUpdate();
-
+            //IsServerOn
+            bool IsServerOn = ProjetDevSys.AppConstants.IsServOn;
+            IsServOnSelector.IsChecked = IsServerOn;
             //blocker
             blockerProcesses = new ObservableCollection<string>();
             if (ProjetDevSys.AppConstants.BlockerProcess != null)

@@ -250,6 +250,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Remote interface.
+        /// </summary>
+        internal static string Config_Serv0 {
+            get {
+                return ResourceManager.GetString("Config.Serv0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Turn on the server:.
+        /// </summary>
+        internal static string Config_Serv1 {
+            get {
+                return ResourceManager.GetString("Config.Serv1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Log Files.
         /// </summary>
         internal static string Config_Tab1 {

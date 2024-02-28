@@ -19,6 +19,7 @@ namespace ProjetDevSys
         public static string CryptPath;
         public static string KeyCrypt;
         public static List<string> ExtensionListPriority;
+        public static bool IsServOn;
         public static long FileSize;
         public static string FileSizeUnit;
 
@@ -72,6 +73,7 @@ namespace ProjetDevSys
                 ExtensionListPriority = new List<string>(config.ExtensionListPriority.ExtensionListPriority.ToObject<List<string>>());
                 Theme = config.WPF.Theme;
                 BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
+                IsServOn = config.IsServOn.IsServOn;
                 FileSize = config.FileSize.FileSize;
                 FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
                 Config.Initialize();
@@ -138,6 +140,7 @@ namespace ProjetDevSys
             KeyCrypt = config.KeyCrypt.KeyCrypt;
             BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
             Theme = config.WPF.Theme;
+            IsServOn = config.IsServOn.IsServOn;
             FileSize = config.FileSize.FileSize;
             FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
             CultureInfo ci = new CultureInfo(Langage);

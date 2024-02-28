@@ -180,6 +180,12 @@
   <data name="Config.SavePath2" xml:space="preserve">
     <value>Insert the path to your backups save file :</value>
   </data>
+  <data name="Config.Serv0" xml:space="preserve">
+    <value>Remote interface</value>
+  </data>
+  <data name="Config.Serv1" xml:space="preserve">
+    <value>Turn on the server:</value>
+  </data>
   <data name="Config.Tab1" xml:space="preserve">
     <value>Log Files</value>
   </data>
