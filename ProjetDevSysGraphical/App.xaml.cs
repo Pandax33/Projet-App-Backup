@@ -70,7 +70,7 @@ namespace ProjetDevSysGraphical
         {
             try
             {
-                var serverSocket = Server.SeConnecter();
+                Socket serverSocket = Server.SeConnecter();
                 Console.WriteLine("Serveur démarré. En attente de connexions...");
 
                 while (serverRunning)

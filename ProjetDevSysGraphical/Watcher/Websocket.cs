@@ -14,14 +14,14 @@ public static class Server
     public static readonly ConcurrentBag<Socket> clients = new ConcurrentBag<Socket>();
     public static Socket SeConnecter()
     {
-        var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         serverSocket.Bind(new IPEndPoint(IPAddress.Any, 1324)); // Change le port en fonctions des besoins
         serverSocket.Listen(10); // Limite de connexions en attente
         return serverSocket;
     }
     public static Socket AccepterConnexion(Socket serverSocket)
     {
-        var clientSocket = serverSocket.Accept();
+        Socket clientSocket = serverSocket.Accept();
         Console.WriteLine($"Client connecté Adresse IP: {((IPEndPoint)clientSocket.RemoteEndPoint).Address}, Port: {((IPEndPoint)clientSocket.RemoteEndPoint).Port}");
         return clientSocket;
     }

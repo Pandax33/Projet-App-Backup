@@ -94,7 +94,7 @@ namespace ProjetDevSysGraphical
 
         private void nameEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var name = sender as TextBox;
+            TextBox name = sender as TextBox;
             if (name == null) return;
 
             int cursorPosition = name.SelectionStart; //Register cursor position to restore it

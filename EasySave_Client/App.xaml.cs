@@ -23,9 +23,9 @@ namespace ProjetDevSysGraphical
             try
             {
                 ClientSocket.EnsureConnected();
-                StartPeriodicTask();
+                ListenServer();
             }
-            catch (InvalidOperationException ex) // Attrape spécifiquement l'exception de connexion
+            catch (InvalidOperationException ex) 
             {
                 MessageBox.Show(ex.Message, "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -46,7 +46,7 @@ namespace ProjetDevSysGraphical
             base.OnExit(e);
         }
 
-        private async void StartPeriodicTask()
+        private async void ListenServer()
         {
             try
             {

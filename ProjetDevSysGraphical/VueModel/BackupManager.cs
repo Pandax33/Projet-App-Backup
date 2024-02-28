@@ -33,7 +33,7 @@ namespace ProjetDevSysGraphical.VueModel
                     ProjetDevSys.AppConstants.backupProgress.TryAdd(backup.Name, backupJob.LogRealTime.Progress);
                     ManualResetEvent mre = new ManualResetEvent(true);
                     ProjetDevSys.AppConstants.BackupPauseHandles.TryAdd(backup.Name, mre);
-                    var cts = new CancellationTokenSource();
+                    CancellationTokenSource cts = new CancellationTokenSource();
                     ProjetDevSys.AppConstants.BackupCancellations[backup.Name] = cts;
                 }
             }

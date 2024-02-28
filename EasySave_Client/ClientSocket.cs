@@ -12,11 +12,10 @@ namespace EasySave_Client
 {
     public static class ClientSocket
     {
-        private static readonly string ServerIp = "10.176.128.236"; // Exemple d'adresse IP du serveur
-        private static readonly int ServerPort = 1324; // Exemple de port
+        private static readonly string ServerIp = "10.176.128.236";
+        private static readonly int ServerPort = 1324;
         private static Socket _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        // Assurez-vous que la connexion est établie avant d'envoyer des commandes
         public static void EnsureConnected()
         {
             if (!_clientSocket.Connected)
@@ -105,8 +104,8 @@ namespace EasySave_Client
         {
 
             string responseJson = SendAndReceiveCommand("get_backup_progress");
-            var progressDict = JsonSerializer.Deserialize<Dictionary<string, double>>(responseJson);
-            var progress = new ConcurrentDictionary<string, double>(progressDict);
+            Dictionary<string, double> progressDict = JsonSerializer.Deserialize<Dictionary<string, double>>(responseJson);        
+            Dictionary<string, double> progress = new Dictionary<string, double>(progressDict);
             if (progress != null)
             {
                 // Mise à jour de backupProgress dans AppConstants

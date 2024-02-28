@@ -94,7 +94,6 @@ namespace ProjetDevSys.MODEL
             logRealTime.UpdateCurrentFileAndSize(fileSize);
             AppConstants.UpdateBackupProgress(name, logRealTime.Progress);
 
-            Console.WriteLine($"Name: {name}, Progress: {AppConstants.backupProgress[name]}%");
             logRealTime.CreateLog();
         }
     }
