@@ -163,7 +163,11 @@ namespace ProjetDevSys
             if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
             {
                 handle.Reset(); // Met en pause
-                backupState.TryAdd(backupName, "Pause");
+                try
+                {
+                    backupState[backupName] = "Pause";
+                }
+                catch { return; }
             }
         }
 
@@ -172,7 +176,12 @@ namespace ProjetDevSys
             if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
             {
                 handle.Set(); // Reprend l'exécution
-                backupState.TryAdd(backupName, "In Progress");
+                try
+                {
+                    backupState[backupName] = "In Progress";
+                }
+                catch { return; }
+
             }
         }
 
@@ -181,10 +190,14 @@ namespace ProjetDevSys
             if (BackupCancellations.TryGetValue(backupName, out var cts))
             {
                 cts.Cancel(); // Envoie une demande d'annulation à la tâche
-                backupState.TryAdd(backupName, "Stop");
+                try
+                {
+                    backupState[backupName] = "Stop";
+                }
+                catch { return; }
             }
 
-            
+
         }
 
 

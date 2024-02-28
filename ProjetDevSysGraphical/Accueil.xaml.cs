@@ -51,6 +51,45 @@ namespace ProjetDevSysGraphical
                 {
                     GenerateGrid();
                 }
+
+                int row = 0;
+                foreach (var backup in ProjetDevSys.AppConstants.backupProgress)
+                {
+                    string borderName = $"BorderBackup{row}";
+                    Border border = BackupsGrid.Children
+                        .OfType<Border>()
+                        .FirstOrDefault(b => b.Name.Equals(borderName));
+
+                    string toggleName = $"toggleButton{row}";
+                    Button toggle = BackupsGrid.Children
+                        .OfType<Button>()
+                        .FirstOrDefault(b => b.Name.Equals(toggleName));
+
+                    if (border == null || toggle == null) break;
+
+                    ProjetDevSys.AppConstants.backupState.TryGetValue(backup.Key, out string state);
+                    switch(state) {
+                        case ("Stop"):
+                            border.Background = new SolidColorBrush(Colors.Black);
+                            break;
+                        case ("Pause"):
+                            border.Background = new SolidColorBrush(Colors.Red);
+                            break;
+                        case ("Completed"):
+                            border.Background = new SolidColorBrush(Colors.Green);
+                            break;
+                        default:
+                            border.Background = (SolidColorBrush)Application.Current.Resources["Brush2"];
+                            break;
+                    }
+                    //blockerProcess logic
+                    ProjetDevSys.AppConstants.EventState.TryGetValue("processEvent", out string eventState);
+                    if (eventState == "Pause")
+                    {
+                        border.Background = new SolidColorBrush(Colors.Red);
+                        return;
+                    }
+                }
             });
         }
         public void GenerateGrid()
@@ -117,6 +156,7 @@ namespace ProjetDevSysGraphical
 
                 Button toggleButton = new Button
                 {
+                    Name = $"toggleButton{row}",
                     Tag = backup.Key,
                     Width = 30,
                     Height = 30,
