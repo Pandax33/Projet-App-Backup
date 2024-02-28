@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -74,12 +75,14 @@ namespace ProjetDevSysGraphical
                             break;
                         case ("Pause"):
                             border.Background = new SolidColorBrush(Colors.Red);
+                            toggle.Content = "⏸";
                             break;
                         case ("Completed"):
                             border.Background = new SolidColorBrush(Colors.Green);
                             break;
                         default:
                             border.Background = (SolidColorBrush)Application.Current.Resources["Brush2"];
+                            toggle.Content = "▶";
                             break;
                     }
                     //blockerProcess logic
@@ -172,21 +175,7 @@ namespace ProjetDevSysGraphical
 
                 toggleButton.Style = AppConstants.GridButtonStyle();
                 bool isPaused = false; //initial state (logic-wise)
-
-                toggleButton.Click += (sender, e) =>
-                {
-                    if (isPaused)
-                    {
-                        toggleButton.Content = "▶";
-                        RepriseButton_Click(sender, e); 
-                    }
-                    else
-                    {
-                        toggleButton.Content = "⏸";
-                        PauseButton_Click(sender, e);
-                    }
-                    isPaused = !isPaused;
-                };
+                toggleButton.Click += toggleButton_Click;
 
                 Grid.SetRow(toggleButton, row);
                 Grid.SetColumn(toggleButton, 2); 
@@ -215,20 +204,23 @@ namespace ProjetDevSysGraphical
                 row++;
             }
         }
-
-        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        private void toggleButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            ProjetDevSys.AppConstants.PauseBackup(button.Tag.ToString());
-            
+
+            if (button == null) return;
+            ProjetDevSys.AppConstants.backupState.TryGetValue(button.Tag.ToString(), out string state);
+
+            if (state == "Pause")
+            {
+                ProjetDevSys.AppConstants.ResumeBackup(button.Tag.ToString());
+            }
+            else
+            {
+                ProjetDevSys.AppConstants.PauseBackup(button.Tag.ToString());
+            }
         }
 
-        private void RepriseButton_Click(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-            ProjetDevSys.AppConstants.ResumeBackup(button.Tag.ToString());
-
-        }
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -237,8 +229,8 @@ namespace ProjetDevSysGraphical
             string backupName = button.Tag.ToString();
             ProjetDevSys.AppConstants.StopBackup(backupName);
         }
-
     }
+
     class ProgressBarDash : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
