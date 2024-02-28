@@ -8,7 +8,7 @@ namespace ProjetDevSys.Model
 {
     public static class BackupFactory
     {
-        private static readonly Dictionary<string, Backup> _backups = new Dictionary<string, Backup>();
+        public static readonly Dictionary<string, Backup> _backups = new Dictionary<string, Backup>();
         private static readonly JsonManager _jsonManager = new JsonManager(AppConstants.JsonSave);
 
         // Update method to create a backup

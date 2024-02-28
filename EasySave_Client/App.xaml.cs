@@ -1,13 +1,11 @@
-﻿using ProjetDevSys.MODEL;
-using ProjetDevSysGraphical.VueModel;
-using ProjetDevSysGraphical.Watcher;
+﻿
+using EasySave_Client;
 using System.Configuration;
 using System.Data;
-using System.Net.Sockets;
+using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
-using System.Threading;
 
 namespace ProjetDevSysGraphical
 {
@@ -16,77 +14,54 @@ namespace ProjetDevSysGraphical
     /// </summary>
     public partial class App : Application
     {
+        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-        public ProcessWatcher processWatcher;
-        private static Mutex mutex = null;
-        public BackupCompletionWatcher backupCompletionWatcher;
-        private Thread serverThread;
-        private volatile bool serverRunning = true; // Contrôle l'exécution du serveur
-        private Socket serverSocket;
         protected override void OnStartup(StartupEventArgs e)
         {
-
-            const string mutexName = "StartMutex";
-
-            // Tentative de création d'un Mutex.
-            bool createdNew;
-            mutex = new Mutex(true, mutexName, out createdNew);
-
-            if (!createdNew)
-            {
-                MessageBox.Show(ResourceHelper.GetString("StartupPopup1"));
-                Application.Current.Shutdown();
-                return;
-            }
-            SynchronizationContext context = SynchronizationContext.Current;
-            BackupManager.SetSynchronizationContext(context);
-            backupCompletionWatcher = new BackupCompletionWatcher(context);
-            processWatcher = new ProcessWatcher(context);
             base.OnStartup(e);
-            backupCompletionWatcher.StartWatching();
-            processWatcher.StartWatching();
-            serverThread = new Thread(StartServer) { IsBackground = true };
-            serverThread.Start();
             ThemeLoader.LoadTheme();
+            try
+            {
+                ClientSocket.EnsureConnected();
+                StartPeriodicTask();
+            }
+            catch (InvalidOperationException ex) // Attrape spécifiquement l'exception de connexion
+            {
+                MessageBox.Show(ex.Message, "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                // Ferme l'application depuis le thread UI
+                Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
+            }
+            catch (Exception ex) // Attrape toutes les autres exceptions imprévues
+            {
+                MessageBox.Show($"Une erreur inattendue est survenue : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                Application.Current.Dispatcher.Invoke(() => Application.Current.Shutdown());
+            }
+
         }
         protected override void OnExit(ExitEventArgs e)
         {
-            processWatcher.StopWatching();
-            backupCompletionWatcher.StopWatching();
-            serverRunning = false;
-
-            if (serverSocket != null)
-            {
-                serverSocket.Close();
-            }
-            if (mutex != null)
-            {
-                mutex.ReleaseMutex();
-            }
+            cancellationTokenSource.Cancel();
             base.OnExit(e);
         }
 
-        private void StartServer()
+        private async void StartPeriodicTask()
         {
             try
             {
-                var serverSocket = Server.SeConnecter();
-                Console.WriteLine("Serveur démarré. En attente de connexions...");
-
-                while (serverRunning)
+                while (!cancellationTokenSource.Token.IsCancellationRequested)
                 {
-                    Socket clientSocket = Server.AccepterConnexion(serverSocket);
-                    Server.clients.Add(clientSocket);
+                    ClientSocket.GetBackupProgress();
+                    Accueil.CurrentInstance?.GenerateGrid();
+                    
+                    await Task.Delay(1000, cancellationTokenSource.Token); 
 
-                    // Gérer chaque client dans un thread séparé
-                    Thread clientThread = new Thread(() => Server.GestionClient(clientSocket));
-                    clientThread.IsBackground = true;
-                    clientThread.Start();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Erreur lors du démarrage du serveur: {ex.Message}");
+                MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
@@ -110,7 +85,7 @@ namespace ProjetDevSysGraphical
             FontFamily FontButton;
             FontFamily FontBase;
             FontFamily FontGrid;
-            string theme = ProjetDevSys.AppConstants.Theme;
+            string theme = AppConstants.Theme;
 
             //B1 = Background GRID + Bouton
             //B2 = Background Barre de navigation
