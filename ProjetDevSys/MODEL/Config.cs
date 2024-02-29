@@ -219,7 +219,7 @@ namespace ProjetDevSys.Model
             try
             {
                 string jsonContent = File.ReadAllText(configFilePath);
-                var config = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonContent);
+                Dictionary<string, JsonElement> config = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jsonContent);
 
                 if (config != null && config.ContainsKey("Logging") && config["Logging"].TryGetProperty("JsonPath", out JsonElement jsonPathElement))
                 {
@@ -350,7 +350,7 @@ namespace ProjetDevSys.Model
                 : new Dictionary<string, JsonElement>();
 
             // Définir les valeurs par défaut pour chaque élément de configuration nécessaire
-            var defaultValues = new Dictionary<string, object>
+            Dictionary<string, object> defaultValues = new Dictionary<string, object>
             {
                 {"Logging", new { JsonPath = defaultConfig.Logging.JsonPath }},
                 {"Langage", new { Langage = defaultConfig.Langage.Langage }},

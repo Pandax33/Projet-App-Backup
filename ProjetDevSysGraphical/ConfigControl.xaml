@@ -707,8 +707,8 @@
                                 <ComboBox Name="themeSelector"  Grid.Row="2" Grid.Column="2">
                                     <ComboBoxItem>Default</ComboBoxItem>
                                     <ComboBoxItem>Legacy</ComboBoxItem>
-                                    <ComboBoxItem>Moche</ComboBoxItem>
-                                    <ComboBoxItem>Portugal</ComboBoxItem>
+                                    <ComboBoxItem>Rouge</ComboBoxItem>
+                                    <ComboBoxItem>Sougal</ComboBoxItem>
                                     <ComboBoxItem>Raimon</ComboBoxItem>
                                     <ComboBoxItem>Dark</ComboBoxItem>
                                 </ComboBox>

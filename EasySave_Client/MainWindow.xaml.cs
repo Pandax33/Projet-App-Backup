@@ -107,5 +107,10 @@ namespace ProjetDevSysGraphical
         {
             contentControl.Content = new IpView();
         }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            contentControl.Content = new BackupView();
+        }
     }
 }

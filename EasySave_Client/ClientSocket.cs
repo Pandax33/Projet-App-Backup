@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ProjetDevSysGraphical;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Collections.Concurrent;
+using ProjetDevSys.Model;
+using System.Diagnostics;
 namespace EasySave_Client
 {
     public static class ClientSocket
@@ -27,6 +29,7 @@ namespace EasySave_Client
                 {
                     _clientSocket.Connect(ServerIp, ServerPort);
                     MessageBox.Show("Connecté au serveur.");
+                    ClientSocket.GetBackup();
                     isRunning = true;
                 }
                 catch (Exception ex)
@@ -101,14 +104,18 @@ namespace EasySave_Client
 
         public static void GetBackup()
         {
-            SendCommand("get_backup");
+            string responseJson = SendAndReceiveCommand("get_backup");
+            Dictionary<string, Backup> receivedBackups = JsonConvert.DeserializeObject<Dictionary<string, Backup>>(responseJson);
+
+            AppConstants.backups = receivedBackups;
+
         }
 
         public static void GetBackupProgress()
         {
 
             string responseJson = SendAndReceiveCommand("get_backup_progress");
-            Dictionary<string, double> progressDict = JsonSerializer.Deserialize<Dictionary<string, double>>(responseJson);
+            Dictionary<string, double> progressDict = JsonConvert.DeserializeObject<Dictionary<string, double>>(responseJson);
             Dictionary<string, double> progress = new Dictionary<string, double>(progressDict);
             if (progress != null)
             {
@@ -163,6 +170,16 @@ namespace EasySave_Client
                 await Task.Delay(1000, cancellationTokenSource.Token);
 
             }
+        }
+
+        public static void LaunchBackup(int[] backupIds)
+        {
+            string command = "launchBackup";
+            foreach (var id in backupIds)
+            {
+                command += "_" + id; 
+            }
+            string response = SendAndReceiveCommand(command);
         }
     }
 }

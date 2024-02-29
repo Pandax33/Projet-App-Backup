@@ -66,9 +66,9 @@ namespace ProjetDevSysGraphical
                     Grid.SetColumnSpan(border, 8);
                 };
 
-                var commonMargin = new Thickness(5, 10, 5, 5);
+                Thickness commonMargin = new Thickness(5, 10, 5, 5);
 
-                var nameLabel = new TextBlock { 
+                TextBlock nameLabel = new TextBlock { 
                     Text = backup.Key,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
@@ -83,7 +83,7 @@ namespace ProjetDevSysGraphical
                 BackupsGrid.Children.Add(nameLabel);
 
 
-                var progressBar = new ProgressBar
+                ProgressBar progressBar = new ProgressBar
                 {
                     Name = $"ProgressBar_{backup.Key}",
                     Value = backup.Value,
@@ -161,20 +161,20 @@ namespace ProjetDevSysGraphical
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            Button button = sender as Button;
             ClientSocket.PauseBackup(button.Tag.ToString());
             
         }
 
         private void RepriseButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            Button button = sender as Button;
             ClientSocket.ResumeBackup(button.Tag.ToString());
 
         }
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            Button button = sender as Button;
             if (button == null) return;
 
             string backupName = button.Tag.ToString();
