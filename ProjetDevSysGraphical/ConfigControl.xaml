@@ -651,7 +651,7 @@
                                 <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                     <ListView.View>
                                         <GridView x:Name="blockerGridView">
-                                            <GridViewColumn Width="750" Header="processes"  DisplayMemberBinding="{Binding process}"/>
+                                            <GridViewColumn Width="500" Header="processes"  DisplayMemberBinding="{Binding process}"/>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
@@ -817,10 +817,10 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Name="IsServOnTitle" Content="{local:LangageExtension Key='Config.Serv0'}" Style="{StaticResource TitleStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                                
-                                <TextBlock Text="{local:LangageExtension Key='Config.Serv1'}" Foreground="{StaticResource Brush3}" Grid.Row="1" Grid.Column="1"/>
-                                <CheckBox Name="IsServOnSelector" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" />
-
+                                <WrapPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+                                <TextBlock Text="{local:LangageExtension Key='Config.Serv1'}" Foreground="{StaticResource Brush3}" HorizontalAlignment="Center" Margin="5"/>
+                                <CheckBox Name="IsServOnSelector" HorizontalAlignment="Right" Background="{StaticResource Brush2}" BorderThickness="0" Margin="5"/>
+                                </WrapPanel>
                             </Grid>
                         </Border>
                     </Grid>

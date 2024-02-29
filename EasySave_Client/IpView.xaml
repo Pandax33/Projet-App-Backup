@@ -3,11 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:EasySave_Client"
+             xmlns:local="clr-namespace:ProjetDevSysGraphical"
              mc:Ignorable="d">
+    <UserControl.Resources>
+
+        <Style TargetType="TextBox">
+            <Setter Property="MaxWidth" Value="600" />
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="Background" Value="{StaticResource Brush2}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FontFamily" Value="{StaticResource FontBase}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="ButtonBottomStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Brush4}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource Brush2}" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="3" Direction="330" Color="Gray"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Label" x:Key="TitleStyle">
+            <Setter Property="FontFamily" Value="{StaticResource FontTitle}"/>
+            <Setter Property="Foreground" Value="{StaticResource Brush3}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </UserControl.Resources>
     <StackPanel Margin="10">
-        <Label>Adresse IP:</Label>
+        <Label Content="{local:LangageExtension Key='Task.IP.Title'}" Style="{StaticResource TitleStyle}" HorizontalAlignment="Center"/>
         <TextBox x:Name="ipTextBox" Margin="0,5"/>
-        <Button Content="Connexion" Margin="0,10" Click="ConnectButton_Click"/>
+        <Button Content="{local:LangageExtension Key='Task.IP.Action'}" Margin="0,10" Click="ConnectButton_Click" Style="{StaticResource ButtonBottomStyle}"/>
     </StackPanel>
 </UserControl>
