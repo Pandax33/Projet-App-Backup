@@ -37,7 +37,7 @@ namespace EasySave_Client
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show(ex.Message, "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, ResourceHelper.GetString("IpViewPopup"), MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
 

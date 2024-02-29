@@ -61,6 +61,24 @@ namespace ProjetDevSysGraphical {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup completed successfully !.
+        /// </summary>
+        internal static string BackupCompletionWatcher_TextFinish {
+            get {
+                return ResourceManager.GetString("BackupCompletionWatcher.TextFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup Complete : .
+        /// </summary>
+        internal static string BackupCompletionWatcher_TittleFinish {
+            get {
+                return ResourceManager.GetString("BackupCompletionWatcher.TittleFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A blocking process has been detected. Backups are paused.
         /// </summary>
         internal static string BackupWatcher_TextPopupFind {
