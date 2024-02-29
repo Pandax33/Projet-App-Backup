@@ -28,13 +28,13 @@ namespace EasySave_Client
                 try
                 {
                     _clientSocket.Connect(ServerIp, ServerPort);
-                    MessageBox.Show("Connecté au serveur.");
+                    MessageBox.Show(ResourceHelper.GetString("Client.Connection"));
                     ClientSocket.GetBackup();
                     isRunning = true;
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Impossible de se connecter au serveur : {ex.Message}", ex);
+                    throw new InvalidOperationException(ResourceHelper.GetString("Client.ConnectionFailed") + ex.Message, ex);
                 }
             }
         }
@@ -50,29 +50,11 @@ namespace EasySave_Client
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de l'envoi de la commande : {ex.Message}");
+                    MessageBox.Show(ResourceHelper.GetString("Client.FailSend") + ex.Message);
                 }
             }
         }
 
-        public static string ReceiveResponse()
-        {
-            try
-            {
-                byte[] buffer = new byte[2048];
-                int received = _clientSocket.Receive(buffer);
-                if (received == 0) return null;
-
-                string response = Encoding.UTF8.GetString(buffer, 0, received);
-                MessageBox.Show($"Réponse reçue du serveur :\n{response}");
-                return response;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erreur lors de la réception de la réponse : {ex.Message}");
-                return null;
-            }
-        }
 
         public static void CloseConnection()
         {
@@ -82,11 +64,11 @@ namespace EasySave_Client
                 {
                     _clientSocket.Shutdown(SocketShutdown.Both);
                     _clientSocket.Close();
-                    MessageBox.Show("Connexion fermée.");
+                    MessageBox.Show(ResourceHelper.GetString("Client.Close"));
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de la fermeture de la connexion : {ex.Message}");
+                    MessageBox.Show(ResourceHelper.GetString("Client.FailClose") + ex.Message);
                 }
                 _clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); // Préparer pour une nouvelle connexion
             }
