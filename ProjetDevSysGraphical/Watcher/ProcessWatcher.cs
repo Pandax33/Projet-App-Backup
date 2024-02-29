@@ -41,13 +41,13 @@ namespace ProjetDevSysGraphical.Watcher
 
                 if (blockerProcessFound && !previousState)
                 {
-                    uiContext.Post(_ => MessageBox.Show("Un processus bloquant a été détecté. Les sauvegardes sont en pause.", "Processus Bloquant Détecté", MessageBoxButton.OK, MessageBoxImage.Warning), null);
+                    uiContext.Post(_ => MessageBox.Show(ResourceHelper.GetString("BackupWatcher.TextPopupFind"), ResourceHelper.GetString("BackupWatcher.TittlePopupFind"), MessageBoxButton.OK, MessageBoxImage.Warning), null);
                     ProjetDevSys.AppConstants.EventState.TryAdd("processEvent", "Pause");
                     ProjetDevSys.AppConstants.processEvent.Reset();
                 }
                 else if (!blockerProcessFound && previousState)
                 {
-                    uiContext.Post(_ => MessageBox.Show("Tous les processus bloquants ont été résolus. Les sauvegardes reprennent.", "Processus Bloquant Résolu", MessageBoxButton.OK, MessageBoxImage.Information), null);
+                    uiContext.Post(_ => MessageBox.Show(ResourceHelper.GetString("BackupWatcher.TextPopupResolve"), ResourceHelper.GetString("BackupWatcher.TittlePopupResolve"), MessageBoxButton.OK, MessageBoxImage.Information), null);
                     ProjetDevSys.AppConstants.processEvent.Set();
                     ProjetDevSys.AppConstants.EventState.TryAdd("processEvent", "Libre");
                 }

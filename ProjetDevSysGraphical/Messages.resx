@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BackupWatcher.TextPopupFind" xml:space="preserve">
+    <value>A blocking process has been detected. Backups are paused</value>
+  </data>
+  <data name="BackupWatcher.TextPopupResolve" xml:space="preserve">
+    <value>All blocking processes have been resolved. Backups are resumed.</value>
+  </data>
+  <data name="BackupWatcher.TittlePopupFind" xml:space="preserve">
+    <value>Blocking process detected</value>
+  </data>
+  <data name="BackupWatcher.TittlePopupResolve" xml:space="preserve">
+    <value>Blocking Process Resolved</value>
+  </data>
   <data name="Config.Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
