@@ -26,7 +26,6 @@ namespace ProjetDevSys.MODEL
         public static Socket AccepterConnexion(Socket serverSocket)
         {
             Socket clientSocket = serverSocket.Accept();
-            Console.WriteLine($"Client connecté Adresse IP: {((IPEndPoint)clientSocket.RemoteEndPoint).Address}, Port: {((IPEndPoint)clientSocket.RemoteEndPoint).Port}");
             return clientSocket;
         }
         public static void EcouterReseau(Socket clientSocket)

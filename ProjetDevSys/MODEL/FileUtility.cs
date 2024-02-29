@@ -77,10 +77,6 @@ namespace ProjetDevSys.MODEL
 
                     LogRealTime.TimeCrypt = timeCrypt;
                 }
-                else
-                {
-                    Console.WriteLine($"Le cryptage du fichier {sourceFilePath} a échoué avec le code de sortie {process.ExitCode}.");
-                }
             }
         }
 
