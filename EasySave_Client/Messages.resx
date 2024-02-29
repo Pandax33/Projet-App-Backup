@@ -282,6 +282,12 @@
   <data name="Task.Grid.Type" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="Task.IP.Action" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="Task.IP.Title" xml:space="preserve">
+    <value>Server Connection</value>
+  </data>
   <data name="Task.LaunchAll" xml:space="preserve">
     <value>Launch every tasks</value>
   </data>
