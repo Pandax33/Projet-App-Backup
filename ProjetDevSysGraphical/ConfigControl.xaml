@@ -650,7 +650,7 @@
                                 <ListView Name="blockerListView"  Grid.Row="3" Grid.Column="2" ItemContainerStyle="{StaticResource ListViewItemStyle}">
                                     <ListView.View>
                                         <GridView x:Name="blockerGridView">
-                                            <GridViewColumn Width="750" Header="processes"  DisplayMemberBinding="{Binding process}"/>
+                                            <GridViewColumn Width="500" Header="processes"  DisplayMemberBinding="{Binding process}"/>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>

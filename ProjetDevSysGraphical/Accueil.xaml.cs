@@ -92,6 +92,7 @@ namespace ProjetDevSysGraphical
                         border.Background = new SolidColorBrush(Colors.Red);
                         return;
                     }
+                    row++;
                 }
             });
         }
