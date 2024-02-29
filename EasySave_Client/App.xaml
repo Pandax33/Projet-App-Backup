@@ -1,0 +1,17 @@
+﻿<Application x:Class="ProjetDevSysGraphical.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ProjetDevSysGraphical"
+             StartupUri="MainWindow.xaml"
+             ShutdownMode="OnLastWindowClose">
+    <Application.Resources>
+        <SolidColorBrush x:Key="BrushBG" Color="#463F3A"/>
+        <SolidColorBrush x:Key="Brush1" Color="#8A817C"/>
+        <SolidColorBrush x:Key="Brush2" Color="#BCB8B1"/>
+        <SolidColorBrush x:Key="Brush3" Color="#F4F3EE"/>
+        <SolidColorBrush x:Key="Brush4" Color="#E0AFA0"/>
+        <FontFamily x:Key="FontTitle"/>
+        <FontFamily x:Key="FontButton"/>
+        <FontFamily x:Key="FontBase"/>
+    </Application.Resources>
+</Application>

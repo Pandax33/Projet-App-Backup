@@ -41,12 +41,9 @@ namespace ProjetDevSysGraphical.Watcher
         {
             while (isWatching)
             {
-                var completedBackups = ProjetDevSys.AppConstants.backupState
-                    .Where(kvp => kvp.Value == "Completed") // Supposons que "Completed" indique une sauvegarde terminée.
-                    .Select(kvp => kvp.Key)
-                    .ToList();
+                List<string> completedBackups = ProjetDevSys.AppConstants.backupState.Where(kvp => kvp.Value == "Completed").Select(kvp => kvp.Key).ToList();
 
-                foreach (var backupName in completedBackups)
+                foreach (string backupName in completedBackups)
                 {
                     string unused;
                     ProjetDevSys.AppConstants.backupState.TryRemove(backupName, out unused);

@@ -5,6 +5,9 @@ using System.IO;
 using ProjetDevSys.Model;
 using System.Diagnostics;
 using System.Collections.Concurrent;
+using System.Net.Sockets;
+using System.Net.WebSockets;
+using ProjetDevSys.MODEL;
 
 namespace ProjetDevSys
 {
@@ -19,9 +22,11 @@ namespace ProjetDevSys
         public static string CryptPath;
         public static string KeyCrypt;
         public static List<string> ExtensionListPriority;
+        public static bool IsServOn;
         public static long FileSize;
         public static string FileSizeUnit;
-
+        public static Thread serverThread;
+        public static Socket serverSocket;
         public static ConcurrentDictionary<string, double> backupProgress = new ConcurrentDictionary<string, double>();
         public static ConcurrentDictionary<string, ManualResetEvent> BackupPauseHandles = new ConcurrentDictionary<string, ManualResetEvent>();
         public static ConcurrentDictionary<string, CancellationTokenSource> BackupCancellations = new ConcurrentDictionary<string, CancellationTokenSource>();
@@ -72,6 +77,7 @@ namespace ProjetDevSys
                 ExtensionListPriority = new List<string>(config.ExtensionListPriority.ExtensionListPriority.ToObject<List<string>>());
                 Theme = config.WPF.Theme;
                 BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
+                IsServOn = config.IsServOn.IsServOn;
                 FileSize = config.FileSize.FileSize;
                 FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
                 Config.Initialize();
@@ -138,6 +144,7 @@ namespace ProjetDevSys
             KeyCrypt = config.KeyCrypt.KeyCrypt;
             BlockerProcess = new List<string>(config.BlockerProcess.BlockerProcess.ToObject<List<string>>());
             Theme = config.WPF.Theme;
+            IsServOn = config.IsServOn.IsServOn;
             FileSize = config.FileSize.FileSize;
             FileSizeUnit = config.FileSizeUnit.FileSizeUnit;
             CultureInfo ci = new CultureInfo(Langage);
@@ -183,8 +190,30 @@ namespace ProjetDevSys
                 cts.Cancel(); // Envoie une demande d'annulation à la tâche
                 backupState.TryAdd(backupName, "Stop");
             }
+      
+        }
 
-            
+        public static void StartServer()
+        {
+            try
+            {
+                Socket serverSocket = Server.SeConnecter();
+                Server.serverRunning = true;
+                while (Server.serverRunning)
+                {
+                    Socket clientSocket = Server.AccepterConnexion(serverSocket);
+                    Server.clients.Add(clientSocket);
+
+                    // Gérer chaque client dans un thread séparé
+                    Thread clientThread = new Thread(() => Server.GestionClient(clientSocket));
+                    clientThread.IsBackground = true;
+                    clientThread.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors du démarrage du serveur: {ex.Message}");
+            }
         }
 
 

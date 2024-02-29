@@ -162,10 +162,9 @@
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-                <Button Content="{local:LangageExtension Key='Selector1'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="1" Click="Home_Click"/>
-                <Button Content="{local:LangageExtension Key='Selector2'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="3" Click="Backup_Click"/>
-                <Button Content="{local:LangageExtension Key='Selector3'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="5" Click="Settings_Click"/>
+                    <Button Content="{local:LangageExtension Key='Selector4'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="1" Click="Ip_Click"/>
+                    <Button Content="{local:LangageExtension Key='Selector1'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="3" Click="Home_Click"/>
+                    
             </Grid>
         </Border>
 

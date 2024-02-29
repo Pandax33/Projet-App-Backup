@@ -163,6 +163,13 @@ namespace ProjetDevSys.VueModel
             return ResourceHelper.GetString("ConfigViewModel1");
         }
 
+        public string EditServerStatus(bool IsServOn)
+        {
+            Config.IsServOn = IsServOn;
+            Config.EditConfig();
+            return ResourceHelper.GetString("ConfigViewModel1");
+        }
+
         public bool verifInputLanguage(string input)
         {
             if (input == "fr" || input == "en")

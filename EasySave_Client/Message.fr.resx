@@ -118,210 +118,210 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Config.Apply" xml:space="preserve">
-    <value>Apply</value>
+    <value>Appliquer</value>
   </data>
   <data name="Config.Blocker1" xml:space="preserve">
-    <value>Blocker processes : if detected backup is interrupted</value>
+    <value>Processus bloquants</value>
   </data>
   <data name="Config.Blocker2" xml:space="preserve">
-    <value>Insert a Process name :</value>
+    <value>Processus :</value>
   </data>
   <data name="Config.Crypto1" xml:space="preserve">
-    <value>CryptoSave Configuration</value>
+    <value>CryptoSave</value>
   </data>
   <data name="Config.Crypto2" xml:space="preserve">
-    <value>CryptoSave Path :</value>
+    <value>Chemin du logiciel :</value>
   </data>
   <data name="Config.Crypto3" xml:space="preserve">
-    <value>CryptoSave extensions to encrypt :</value>
+    <value>Extensions à chiffrer :</value>
   </data>
   <data name="Config.Crypto4" xml:space="preserve">
     <value>Extensions</value>
   </data>
   <data name="Config.FileSize0" xml:space="preserve">
-    <value>Size of heavy files</value>
+    <value>Taille minimale des fichiers lourds</value>
   </data>
   <data name="Config.FileSize1" xml:space="preserve">
-    <value>Size:</value>
+    <value>Taille minimale :</value>
   </data>
   <data name="Config.FileSize2" xml:space="preserve">
-    <value>Unit:</value>
+    <value>Unité :</value>
   </data>
   <data name="Config.Languages1" xml:space="preserve">
-    <value>Change localization</value>
+    <value>Langue</value>
   </data>
   <data name="Config.Languages2" xml:space="preserve">
-    <value>Select a language :</value>
+    <value>Langue :</value>
   </data>
   <data name="Config.Log1" xml:space="preserve">
-    <value>Log Files Configuration</value>
+    <value>Fichiers de logs</value>
   </data>
   <data name="Config.Log2" xml:space="preserve">
-    <value>Daily Log Path :</value>
+    <value>Chemin des logs journaliers :</value>
   </data>
   <data name="Config.Log3" xml:space="preserve">
-    <value>Real-Time Log Path :</value>
+    <value>Chemin des logs en temps réel :</value>
   </data>
   <data name="Config.Log4" xml:space="preserve">
-    <value>Logs Extension type :</value>
+    <value>Type d'extension :</value>
   </data>
   <data name="Config.Priority1" xml:space="preserve">
-    <value>Priority files</value>
+    <value>Fichiers prioritaires</value>
   </data>
   <data name="Config.Priority3" xml:space="preserve">
-    <value>Extension of files to prioritize:</value>
+    <value>Extension à prioriser :</value>
   </data>
   <data name="Config.Reset" xml:space="preserve">
-    <value>Reset</value>
+    <value>Réinitialiser</value>
   </data>
   <data name="Config.SavePath1" xml:space="preserve">
-    <value>Path to backups save file</value>
+    <value>Sauvegarde des tâches</value>
   </data>
   <data name="Config.SavePath2" xml:space="preserve">
-    <value>Insert the path to your backups save file :</value>
-  </data>
-  <data name="Config.Serv0" xml:space="preserve">
-    <value>Remote interface</value>
-  </data>
-  <data name="Config.Serv1" xml:space="preserve">
-    <value>Turn on the server:</value>
+    <value>Fichier de sauvegarde :</value>
   </data>
   <data name="Config.Tab1" xml:space="preserve">
-    <value>Log Files</value>
+    <value>Fichiers logs</value>
   </data>
   <data name="Config.Tab2" xml:space="preserve">
     <value>CryptoSave</value>
   </data>
   <data name="Config.Tab3" xml:space="preserve">
-    <value>Language</value>
+    <value>Langues</value>
   </data>
   <data name="Config.Tab4" xml:space="preserve">
-    <value>Blocker Process</value>
+    <value>Processus bloquants</value>
   </data>
   <data name="Config.Tab5" xml:space="preserve">
-    <value>Save Paths</value>
+    <value>Chemin de sauvegarde</value>
   </data>
   <data name="Config.Themes1" xml:space="preserve">
-    <value>App theme</value>
+    <value>Thème de l'application</value>
   </data>
   <data name="Config.Themes2" xml:space="preserve">
-    <value>Theme:</value>
+    <value>Thème : </value>
   </data>
   <data name="Home1" xml:space="preserve">
-    <value>Welcome !</value>
+    <value>Bienvenue !</value>
   </data>
   <data name="ResetConfig" xml:space="preserve">
-    <value>Are you sure you want to reset all settings ?</value>
+    <value>Voulez vous vraiment réinitialiser les paramètres ?</value>
   </data>
   <data name="RunTaskView11" xml:space="preserve">
-    <value>Save done</value>
+    <value>Sauvegarde effectuée</value>
   </data>
   <data name="RunTaskView12" xml:space="preserve">
-    <value>saves done</value>
+    <value>sauvegardes effectuées</value>
   </data>
   <data name="RunTaskView4" xml:space="preserve">
-    <value>A Blocker process is in use (your backups will be done when the process is closed)</value>
+    <value>Un processus Bloquant est en cours d'utilisation (vos sauvegardes seront effectuées lorsque le processus sera fermé)</value>
   </data>
   <data name="RunTaskView5" xml:space="preserve">
-    <value>Processus Error</value>
+    <value>Processus Erreur</value>
   </data>
   <data name="RunTaskView6" xml:space="preserve">
-    <value>All the saves are done</value>
+    <value>Toutes les sauvegardes ont été effectuées</value>
   </data>
   <data name="Selector1" xml:space="preserve">
-    <value>Home</value>
+    <value>Accueil</value>
   </data>
   <data name="Selector2" xml:space="preserve">
-    <value>Saves</value>
+    <value>Sauvegarde</value>
   </data>
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
   </data>
+  <data name="Selector4" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
   <data name="StartupPopup1" xml:space="preserve">
-    <value>Proceedings are already underway.</value>
+    <value>Une instance est déjà en cours.</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
   <data name="Task.Add.Title" xml:space="preserve">
-    <value>Add a task</value>
+    <value>Ajouter une tâche</value>
+  </data>
+  <data name="Task.Add1" xml:space="preserve">
+    <value>Nom :</value>
+  </data>
+  <data name="Task.Add2" xml:space="preserve">
+    <value>Source :</value>
+  </data>
+  <data name="Task.Add3" xml:space="preserve">
+    <value>Cible :</value>
   </data>
   <data name="Task.AddButton" xml:space="preserve">
-    <value>Add a task</value>
+    <value>Ajouter une tâche</value>
   </data>
   <data name="Task.Apply" xml:space="preserve">
-    <value>Apply</value>
+    <value>Valider</value>
   </data>
   <data name="Task.Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Annuler</value>
   </data>
   <data name="Task.Delete" xml:space="preserve">
-    <value>Result</value>
+    <value>Tâche supprimée avec succès</value>
   </data>
   <data name="Task.DeleteInfo" xml:space="preserve">
-    <value>Task deleted successfully</value>
+    <value>Résultat</value>
   </data>
   <data name="Task.Edit.Title" xml:space="preserve">
-    <value>Edit a task</value>
+    <value>Editer une tâche</value>
   </data>
   <data name="Task.Grid.Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Supprimer</value>
   </data>
   <data name="Task.Grid.Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Editer</value>
   </data>
   <data name="Task.Grid.ID" xml:space="preserve">
     <value>ID</value>
   </data>
   <data name="Task.Grid.Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Nom</value>
   </data>
   <data name="Task.Grid.Select" xml:space="preserve">
-    <value>Select</value>
+    <value>Sélectionner</value>
   </data>
   <data name="Task.Grid.Source" xml:space="preserve">
     <value>Source</value>
   </data>
   <data name="Task.Grid.Target" xml:space="preserve">
-    <value>Target</value>
+    <value>Cible</value>
   </data>
   <data name="Task.Grid.Type" xml:space="preserve">
     <value>Type</value>
   </data>
   <data name="Task.LaunchAll" xml:space="preserve">
-    <value>Launch every tasks</value>
+    <value>Lancer toutes les tâches</value>
   </data>
   <data name="Task.LaunchSelect" xml:space="preserve">
-    <value>Launch all selected tasks</value>
+    <value>Lancer les tâches sélectionnées</value>
   </data>
   <data name="Task.Popup.Add1" xml:space="preserve">
-    <value>Problem: source doesn't exist</value>
+    <value>Problème : la source n'existe pas</value>
   </data>
   <data name="Task.Popup.Add2" xml:space="preserve">
-    <value>Problem: target doesn't exist</value>
+    <value>Problème : la cible n'existe pas</value>
   </data>
   <data name="Task.Popup.Add3" xml:space="preserve">
-    <value>Problem: source and target doesn't exist</value>
+    <value>Problème : ni la source ni la cible n'existent</value>
   </data>
   <data name="Task.Popup.Add4" xml:space="preserve">
-    <value>Please fill out all the entries</value>
+    <value>Veuillez fournir toutes les informations</value>
   </data>
   <data name="Task.Popup.Out" xml:space="preserve">
-    <value>Result</value>
+    <value>Résultat</value>
   </data>
   <data name="Task.Popup.Warning" xml:space="preserve">
-    <value>Problem</value>
-  </data>
-  <data name="Task.Prompt1" xml:space="preserve">
-    <value>Name :</value>
-  </data>
-  <data name="Task.Prompt2" xml:space="preserve">
-    <value>Source Path :</value>
-  </data>
-  <data name="Task.Prompt3" xml:space="preserve">
-    <value>Target Path :</value>
+    <value>Problème</value>
   </data>
   <data name="Task.Type1" xml:space="preserve">
-    <value>Complete</value>
+    <value>Complète</value>
   </data>
   <data name="Task.Type2" xml:space="preserve">
-    <value>Differential</value>
+    <value>Differentielle</value>
   </data>
 </root>

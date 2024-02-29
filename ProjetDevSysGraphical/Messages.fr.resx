@@ -180,6 +180,12 @@
   <data name="Config.SavePath2" xml:space="preserve">
     <value>Fichier de sauvegarde :</value>
   </data>
+  <data name="Config.Serv0" xml:space="preserve">
+    <value>Interface déportée</value>
+  </data>
+  <data name="Config.Serv1" xml:space="preserve">
+    <value>Allumer le serveur :</value>
+  </data>
   <data name="Config.Tab1" xml:space="preserve">
     <value>Fichiers logs</value>
   </data>

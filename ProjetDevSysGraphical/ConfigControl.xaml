@@ -436,6 +436,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -796,6 +797,29 @@
                                     <ComboBoxItem Content="Mo"/>
                                     <ComboBoxItem Content="Go"/>
                                 </ComboBox>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Row="8" Grid.Column="0">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Name="IsServOnTitle" Content="{local:LangageExtension Key='Config.Serv0'}" Style="{StaticResource TitleStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                                
+                                <TextBlock Text="{local:LangageExtension Key='Config.Serv1'}" Foreground="{StaticResource Brush3}" Grid.Row="1" Grid.Column="1"/>
+                                <CheckBox Name="IsServOnSelector" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" />
 
                             </Grid>
                         </Border>

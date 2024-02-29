@@ -1,13 +1,11 @@
-﻿using ProjetDevSys.MODEL;
-using ProjetDevSysGraphical.VueModel;
-using ProjetDevSysGraphical.Watcher;
+﻿
+using EasySave_Client;
 using System.Configuration;
 using System.Data;
-using System.Net.Sockets;
+using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
-using System.Threading;
 
 namespace ProjetDevSysGraphical
 {
@@ -17,55 +15,18 @@ namespace ProjetDevSysGraphical
     public partial class App : Application
     {
 
-        public ProcessWatcher processWatcher;
-        private static Mutex mutex = null;
-        public BackupCompletionWatcher backupCompletionWatcher;
-        private volatile bool serverRunning = true;
         protected override void OnStartup(StartupEventArgs e)
         {
-
-            const string mutexName = "StartMutex";
-
-            // Tentative de création d'un Mutex.
-            bool createdNew;
-            mutex = new Mutex(true, mutexName, out createdNew);
-
-            if (!createdNew)
-            {
-                MessageBox.Show(ResourceHelper.GetString("StartupPopup1"));
-                Application.Current.Shutdown();
-                return;
-            }
-            SynchronizationContext context = SynchronizationContext.Current;
-            BackupManager.SetSynchronizationContext(context);
-            backupCompletionWatcher = new BackupCompletionWatcher(context);
-            processWatcher = new ProcessWatcher(context);
             base.OnStartup(e);
-            backupCompletionWatcher.StartWatching();
-            processWatcher.StartWatching();
-            if (ProjetDevSys.AppConstants.IsServOn)
-            {
-                ProjetDevSys.AppConstants.serverThread = new Thread(ProjetDevSys.AppConstants.StartServer) { IsBackground = true };
-                ProjetDevSys.AppConstants.serverThread.Start();
-            }
-            ThemeLoader.LoadTheme();
+            ThemeLoader.LoadTheme();  
+
         }
         protected override void OnExit(ExitEventArgs e)
         {
-            processWatcher.StopWatching();
-            backupCompletionWatcher.StopWatching();
-            Server.serverRunning = false;
-
-            if (ProjetDevSys.AppConstants.serverSocket != null)
-            {
-                ProjetDevSys.AppConstants.serverSocket.Close();
-            }
-            if (mutex != null)
-            {
-                mutex.ReleaseMutex();
-            }
+            ClientSocket.cancellationTokenSource.Cancel();
             base.OnExit(e);
         }
+
 
     }
 
@@ -88,7 +49,7 @@ namespace ProjetDevSysGraphical
             FontFamily FontButton;
             FontFamily FontBase;
             FontFamily FontGrid;
-            string theme = ProjetDevSys.AppConstants.Theme;
+            string theme = AppConstants.Theme;
 
             //B1 = Background GRID + Bouton
             //B2 = Background Barre de navigation

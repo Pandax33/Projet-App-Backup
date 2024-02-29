@@ -180,12 +180,6 @@
   <data name="Config.SavePath2" xml:space="preserve">
     <value>Insert the path to your backups save file :</value>
   </data>
-  <data name="Config.Serv0" xml:space="preserve">
-    <value>Remote interface</value>
-  </data>
-  <data name="Config.Serv1" xml:space="preserve">
-    <value>Turn on the server:</value>
-  </data>
   <data name="Config.Tab1" xml:space="preserve">
     <value>Log Files</value>
   </data>
@@ -236,6 +230,9 @@
   </data>
   <data name="Selector3" xml:space="preserve">
     <value>Configuration</value>
+  </data>
+  <data name="Selector4" xml:space="preserve">
+    <value>Connection</value>
   </data>
   <data name="StartupPopup1" xml:space="preserve">
     <value>Proceedings are already underway.</value>
