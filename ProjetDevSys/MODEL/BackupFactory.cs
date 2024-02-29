@@ -132,7 +132,7 @@ namespace ProjetDevSys.Model
         public static Backup GetBackupByIndex(int index)
         {
             // Convert the dictionary values to a list
-            var backupList = _backups.Values.ToList();
+            List<Backup> backupList = _backups.Values.ToList();
             if (index >= 0 && index < backupList.Count)
             {
                 return backupList[index];

@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+
+using ProjetDevSys.Model;
 namespace ProjetDevSysGraphical
 {
     public static class AppConstants
@@ -15,6 +17,7 @@ namespace ProjetDevSysGraphical
         public static ConcurrentDictionary<string, CancellationTokenSource> BackupCancellations = new ConcurrentDictionary<string, CancellationTokenSource>();
         public static ConcurrentDictionary<string, string> backupState = new ConcurrentDictionary<string, string>();
         public static ConcurrentDictionary<string, string> EventState = new ConcurrentDictionary<string, string>();
+        public static Dictionary<string, Backup> backups = new Dictionary<string, Backup>();
         public static string Theme = "Raimon";
         public static Style GridButtonStyle()
         {

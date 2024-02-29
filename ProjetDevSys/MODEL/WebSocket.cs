@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using ProjetDevSys.VueModel;
 
 namespace ProjetDevSys.MODEL
 {
@@ -120,6 +121,20 @@ namespace ProjetDevSys.MODEL
                         }
                         BroadcasterMessage(message, clientSocket);
                     }
+                    if (parts[0].ToLower() == "launchbackup" && parts.Length > 1)
+                    {
+                        int[] backupIds = parts.Skip(1).Select(id =>
+                        {
+                            int.TryParse(id, out int parsedId);
+                            return parsedId;
+                        }).ToArray();
+
+                        BackupManager.AddBackupToQueue(backupIds);
+
+                        string confirmation = "Backups added to queue";
+                        clientSocket.Send(Encoding.UTF8.GetBytes(confirmation));
+                        continue; 
+                    }
                 }
             }
             catch (Exception ex)
@@ -129,7 +144,7 @@ namespace ProjetDevSys.MODEL
             finally
             {
                 clientSocket.Close();
-                clients.TryTake(out var _); // Retire le client de la liste
+                clients.TryTake(out var _);
             }
         }
 
@@ -137,7 +152,7 @@ namespace ProjetDevSys.MODEL
         {
             foreach (var client in clients)
             {
-                if (client != senderSocket) // Pour envoyer à tous les clients, y compris l'émetteur, supprimez cette ligne
+                if (client != senderSocket)
                 {
                     try
                     {

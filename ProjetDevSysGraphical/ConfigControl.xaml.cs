@@ -223,7 +223,7 @@ namespace ProjetDevSysGraphical
             Refresh();
             if (needRestart)
             {
-                var mainWindow = App.Current.MainWindow as MainWindow;
+                MainWindow mainWindow = App.Current.MainWindow as MainWindow;
                 mainWindow?.HotReload();
             }
         }

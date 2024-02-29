@@ -20,7 +20,7 @@ namespace ProjetDevSysGraphical
     {
         public static string OpenFolderDialog()
         {
-            using (var dialog = new CommonOpenFileDialog())
+            using (CommonOpenFileDialog dialog = new CommonOpenFileDialog())
             {
                 dialog.IsFolderPicker = true;
                 if (dialog.ShowDialog() == CommonFileDialogResult.Ok)

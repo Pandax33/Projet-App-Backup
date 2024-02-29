@@ -164,8 +164,9 @@
                 </Grid.RowDefinitions>
                     <Button Content="{local:LangageExtension Key='Selector4'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="1" Click="Ip_Click"/>
                     <Button Content="{local:LangageExtension Key='Selector1'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="3" Click="Home_Click"/>
-                    
-            </Grid>
+                    <Button Content="{local:LangageExtension Key='Selector2'}" Style="{StaticResource NavigationButtonStyle}" Grid.Row="5" Click="Save_Click"/>
+
+                </Grid>
         </Border>
 
         <Grid Grid.Column="1" Grid.Row="1">
