@@ -17,7 +17,6 @@ namespace ProjetDevSys.Model
             // Check if the backup already exists
             if (_backups.ContainsKey(save))
             {
-                // You can throw an exception or return null
                 throw new ArgumentException(ResourceHelper.GetString("BackupFactory1"));
             }
 
@@ -82,19 +81,17 @@ namespace ProjetDevSys.Model
             if (_backups.ContainsKey(name))
             {
                 _backups.Remove(name);
-                // Update the JSON file
                 SaveBackupsToJson();
                 return true;
             }
             else
             {
-                return false; // Return false if the backup was not found
+                return false;
             }
         }
 
         public static bool EditBackup(string name, string newDestination, string newSource, string newType)
         {
-            // Check if the backup exists
             if (_backups.TryGetValue(name, out Backup backup))
             {
                 // Update the backup properties
@@ -105,27 +102,25 @@ namespace ProjetDevSys.Model
                 // Save the changes to the JSON file
                 SaveBackupsToJson();
 
-                return true; // Return true if the backup was found and updated
+                return true;
             }
             else
             {
-                return false; // Return false if the backup was not found
+                return false;
             }
         }
 
         public static IEnumerable<Backup> GetBackupsInRange(int startNumber, int endNumber)
         {
-            // Calculate the number of elements to take from the dictionary
             int count = endNumber - startNumber + 1;
 
-            // Check if the range is valid
             if (count > 0)
             {
                 return _backups.Values.Skip(startNumber).Take(count);
             }
             else
             {
-                return Enumerable.Empty<Backup>(); // Return an empty collection if the range is invalid
+                return Enumerable.Empty<Backup>();
             }
         }
 

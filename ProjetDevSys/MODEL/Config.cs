@@ -112,7 +112,7 @@ namespace ProjetDevSys.Model
             return defaultConfig;
         }
 
-        // Crée le dossier et le fichier de configuration avec les valeurs par défaut si nécessaire
+        // Crée le dossier et le fichier de configuration avec les valeurs par défaut
         public static void CreateSetting()
         {
             string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);

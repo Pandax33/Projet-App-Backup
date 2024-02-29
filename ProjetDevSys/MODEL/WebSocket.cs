@@ -37,7 +37,7 @@ namespace ProjetDevSys.MODEL
                 {
                     byte[] buffer = new byte[1024];
                     int received = clientSocket.Receive(buffer);
-                    if (received == 0) break; // Le client s'est déconnecté proprement
+                    if (received == 0) break; // Le client s'est déconnecté
 
                     byte[] data = new byte[received];
                     Array.Copy(buffer, data, received);
@@ -77,7 +77,7 @@ namespace ProjetDevSys.MODEL
                         string backupsJson = SerializeBackups();
                         byte[] dataToSend = Encoding.UTF8.GetBytes(backupsJson);
                         clientSocket.Send(dataToSend);
-                        continue; // Passe au prochain cycle de la boucle
+                        continue;
                     }
                     if (message == "get_backup_progress")
                     {
@@ -104,7 +104,7 @@ namespace ProjetDevSys.MODEL
                     {
                         string command = parts[0];
                         string backupName = parts[1];
-                        switch (command.ToLower()) // Utilisez ToLower pour ignorer la casse
+                        switch (command.ToLower())
                         {
                             case "pause":
                                 ProjetDevSys.AppConstants.PauseBackup(backupName);
@@ -167,13 +167,11 @@ namespace ProjetDevSys.MODEL
 
         private static string SerializeBackups()
         {
-            // Assurez-vous que la classe Backup et ses membres sont sérialisables.
             return JsonConvert.SerializeObject(BackupFactory._backups);
         }
 
         private static string SerializeBackupProgress()
         {
-            // Utilisation de Newtonsoft.Json pour la sérialisation
             return JsonConvert.SerializeObject(ProjetDevSys.AppConstants.backupProgress);
         }
         private static string SerializeBackupState()

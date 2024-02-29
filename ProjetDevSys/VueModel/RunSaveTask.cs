@@ -42,7 +42,7 @@ namespace ProjetDevSys.VueModel
 
             foreach (Backup backup in allBackups)
             {
-                int currentIndex = i; // Capture de l'index actuel de manière explicite
+                int currentIndex = i;
                 doneEvents[currentIndex] = new ManualResetEvent(false);
                 BackupJob backupJob = new BackupJob(backup);
                 ThreadPool.QueueUserWorkItem(_ =>
@@ -58,13 +58,12 @@ namespace ProjetDevSys.VueModel
                     }
                     finally
                     {
-                        doneEvents[currentIndex].Set(); // Utiliser currentIndex ici
+                        doneEvents[currentIndex].Set();
                     }
                 });
                 i++;
             }
 
-            // Attendez que tous les travaux de sauvegarde soient terminés
             WaitHandle.WaitAll(doneEvents);
             return ResourceHelper.GetString("RunTaskView6");
         }
@@ -83,20 +82,20 @@ namespace ProjetDevSys.VueModel
                 Backup backup = BackupFactory.GetBackupByIndex(id);
                 if (backup == null)
                 {
-                    continue; // ou retourner une erreur spécifique si un backup n'est pas trouvé
+                    continue; 
                 }
 
                 doneEvents[i] = new ManualResetEvent(false);
                 BackupJob backupJob = new BackupJob(backup);
 
-                int currentIndex = i; // Capture de l'index actuel de manière explicite pour l'utiliser dans la lambda
+                int currentIndex = i;
 
                 ThreadPool.QueueUserWorkItem(_ =>
                 {
                     try
                     {
                         backupJob.Save();
-                        AppConstants.backupProgress.TryAdd(backup.Name, 0); // Assurez-vous que cette opération est thread-safe
+                        AppConstants.backupProgress.TryAdd(backup.Name, 0);
                     }
                     catch (Exception ex)
                     {
@@ -104,14 +103,13 @@ namespace ProjetDevSys.VueModel
                     }
                     finally
                     {
-                        doneEvents[currentIndex].Set(); // Signal que cette tâche de sauvegarde est terminée
+                        doneEvents[currentIndex].Set();
                     }
                 });
 
                 i++;
             }
 
-            // Attendez que tous les travaux de sauvegarde soient terminés
             WaitHandle.WaitAll(doneEvents);
 
             return ResourceHelper.GetString("RunTaskView11");
