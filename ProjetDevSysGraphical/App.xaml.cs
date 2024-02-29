@@ -110,7 +110,7 @@ namespace ProjetDevSysGraphical
                     FontGrid = new FontFamily("Roboto");
                     FontBase= new FontFamily("Roboto");
                     break;
-                case "Moche":
+                case "Rouge":
 
                     BG = (Color)ColorConverter.ConvertFromString("#08415C");
                     B1 = (Color)ColorConverter.ConvertFromString("#CC2936");
@@ -159,7 +159,7 @@ namespace ProjetDevSysGraphical
                     FontGrid = new FontFamily("Roboto");
                     FontBase = new FontFamily("Roboto");
                     break;
-                case "Portugal":
+                case "Nata":
                     BG = (Color)ColorConverter.ConvertFromString("#046A38"); // green
                     B1 = (Color)ColorConverter.ConvertFromString("#DA291C"); // red
                     B2 = (Color)ColorConverter.ConvertFromString("#FFE900"); // yellow

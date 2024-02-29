@@ -115,7 +115,21 @@ namespace ProjetDevSysGraphical
                 Grid.SetColumn(progressBar, 1);
                 BackupsGrid.Children.Add(progressBar);
 
-                Button toggleButton = new Button
+                Button pause = new Button
+                {
+                    Tag = backup.Key,
+                    Width = 30,
+                    Height = 30,
+                    Margin = commonMargin,
+                    Content = new TextBlock
+                    {
+                        Text = "⏸",
+                        Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Top,
+                    },
+                };
+                Button play = new Button
                 {
                     Tag = backup.Key,
                     Width = 30,
@@ -129,28 +143,19 @@ namespace ProjetDevSysGraphical
                         VerticalAlignment = VerticalAlignment.Top,
                     },
                 };
+                pause.Style = AppConstants.GridButtonStyle();
+                play.Style = AppConstants.GridButtonStyle();
+                pause.Click += PauseButton_Click;
+                play.Content = "▶";
+                play.Click += RepriseButton_Click;
 
-                toggleButton.Style = AppConstants.GridButtonStyle();
-                bool isPaused = false; //initial state (logic-wise)
+                Grid.SetRow(pause, row);
+                Grid.SetColumn(pause, 2);
+                Grid.SetRow(play, row);
+                Grid.SetColumn(play, 3);
 
-                toggleButton.Click += (sender, e) =>
-                {
-                    if (isPaused)
-                    {
-                        toggleButton.Content = "▶";
-                        RepriseButton_Click(sender, e); 
-                    }
-                    else
-                    {
-                        toggleButton.Content = "⏸";
-                        PauseButton_Click(sender, e);
-                    }
-                    isPaused = !isPaused;
-                };
-
-                Grid.SetRow(toggleButton, row);
-                Grid.SetColumn(toggleButton, 2); 
-                BackupsGrid.Children.Add(toggleButton);
+                BackupsGrid.Children.Add(pause);
+                BackupsGrid.Children.Add(play);
 
                 Button stopButton = new Button
                 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using System.Windows; // Nécessaire pour MessageBox
+using System.Windows;
 
 namespace ProjetDevSysGraphical.Watcher
 {
@@ -15,7 +15,7 @@ namespace ProjetDevSysGraphical.Watcher
         {
             watcherThread = new Thread(new ThreadStart(WatchProcess));
             isWatching = true;
-            uiContext = context; // Initialiser avec le contexte UI passé en paramètre
+            uiContext = context; 
         }
 
         public void StartWatching()
@@ -29,7 +29,7 @@ namespace ProjetDevSysGraphical.Watcher
         public void StopWatching()
         {
             isWatching = false;
-            watcherThread.Join(); // Attendre la fin du thread
+            watcherThread.Join();
         }
 
         private void WatchProcess()
