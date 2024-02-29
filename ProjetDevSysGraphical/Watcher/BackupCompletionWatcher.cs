@@ -57,7 +57,7 @@ namespace ProjetDevSysGraphical.Watcher
 
         private void ShowBackupCompletePopup(string backupName)
         {
-            System.Windows.MessageBox.Show($"Backup {backupName} completed successfully!", "Backup Complete", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+            System.Windows.MessageBox.Show(ResourceHelper.GetString("BackupCompletionWatcher.TextFinish"), ResourceHelper.GetString("BackupCompletionWatcher.TittleFinish") + backupName, System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
     }
 }

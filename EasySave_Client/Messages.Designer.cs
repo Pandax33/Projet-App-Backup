@@ -61,6 +61,51 @@ namespace EasySave_Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Closed connection..
+        /// </summary>
+        internal static string Client_Close {
+            get {
+                return ResourceManager.GetString("Client.Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected to the server..
+        /// </summary>
+        internal static string Client_Connection {
+            get {
+                return ResourceManager.GetString("Client.Connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to connect to the server :.
+        /// </summary>
+        internal static string Client_ConnectionFailed {
+            get {
+                return ResourceManager.GetString("Client.ConnectionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error closing connection :.
+        /// </summary>
+        internal static string Client_FailClose {
+            get {
+                return ResourceManager.GetString("Client.FailClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error when sending the order :.
+        /// </summary>
+        internal static string Client_FailSend {
+            get {
+                return ResourceManager.GetString("Client.FailSend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
         internal static string Config_Apply {
@@ -322,6 +367,15 @@ namespace EasySave_Client {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection error.
+        /// </summary>
+        internal static string IpViewPopup {
+            get {
+                return ResourceManager.GetString("IpViewPopup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to reset all settings ?.
         /// </summary>
         internal static string ResetConfig {
@@ -552,6 +606,24 @@ namespace EasySave_Client {
         internal static string Task_Grid_Type {
             get {
                 return ResourceManager.GetString("Task.Grid.Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect.
+        /// </summary>
+        internal static string Task_IP_Action {
+            get {
+                return ResourceManager.GetString("Task.IP.Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Connection.
+        /// </summary>
+        internal static string Task_IP_Title {
+            get {
+                return ResourceManager.GetString("Task.IP.Title", resourceCulture);
             }
         }
         

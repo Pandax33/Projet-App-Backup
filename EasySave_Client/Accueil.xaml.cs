@@ -66,9 +66,9 @@ namespace ProjetDevSysGraphical
                     Grid.SetColumnSpan(border, 8);
                 };
 
-                var commonMargin = new Thickness(5, 10, 5, 5);
+                Thickness commonMargin = new Thickness(5, 10, 5, 5);
 
-                var nameLabel = new TextBlock { 
+                TextBlock nameLabel = new TextBlock { 
                     Text = backup.Key,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     VerticalAlignment = VerticalAlignment.Center,
@@ -83,7 +83,7 @@ namespace ProjetDevSysGraphical
                 BackupsGrid.Children.Add(nameLabel);
 
 
-                var progressBar = new ProgressBar
+                ProgressBar progressBar = new ProgressBar
                 {
                     Name = $"ProgressBar_{backup.Key}",
                     Value = backup.Value,
@@ -112,28 +112,45 @@ namespace ProjetDevSysGraphical
                         VerticalAlignment = VerticalAlignment.Top,
                     },
                 };
-
-                toggleButton.Style = AppConstants.GridButtonStyle();
-                bool isPaused = false; //initial state (logic-wise)
-
-                toggleButton.Click += (sender, e) =>
-                {
-                    if (isPaused)
+                Button pause = new Button {
+                    Tag = backup.Key,
+                    Width = 30,
+                    Height = 30,
+                    Margin = commonMargin,
+                    Content = new TextBlock
                     {
-                        toggleButton.Content = "▶";
-                        RepriseButton_Click(sender, e); 
-                    }
-                    else
-                    {
-                        toggleButton.Content = "⏸";
-                        PauseButton_Click(sender, e);
-                    }
-                    isPaused = !isPaused;
+                        Text = "⏸",
+                        Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Top,
+                    },
                 };
+                Button play = new Button {
+                    Tag = backup.Key,
+                    Width = 30,
+                    Height = 30,
+                    Margin = commonMargin,
+                    Content = new TextBlock
+                    {
+                        Text = "▶",
+                        Foreground = (SolidColorBrush)Application.Current.Resources["Brush3"],
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Top,
+                    },
+                };
+                pause.Style = AppConstants.GridButtonStyle();
+                play.Style = AppConstants.GridButtonStyle();
+                pause.Click += PauseButton_Click;
+                play.Content = "▶";
+                play.Click += RepriseButton_Click;
 
-                Grid.SetRow(toggleButton, row);
-                Grid.SetColumn(toggleButton, 2); 
-                BackupsGrid.Children.Add(toggleButton);
+                Grid.SetRow(pause, row);
+                Grid.SetColumn(pause, 2);
+                Grid.SetRow(play, row);
+                Grid.SetColumn(play, 3);
+
+                BackupsGrid.Children.Add(pause);
+                BackupsGrid.Children.Add(play);
 
                 Button stopButton = new Button
                 {
@@ -161,20 +178,20 @@ namespace ProjetDevSysGraphical
 
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            Button button = sender as Button;
             ClientSocket.PauseBackup(button.Tag.ToString());
             
         }
 
         private void RepriseButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            Button button = sender as Button;
             ClientSocket.ResumeBackup(button.Tag.ToString());
 
         }
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
+            Button button = sender as Button;
             if (button == null) return;
 
             string backupName = button.Tag.ToString();

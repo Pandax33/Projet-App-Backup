@@ -25,6 +25,10 @@ namespace ProjetDevSysGraphical
         public AddTask()
         {
             InitializeComponent();
+
+            //position
+            this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2 + SystemParameters.WorkArea.Left;
+            this.Top = (SystemParameters.WorkArea.Height - this.Height) / 2 + SystemParameters.WorkArea.Top;
         }
 
         private void applyButton_Click(object sender, RoutedEventArgs e)

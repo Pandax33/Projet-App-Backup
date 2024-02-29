@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using ProjetDevSys.VueModel;
 
 namespace ProjetDevSys.MODEL
 {
@@ -25,7 +26,6 @@ namespace ProjetDevSys.MODEL
         public static Socket AccepterConnexion(Socket serverSocket)
         {
             Socket clientSocket = serverSocket.Accept();
-            Console.WriteLine($"Client connecté Adresse IP: {((IPEndPoint)clientSocket.RemoteEndPoint).Address}, Port: {((IPEndPoint)clientSocket.RemoteEndPoint).Port}");
             return clientSocket;
         }
         public static void EcouterReseau(Socket clientSocket)
@@ -36,7 +36,7 @@ namespace ProjetDevSys.MODEL
                 {
                     byte[] buffer = new byte[1024];
                     int received = clientSocket.Receive(buffer);
-                    if (received == 0) break; // Le client s'est déconnecté proprement
+                    if (received == 0) break; // Le client s'est déconnecté
 
                     byte[] data = new byte[received];
                     Array.Copy(buffer, data, received);
@@ -76,7 +76,7 @@ namespace ProjetDevSys.MODEL
                         string backupsJson = SerializeBackups();
                         byte[] dataToSend = Encoding.UTF8.GetBytes(backupsJson);
                         clientSocket.Send(dataToSend);
-                        continue; // Passe au prochain cycle de la boucle
+                        continue;
                     }
                     if (message == "get_backup_progress")
                     {
@@ -103,7 +103,7 @@ namespace ProjetDevSys.MODEL
                     {
                         string command = parts[0];
                         string backupName = parts[1];
-                        switch (command.ToLower()) // Utilisez ToLower pour ignorer la casse
+                        switch (command.ToLower())
                         {
                             case "pause":
                                 ProjetDevSys.AppConstants.PauseBackup(backupName);
@@ -120,6 +120,20 @@ namespace ProjetDevSys.MODEL
                         }
                         BroadcasterMessage(message, clientSocket);
                     }
+                    if (parts[0].ToLower() == "launchbackup" && parts.Length > 1)
+                    {
+                        int[] backupIds = parts.Skip(1).Select(id =>
+                        {
+                            int.TryParse(id, out int parsedId);
+                            return parsedId;
+                        }).ToArray();
+
+                        BackupManager.AddBackupToQueue(backupIds);
+
+                        string confirmation = "Backups added to queue";
+                        clientSocket.Send(Encoding.UTF8.GetBytes(confirmation));
+                        continue; 
+                    }
                 }
             }
             catch (Exception ex)
@@ -129,7 +143,7 @@ namespace ProjetDevSys.MODEL
             finally
             {
                 clientSocket.Close();
-                clients.TryTake(out var _); // Retire le client de la liste
+                clients.TryTake(out var _);
             }
         }
 
@@ -137,7 +151,7 @@ namespace ProjetDevSys.MODEL
         {
             foreach (var client in clients)
             {
-                if (client != senderSocket) // Pour envoyer à tous les clients, y compris l'émetteur, supprimez cette ligne
+                if (client != senderSocket)
                 {
                     try
                     {
@@ -152,13 +166,11 @@ namespace ProjetDevSys.MODEL
 
         private static string SerializeBackups()
         {
-            // Assurez-vous que la classe Backup et ses membres sont sérialisables.
             return JsonConvert.SerializeObject(BackupFactory._backups);
         }
 
         private static string SerializeBackupProgress()
         {
-            // Utilisation de Newtonsoft.Json pour la sérialisation
             return JsonConvert.SerializeObject(ProjetDevSys.AppConstants.backupProgress);
         }
         private static string SerializeBackupState()

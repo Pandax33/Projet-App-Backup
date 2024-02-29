@@ -26,6 +26,11 @@ namespace ProjetDevSysGraphical
         public EditTask(int id, string name, string fileSource, string fileTarget, string saveType)
         {
             InitializeComponent();
+
+            //position
+            this.Left = (SystemParameters.WorkArea.Width - this.Width) / 2 + SystemParameters.WorkArea.Left;
+            this.Top = (SystemParameters.WorkArea.Height - this.Height) / 2 + SystemParameters.WorkArea.Top;
+
             Id = id;
             taskName.Content = name;
             sourcePathEntry.Text = fileSource;

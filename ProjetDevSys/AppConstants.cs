@@ -106,7 +106,7 @@ namespace ProjetDevSys
         {
             try
             {
-                var absolutePath = Path.GetFullPath(path);
+                string absolutePath = Path.GetFullPath(path);
                 return true;
             }
             catch (Exception)
@@ -155,7 +155,7 @@ namespace ProjetDevSys
         {
             if (BlockerProcess == null || !BlockerProcess.Any()) return false;
 
-            foreach (var processName in BlockerProcess)
+            foreach (string processName in BlockerProcess)
             {
                 if (Process.GetProcessesByName(processName).Any())
                 {
@@ -167,7 +167,7 @@ namespace ProjetDevSys
         }
         public static void PauseBackup(string backupName)
         {
-            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
+            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out ManualResetEvent handle))
             {
                 handle.Reset(); // Met en pause
                 backupState.TryAdd(backupName, "Pause");
@@ -176,7 +176,7 @@ namespace ProjetDevSys
 
         public static void ResumeBackup(string backupName)
         {
-            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out var handle))
+            if (AppConstants.BackupPauseHandles.TryGetValue(backupName, out ManualResetEvent handle))
             {
                 handle.Set(); // Reprend l'exécution
                 backupState.TryAdd(backupName, "In Progress");
@@ -185,7 +185,7 @@ namespace ProjetDevSys
 
         public static void StopBackup(string backupName)
         {
-            if (BackupCancellations.TryGetValue(backupName, out var cts))
+            if (BackupCancellations.TryGetValue(backupName, out CancellationTokenSource cts))
             {
                 cts.Cancel(); // Envoie une demande d'annulation à la tâche
                 backupState.TryAdd(backupName, "Stop");
